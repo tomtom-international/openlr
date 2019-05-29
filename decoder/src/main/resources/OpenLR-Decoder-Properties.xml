@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2009 TomTom International B.V.
+
+  TomTom (Legal Department)
+  Email: legal@tomtom.com
+  
+  TomTom (Technical contact)
+  Email: openlr@tomtom.com
+  
+  Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam, 
+  the Netherlands
+
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 of the License and the extra
+ conditions for OpenLR. (see openlr-license.txt)
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+
+<!-- email: software@openlr.org -->
+<ml:OpenLRDecoderProperties xmlns:ml="http://www.example.org/OpenLRpropertiesProperties/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OpenLRpropertiesProperties/ properties/OpenLRDecoderProperties.xsd ">
+  <BearingDistance>20</BearingDistance>
+  <MaxNodeDistance>100</MaxNodeDistance>
+  <NodeFactor>3</NodeFactor>
+  <LineFactor>3</LineFactor>
+  <FRC_Rating>
+    <Excellent>100</Excellent>
+    <Good>75</Good>
+    <Average>50</Average>
+    <Poor>0</Poor>
+  </FRC_Rating>
+  <FRC_Intervals>
+    <Excellent>0</Excellent>
+    <Good>1</Good>
+    <Average>2</Average>
+  </FRC_Intervals>
+  <FOW_Rating>
+    <Excellent>100</Excellent>
+    <Good>50</Good>
+    <Average>50</Average>
+    <Poor>25</Poor>
+  </FOW_Rating>
+  <Bearing_Rating>
+    <Excellent>100</Excellent>
+    <Good>50</Good>
+    <Average>25</Average>
+    <Poor>0</Poor>
+  </Bearing_Rating>
+  <Bearing_Intervals>
+    <Excellent>6</Excellent>
+    <Good>12</Good>
+    <Average>18</Average>
+  </Bearing_Intervals>
+  <FRC_Variance>2</FRC_Variance>
+  <MinimumAcceptedRating>700</MinimumAcceptedRating>
+  <MaxNumberRetries>3</MaxNumberRetries>
+  <SameLineDegradation>0.10</SameLineDegradation>
+  <ConnectedRouteIncrease>0.10</ConnectedRouteIncrease>
+  <DNPVariance>118</DNPVariance>
+  <maxBearingDiff>90</maxBearingDiff>
+  <Calc_Affected_Lines>false</Calc_Affected_Lines>
+</ml:OpenLRDecoderProperties>

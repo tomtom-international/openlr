@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>circle</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <CircleLocationReference>
+                <GeoCoordinate>
+                    <Coordinates>
+                        <Longitude>6.12699</Longitude>
+                        <Latitude>49.60728</Latitude>
+                    </Coordinates>
+                </GeoCoordinate>
+                <Radius>16000000</Radius>
+            </CircleLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
+		Email: legal@tomtom.com TomTom (Technical contact) Email:
+		openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
+		114, 1011DK Amsterdam, the Netherlands This program is free software;
+		you can redistribute it and/or modify it under the terms of the GNU
+		General Public License as published by the Free Software Foundation;
+		version 2 of the License and the extra conditions for OpenLR. (see
+		openlr-license.txt) This program is distributed in the hope that it
+		will be useful, but WITHOUT ANY WARRANTY; without even the implied
+		warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+		the GNU General Public License for more details. You should have
+		received a copy of the GNU General Public License along with this
+		program; if not, write to the Free Software Foundation, Inc., 51
+		Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+	-->
+<MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+	<Nodes>
+		<Node id="1">
+			<Latitude>49.61230</Latitude>
+			<Longitude>6.12579</Longitude>
+		</Node>
+		<Node id="2">
+			<Latitude>49.61226</Latitude>
+			<Longitude>6.12676</Longitude>
+		</Node>
+		<Node id="3">
+			<Latitude>49.61220</Latitude>
+			<Longitude>6.12811</Longitude>
+		</Node>
+		<Node id="4">
+			<Latitude>49.61328</Latitude>
+			<Longitude>6.12799</Longitude>
+		</Node>
+		<Node id="5">
+			<Latitude>49.61302</Latitude>
+			<Longitude>6.12667</Longitude>
+		</Node>
+		<Node id="6">
+			<Latitude>49.61211</Latitude>
+			<Longitude>6.12965</Longitude>
+		</Node>
+	</Nodes>
+	<Lines>
+		<Line id="1">
+			<StartNode>1</StartNode>
+			<EndNode>2</EndNode>
+			<Length>70</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="2">
+			<StartNode>2</StartNode>
+			<EndNode>3</EndNode>
+			<Length>97</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="3">
+			<StartNode>3</StartNode>
+			<EndNode>4</EndNode>
+			<Length>121</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="4">
+			<StartNode>4</StartNode>
+			<EndNode>5</EndNode>
+			<Length>98</Length>
+			<FRC>FRC_3</FRC>			
+		</Line>
+		<Line id="5">
+			<StartNode>5</StartNode>
+			<EndNode>2</EndNode>
+			<Length>82</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="6">
+			<StartNode>3</StartNode>
+			<EndNode>6</EndNode>
+			<Length>112</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="-1">
+			<StartNode>2</StartNode>
+			<EndNode>1</EndNode>
+			<Length>70</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="-2">
+			<StartNode>3</StartNode>
+			<EndNode>2</EndNode>
+			<Length>97</Length>
+			<FRC>FRC_3</FRC>			
+		</Line>
+		<Line id="-3">
+			<StartNode>4</StartNode>
+			<EndNode>3</EndNode>
+			<Length>121</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="-4">
+			<StartNode>5</StartNode>
+			<EndNode>4</EndNode>
+			<Length>98</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="-5">
+			<StartNode>2</StartNode>
+			<EndNode>5</EndNode>
+			<Length>82</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="-6">
+			<StartNode>6</StartNode>
+			<EndNode>3</EndNode>
+			<Length>112</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+		<Line id="7">
+            <!--	Loops from node 6 back to node 6	-->
+			<StartNode>6</StartNode>
+			<EndNode>6</EndNode>
+			<Length>400</Length>
+			<FRC>FRC_3</FRC>
+		</Line>
+	</Lines>
+	<Calls>
+		<GetPointAlongLineCalls>
+			<GetPointAlongLine line="1">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.1261</Longitude>
+					<Latitude>49.6123</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="2">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.12704</Longitude>
+					<Latitude>49.61225</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="2">
+				<Input>77</Input>
+				<Output>
+					<Longitude>6.12783</Longitude>
+					<Latitude>49.61223</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="3">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.12816</Longitude>
+					<Latitude>49.6124</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="4">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.12771</Longitude>
+					<Latitude>49.61325</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="6">
+				<Input>92</Input>
+				<Output>
+					<Longitude>6.1294</Longitude>
+					<Latitude>49.61216</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="6">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.1284</Longitude>
+					<Latitude>49.6122</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="-6">
+				<Input>92</Input>
+				<Output>
+					<Longitude>6.1284</Longitude>
+					<Latitude>49.6122</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="7">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.1299</Longitude>
+					<Latitude>49.6121</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="7">
+				<Input>380</Input>
+				<Output>
+					<Longitude>6.12968</Longitude>
+					<Latitude>49.6123</Latitude>
+				</Output>
+			</GetPointAlongLine>
+		</GetPointAlongLineCalls>
+	</Calls>
+</MockedMapDatabase>

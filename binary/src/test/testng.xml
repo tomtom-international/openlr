@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="binary" verbose="1" >
+  <test name="All Tests">
+    <packages>
+      <package name="openlr.binary.*"/>
+    </packages>
+    <groups>
+    	<run>
+    		<exclude name="broken" />
+    	</run>
+    </groups>
+  </test>
+</suite>

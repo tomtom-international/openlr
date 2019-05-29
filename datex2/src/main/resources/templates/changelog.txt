@@ -1,0 +1,101 @@
+===============
+Version history
+===============
+
+Software project: ${project.name} 
+Latest release: ${version} 
+
+${introduction}
+
+#if ($releases.size() == 0)
+Currently no release description available!
+#else
+
+#foreach ($rel in $releases)
+----------------------------------------------------------------
+Version: $rel.getVersion()
+
+Release date: $rel.getDateRelease()
+
+#set ($desc = $rel.getDescription())
+#if ($desc.length() > 80)
+#set ($parts = $desc.length() / 80)
+#foreach ($i in [0..$parts])
+#set ($current = $i * 80)
+#set ($next = $current + 80)
+#if ($next >= $desc.length())
+#set ($next = $desc.length())
+#end
+#if ($i == 0)
+#set ($pre = "Description: ")
+#else
+#set ($pre = "             ")
+#end
+$pre$desc.substring($current, $next)
+#end
+#else
+Description: $desc
+#end
+
+Changelist:
+##if ($rel.getActions('add').size() !=0)
+  New features:
+#foreach($actionItem in $rel.getActions('add'))
+#set($action=$actionItem.getAction())
+#if ($actionItem.getIssue())
+#set($issue=$actionItem.getIssue())
+#else
+#set($issue="")
+#end
+    o ${action} #if($!issue != "") Issue: $issue. #end
+    
+#end 
+##end
+
+##if ($rel.getActions('fix').size() !=0)
+  Fixed Bugs:
+#foreach($actionItem in $rel.getActions('fix'))
+#set($action=$actionItem.getAction())
+#if ($actionItem.getIssue())
+#set($issue=$actionItem.getIssue())
+#else
+#set($issue="")
+#end
+    o ${action} #if($!issue != "") Issue: $issue. #end
+    
+#end
+##end
+
+##if ($rel.getActions('update').size() !=0)
+  Changes:
+#foreach($actionItem in $rel.getActions('update'))
+#set($action=$actionItem.getAction())
+#if ($actionItem.getIssue())
+#set($issue=$actionItem.getIssue())
+#else
+#set($issue="")
+#end
+    o ${action} #if($!issue != "") Issue: $issue. #end#
+    
+#end
+##end
+
+##if ($rel.getActions('remove').size() !=0)
+  Removed:
+#foreach($actionItem in $rel.getActions('remove'))
+#set($action=$actionItem.getAction())
+#if ($actionItem.getIssue())
+#set($issue=$actionItem.getIssue())
+#else
+#set($issue="")
+#end
+    o ${action} #if($!issue != "") Issue: $issue. #end
+    
+#end
+##end
+
+----------------------------------------------------------------
+
+#end
+## End of main loop
+#end

@@ -1,0 +1,376 @@
+XML location reference - examples
+
+ The following examples show how location references might be represented in a
+ XML format according to the OpenLR {{{./schema.html}schema}} definition.
+ 
+* Example - 1: LineLocationReference
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>1</LocationID>
+    <XMLLocationReference>
+        <LineLocationReference>
+            <LocationReferencePoint>
+                <Coordinates>
+                    <Longitude>6.12683</Longitude>
+                    <Latitude>49.60851</Latitude>
+                </Coordinates>
+                <LineAttributes>
+                    <FRC>FRC3</FRC>
+                    <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+                    <BEAR>135</BEAR>
+                </LineAttributes>
+                <PathAttributes>
+                    <LFRCNP>FRC3</LFRCNP>
+                    <DNP>561</DNP>
+                </PathAttributes>
+            </LocationReferencePoint>
+            <LocationReferencePoint>
+                <Coordinates>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Coordinates>
+                <LineAttributes>
+                    <FRC>FRC3</FRC>
+                    <FOW>SINGLE_CARRIAGEWAY</FOW>
+                    <BEAR>227</BEAR>
+                </LineAttributes>
+                <PathAttributes>
+                    <LFRCNP>FRC5</LFRCNP>
+                    <DNP>274</DNP>
+                </PathAttributes>
+            </LocationReferencePoint>
+            <LastLocationReferencePoint>
+                <Coordinates>
+                    <Longitude>6.12817</Longitude>
+                    <Latitude>49.60305</Latitude>
+                </Coordinates>
+                <LineAttributes>
+                    <FRC>FRC5</FRC>
+                    <FOW>SINGLE_CARRIAGEWAY</FOW>
+                    <BEAR>290</BEAR>
+                </LineAttributes>
+            </LastLocationReferencePoint>
+            <Offsets>
+                <PosOff>200</PosOff>
+                <NegOff>0</NegOff>
+            </Offsets>
+        </LineLocationReference>
+    </XMLLocationReference>
+</OpenLR>
+
+---------------------------------------------- 
+
+* Example - 2: BinaryLocationReference
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>1</LocationID>
+    <BinaryLocationReferences>
+    	<BinaryLocationReference id="openlr-binary" version="2">CgOkbyUN6COJAwEB/8YjGQ==<BinaryLocationReference>
+    </BinaryLocationReferences>
+</OpenLR>
+
+---------------------------------------------- 
+
+* Example - 3: GeoCoordinate
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<openlr:OpenLR xmlns="http://www.openlr.org/openlr">
+    <openlr:LocationID>TestID01</openlr:LocationID>
+    <openlr:XMLLocationReference>
+        <openlr:PointLocationReference>
+            <openlr:GeoCoordinate>
+                <openlr:Coordinates>
+                    <openlr:Longitude>6.12699</openlr:Longitude>
+                    <openlr:Latitude>49.60728</openlr:Latitude>
+                </openlr:Coordinates>
+            </openlr:GeoCoordinate>
+        </openlr:PointLocationReference>
+    </openlr:XMLLocationReference>
+</openlr:OpenLR>
+
+
+----------------------------------------------
+
+* Example - 4: PointAlongLine
+
+---------------------------------------------- 
+
+ ?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<openlr:OpenLR xmlns="http://www.openlr.org/openlr">
+    <openlr:LocationID>TestID02</openlr:LocationID>
+    <openlr:XMLLocationReference>
+        <openlr:PointLocationReference>
+            <openlr:PointAlongLine>
+                <openlr:LocationReferencePoint>
+                    <openlr:Coordinates>
+                        <openlr:Longitude>6.12829</openlr:Longitude>
+                        <openlr:Latitude>49.60597</openlr:Latitude>
+                    </openlr:Coordinates>
+                    <openlr:LineAttributes>
+                        <openlr:FRC>FRC2</openlr:FRC>
+                        <openlr:FOW>MULTIPLE_CARRIAGEWAY</openlr:FOW>
+                        <openlr:BEAR>202</openlr:BEAR>
+                    </openlr:LineAttributes>
+                    <openlr:PathAttributes>
+                        <openlr:LFRCNP>FRC2</openlr:LFRCNP>
+                        <openlr:DNP>92</openlr:DNP>
+                    </openlr:PathAttributes>
+                 </openlr:LocationReferencePoint>
+                 <openlr:LastLocationReferencePoint>
+                          <openlr:Coordinates>
+                                 <openlr:Longitude>6.12779</openlr:Longitude>
+                                 <openlr:Latitude>49.60521</openlr:Latitude>
+                          </openlr:Coordinates>
+                          <openlr:LineAttributes>
+                                 <openlr:FRC>FRC2</openlr:FRC>
+                                 <openlr:FOW>MULTIPLE_CARRIAGEWAY</openlr:FOW>
+                                 <openlr:BEAR>227</openlr:BEAR>
+                          </openlr:LineAttributes>
+                 </openlr:LastLocationReferencePoint>
+                 <openlr:Offsets>
+                          <openlr:PosOff>28</openlr:PosOff>
+                          <openlr:NegOff>0</openlr:NegOff>
+                  </openlr:Offsets>
+                  <openlr:SideOfRoad>LEFT</openlr:SideOfRoad>
+                  <openlr:Orientation>NO_ORIENTATION_OR_UNKNOWN</openlr:Orientation>
+               </openlr:PointAlongLine>
+          </openlr:PointLocationReference>
+     </openlr:XMLLocationReference>
+</openlr:OpenLR>
+
+
+----------------------------------------------
+
+* Example - 5: PoiWithAccessPoint
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<openlr:OpenLR xmlns="http://www.openlr.org/openlr">
+    <openlr:LocationID>TestID03</openlr:LocationID>
+    <openlr:XMLLocationReference>
+        <openlr:PointLocationReference>
+            <openlr:PoiWithAccessPoint>
+                <openlr:LocationReferencePoint>
+                    <openlr:Coordinates>
+                        <openlr:Longitude>6.12829</openlr:Longitude>
+                        <openlr:Latitude>49.60597</openlr:Latitude>
+                    </openlr:Coordinates>
+                    <openlr:LineAttributes>
+                        <openlr:FRC>FRC2</openlr:FRC>
+                        <openlr:FOW>MULTIPLE_CARRIAGEWAY</openlr:FOW>
+                        <openlr:BEAR>202</openlr:BEAR>
+                    </openlr:LineAttributes>
+                    <openlr:PathAttributes>
+                        <openlr:LFRCNP>FRC2</openlr:LFRCNP>
+                        <openlr:DNP>92</openlr:DNP>
+                    </openlr:PathAttributes>
+                </openlr:LocationReferencePoint>
+                <openlr:LastLocationReferencePoint>
+                    <openlr:Coordinates>
+                        <openlr:Longitude>6.12779</openlr:Longitude>
+                        <openlr:Latitude>49.60521</openlr:Latitude>
+                    </openlr:Coordinates>
+                    <openlr:LineAttributes>
+                        <openlr:FRC>FRC2</openlr:FRC>
+                        <openlr:FOW>MULTIPLE_CARRIAGEWAY</openlr:FOW>
+                        <openlr:BEAR>227</openlr:BEAR>
+                    </openlr:LineAttributes>
+                </openlr:LastLocationReferencePoint>
+                <openlr:Offsets>
+                    <openlr:PosOff>28</openlr:PosOff>
+                    <openlr:NegOff>0</openlr:NegOff>
+                </openlr:Offsets>
+                <openlr:Coordinates>
+                    <openlr:Longitude>6.12699</openlr:Longitude>
+                    <openlr:Latitude>49.60728</openlr:Latitude>
+                </openlr:Coordinates>
+                <openlr:SideOfRoad>LEFT</openlr:SideOfRoad>
+                <openlr:Orientation>NO_ORIENTATION_OR_UNKNOWN</openlr:Orientation>
+            </openlr:PoiWithAccessPoint>
+        </openlr:PointLocationReference>
+    </openlr:XMLLocationReference>
+</openlr:OpenLR>
+
+
+----------------------------------------------
+
+* Example - 6: Circle
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>circle</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <CircleLocationReference>
+                <GeoCoordinate>
+                    <Coordinates>
+                        <Longitude>6.12699</Longitude>
+                        <Latitude>49.60728</Latitude>
+                    </Coordinates>
+                </GeoCoordinate>
+                <Radius>100</Radius>
+            </CircleLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>
+
+----------------------------------------------
+
+* Example - 7: Polygon
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>pentagon</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <PolygonLocationReference>
+                <PolygonCorners>
+                    <Coordinates>
+                        <Longitude>6.12549</Longitude>
+                        <Latitude>49.60576</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>6.12903</Longitude>
+                        <Latitude>49.60591</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>6.12739</Longitude>
+                        <Latitude>49.60834</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>6.12657</Longitude>
+                        <Latitude>49.6087</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>6.12492</Longitude>
+                        <Latitude>49.60795</Latitude>
+                    </Coordinates>
+                </PolygonCorners>
+            </PolygonLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>
+
+----------------------------------------------
+
+* Example - 8: Rectangle
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>rectangle</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <RectangleLocationReference>
+                <Rectangle>
+                    <LowerLeft>
+                        <Longitude>6.12555</Longitude>
+                        <Latitude>49.60586c</Latitude>
+                    </LowerLeft>
+                    <UpperRight>
+                        <Longitude>6.12875c</Longitude>
+                        <Latitude>49.60711</Latitude>
+                    </UpperRight>
+                </Rectangle>
+            </RectangleLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>
+
+----------------------------------------------
+
+* Example - 9: Grid
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>grid</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <GridLocationReference>
+                <Rectangle>
+                    <LowerLeft>
+                        <Longitude>6.12555</Longitude>
+                        <Latitude>49.60586</Latitude>
+                    </LowerLeft>
+                    <UpperRight>
+                        <Longitude>6.126291</Longitude>
+                        <Latitude>49.606170</Latitude>
+                    </UpperRight>
+                </Rectangle>
+                <NumColumns>5</NumColumns>
+                <NumRows>3</NumRows>
+            </GridLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>
+
+----------------------------------------------
+
+* Example - 10: Closed line
+
+---------------------------------------------- 
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>closedLine</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <ClosedLineLocationReference>
+                <LocationReferencePoint>
+                    <Coordinates>
+                        <Longitude>6.12829</Longitude>
+                        <Latitude>49.60597</Latitude>
+                    </Coordinates>
+                    <LineAttributes>
+                        <FRC>FRC2</FRC>
+                        <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+                        <BEAR>134</BEAR>
+                    </LineAttributes>
+                    <PathAttributes>
+                        <LFRCNP>FRC3</LFRCNP>
+                        <DNP>246</DNP>
+                    </PathAttributes>
+                </LocationReferencePoint>
+                <LocationReferencePoint>
+                    <Coordinates>
+                        <Longitude>6.12838</Longitude>
+                        <Latitude>49.60398</Latitude>
+                    </Coordinates>
+                    <LineAttributes>
+                        <FRC>FRC3</FRC>
+                        <FOW>SINGLE_CARRIAGEWAY</FOW>
+                        <BEAR>227</BEAR>
+                    </LineAttributes>
+                    <PathAttributes>
+                        <LFRCNP>FRC7</LFRCNP>
+                        <DNP>246</DNP>
+                    </PathAttributes>
+                </LocationReferencePoint>
+                <LastLine>
+                    <FRC>FRC2</FRC>
+                    <FOW>SINGLE_CARRIAGEWAY</FOW>
+                    <BEAR>239</BEAR>
+                </LastLine>
+            </ClosedLineLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>
+
+----------------------------------------------
+ 

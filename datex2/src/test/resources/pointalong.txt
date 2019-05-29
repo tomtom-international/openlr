@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<d2LogicalModel xmlns="http://datex2.eu/schema/2_0RC2/2_0">
+    <payloadPublication xsi:type="SituationPublication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <situation>
+            <situationRecord xsi:type="Accident">
+                <groupOfLocations xsi:type="Point">
+                    <pointExtension>
+                        <OpenlrExtendedPoint>
+                            <openlrPointLocationReference>
+<openlrPointAlongLine>
+    <openlrSideOfRoad>left</openlrSideOfRoad>
+    <openlrOrientation>noOrientationOrUnknown</openlrOrientation>
+    <openlrPositiveOffset>28</openlrPositiveOffset>
+    <openlrLocationReferencePoint>
+        <openlrCoordinate>
+            <latitude>49.60597</latitude>
+            <longitude>6.12829</longitude>
+        </openlrCoordinate>
+        <openlrLineAttributes>
+            <openlrFunctionalRoadClass>FRC2</openlrFunctionalRoadClass>
+            <openlrFormOfWay>multipleCarriageway</openlrFormOfWay>
+            <openlrBearing>202</openlrBearing>
+        </openlrLineAttributes>
+        <openlrPathAttributes>
+            <openlrLowestFRCToNextLRPoint>FRC2</openlrLowestFRCToNextLRPoint>
+            <openlrDistanceToNextLRPoint>92</openlrDistanceToNextLRPoint>
+        </openlrPathAttributes>
+    </openlrLocationReferencePoint>
+    <openlrLastLocationReferencePoint>
+        <openlrCoordinate>
+            <latitude>49.60521</latitude>
+            <longitude>6.12779</longitude>
+        </openlrCoordinate>
+        <openlrLineAttributes>
+            <openlrFunctionalRoadClass>FRC2</openlrFunctionalRoadClass>
+            <openlrFormOfWay>multipleCarriageway</openlrFormOfWay>
+            <openlrBearing>42</openlrBearing>
+        </openlrLineAttributes>
+    </openlrLastLocationReferencePoint>
+</openlrPointAlongLine>
+                            </openlrPointLocationReference>
+                        </OpenlrExtendedPoint>
+                    </pointExtension>
+                </groupOfLocations>
+            </situationRecord>
+        </situation>
+    </payloadPublication>
+</d2LogicalModel>

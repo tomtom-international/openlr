@@ -1,0 +1,46 @@
+#navcolumn {
+  color: #333;
+  background: #D7E9EC;
+  border: 1px dashed black;
+}
+
+#leftColumn {
+  background: #FFFFFF;
+  border: 0px dashed black;
+  padding-left: 13px;
+}
+
+#footer {
+  width: auto;
+  height: 16px;
+  color: #FFFFFF;
+  background: #808080;
+  padding-bottom: 7px;
+  padding-top: 9px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 10px;
+  border: 1px solid black;
+  margin: 15px;
+}
+
+#breadcrumbs {
+  width: auto;
+  height: 18px;
+  color: #333;
+  background: silver;
+  border: 1px solid black;
+  margin: 15px;
+  padding-top: 8px;
+}
+
+#banner {
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 0px;
+}
+
+#bannerLeft {
+  display: none;
+}

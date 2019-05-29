@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>grid</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <GridLocationReference>
+                <Rectangle>
+                    <LowerLeft>
+                        <Longitude>5.0903</Longitude>
+                        <Latitude>52.08591</Latitude>
+                    </LowerLeft>
+                    <UpperRight>
+                        <Longitude>5.12141</Longitude>
+                        <Latitude>52.10437</Latitude>
+                    </UpperRight>
+                </Rectangle>
+                <NumColumns>4</NumColumns>
+                <NumRows>6</NumRows>
+            </GridLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>

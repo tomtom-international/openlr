@@ -1,0 +1,42 @@
+Usage of the interfaces
+
+ The OpenLR encoder and decoder use interfaces for their input and output
+ data. The following sketches outline the workflow and the usage of the interfaces
+ provided by the OpenLR data package.  
+ 
+* Encoding
+
+ The encoding process starts with the creation of a (map-dependent) location. The
+ LocationFactory in the OpenLR encoder package provides several methods for creating
+ point and line locations.
+ 
+ The OpenLR encoder takes such a location as input for the encoding process. It generates
+ a raw location reference which is the input for all physical encoders. These physical
+ encoder generate the different location reference formats. These formats implement the
+ location reference interface.
+
+[./images/encoding.jpg] Encoding workflow
+
+* Decoding
+
+ The decoding process needs a (map-independent) location reference as input. There can be
+ several different implementations of this interface as there are different physical
+ formats available. 
+ 
+ The physical decoder takes this location reference and translates the data into a raw
+ location reference. This step also depends on the physical format being used. Such a
+ raw location reference is used by the OpenLR decoder to find back the location.
+
+[./images/decoding.jpg] Decoding workflow
+
+* Legend
+ 
+ The legend below shows the interpretation of the symbols. Interfaces are shown as a
+ circle, components are drawn as a rectangle, implementations of an interface are
+ drawn as a dashed rectangle, and factories are drawn as dashed rectangles with
+ rounded edges.
+ 
+ The implementations of an interface within the different physical formats may have
+ different names and therefore "\{PF\}" stands for the name of the physical format.
+
+[./images/legend.jpg] Legend

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
+		Email: legal@tomtom.com TomTom (Technical contact) Email:
+		openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
+		114, 1011DK Amsterdam, the Netherlands This program is free software;
+		you can redistribute it and/or modify it under the terms of the GNU
+		General Public License as published by the Free Software Foundation;
+		version 2 of the License and the extra conditions for OpenLR. (see
+		openlr-license.txt) This program is distributed in the hope that it
+		will be useful, but WITHOUT ANY WARRANTY; without even the implied
+		warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+		the GNU General Public License for more details. You should have
+		received a copy of the GNU General Public License along with this
+		program; if not, write to the Free Software Foundation, Inc., 51
+		Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+	-->
+<MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+	<Nodes>
+		<Node id="261">
+			<Latitude>46.88698</Latitude>
+			<Longitude>9.08696</Longitude>
+		</Node>
+		
+		<Node id="262">
+			<Latitude>46.88913</Latitude>
+			<Longitude>8.91596</Longitude>
+		</Node>
+		
+		<Node id="263">
+			<Latitude>46.88782</Latitude>
+			<Longitude>8.82390</Longitude>
+		</Node>
+	</Nodes>
+	<Lines>
+		<Line id="26">
+			<StartNode>261</StartNode>
+			<EndNode>263</EndNode>
+			<Length>20000</Length>
+			<FRC>FRC_1</FRC>
+		</Line>	
+		
+		<Line id="27">
+			<StartNode>261</StartNode>
+			<EndNode>262</EndNode>
+			<Length>13000</Length>
+			<FRC>FRC_1</FRC>
+		</Line>	
+		<Line id="28">
+			<StartNode>262</StartNode>
+			<EndNode>263</EndNode>
+			<Length>7000</Length>
+			<FRC>FRC_1</FRC>
+		</Line>
+	</Lines>
+	<Calls>
+	<GetPointAlongLineCalls>
+			<GetPointAlongLine line="26">
+				<Input>20</Input>
+				<Output>
+					<Longitude>9.085940</Longitude>
+					<Latitude>46.28658</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>19980</Input>
+				<Output>
+					<Longitude>8.82374</Longitude>
+					<Latitude>46.88679</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>15000</Input>
+				<Output>
+					<Longitude>8.88954</Longitude>
+					<Latitude>46.88913</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>15020</Input>
+				<Output>
+					<Longitude>8.88929</Longitude>
+					<Latitude>46.88914</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>14980</Input>
+				<Output>
+					<Longitude>8.88988</Longitude>
+					<Latitude>46.88915</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			
+			<GetPointAlongLine line="27">
+				<Input>20</Input>
+				<Output>
+					<Longitude>9.085940</Longitude>
+					<Latitude>46.28658</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			
+			<GetPointAlongLine line="27">
+				<Input>12980</Input>
+				<Output>
+					<Longitude>8.91624</Longitude>
+					<Latitude>46.88910</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			
+			<GetPointAlongLine line="28">
+				<Input>6980</Input>
+				<Output>
+					<Longitude>8.82374</Longitude>
+					<Latitude>46.88679</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			
+			<GetPointAlongLine line="28">
+				<Input>20</Input>
+				<Output>
+					<Longitude>8.91570</Longitude>
+					<Latitude>46.88913</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			
+		</GetPointAlongLineCalls>
+		<MeasureAlongLineCalls>
+			<MeasureAlongLine line="26">
+				<Output>15000</Output>
+				<Input>
+					<Longitude>8.88954</Longitude>
+					<Latitude>46.88913</Latitude>
+				</Input>
+			</MeasureAlongLine>
+			
+		</MeasureAlongLineCalls>
+	</Calls>
+</MockedMapDatabase>

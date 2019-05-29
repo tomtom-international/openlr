@@ -1,0 +1,12 @@
+Built-By: TomTom International B.V.
+Export-Package: openlr,
+ openlr.decoder,
+ openlr.encoder,
+ openlr.location,
+ openlr.location.data,
+ openlr.location.utils,
+ openlr.properties,
+ openlr.rawLocRef
+Require-Bundle: openlr.map;bundle-version="1.2.3"
+Import-Package: org.apache.commons.lang.builder;version="2.4.0",
+ org.apache.log4j;version="1.2.13"

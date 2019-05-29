@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>pentagon</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <PolygonLocationReference>
+                <PolygonCorners>
+                    <Coordinates>
+                        <Longitude>5.08715</Longitude>
+                        <Latitude>52.13274</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>5.07557</Longitude>
+                        <Latitude>52.12698</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>5.07905</Longitude>
+                        <Latitude>52.12079</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>5.09396</Longitude>
+                        <Latitude>52.12002</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>5.09941</Longitude>
+                        <Latitude>52.12698</Latitude>
+                    </Coordinates>
+                </PolygonCorners>
+            </PolygonLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>

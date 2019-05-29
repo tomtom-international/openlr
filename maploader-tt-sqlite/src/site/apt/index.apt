@@ -1,0 +1,13 @@
+Map-SQLite
+ 
+ TomTom provides a Java library called "TomTom OpenLR Access Layer for SQLite" which enables 
+ the OpenLR en-/decoder components to use TomTom Digital Maps for location referencing. The map 
+ data must be stored in a SQLite database which complies to the illustrated schema.
+ 
+ The map-sqlite package also includes a map loader implementation which can be used to load the 
+ TomTom test maps within the OpenLR "Map Viewer" tool.
+
+ The implementation uses Java version 6 (see http://java.sun.com) and is licensed under the terms of 
+ the Apache v2.0 license.
+ 
+[./images/openlr-sqlite-schema.gif] SQLite schema

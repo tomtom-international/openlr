@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<d2LogicalModel xmlns="http://datex2.eu/schema/2_0RC2/2_0">
+    <payloadPublication xsi:type="SituationPublication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <situation>
+            <situationRecord xsi:type="Accident">
+                <groupOfLocations xsi:type="Linear">
+                    <linearExtension>
+                        <OpenlrExtendedLinear>
+                            <openlrLineLocationReference>
+<openlrLocationReferencePoint>
+    <openlrCoordinate>
+        <latitude>49.60851</latitude>
+        <longitude>6.12683</longitude>
+    </openlrCoordinate>
+    <openlrLineAttributes>
+        <openlrFunctionalRoadClass>FRC3</openlrFunctionalRoadClass>
+        <openlrFormOfWay>multipleCarriageway</openlrFormOfWay>
+        <openlrBearing>135</openlrBearing>
+    </openlrLineAttributes>
+    <openlrPathAttributes>
+        <openlrLowestFRCToNextLRPoint>FRC3</openlrLowestFRCToNextLRPoint>
+        <openlrDistanceToNextLRPoint>561</openlrDistanceToNextLRPoint>
+    </openlrPathAttributes>
+</openlrLocationReferencePoint>
+<openlrLocationReferencePoint>
+    <openlrCoordinate>
+        <latitude>49.60398</latitude>
+        <longitude>6.12838</longitude>
+    </openlrCoordinate>
+    <openlrLineAttributes>
+        <openlrFunctionalRoadClass>FRC3</openlrFunctionalRoadClass>
+        <openlrFormOfWay>singleCarriageway</openlrFormOfWay>
+        <openlrBearing>227</openlrBearing>
+    </openlrLineAttributes>
+    <openlrPathAttributes>
+        <openlrLowestFRCToNextLRPoint>FRC5</openlrLowestFRCToNextLRPoint>
+        <openlrDistanceToNextLRPoint>274</openlrDistanceToNextLRPoint>
+    </openlrPathAttributes>
+</openlrLocationReferencePoint>
+<openlrLastLocationReferencePoint>
+    <openlrCoordinate>
+        <latitude>49.60305</latitude>
+        <longitude>6.12817</longitude>
+    </openlrCoordinate>
+    <openlrLineAttributes>
+        <openlrFunctionalRoadClass>FRC5</openlrFunctionalRoadClass>
+        <openlrFormOfWay>singleCarriageway</openlrFormOfWay>
+        <openlrBearing>290</openlrBearing>
+    </openlrLineAttributes>
+</openlrLastLocationReferencePoint>
+<openlrOffsets>
+    <openlrPositiveOffset>200</openlrPositiveOffset>
+    <openlrNegativeOffset>0</openlrNegativeOffset>
+</openlrOffsets>
+                            </openlrLineLocationReference>
+                        </OpenlrExtendedLinear>
+                    </linearExtension>
+                </groupOfLocations>
+            </situationRecord>
+        </situation>
+    </payloadPublication>
+</d2LogicalModel>

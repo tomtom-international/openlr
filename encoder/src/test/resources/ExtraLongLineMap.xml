@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
+		Email: legal@tomtom.com TomTom (Technical contact) Email:
+		openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
+		114, 1011DK Amsterdam, the Netherlands This program is free software;
+		you can redistribute it and/or modify it under the terms of the GNU
+		General Public License as published by the Free Software Foundation;
+		version 2 of the License and the extra conditions for OpenLR. (see
+		openlr-license.txt) This program is distributed in the hope that it
+		will be useful, but WITHOUT ANY WARRANTY; without even the implied
+		warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+		the GNU General Public License for more details. You should have
+		received a copy of the GNU General Public License along with this
+		program; if not, write to the Free Software Foundation, Inc., 51
+		Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+	-->
+<MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+	<Nodes>
+		<Node id="14">
+			<Latitude>49.60315</Latitude>
+			<Longitude>6.12786</Longitude>
+		</Node>
+		<Node id="15">
+			<Latitude>49.60305</Latitude>
+			<Longitude>6.12817</Longitude>
+		</Node>
+		<Node id="16">
+			<Latitude>49.69423</Latitude>
+			<Longitude>6.31762</Longitude>
+		</Node>
+		<Node id="17">
+			<Latitude>49.7057</Latitude>
+			<Longitude>6.33596</Longitude>
+		</Node>
+		
+		<Node id="261">
+			<Latitude>50.93869</Latitude>
+			<Longitude>8.66343</Longitude>
+		</Node>
+		
+		<Node id="262">
+			<Latitude>50.93347</Latitude>
+			<Longitude>9.16048</Longitude>
+		</Node>
+	</Nodes>
+	<Lines>
+		<Line id="19">
+			<StartNode>14</StartNode>
+			<EndNode>15</EndNode>
+			<Length>25</Length>
+			<FRC>FRC_5</FRC>
+		</Line>
+		<Line id="24">
+			<StartNode>15</StartNode>
+			<EndNode>16</EndNode>
+			<Length>17000</Length>
+			<FRC>FRC_5</FRC>
+		</Line>
+		<Line id="25">
+			<StartNode>16</StartNode>
+			<EndNode>17</EndNode>
+			<Length>2500</Length>
+			<FRC>FRC_5</FRC>
+		</Line>
+		<Line id="26">
+			<StartNode>261</StartNode>
+			<EndNode>262</EndNode>
+			<Length>35000</Length>
+			<FRC>FRC_1</FRC>
+		</Line>		
+	</Lines>
+	<Calls>
+		<GetPointAlongLineCalls>
+			<GetPointAlongLine line="19">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.12806</Longitude>
+					<Latitude>49.60302</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="25">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.61881</Longitude>
+					<Latitude>49.69434</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="25">
+				<!--				 line length minus bearing distance -->
+				<Input>2480</Input>
+				<Output>
+					<Longitude>6.3338</Longitude>
+					<Latitude>49.7022</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="24">
+				<Input>20</Input>
+				<Output>
+					<Longitude>6.12843</Longitude>
+					<Latitude>49.60312</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="24">
+				<!--				 max node distance -->
+				<Input>15000</Input>
+				<Output>
+					<Longitude>6.30286</Longitude>
+					<Latitude>49.67622</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="24">
+				<!--				 max node distance + bearing distance -->
+				<Input>15020</Input>
+				<Output>
+					<Longitude>6.30299</Longitude>
+					<Latitude>49.67643</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="24">
+				<Input>14980</Input>
+				<Output>
+                    <Longitude>6.30298</Longitude>
+                    <Latitude>49.67643</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="24">
+				<Input>16980</Input>
+				<Output>
+					<Longitude>6.312757</Longitude>
+					<Latitude>49.692056</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>16000</Input>
+				<Output>
+					<Longitude>8.89250</Longitude>
+					<Latitude>50.93638</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>20</Input>
+				<Output>
+					<Longitude>8.66372</Longitude>
+					<Latitude>50.93866</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>14980</Input>
+				<Output>
+					<Longitude>8.876812</Longitude>
+					<Latitude>50.933450</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>34980</Input>
+				<Output>
+					<Longitude>9.16019</Longitude>
+					<Latitude>50.93347</Latitude>
+				</Output>
+			</GetPointAlongLine>
+		<GetPointAlongLine line="26">
+				<Input>15000</Input>
+				<Output>
+					<Longitude>8.87777</Longitude>
+					<Latitude>50.93595</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>15020</Input>
+				<Output>
+					<Longitude>8.87814</Longitude>
+					<Latitude>50.93600</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			<GetPointAlongLine line="26">
+				<Input>30000</Input>
+				<Output>
+					<Longitude>9.09091</Longitude>
+					<Latitude>50.93419</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			
+			<GetPointAlongLine line="26">
+				<Input>30020</Input>
+				<Output>
+					<Longitude>9.09122</Longitude>
+					<Latitude>50.93418</Latitude>
+				</Output>
+			</GetPointAlongLine>
+			
+			<GetPointAlongLine line="26">
+				<Input>29980</Input>
+				<Output>
+					<Longitude>9.09122</Longitude>
+					<Latitude>50.93418</Latitude>
+				</Output>
+			</GetPointAlongLine>
+		</GetPointAlongLineCalls>
+		<MeasureAlongLineCalls>
+			<MeasureAlongLine line="24">
+				<Input>
+					<Longitude>6.30286</Longitude>
+					<Latitude>49.67622</Latitude>
+				</Input>
+				<!--				 max node distance -->
+				<Output>15000</Output>
+			</MeasureAlongLine>
+			<MeasureAlongLine line="26">
+				<Output>15000</Output>
+				<Input>
+					<Longitude>8.87777</Longitude>
+					<Latitude>50.93595</Latitude>
+				</Input>
+			</MeasureAlongLine>
+			<MeasureAlongLine line="26">
+				<Output>30000</Output>
+				<Input>
+					<Longitude>9.09091</Longitude>
+					<Latitude>50.93419</Latitude>
+				</Input>
+			</MeasureAlongLine>
+			
+			<MeasureAlongLine line="26">
+				<Output>30020</Output>
+				<Input>
+					<Longitude>9.09122</Longitude>
+					<Latitude>50.93418</Latitude>
+				</Input>
+			</MeasureAlongLine>
+		</MeasureAlongLineCalls>
+	</Calls>
+</MockedMapDatabase>

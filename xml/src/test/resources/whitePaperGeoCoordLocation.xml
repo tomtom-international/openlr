@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<openlr:OpenLR xmlns:openlr="http://www.openlr.org/openlr">
+    <openlr:LocationID>TestID01</openlr:LocationID>
+    <openlr:XMLLocationReference>
+        <openlr:PointLocationReference>
+            <openlr:GeoCoordinate>
+                <openlr:Coordinates>
+                    <openlr:Longitude>6.12699</openlr:Longitude>
+                    <openlr:Latitude>49.60728</openlr:Latitude>
+                </openlr:Coordinates>
+            </openlr:GeoCoordinate>
+        </openlr:PointLocationReference>
+    </openlr:XMLLocationReference>
+</openlr:OpenLR>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<d2LogicalModel xmlns="http://datex2.eu/schema/2_0RC2/2_0">
+    <payloadPublication xsi:type="SituationPublication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <situation>
+            <situationRecord xsi:type="Accident">
+                <groupOfLocations xsi:type="Point">
+                    <pointExtension>
+                        <OpenlrExtendedPoint>
+                            <openlrPointLocationReference>
+<openlrGeoCoordinate>
+    <openlrCoordinate>
+        <latitude>49.60728</latitude>
+        <longitude>6.12699</longitude>
+    </openlrCoordinate>
+</openlrGeoCoordinate>
+                            </openlrPointLocationReference>
+                        </OpenlrExtendedPoint>
+                    </pointExtension>
+                </groupOfLocations>
+            </situationRecord>
+        </situation>
+    </payloadPublication>
+</d2LogicalModel>

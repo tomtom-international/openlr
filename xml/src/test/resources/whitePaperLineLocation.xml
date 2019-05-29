@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openlr:OpenLR xmlns:openlr="http://www.openlr.org/openlr"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.openlr.org/openlr openlr.xsd ">
+  <openlr:LocationID>ExampleLocation</openlr:LocationID>
+  <openlr:XMLLocationReference>
+    <openlr:LineLocationReference>
+      <openlr:LocationReferencePoint>
+        <openlr:Coordinates>
+          <openlr:Longitude>6.12683</openlr:Longitude>
+          <openlr:Latitude>49.60851</openlr:Latitude>
+        </openlr:Coordinates>
+        <openlr:LineAttributes>
+          <openlr:FRC>FRC3</openlr:FRC>
+          <openlr:FOW>MULTIPLE_CARRIAGEWAY</openlr:FOW>
+          <openlr:BEAR>135</openlr:BEAR>
+        </openlr:LineAttributes>
+        <openlr:PathAttributes>
+          <openlr:LFRCNP>FRC3</openlr:LFRCNP>
+          <openlr:DNP>561</openlr:DNP>
+        </openlr:PathAttributes>
+      </openlr:LocationReferencePoint>
+      <openlr:LocationReferencePoint>
+        <openlr:Coordinates>
+          <openlr:Longitude>6.12838</openlr:Longitude>
+          <openlr:Latitude>49.60398</openlr:Latitude>
+        </openlr:Coordinates>
+        <openlr:LineAttributes>
+          <openlr:FRC>FRC3</openlr:FRC>
+          <openlr:FOW>SINGLE_CARRIAGEWAY</openlr:FOW>
+          <openlr:BEAR>227</openlr:BEAR>
+        </openlr:LineAttributes>
+        <openlr:PathAttributes>
+          <openlr:LFRCNP>FRC5</openlr:LFRCNP>
+          <openlr:DNP>274</openlr:DNP>
+        </openlr:PathAttributes>
+      </openlr:LocationReferencePoint>
+      <openlr:LastLocationReferencePoint>
+        <openlr:Coordinates>
+          <openlr:Longitude>6.12817</openlr:Longitude>
+          <openlr:Latitude>49.60305</openlr:Latitude>
+        </openlr:Coordinates>
+        <openlr:LineAttributes>
+          <openlr:FRC>FRC5</openlr:FRC>
+          <openlr:FOW>SINGLE_CARRIAGEWAY</openlr:FOW>
+          <openlr:BEAR>290</openlr:BEAR>
+        </openlr:LineAttributes>
+      </openlr:LastLocationReferencePoint>
+      <openlr:Offsets>
+        <openlr:PosOff>150</openlr:PosOff>
+        <openlr:NegOff>0</openlr:NegOff>
+      </openlr:Offsets>
+    </openlr:LineLocationReference>
+  </openlr:XMLLocationReference>
+  <openlr:BinaryLocationReferences>
+    <openlr:BinaryLocationReference id="BinaryExample" version="2">
+      CgRbWyNG9BpsCQCb/jsbtAT/6/+jK1kC
+    </openlr:BinaryLocationReference>
+  </openlr:BinaryLocationReferences>
+  <openlr:AdditionalInformation>
+    <openlr:BoundingBox>
+      <openlr:LowerLeft>
+        <openlr:Longitude>6.12601</openlr:Longitude>
+        <openlr:Latitude>49.60243</openlr:Latitude>
+      </openlr:LowerLeft>
+      <openlr:UpperRight>
+        <openlr:Longitude>6.12951</openlr:Longitude>
+        <openlr:Latitude>49.60891</openlr:Latitude>
+        </openlr:UpperRight>
+     </openlr:BoundingBox>
+     <openlr:MapDatabase>ExampleMap Version 0.1</openlr:MapDatabase>
+     <openlr:AdditionalData/>
+  </openlr:AdditionalInformation>
+</openlr:OpenLR>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenLR xmlns="http://www.openlr.org/openlr">
+    <LocationID>triangle</LocationID>
+    <XMLLocationReference>
+        <AreaLocationReference>
+            <PolygonLocationReference>
+                <PolygonCorners>
+                    <Coordinates>
+                        <Longitude>5.06853</Longitude>
+                        <Latitude>52.05942</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>5.08782</Longitude>
+                        <Latitude>52.07235</Latitude>
+                    </Coordinates>
+                    <Coordinates>
+                        <Longitude>5.06019</Longitude>
+                        <Latitude>52.07334</Latitude>
+                    </Coordinates>
+                </PolygonCorners>
+            </PolygonLocationReference>
+        </AreaLocationReference>
+    </XMLLocationReference>
+</OpenLR>

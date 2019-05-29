@@ -1,0 +1,8 @@
+/target
+/test-output
+.settings/
+/OpenLR-decoder.log
+/.checkstyle
+/.classpath
+/.project
+/bin

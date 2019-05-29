@@ -1,0 +1,7 @@
+
+OpenLR - data
+
+  The data package consists of abstract classes and interfaces for OpenLR data
+  handling and services. The package comprises interfaces for OpenLR location 
+  references and also for encoding and decoding services converting the internal 
+  data into a defined physical format and the other way round. 

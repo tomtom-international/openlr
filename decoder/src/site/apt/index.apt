@@ -1,0 +1,6 @@
+OpenLR - decoder
+
+  The decoder package holds the reference implementation for the OpenLR decoder. It
+takes a (map-agnostic) location reference as input and finds back a corresponding 
+(map-dependent) location reference. This package uses the OpenLR map package and 
+the OpenLR data package. 

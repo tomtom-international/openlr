@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="map" verbose="1" >
+  <test name="All Tests">
+    <packages>
+      <package name="openlr.map.*"/>
+    </packages>
+  </test>
+</suite>

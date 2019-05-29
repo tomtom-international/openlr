@@ -1,0 +1,127 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+	<properties>
+		<title>OpenLR - xml package</title>
+		<author email="openlr@tomtom.com">TomTom International B.V.</author>
+	</properties>
+	<body>
+
+		<!-- template for future releases <release version="<version number>" date="<release 
+			date>" description="<textual description>"> <action dev="<developer>" type="add"> 
+			Test 1 </action> <action dev="<developer>" type="update"> Test 2 </action> 
+			<action dev="<developer>" type="fix"> Test 3 </action> <action dev="<developer>" 
+			type="remove"> Test 4 </action> </release> -->
+
+<release version="1.4.1" date="" description="OpenLR release 1.4.1">
+		
+		</release>
+
+		<release version="1.4.0" date="" description="Release 1.4.0">
+
+		</release>
+
+		<release version="1.3.0" date="" description="Release 1.3.0">
+			<action dev="TomTom International B.V." type="add">
+				Add area location
+				support.
+			</action>
+		</release>
+
+
+		<release version="1.2.2" date="" description="Release 1.2.2">
+			<action dev="TomTom International B.V." type="fix">
+				Decoder accepts
+				missing positive/negative offsets.
+			</action>
+			<action dev="TomTom International B.V." type="update">
+				Adapt changes in
+				the data package.
+			</action>
+			<action dev="TomTom International B.V." type="fix">
+				Prevent creation
+				of invalid location object with valid return code.
+			</action>
+		</release>
+
+		<release version="1.2.1" date="2010-08-04" description="Release 1.2.1">
+			<action dev="TomTom International B.V." type="update">
+				change of
+				maven-jaxb plugin
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				add equals and
+				hashCode methods to generated classes
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				add hashCode and
+				equals method to all data classes
+			</action>
+			<action dev="TomTom International B.V." type="update">
+				use of consistent
+				location/(raw) location reference identifier
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				add name and
+				explanation to error code
+			</action>
+			<action dev="TomTom International B.V." type="update">
+				implement return
+				code instead of exceptions
+			</action>
+			<action dev="TomTom International B.V." type="update">
+				split raw
+				location depending on location type
+			</action>
+			<action dev="TomTom International B.V." type="update">
+				split encoder and
+				decoder depending on location type
+			</action>
+		</release>
+
+		<release version="1.2.0" date="2010-07-01" description="Major OpenLR release 1.2.0">
+			<action dev="TomTom International B.V." type="add">
+				add version to
+				location reference
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				handle binary
+				data in the XML
+			</action>
+			<action dev="TomTom International B.V." type="update">
+				rename classes
+			</action>
+			<action dev="TomTom International B.V." type="update">
+				update uml model
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				adapt raw
+				location reference interface
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				resolve location
+				type automatically
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				add side of road
+				and orientation for point locations
+			</action>
+			<action dev="TomTom International B.V." type="add">
+				add point
+				location support
+			</action>
+			<action dev="TomTom International B.V." type="fix">
+				fix #8 (storing
+				xml data fails if bearing is rounded to 360)
+			</action>
+		</release>
+
+		<release version="1.1.0" date="2010-02-01" description="Major OpenLR release 1.1.0">
+			<action dev="TomTom International B.V." type="add">
+				Initial release
+				of the OpenLR xml package.
+			</action>
+		</release>
+
+	</body>
+</document>

@@ -1,0 +1,9 @@
+Built-By: TomTom International B.V.
+Export-Package: META-INF.services,
+ openlr.binary,
+ openlr.binary.data,
+ openlr.binary.impl,
+ openlr.binary.rawlocref
+Require-Bundle: openlr.data;bundle-version="1.2.3",
+ openlr.map;bundle-version="1.2.3"
+Import-Package: org.apache.log4j;version="1.2.13"

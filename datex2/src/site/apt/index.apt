@@ -1,0 +1,12 @@
+OpenLR - Datex2
+
+ The datex2 package consists of classes for reading and writing Datex II xml location 
+reference data as a service. The OpenLR encoder may use this package to create a Datex II xml 
+representation of a location reference. The OpenLR decoder may use this package to
+receive and decode Datex II xml location reference data. 
+
+ This package implements version 1.1 as described on the Datex II website 
+({{http://www.datex2.eu/content/openlr-extension-11}}). An extract of the complete {{{./schema.html}schema}}
+shows the OpenLR relevant parts.
+
+ This package does currently not support area locations. 
