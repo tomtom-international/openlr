@@ -107,6 +107,7 @@ OpenLR map interface.</description>
 				<configuration>
 					<excludedGroups>broken</excludedGroups>
 				</configuration>
+				<version>${maven.surefire.plugin.version}</version>
 			</plugin>
 
 			<plugin>
@@ -116,6 +117,7 @@ OpenLR map interface.</description>
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
+				<version>${maven.license.plugin.version}</version>
 			</plugin>
 
 			<plugin>

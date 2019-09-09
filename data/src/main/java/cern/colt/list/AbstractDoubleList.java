@@ -37,7 +37,7 @@ public void add(double element) {
 }
 /**
  * Appends all elements of the specified list to the receiver.
- * @param list the list of which all elements shall be appended.
+ * @param other the list of which all elements shall be appended.
  */
 public void addAllOf(DoubleArrayList other) {
 	addAllOfFromTo(other,0,other.size()-1); 
@@ -171,7 +171,7 @@ public Object clone() {
 /**
  * Returns true if the receiver contains the specified element.
  *
- * @param element element whose presence in the receiver is to be tested.
+ * @param elem element whose presence in the receiver is to be tested.
  */
 public boolean contains(double elem) {
 	return indexOfFromTo(elem,0,size-1) >=0;

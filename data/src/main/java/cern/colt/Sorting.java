@@ -339,8 +339,6 @@ public static int binarySearchFromTo(short[] list, short key, int from, int to) 
  * equal to the specified key, there is no guarantee which of the multiple elements
  * will be found.
  *
- * @param list the list to be searched.
- * @param key the value to be searched for.
  * @param from the leftmost search position, inclusive.
  * @param to the rightmost search position, inclusive.
  * @return index of the search key, if it is contained in the list;

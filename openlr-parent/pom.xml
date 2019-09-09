@@ -36,6 +36,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.license.plugin.version>1.10.b1</maven.license.plugin.version>
+		<maven.surefire.plugin.version>3.0.0-M3</maven.surefire.plugin.version>
 	</properties>
 
 	<build>
@@ -79,7 +81,7 @@
 				<plugin>
 					<groupId>com.mycila</groupId>
 					<artifactId>license-maven-plugin</artifactId>
-					<version>2.6</version>
+					<version>${maven.license.plugin.version}</version>
 					<configuration>
 						<header>${basedir}/src/main/resources/templates/HEADER</header>
 						<includes>

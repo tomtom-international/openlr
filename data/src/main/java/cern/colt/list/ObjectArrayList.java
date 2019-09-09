@@ -242,7 +242,7 @@ public Object clone() {
  * Returns true if the receiver contains the specified element.
  * Tests for equality or identity as specified by testForEquality.
  *
- * @param element element to search for.
+ * @param elem element to search for.
  * @param testForEquality if true -> test for equality, otherwise for identity.
  */
 public boolean contains(Object elem, boolean testForEquality) {

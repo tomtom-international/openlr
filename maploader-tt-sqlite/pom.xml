@@ -154,12 +154,13 @@
 				<configuration>
 					<excludedGroups>broken</excludedGroups>
 				</configuration>
+				<version>${maven.surefire.plugin.version}</version>
 			</plugin>
 
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
-				<version>1.9.0</version>
+				<version>${maven.license.plugin.version}</version>
 				<configuration>
 				    <strictCheck>true</strictCheck>
 					<header>${basedir}/src/main/resources/templates/HEADER</header>
@@ -432,13 +433,13 @@
 									<manifestFile>src/main/resources/templates/MANIFEST.MF
 									</manifestFile>
 									<manifestEntries>
-										<Bundle-SymbolicName>${pom.groupId}.${pom.artifactId}.source
+										<Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source
 										</Bundle-SymbolicName>
-										<Bundle-Version>${pom.version}</Bundle-Version>
+										<Bundle-Version>${project.version}</Bundle-Version>
 										<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-										<Bundle-Name>${pom.groupId} ${pom.artifactId} sources
+										<Bundle-Name>${project.groupId} ${project.artifactId} sources
 										</Bundle-Name>
-										<Eclipse-SourceBundle>${pom.groupId}.${pom.artifactId};version="${pom.version}";roots:="."
+										<Eclipse-SourceBundle>${project.groupId}.${project.artifactId};version="${project.version}";roots:="."
 										</Eclipse-SourceBundle>
 									</manifestEntries>
 								</archive>
@@ -467,11 +468,11 @@
 									<manifestFile>src/main/resources/templates/MANIFEST.MF
 									</manifestFile>
 									<manifestEntries>
-										<Bundle-SymbolicName>${pom.groupId}.${pom.artifactId}
+										<Bundle-SymbolicName>${project.groupId}.${project.artifactId}
 										</Bundle-SymbolicName>
-										<Bundle-Version>${pom.version}</Bundle-Version>
+										<Bundle-Version>${project.version}</Bundle-Version>
 										<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-										<Bundle-Name>${pom.groupId} ${pom.artifactId}</Bundle-Name>
+										<Bundle-Name>${project.groupId} ${project.artifactId}</Bundle-Name>
 									</manifestEntries>
 								</archive>
 							</configuration>

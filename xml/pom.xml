@@ -88,11 +88,13 @@
 				<configuration>
 					<excludedGroups>broken</excludedGroups>
 				</configuration>
+				<version>${maven.surefire.plugin.version}</version>
 			</plugin>
 
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
+				<version>${maven.license.plugin.version}</version>
 			</plugin>
 
 			<plugin>

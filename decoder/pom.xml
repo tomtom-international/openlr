@@ -57,7 +57,8 @@
 
 			<plugin>
 				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
+				<artifactId>maven-license-plugin</artifactId>
+                <version>${maven.license.plugin.version}</version>
 			</plugin>
 
 			<plugin>
@@ -69,6 +70,7 @@
 				<configuration>
 					<excludedGroups>broken</excludedGroups>
 				</configuration>
+				<version>${maven.surefire.plugin.version}</version>
 			</plugin>
 
 			<plugin>

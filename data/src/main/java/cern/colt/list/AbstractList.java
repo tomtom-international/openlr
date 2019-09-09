@@ -168,8 +168,8 @@ public void remove(int index) {
  * elements to the left (reduces their index).
  * This call shortens the list by <tt>(to - from + 1)</tt> elements.
  *
- * @param from index of first element to be removed.
- * @param to index of last element to be removed.
+ * @param fromIndex index of first element to be removed.
+ * @param toIndex index of last element to be removed.
  * @throws IndexOutOfBoundsException if <tt>(from&lt;0 || from&gt;to || to&gt;=size()) && to!=from-1</tt>.
  */
 public abstract void removeFromTo(int fromIndex, int toIndex);

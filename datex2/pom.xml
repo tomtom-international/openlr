@@ -85,6 +85,7 @@
 						<exclude>src/test/**</exclude>
 					</excludes>
 				</configuration>
+				<version>${maven.license.plugin.version}</version>
 			</plugin>
 
 			<plugin>
@@ -96,6 +97,7 @@
 				<configuration>
 					<excludedGroups>broken</excludedGroups>
 				</configuration>
+                <version>${maven.surefire.plugin.version}</version>
 			</plugin>
 
 		<plugin>

@@ -165,7 +165,7 @@ public Object clone() {
 /**
  * Returns true if the receiver contains the specified element.
  *
- * @param element element whose presence in the receiver is to be tested.
+ * @param elem element whose presence in the receiver is to be tested.
  */
 public boolean contains(float elem) {
 	return indexOfFromTo(elem,0,size-1) >=0;

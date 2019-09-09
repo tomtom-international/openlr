@@ -9,6 +9,7 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt;
 
 import cern.colt.function.IntComparator;
+import cern.colt.matrix.doublealgo.Sorting;
 /**
 Generically sorts arbitrary shaped data (for example multiple arrays, 1,2 or 3-d matrices, and so on) using a 
 quicksort or mergesort. This class addresses two problems, namely 
