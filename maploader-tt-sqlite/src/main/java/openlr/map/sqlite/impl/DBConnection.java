@@ -30,212 +30,218 @@
  */
 package openlr.map.sqlite.impl;
 
+import org.apache.log4j.Logger;
+import org.sqlite.SQLiteConfig;
+import org.sqlite.SQLiteJDBCLoader;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.log4j.Logger;
-import org.sqlite.SQLiteConfig;
-import org.sqlite.SQLiteJDBCLoader;
-
 /**
  * The Class DBConnection.
  */
 public class DBConnection {
-	
-	/**
-	 * The default logger for this class.
-	 */
-	private static final Logger LOG = Logger.getLogger(DBConnection.class);
-	
-	/**
-	 * Database connection.
-	 */
-	private final Connection connection;
-	
-	/** The ps get line. */
-	private final PreparedStatement psGetLine;
 
-	/** The ps nodes close by. */
-	private final PreparedStatement psNodesCloseBy;
+    /**
+     * The default logger for this class.
+     */
+    private static final Logger LOG = Logger.getLogger(DBConnection.class);
 
-	/** The ps lines close by. */
-	private final PreparedStatement psLinesCloseBy;
+    /**
+     * Database connection.
+     */
+    private final Connection connection;
 
-	/** The ps get node. */
-	private final PreparedStatement psGetNode;
+    /**
+     * The ps get line.
+     */
+    private final PreparedStatement psGetLine;
 
-	/** The ps meta data. */
-	private final PreparedStatement psMetaData;
+    /**
+     * The ps nodes close by.
+     */
+    private final PreparedStatement psNodesCloseBy;
 
-	/** The ps line count. */
-	private final PreparedStatement psLineCount;
+    /**
+     * The ps lines close by.
+     */
+    private final PreparedStatement psLinesCloseBy;
 
-	/** The ps node count. */
-	private final PreparedStatement psNodeCount;
+    /**
+     * The ps get node.
+     */
+    private final PreparedStatement psGetNode;
 
-	/** The ps incoming. */
-	private final PreparedStatement psIncoming;
+    /**
+     * The ps meta data.
+     */
+    private final PreparedStatement psMetaData;
 
-	/** The ps outgoing. */
-	private final PreparedStatement psOutgoing;
-	
-	
-	
-	/**
-	 * Instantiates a new dB connection.
-	 *
-	 * @param db the db
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws SQLException the sQL exception
-	 */
-	public DBConnection(final String db) throws ClassNotFoundException, SQLException {
-		connection = getDatabaseConnection(db);
-		try {
-			psGetLine = connection
-					.prepareStatement(Configuration.SQL_SELECT_LINE);
-			psNodesCloseBy = connection
-					.prepareStatement(Configuration.SQL_FIND_CLOSE_BY_NODE);
-			psLinesCloseBy = connection
-					.prepareStatement(Configuration.SQL_FIND_CLOSE_BY_LINE);
-			psGetNode = connection
-					.prepareStatement(Configuration.SQL_SELECT_NODE);
-			psMetaData = connection
-					.prepareStatement(Configuration.SQL_METADATA);
-			psLineCount = connection
-					.prepareStatement(Configuration.SQL_LINE_COUNT);
-			psNodeCount = connection
-					.prepareStatement(Configuration.SQL_NODE_COUNT);
-			psIncoming = connection
-					.prepareStatement(Configuration.SQL_LINE_INCOMING);
-			psOutgoing = connection
-					.prepareStatement(Configuration.SQL_LINE_OUTGOING);
-		} catch (SQLException e) {
-			throw new IllegalStateException(
-					"Unable to prepare SQL statements.", e);
-		}
-	}
+    /**
+     * The ps line count.
+     */
+    private final PreparedStatement psLineCount;
+
+    /**
+     * The ps node count.
+     */
+    private final PreparedStatement psNodeCount;
+
+    /**
+     * The ps incoming.
+     */
+    private final PreparedStatement psIncoming;
+
+    /**
+     * The ps outgoing.
+     */
+    private final PreparedStatement psOutgoing;
 
 
-	/**
-	 * Gets the ps get line.
-	 *
-	 * @return the ps get line
-	 */
-	public final PreparedStatement getPsGetLine() {
-		return psGetLine;
-	}
+    /**
+     * Instantiates a new dB connection.
+     *
+     * @param db the db
+     * @throws ClassNotFoundException the class not found exception
+     * @throws SQLException           the sQL exception
+     */
+    public DBConnection(final String db) throws ClassNotFoundException, SQLException {
+        connection = getDatabaseConnection(db);
+        try {
+            psGetLine = connection
+                    .prepareStatement(Configuration.SQL_SELECT_LINE);
+            psNodesCloseBy = connection
+                    .prepareStatement(Configuration.SQL_FIND_CLOSE_BY_NODE);
+            psLinesCloseBy = connection
+                    .prepareStatement(Configuration.SQL_FIND_CLOSE_BY_LINE);
+            psGetNode = connection
+                    .prepareStatement(Configuration.SQL_SELECT_NODE);
+            psMetaData = connection
+                    .prepareStatement(Configuration.SQL_METADATA);
+            psLineCount = connection
+                    .prepareStatement(Configuration.SQL_LINE_COUNT);
+            psNodeCount = connection
+                    .prepareStatement(Configuration.SQL_NODE_COUNT);
+            psIncoming = connection
+                    .prepareStatement(Configuration.SQL_LINE_INCOMING);
+            psOutgoing = connection
+                    .prepareStatement(Configuration.SQL_LINE_OUTGOING);
+        } catch (SQLException e) {
+            throw new IllegalStateException(
+                    "Unable to prepare SQL statements.", e);
+        }
+    }
 
 
-
-	/**
-	 * Gets the ps nodes close by.
-	 *
-	 * @return the ps nodes close by
-	 */
-	public final PreparedStatement getPsNodesCloseBy() {
-		return psNodesCloseBy;
-	}
-
+    /**
+     * Gets the ps get line.
+     *
+     * @return the ps get line
+     */
+    public final PreparedStatement getPsGetLine() {
+        return psGetLine;
+    }
 
 
-	/**
-	 * Gets the ps lines close by.
-	 *
-	 * @return the ps lines close by
-	 */
-	public final PreparedStatement getPsLinesCloseBy() {
-		return psLinesCloseBy;
-	}
+    /**
+     * Gets the ps nodes close by.
+     *
+     * @return the ps nodes close by
+     */
+    public final PreparedStatement getPsNodesCloseBy() {
+        return psNodesCloseBy;
+    }
 
 
-
-	/**
-	 * Gets the ps get node.
-	 *
-	 * @return the ps get node
-	 */
-	public final PreparedStatement getPsGetNode() {
-		return psGetNode;
-	}
-
+    /**
+     * Gets the ps lines close by.
+     *
+     * @return the ps lines close by
+     */
+    public final PreparedStatement getPsLinesCloseBy() {
+        return psLinesCloseBy;
+    }
 
 
-	/**
-	 * Gets the ps meta data.
-	 *
-	 * @return the ps meta data
-	 */
-	public final PreparedStatement getPsMetaData() {
-		return psMetaData;
-	}
+    /**
+     * Gets the ps get node.
+     *
+     * @return the ps get node
+     */
+    public final PreparedStatement getPsGetNode() {
+        return psGetNode;
+    }
 
 
-
-	/**
-	 * Gets the ps line count.
-	 *
-	 * @return the ps line count
-	 */
-	public final PreparedStatement getPsLineCount() {
-		return psLineCount;
-	}
-
+    /**
+     * Gets the ps meta data.
+     *
+     * @return the ps meta data
+     */
+    public final PreparedStatement getPsMetaData() {
+        return psMetaData;
+    }
 
 
-	/**
-	 * Gets the ps node count.
-	 *
-	 * @return the ps node count
-	 */
-	public final PreparedStatement getPsNodeCount() {
-		return psNodeCount;
-	}
+    /**
+     * Gets the ps line count.
+     *
+     * @return the ps line count
+     */
+    public final PreparedStatement getPsLineCount() {
+        return psLineCount;
+    }
 
 
-
-	/**
-	 * Gets the ps incoming.
-	 *
-	 * @return the ps incoming
-	 */
-	public final PreparedStatement getPsIncoming() {
-		return psIncoming;
-	}
-
+    /**
+     * Gets the ps node count.
+     *
+     * @return the ps node count
+     */
+    public final PreparedStatement getPsNodeCount() {
+        return psNodeCount;
+    }
 
 
-	/**
-	 * Gets the ps outgoing.
-	 *
-	 * @return the ps outgoing
-	 */
-	public final PreparedStatement getPsOutgoing() {
-		return psOutgoing;
-	}
-	
-	/**
-	 * Gets the connection to a given SQLite database.
-	 * 
-	 * @param db
-	 *            path to the SQLite database.
-	 * @return a connection to the specified SQLite database.
-	 * @throws ClassNotFoundException
-	 *             if the driver was not found in classpath.
-	 * @throws SQLException
-	 *             if opening the database connection fails.
-	 */
-	private Connection getDatabaseConnection(final String db)
-			throws ClassNotFoundException, SQLException {
-		assert db != null;
-		if (LOG.isDebugEnabled()) {
-			String mode = "pure-java";
-			if (SQLiteJDBCLoader.isNativeMode()) {
-				mode = "native";
-			}
-			LOG.debug(String
-					.format("SQLite driver is running in %s mode", mode));
+    /**
+     * Gets the ps incoming.
+     *
+     * @return the ps incoming
+     */
+    public final PreparedStatement getPsIncoming() {
+        return psIncoming;
+    }
+
+
+    /**
+     * Gets the ps outgoing.
+     *
+     * @return the ps outgoing
+     */
+    public final PreparedStatement getPsOutgoing() {
+        return psOutgoing;
+    }
+
+    /**
+     * Gets the connection to a given SQLite database.
+     *
+     * @param db path to the SQLite database.
+     * @return a connection to the specified SQLite database.
+     * @throws ClassNotFoundException if the driver was not found in classpath.
+     * @throws SQLException           if opening the database connection fails.
+     */
+    private Connection getDatabaseConnection(final String db)
+            throws ClassNotFoundException, SQLException {
+        assert db != null;
+        if (LOG.isDebugEnabled()) {
+            String mode = "pure-java";
+            if (SQLiteJDBCLoader.isNativeMode()) {
+                mode = "native";
+            }
+            LOG.debug(String
+                    .format("SQLite driver is running in %s mode", mode));
         }
         SQLiteConfig config = new SQLiteConfig();
         config.setReadOnly(true);

@@ -35,82 +35,85 @@ import openlr.map.loader.MapLoadParameter;
 /**
  * The class DBFileNameParameter implements a map loader parameter. This
  * parameter represents the path to the database file.
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class DBFileNameParameter implements MapLoadParameter {
 
-	/** The Constant IDENTIFIER. */
-	public static final int IDENTIFIER = 1;
+    /**
+     * The Constant IDENTIFIER.
+     */
+    public static final int IDENTIFIER = 1;
 
-	/**
-	 * Serial ID.
-	 */
-	private static final long serialVersionUID = -7329609426045551511L;
+    /**
+     * Serial ID.
+     */
+    private static final long serialVersionUID = -7329609426045551511L;
 
-	/** The value. */
-	private String value;
+    /**
+     * The value.
+     */
+    private String value;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String getDescription() {
-		return "The SQLite database";
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String getDescription() {
+        return "The SQLite database";
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String getName() {
-		return "Database file";
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String getName() {
+        return "Database file";
+    }
 
-	/*
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final boolean isRequired() {
-		return true;
-	}
+    /*
+     * {@inheritDoc}
+     */
+    @Override
+    public final boolean isRequired() {
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final ParameterType getType() {
-		return ParameterType.FILE;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final ParameterType getType() {
+        return ParameterType.FILE;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final int getIdentifier() {
-		return IDENTIFIER;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final int getIdentifier() {
+        return IDENTIFIER;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final String getValue() {
-		return value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String getValue() {
+        return value;
+    }
 
-	/**
-	 * Sets the value.
-	 * 
-	 * @param s
-	 *            the new value
-	 */
-	public final void setValue(final String s) {
-		value = s;
-	}
+    /**
+     * Sets the value.
+     *
+     * @param s the new value
+     */
+    public final void setValue(final String s) {
+        value = s;
+    }
 }

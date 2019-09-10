@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,22 +39,17 @@
  */
 package eu.datex2.schema._2_0rc2._2_0;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import javax.xml.bind.annotation.*;
+
 /**
  * <p>Java class for D2LogicalModel complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="D2LogicalModel">
  *   &lt;complexContent>
@@ -60,37 +66,37 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "D2LogicalModel", propOrder = {
-    "exchange",
-    "payloadPublication",
-    "d2LogicalModelExtension"
+        "exchange",
+        "payloadPublication",
+        "d2LogicalModelExtension"
 })
 public class D2LogicalModel {
 
     /** The exchange. */
     @XmlElement(required = true)
     protected Exchange exchange;
-    
+
     /** The payload publication. */
     protected PayloadPublication payloadPublication;
-    
+
     /** The d2 logical model extension. */
     protected ExtensionType d2LogicalModelExtension;
-    
+
     /** The model base version. */
     @XmlAttribute(name = "modelBaseVersion", required = true)
     @XmlSchemaType(name = "anySimpleType")
     protected String modelBaseVersion;
-    
+
     /** The extension name. */
     @XmlAttribute(name = "extensionName")
     @XmlSchemaType(name = "anySimpleType")
     protected String extensionName;
-    
+
     /** The extension version. */
     @XmlAttribute(name = "extensionVersion")
     @XmlSchemaType(name = "anySimpleType")
@@ -109,11 +115,11 @@ public class D2LogicalModel {
 
     /**
      * Sets the value of the exchange property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Exchange }
-     *     
+     *
      */
     public final void setExchange(final Exchange value) {
         this.exchange = value;
@@ -132,11 +138,11 @@ public class D2LogicalModel {
 
     /**
      * Sets the value of the payloadPublication property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link PayloadPublication }
-     *     
+     *
      */
     public final void setPayloadPublication(final PayloadPublication value) {
         this.payloadPublication = value;
@@ -155,11 +161,11 @@ public class D2LogicalModel {
 
     /**
      * Sets the value of the d2LogicalModelExtension property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link ExtensionType }
-     *     
+     *
      */
     public final void setD2LogicalModelExtension(final ExtensionType value) {
         this.d2LogicalModelExtension = value;
@@ -182,11 +188,11 @@ public class D2LogicalModel {
 
     /**
      * Sets the value of the modelBaseVersion property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public final void setModelBaseVersion(final String value) {
         this.modelBaseVersion = value;
@@ -209,11 +215,11 @@ public class D2LogicalModel {
 
     /**
      * Sets the value of the extensionName property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public final void setExtensionName(final String value) {
         this.extensionName = value;
@@ -236,11 +242,11 @@ public class D2LogicalModel {
 
     /**
      * Sets the value of the extensionVersion property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public final void setExtensionVersion(final String value) {
         this.extensionVersion = value;

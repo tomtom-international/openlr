@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -16,7 +16,8 @@
 
 	<name>OpenLR - maploader-tt-sqlite</name>
 	<description>This library provides an access layer which enables OpenLR
-		to use TomTom Digital Maps in SQLite Format.</description>
+		to use TomTom Digital Maps in SQLite Format.
+	</description>
 	<url>http://www.openlr.org</url>
 
 	<licenses>
@@ -70,7 +71,7 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-		    <version>2.6</version>
+			<version>2.6</version>
 		</dependency>
 	</dependencies>
 
@@ -154,14 +155,15 @@
 				<configuration>
 					<excludedGroups>broken</excludedGroups>
 				</configuration>
+				<version>${maven.surefire.plugin.version}</version>
 			</plugin>
 
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
-				<version>1.9.0</version>
+				<version>${maven.license.plugin.version}</version>
 				<configuration>
-				    <strictCheck>true</strictCheck>
+					<strictCheck>true</strictCheck>
 					<header>${basedir}/src/main/resources/templates/HEADER</header>
 					<includes>
 						<include>**/*.java</include>
@@ -242,32 +244,38 @@
 							<files>
 								<file>
 									<source>src/changes/changes.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
+									<outputDirectory>
+										${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
 									</outputDirectory>
 								</file>
 								<file>
 									<source>checkstyle_openlr.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
+									<outputDirectory>
+										${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
 									</outputDirectory>
 								</file>
 								<file>
 									<source>src/main/resources/templates/HEADER</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+									<outputDirectory>
+										${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
 									</outputDirectory>
 								</file>
 								<file>
 									<source>src/main/resources/templates/changelog.txt</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+									<outputDirectory>
+										${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
 									</outputDirectory>
 								</file>
 								<file>
 									<source>src/main/resources/templates/MANIFEST.MF</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+									<outputDirectory>
+										${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
 									</outputDirectory>
 								</file>
 								<file>
 									<source>src/main/assembly/with-dependencies.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/assembly
+									<outputDirectory>
+										${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/assembly
 									</outputDirectory>
 								</file>
 							</files>
@@ -432,13 +440,14 @@
 									<manifestFile>src/main/resources/templates/MANIFEST.MF
 									</manifestFile>
 									<manifestEntries>
-										<Bundle-SymbolicName>${pom.groupId}.${pom.artifactId}.source
+										<Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source
 										</Bundle-SymbolicName>
-										<Bundle-Version>${pom.version}</Bundle-Version>
+										<Bundle-Version>${project.version}</Bundle-Version>
 										<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-										<Bundle-Name>${pom.groupId} ${pom.artifactId} sources
+										<Bundle-Name>${project.groupId} ${project.artifactId} sources
 										</Bundle-Name>
-										<Eclipse-SourceBundle>${pom.groupId}.${pom.artifactId};version="${pom.version}";roots:="."
+										<Eclipse-SourceBundle>
+											${project.groupId}.${project.artifactId};version="${project.version}";roots:="."
 										</Eclipse-SourceBundle>
 									</manifestEntries>
 								</archive>
@@ -467,11 +476,11 @@
 									<manifestFile>src/main/resources/templates/MANIFEST.MF
 									</manifestFile>
 									<manifestEntries>
-										<Bundle-SymbolicName>${pom.groupId}.${pom.artifactId}
+										<Bundle-SymbolicName>${project.groupId}.${project.artifactId}
 										</Bundle-SymbolicName>
-										<Bundle-Version>${pom.version}</Bundle-Version>
+										<Bundle-Version>${project.version}</Bundle-Version>
 										<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-										<Bundle-Name>${pom.groupId} ${pom.artifactId}</Bundle-Name>
+										<Bundle-Name>${project.groupId} ${project.artifactId}</Bundle-Name>
 									</manifestEntries>
 								</archive>
 							</configuration>

@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -30,192 +41,191 @@
  */
 package openlr.encoder;
 
+import openlr.PhysicalEncoder;
+import openlr.map.MapDatabase;
+import org.apache.commons.configuration.Configuration;
+
 import java.util.Collections;
 import java.util.List;
 
-import openlr.PhysicalEncoder;
-import openlr.map.MapDatabase;
-
-import org.apache.commons.configuration.Configuration;
-
-/** 
+/**
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public final class OpenLREncoderParameter {
 
-	/** The map. */
-	private final MapDatabase map;
+    /** The map. */
+    private final MapDatabase map;
 
-	/** The config. */
-	private final Configuration config;
+    /** The config. */
+    private final Configuration config;
 
-	/** The lrdb. */
-	private final LRDatabase lrdb;
-	
-	/** The phys encoder. */
-	private final List<PhysicalEncoder> physEncoder;	
-	
-	
-	/**
-	 * Instantiates a new open lr encoder parameter.
-	 *
-	 * @param b the builder
-	 */
-	private OpenLREncoderParameter(final Builder b) {
-		map = b.map;
-		config = b.config;
-		lrdb = b.lrdb;
-		physEncoder = b.physEncoder;
-	}	
+    /** The lrdb. */
+    private final LRDatabase lrdb;
 
-	/**
-	 * Gets the map datase.
-	 *
-	 * @return the map datase
-	 */
-	public MapDatabase getMapDatase() {
-		return map;
-	}
+    /** The phys encoder. */
+    private final List<PhysicalEncoder> physEncoder;
 
-	/**
-	 * Gets the configuration.
-	 *
-	 * @return the configuration
-	 */
-	public Configuration getConfiguration() {
-		return config;
-	}
 
-	/**
-	 * Gets the lR database.
-	 *
-	 * @return the lR database
-	 */
-	public LRDatabase getLRDatabase() {
-		return lrdb;
-	}
+    /**
+     * Instantiates a new open lr encoder parameter.
+     *
+     * @param b the builder
+     */
+    private OpenLREncoderParameter(final Builder b) {
+        map = b.map;
+        config = b.config;
+        lrdb = b.lrdb;
+        physEncoder = b.physEncoder;
+    }
 
-	/**
-	 * Checks for map database.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean hasMapDatabase() {
-		return map != null;
-	}
+    /**
+     * Gets the map datase.
+     *
+     * @return the map datase
+     */
+    public MapDatabase getMapDatase() {
+        return map;
+    }
 
-	/**
-	 * Checks for configuration.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean hasConfiguration() {
-		return config != null;
-	}
+    /**
+     * Gets the configuration.
+     *
+     * @return the configuration
+     */
+    public Configuration getConfiguration() {
+        return config;
+    }
 
-	/**
-	 * Checks for lr database.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean hasLRDatabase() {
-		return lrdb != null;
-	}
-	
-	/**
-	 * Checks for physical encoder.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean hasPhysicalEncoder() {
-		return !physEncoder.isEmpty();
-	}
-	
-	/**
-	 * Gets the physical encoders.
-	 *
-	 * @return the physical encoders
-	 */
-	public List<PhysicalEncoder> getPhysicalEncoders() {
-		return physEncoder;
-	}
-	
-	/**
-	 * The Class Builder.
-	 */
-	public static final class Builder {
-		
-		/** The map. */
-		private MapDatabase map;
+    /**
+     * Gets the lR database.
+     *
+     * @return the lR database
+     */
+    public LRDatabase getLRDatabase() {
+        return lrdb;
+    }
 
-		/** The config. */
-		private Configuration config;
+    /**
+     * Checks for map database.
+     *
+     * @return true, if successful
+     */
+    public boolean hasMapDatabase() {
+        return map != null;
+    }
 
-		/** The lrdb. */
-		private LRDatabase lrdb;
-		
-		/** The phys encoder. */
-		private List<PhysicalEncoder> physEncoder = Collections.emptyList();
+    /**
+     * Checks for configuration.
+     *
+     * @return true, if successful
+     */
+    public boolean hasConfiguration() {
+        return config != null;
+    }
 
-		
-		/**
-		 * With map database.
-		 *
-		 * @param mdb the mdb
-		 * @return the builder
-		 */
-		public Builder with(final MapDatabase mdb) {
-			map = mdb;
-			return this;
-		}
-		
-		/**
-		 * With configuration.
-		 *
-		 * @param c the c
-		 * @return the builder
-		 */
-		public Builder with(final Configuration c) {
-			config = c;
-			return this;
-		}
-		
-		/**
-		 * With location reference database.
-		 *
-		 * @param l the l
-		 * @return the builder
-		 */
-		public Builder with(final LRDatabase l) {
-			lrdb = l;
-			return this;
-		}
-		
-		/**
-		 * With physical encoders.
-		 *
-		 * @param pe the pe
-		 * @return the builder
-		 */
-		public  Builder with(final List<PhysicalEncoder> pe) {
-			physEncoder = Collections.unmodifiableList(pe);
-			return this;
-		}
-		
-		/**
-		 * Builds the parameter.
-		 *
-		 * @return the open lr encoder parameter
-		 */
-		public OpenLREncoderParameter buildParameter() {
-			return new OpenLREncoderParameter(this);
-		}	
-		
-	}
+    /**
+     * Checks for lr database.
+     *
+     * @return true, if successful
+     */
+    public boolean hasLRDatabase() {
+        return lrdb != null;
+    }
+
+    /**
+     * Checks for physical encoder.
+     *
+     * @return true, if successful
+     */
+    public boolean hasPhysicalEncoder() {
+        return !physEncoder.isEmpty();
+    }
+
+    /**
+     * Gets the physical encoders.
+     *
+     * @return the physical encoders
+     */
+    public List<PhysicalEncoder> getPhysicalEncoders() {
+        return physEncoder;
+    }
+
+    /**
+     * The Class Builder.
+     */
+    public static final class Builder {
+
+        /** The map. */
+        private MapDatabase map;
+
+        /** The config. */
+        private Configuration config;
+
+        /** The lrdb. */
+        private LRDatabase lrdb;
+
+        /** The phys encoder. */
+        private List<PhysicalEncoder> physEncoder = Collections.emptyList();
+
+
+        /**
+         * With map database.
+         *
+         * @param mdb the mdb
+         * @return the builder
+         */
+        public Builder with(final MapDatabase mdb) {
+            map = mdb;
+            return this;
+        }
+
+        /**
+         * With configuration.
+         *
+         * @param c the c
+         * @return the builder
+         */
+        public Builder with(final Configuration c) {
+            config = c;
+            return this;
+        }
+
+        /**
+         * With location reference database.
+         *
+         * @param l the l
+         * @return the builder
+         */
+        public Builder with(final LRDatabase l) {
+            lrdb = l;
+            return this;
+        }
+
+        /**
+         * With physical encoders.
+         *
+         * @param pe the pe
+         * @return the builder
+         */
+        public Builder with(final List<PhysicalEncoder> pe) {
+            physEncoder = Collections.unmodifiableList(pe);
+            return this;
+        }
+
+        /**
+         * Builds the parameter.
+         *
+         * @return the open lr encoder parameter
+         */
+        public OpenLREncoderParameter buildParameter() {
+            return new OpenLREncoderParameter(this);
+        }
+
+    }
 
 }

@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -38,7 +49,6 @@ import openlr.map.FunctionalRoadClass;
 import openlr.map.Line;
 import openlr.map.utils.GeometryUtils;
 import openlr.map.utils.GeometryUtils.BearingDirection;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -64,200 +74,200 @@ import org.apache.log4j.Logger;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class OpenLRRatingImpl implements OpenLRRating {
 
-	/** Number of degrees for a half circle */
-	private static final int HALF_CIRCLE = 180;
+    /** Number of degrees for a half circle */
+    private static final int HALF_CIRCLE = 180;
 
-	/** Number of degrees for a full circle */
-	private static final int FULL_CIRCLE = 360;
+    /** Number of degrees for a full circle */
+    private static final int FULL_CIRCLE = 360;
 
-	/** logger */
-	private static final Logger LOG = Logger.getLogger(OpenLRRatingImpl.class);
-	
-	/** The Constant fowRatingTable. */
-	private static final FormOfWayRatingTable FOW_RATING_TABLE = new FormOfWayRatingTable();
+    /** logger */
+    private static final Logger LOG = Logger.getLogger(OpenLRRatingImpl.class);
 
-	/** {@inheritDoc} */
-	@Override
-	public final int getRating(final OpenLRDecoderProperties properties,
-			final int distance, final LocationReferencePoint p,
-			final Line line, final int projectionAlongLine)
-			throws OpenLRProcessingException {
-		BearingDirection dir = null;
-		if (p.isLastLRP()) {
-			dir = BearingDirection.AGAINST_DIRECTION;
-		} else {
-			dir = BearingDirection.IN_DIRECTION;
-		}
-		int nodeRating = calculateDistanceRating(properties, distance);
-		int bearingRating = calculateBearingRating(properties, p.getBearing(),
-				dir, line, projectionAlongLine);
-		if (bearingRating < 0) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("bearing of a candidate line is out of range ["
-						+ line.getID() + "]");
-			}
-			return -1;
-		}
-		int frcRating = calculateFRCRating(properties, p.getFRC(), line);
-		int fowRating = calculateFOWRating(properties, p.getFOW(), line);
-		int lineRating = bearingRating + frcRating + fowRating;
-		int rating = properties.getNodeFactor() * nodeRating
-				+ properties.getLineFactor() * lineRating;
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("total rating [" + line.getID() + "]: " + rating
-					+ "  (node: " + nodeRating + ", line: " + lineRating
-					+ ", bearing: " + bearingRating + ", frc: " + frcRating
-					+ ", fow: " + fowRating + ")");
-		}
-		return rating;
-	}
+    /** The Constant fowRatingTable. */
+    private static final FormOfWayRatingTable FOW_RATING_TABLE = new FormOfWayRatingTable();
 
-	/**
-	 * Calculates the node value based on the distance between the LRP position
-	 * and the corresponding node. The formula looks like: <br>
-	 * <br>
-	 * node_value = [max_node_distance] - distance <br>
-	 * <br>
-	 * The max_node_distance is configurable in the OpenLR properties.
-	 * 
-	 * @param properties
-	 *            the OpenLR properties
-	 * @param distance
-	 *            the distance of the node to the LRP position
-	 * @return the node value
-	 * @throws OpenLRProcessingException
-	 *             the open lr processing exception
-	 */
-	private int calculateDistanceRating(
-			final OpenLRDecoderProperties properties, final double distance)
-			throws OpenLRProcessingException {
-		int diff = properties.getMaxNodeDistance() - (int) Math.round(distance);
-		return Math.max(0, diff);
-	}
+    /** {@inheritDoc} */
+    @Override
+    public final int getRating(final OpenLRDecoderProperties properties,
+                               final int distance, final LocationReferencePoint p,
+                               final Line line, final int projectionAlongLine)
+            throws OpenLRProcessingException {
+        BearingDirection dir = null;
+        if (p.isLastLRP()) {
+            dir = BearingDirection.AGAINST_DIRECTION;
+        } else {
+            dir = BearingDirection.IN_DIRECTION;
+        }
+        int nodeRating = calculateDistanceRating(properties, distance);
+        int bearingRating = calculateBearingRating(properties, p.getBearing(),
+                dir, line, projectionAlongLine);
+        if (bearingRating < 0) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("bearing of a candidate line is out of range ["
+                        + line.getID() + "]");
+            }
+            return -1;
+        }
+        int frcRating = calculateFRCRating(properties, p.getFRC(), line);
+        int fowRating = calculateFOWRating(properties, p.getFOW(), line);
+        int lineRating = bearingRating + frcRating + fowRating;
+        int rating = properties.getNodeFactor() * nodeRating
+                + properties.getLineFactor() * lineRating;
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("total rating [" + line.getID() + "]: " + rating
+                    + "  (node: " + nodeRating + ", line: " + lineRating
+                    + ", bearing: " + bearingRating + ", frc: " + frcRating
+                    + ", fow: " + fowRating + ")");
+        }
+        return rating;
+    }
 
-	/**
-	 * Calculates the frc value based on the frc values of the line and the lrp
-	 * attribute. <br>
-	 * <br>
-	 * The method calculates the difference of the frc IDs and looks up the
-	 * rating category for this difference value. The defined value based on
-	 * this category is used for the rating value. The rating categories and its
-	 * rating values are defined in the OpenLR properties.
-	 * 
-	 * @param properties
-	 *            the OpenLR properties
-	 * @param frc
-	 *            the functional road class of the LRP
-	 * @param line
-	 *            the line to be rated
-	 * @return the frc value
-	 * @throws OpenLRProcessingException
-	 *             the open lr processing exception
-	 */
-	private int calculateFRCRating(final OpenLRDecoderProperties properties,
-			final FunctionalRoadClass frc, final Line line)
-			throws OpenLRProcessingException {
-		int lineFRC = line.getFRC().getID();
-		int diff = Math.abs(frc.getID() - lineFRC);
+    /**
+     * Calculates the node value based on the distance between the LRP position
+     * and the corresponding node. The formula looks like: <br>
+     * <br>
+     * node_value = [max_node_distance] - distance <br>
+     * <br>
+     * The max_node_distance is configurable in the OpenLR properties.
+     *
+     * @param properties
+     *            the OpenLR properties
+     * @param distance
+     *            the distance of the node to the LRP position
+     * @return the node value
+     * @throws OpenLRProcessingException
+     *             the open lr processing exception
+     */
+    private int calculateDistanceRating(
+            final OpenLRDecoderProperties properties, final double distance)
+            throws OpenLRProcessingException {
+        int diff = properties.getMaxNodeDistance() - (int) Math.round(distance);
+        return Math.max(0, diff);
+    }
 
-		RatingCategory bestCat;
-		if (diff <= properties.getFrcIntervals(RatingCategory.EXCELLENT)) {
-			bestCat = RatingCategory.EXCELLENT;
-		} else if (diff <= properties.getFrcIntervals(RatingCategory.GOOD)) {
-			bestCat = RatingCategory.GOOD;
-		} else if (diff <= properties.getFrcIntervals(RatingCategory.AVERAGE)) {
-			bestCat = RatingCategory.AVERAGE;
-		} else {
-			bestCat = RatingCategory.POOR;
-		}
-		return properties.getFrcRating(bestCat);
-	}
+    /**
+     * Calculates the frc value based on the frc values of the line and the lrp
+     * attribute. <br>
+     * <br>
+     * The method calculates the difference of the frc IDs and looks up the
+     * rating category for this difference value. The defined value based on
+     * this category is used for the rating value. The rating categories and its
+     * rating values are defined in the OpenLR properties.
+     *
+     * @param properties
+     *            the OpenLR properties
+     * @param frc
+     *            the functional road class of the LRP
+     * @param line
+     *            the line to be rated
+     * @return the frc value
+     * @throws OpenLRProcessingException
+     *             the open lr processing exception
+     */
+    private int calculateFRCRating(final OpenLRDecoderProperties properties,
+                                   final FunctionalRoadClass frc, final Line line)
+            throws OpenLRProcessingException {
+        int lineFRC = line.getFRC().getID();
+        int diff = Math.abs(frc.getID() - lineFRC);
 
-	/**
-	 * Calculates the fow value based on the line and lrp attributes. The
-	 * formula uses the rating values defined in the OpenLR properties. The
-	 * matching between the line and lrp fow attribute is EXCELLENT if both IDs
-	 * are equal. Otherwise if one of the attributes is undefined then the match
-	 * is AVERAGE and if no former rule matches then we have a POOR match of the
-	 * attributes.
-	 * 
-	 * @param properties
-	 *            the OpenLR properties
-	 * @param fow
-	 *            the fow attribute of the LRP
-	 * @param line
-	 *            the line to be rated
-	 * @return the fow value
-	 * @throws OpenLRProcessingException
-	 *             the open lr processing exception
-	 */
-	private int calculateFOWRating(final OpenLRDecoderProperties properties,
-			final FormOfWay fow, final Line line)
-			throws OpenLRProcessingException {
-		RatingCategory category = FOW_RATING_TABLE.getRating(fow, line.getFOW());
-		return properties.getFowRating(category);
-	}
+        RatingCategory bestCat;
+        if (diff <= properties.getFrcIntervals(RatingCategory.EXCELLENT)) {
+            bestCat = RatingCategory.EXCELLENT;
+        } else if (diff <= properties.getFrcIntervals(RatingCategory.GOOD)) {
+            bestCat = RatingCategory.GOOD;
+        } else if (diff <= properties.getFrcIntervals(RatingCategory.AVERAGE)) {
+            bestCat = RatingCategory.AVERAGE;
+        } else {
+            bestCat = RatingCategory.POOR;
+        }
+        return properties.getFrcRating(bestCat);
+    }
 
-	/**
-	 * Calculates the bearing value based on the bearing values of the line and
-	 * the lrp attribute. <br>
-	 * <br>
-	 * The method calculates the difference of the bearing values and looks up
-	 * the rating category for this difference value. The defined value based on
-	 * this category is used for the rating value. The rating categories and its
-	 * rating values are defined in the OpenLR properties.
-	 * 
-	 * Candidate lines with a bearing difference greater than the defined value
-	 * will be rejected.
-	 * 
-	 * @param properties
-	 *            the OpenLR properties
-	 * @param bearing
-	 *            the bearing value of the LRP
-	 * @param dir
-	 *            the bearing direction (in direction or against direction)
-	 * @param line
-	 *            the line to be rated
-	 * @param projectionAlongLine
-	 *            the distance between the projection point and the start of the
-	 *            line
-	 * @return the bearing value
-	 * @throws OpenLRProcessingException
-	 *             the open lr processing exception
-	 */
-	private int calculateBearingRating(
-			final OpenLRDecoderProperties properties, final double bearing,
-			final BearingDirection dir, final Line line,
-			final int projectionAlongLine) throws OpenLRProcessingException {
-		double lineBearing = GeometryUtils.calculateLineBearing(line, dir,
-				properties.getBearingDistance(), projectionAlongLine);
+    /**
+     * Calculates the fow value based on the line and lrp attributes. The
+     * formula uses the rating values defined in the OpenLR properties. The
+     * matching between the line and lrp fow attribute is EXCELLENT if both IDs
+     * are equal. Otherwise if one of the attributes is undefined then the match
+     * is AVERAGE and if no former rule matches then we have a POOR match of the
+     * attributes.
+     *
+     * @param properties
+     *            the OpenLR properties
+     * @param fow
+     *            the fow attribute of the LRP
+     * @param line
+     *            the line to be rated
+     * @return the fow value
+     * @throws OpenLRProcessingException
+     *             the open lr processing exception
+     */
+    private int calculateFOWRating(final OpenLRDecoderProperties properties,
+                                   final FormOfWay fow, final Line line)
+            throws OpenLRProcessingException {
+        RatingCategory category = FOW_RATING_TABLE.getRating(fow, line.getFOW());
+        return properties.getFowRating(category);
+    }
 
-		int diff = (int) Math.round(Math.abs(bearing - lineBearing));
-		if (diff > HALF_CIRCLE) {
-			diff = FULL_CIRCLE - diff;
-		}
-		if (diff > properties.getMaxBearingDiff()) {
-			return -1;
-		}
+    /**
+     * Calculates the bearing value based on the bearing values of the line and
+     * the lrp attribute. <br>
+     * <br>
+     * The method calculates the difference of the bearing values and looks up
+     * the rating category for this difference value. The defined value based on
+     * this category is used for the rating value. The rating categories and its
+     * rating values are defined in the OpenLR properties.
+     *
+     * Candidate lines with a bearing difference greater than the defined value
+     * will be rejected.
+     *
+     * @param properties
+     *            the OpenLR properties
+     * @param bearing
+     *            the bearing value of the LRP
+     * @param dir
+     *            the bearing direction (in direction or against direction)
+     * @param line
+     *            the line to be rated
+     * @param projectionAlongLine
+     *            the distance between the projection point and the start of the
+     *            line
+     * @return the bearing value
+     * @throws OpenLRProcessingException
+     *             the open lr processing exception
+     */
+    private int calculateBearingRating(
+            final OpenLRDecoderProperties properties, final double bearing,
+            final BearingDirection dir, final Line line,
+            final int projectionAlongLine) throws OpenLRProcessingException {
+        double lineBearing = GeometryUtils.calculateLineBearing(line, dir,
+                properties.getBearingDistance(), projectionAlongLine);
 
-		RatingCategory bestCat;
-		if (diff <= properties.getBearingIntervals(RatingCategory.EXCELLENT)) {
-			bestCat = RatingCategory.EXCELLENT;
-		} else if (diff <= properties.getBearingIntervals(RatingCategory.GOOD)) {
-			bestCat = RatingCategory.GOOD;
-		} else if (diff <= properties
-				.getBearingIntervals(RatingCategory.AVERAGE)) {
-			bestCat = RatingCategory.AVERAGE;
-		} else {
-			bestCat = RatingCategory.POOR;
-		}
+        int diff = (int) Math.round(Math.abs(bearing - lineBearing));
+        if (diff > HALF_CIRCLE) {
+            diff = FULL_CIRCLE - diff;
+        }
+        if (diff > properties.getMaxBearingDiff()) {
+            return -1;
+        }
 
-		return properties.getBearingRating(bestCat);
-	}
+        RatingCategory bestCat;
+        if (diff <= properties.getBearingIntervals(RatingCategory.EXCELLENT)) {
+            bestCat = RatingCategory.EXCELLENT;
+        } else if (diff <= properties.getBearingIntervals(RatingCategory.GOOD)) {
+            bestCat = RatingCategory.GOOD;
+        } else if (diff <= properties
+                .getBearingIntervals(RatingCategory.AVERAGE)) {
+            bestCat = RatingCategory.AVERAGE;
+        } else {
+            bestCat = RatingCategory.POOR;
+        }
+
+        return properties.getBearingRating(bestCat);
+    }
 
 }

@@ -7,12 +7,12 @@
                     <pointExtension>
                         <OpenlrExtendedPoint>
                             <openlrPointLocationReference>
-<openlrGeoCoordinate>
-    <openlrCoordinate>
-        <latitude>49.60728</latitude>
-        <longitude>6.12699</longitude>
-    </openlrCoordinate>
-</openlrGeoCoordinate>
+                                <openlrGeoCoordinate>
+                                    <openlrCoordinate>
+                                        <latitude>49.60728</latitude>
+                                        <longitude>6.12699</longitude>
+                                    </openlrCoordinate>
+                                </openlrGeoCoordinate>
                             </openlrPointLocationReference>
                         </OpenlrExtendedPoint>
                     </pointExtension>

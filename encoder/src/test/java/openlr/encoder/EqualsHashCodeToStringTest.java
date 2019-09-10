@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,15 +39,6 @@
  */
 package openlr.encoder;
 
-import static openlr.testutils.CommonObjectTestUtils.testCompare;
-import static openlr.testutils.CommonObjectTestUtils.testToString;
-import static org.testng.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import openlr.LocationReferencePoint;
 import openlr.OpenLRProcessingException;
 import openlr.encoder.data.LocRefPoint;
@@ -44,19 +46,23 @@ import openlr.encoder.data.OffsetData;
 import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.data.Orientation;
 import openlr.location.data.SideOfRoad;
-import openlr.map.GeoCoordinates;
-import openlr.map.GeoCoordinatesImpl;
-import openlr.map.InvalidMapDataException;
-import openlr.map.Line;
-import openlr.map.Node;
+import openlr.map.*;
 import openlr.map.utils.GeometryUtils;
 import openlr.rawLocRef.RawLineLocRef;
 import openlr.rawLocRef.RawPoiAccessLocRef;
 import openlr.rawLocRef.RawPointAlongLocRef;
-
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static openlr.testutils.CommonObjectTestUtils.testCompare;
+import static openlr.testutils.CommonObjectTestUtils.testToString;
+import static org.testng.Assert.fail;
 
 /**
  * This class performs tests of the toString, hashCode and equals methods of
@@ -65,41 +71,38 @@ import org.testng.annotations.Test;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class EqualsHashCodeToStringTest {
 
     /**
+     * An instance of {@link OffsetData}.
+     */
+    private static final OffsetData OFFSETS_IMPL = new OffsetData(2, 1);
+    /**
+     * An instance of {@link OffsetData} that should be equal to
+     * {@link #OFFSETS_IMPL}.
+     */
+    private static final OffsetData OFFSETS_IMPL_EQUAL = new OffsetData(2, 1);
+    /**
      * An instance of {@link LocRefPoint}.
      */
     private final LocRefPoint lrp;
-
     /**
      * A {@link LocRefPoint} instance that should not be equal to {@link #lrp}.
      */
     private final LocRefPoint lrpUnequal;
 
     /**
-     * An instance of {@link OffsetData}.
-     */
-    private static final OffsetData OFFSETS_IMPL = new OffsetData(2, 1);
-
-    /**
-     * An instance of {@link OffsetData} that should be equal to
-     * {@link #OFFSETS_IMPL}.
-     */
-    private static final OffsetData OFFSETS_IMPL_EQUAL = new OffsetData(2, 1);
-
-    /**
      * Performs some setup tasks.
-     * 
+     *
      * @throws OpenLRProcessingException
      *             If an error occurs creating the {@link LocRefPoint}s.
      */
     public EqualsHashCodeToStringTest() throws OpenLRProcessingException {
 
-    	OpenLREncoderProperties config = TestData.getInstance().getProperties();
+        OpenLREncoderProperties config = TestData.getInstance().getProperties();
         final Line mockedLine = mockLine(1);
 
         List<Line> linesA = Arrays.asList(mockedLine, mockedLine);
@@ -118,7 +121,7 @@ public class EqualsHashCodeToStringTest {
 
     /**
      * Mocks a line object.
-     * 
+     *
      * @param id
      *            The desired line ID.
      * @return The mocked line.

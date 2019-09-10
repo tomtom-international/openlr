@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -30,9 +41,6 @@
  */
 package openlr.encoder.locRefAdjust.worker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import openlr.OpenLRProcessingException;
 import openlr.encoder.OpenLREncoderProcessingException;
 import openlr.encoder.OpenLREncoderProcessingException.EncoderProcessingError;
@@ -42,42 +50,44 @@ import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.map.Line;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Performs adjustment for LRP based point location references.
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class LrpBasedPointLocRefAdjust extends BasicLrpBasedLocRefAdjust {
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected final void additionalAdjustments(final OpenLREncoderProperties properties,
-			final LocRefData locRefData) throws OpenLRProcessingException {
-		
-		if (locRefData.getLocRefPoints().size() != 2) {
-			fit4PointLocation(locRefData, properties);
-			if (locRefData.getLocRefPoints().size() != 2) {
-				throw new OpenLREncoderProcessingException(
-						EncoderProcessingError.INVALID_POINT_LOCATION_LRP);
-			}
-		}
-	}
-	
-	
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected final void additionalAdjustments(final OpenLREncoderProperties properties,
+                                               final LocRefData locRefData) throws OpenLRProcessingException {
+
+        if (locRefData.getLocRefPoints().size() != 2) {
+            fit4PointLocation(locRefData, properties);
+            if (locRefData.getLocRefPoints().size() != 2) {
+                throw new OpenLREncoderProcessingException(
+                        EncoderProcessingError.INVALID_POINT_LOCATION_LRP);
+            }
+        }
+    }
+
 
     /**
      * Removes location reference points as point locations only supports two
      * LRPs. This changes the input {@code locRefData} instance!
      * Besides removing LRPs that are not directly around the POI line it eliminates 
      * their expansion data.
-     * 
+     *
      * @param locRefData
      *            the loc ref data
      * @param properties
@@ -95,12 +105,12 @@ public class LrpBasedPointLocRefAdjust extends BasicLrpBasedLocRefAdjust {
         List<LocRefPoint> points = locRefData.getLocRefPoints();
         for (int i = 0; i < points.size() - 1; i++) {
             LocRefPoint l = points.get(i);
-            
+
             if (l.getRoute().contains(pLine)) {
                 reducedLRPs.add(l);
-                
+
                 int nextIndex = i + 1;
-                LocRefPoint oldSuccessor = points.get(nextIndex); 
+                LocRefPoint oldSuccessor = points.get(nextIndex);
 
                 LocRefPoint newLast;
                 // create an artificial last LRP
@@ -114,23 +124,23 @@ public class LrpBasedPointLocRefAdjust extends BasicLrpBasedLocRefAdjust {
                 }
 
                 reducedLRPs.add(newLast);
-                
+
                 // cleanup the expansion at the end of the loc ref from all the following LRP routes
                 for (int x = nextIndex; x < points.size() - 1; x++) {
                     LocRefPoint lrp = points.get(x);
-                    locRefData.getExpansionData().modifyExpansionAtEnd(lrp.getRoute()); 
+                    locRefData.getExpansionData().modifyExpansionAtEnd(lrp.getRoute());
                 }
-                
+
                 break;
-            } else {            
+            } else {
                 // We remove an LRP whose subroute doesn't contain the POI line, must have been an expansion.
                 // correct the expansion here to keep the positive offset calculation in the loc ref valid
                 locRefData.getExpansionData().modifyExpansionAtStart(l.getRoute());
             }
         }
-        
-            
+
+
         locRefData.setLocRefPoints(reducedLRPs);
-    }	
+    }
 
 }

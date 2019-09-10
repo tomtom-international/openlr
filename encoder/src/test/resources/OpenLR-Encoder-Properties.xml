@@ -25,12 +25,14 @@
  with this program; if not, write to the Free Software Foundation, Inc.,
  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 -->
-<p:OpenLREncoderProperties xmlns:p="http://www.example.org/OpenLREncoderProperties/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OpenLREncoderProperties/ properties/OpenLREncoderProperties.xsd ">
-  <BearingDistance>20</BearingDistance>
-  <MaximumDistanceLRP>15000</MaximumDistanceLRP>
-  <CheckTurnRestrictions>false</CheckTurnRestrictions>
-  <PhysicalFormatVersion>
-  	<binary>3</binary>
-  	<xml>2</xml>
-  </PhysicalFormatVersion>
+<p:OpenLREncoderProperties xmlns:p="http://www.example.org/OpenLREncoderProperties/"
+                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xsi:schemaLocation="http://www.example.org/OpenLREncoderProperties/ properties/OpenLREncoderProperties.xsd ">
+    <BearingDistance>20</BearingDistance>
+    <MaximumDistanceLRP>15000</MaximumDistanceLRP>
+    <CheckTurnRestrictions>false</CheckTurnRestrictions>
+    <PhysicalFormatVersion>
+        <binary>3</binary>
+        <xml>2</xml>
+    </PhysicalFormatVersion>
 </p:OpenLREncoderProperties>

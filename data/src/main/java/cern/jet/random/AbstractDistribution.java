@@ -9,9 +9,10 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
+
 /**
  * Abstract base class for all random distributions.
- *
+ * <p>
  * A subclass of this class need to override method <tt>nextDouble()</tt> and, in rare cases, also <tt>nextInt()</tt>.
  * <p>
  * Currently all subclasses use a uniform pseudo-random number generation engine and transform its results to the target distribution.
@@ -20,7 +21,7 @@ import cern.jet.random.engine.RandomEngine;
  * {@link cern.jet.random.engine.MersenneTwister} is recommended as uniform pseudo-random number generation engine, since it is very strong and at the same time quick.
  * {@link #makeDefaultGenerator()} will conveniently construct and return such a magic thing.
  * You can also, for example, use {@link cern.jet.random.engine.DRand}, a quicker (but much weaker) uniform random number generation engine.
- * Of course, you can also use other strong uniform random number generation engines. 
+ * Of course, you can also use other strong uniform random number generation engines.
  *
  * <p>
  * <b>Ressources on the Web:</b>
@@ -37,71 +38,82 @@ import cern.jet.random.engine.RandomEngine;
  * <A HREF="http://www.stat.umn.edu/~jkuhn/courses/stat3091f/stat3091f.html"> another text book</A>.
  * <dt>Finally, a good link list <A HREF="http://www.execpc.com/~helberg/statistics.html"> Statistics on the Web</A>.
  * <p>
+ *
+ * @author wolfgang.hoschek@cern.ch
+ * @version 1.0, 09/24/99
  * @see cern.jet.random.engine
  * @see cern.jet.random.engine.Benchmark
  * @see cern.jet.random.Benchmark
- * @author wolfgang.hoschek@cern.ch
- * @version 1.0, 09/24/99
  */
 public abstract class AbstractDistribution extends cern.colt.PersistentObject implements cern.colt.function.DoubleFunction, cern.colt.function.IntFunction {
-	protected RandomEngine randomGenerator;
-/**
- * Makes this class non instantiable, but still let's others inherit from it.
- */
-protected AbstractDistribution() {}
-/**
-Equivalent to <tt>nextDouble()</tt>.
-This has the effect that distributions can now be used as function objects, returning a random number upon function evaluation.
-*/
-public double apply(double dummy) {
-	return nextDouble();
-}
-/**
-Equivalent to <tt>nextInt()</tt>.
-This has the effect that distributions can now be used as function objects, returning a random number upon function evaluation.
-*/
-public int apply(int dummy) {
-	return nextInt();
-}
-/**
- * Returns a deep copy of the receiver; the copy will produce identical sequences.
- * After this call has returned, the copy and the receiver have equal but separate state.
- *
- * @return a copy of the receiver.
- */
-public Object clone() {
-	AbstractDistribution copy = (AbstractDistribution) super.clone();
-	if (this.randomGenerator != null) copy.randomGenerator = (RandomEngine) this.randomGenerator.clone();
-	return copy;
-}
-/**
- * Returns the used uniform random number generator;
- */
-protected RandomEngine getRandomGenerator() {
-	return randomGenerator;
-}
-/**
- * Constructs and returns a new uniform random number generation engine seeded with the current time.
- * Currently this is {@link cern.jet.random.engine.MersenneTwister}.
- */
-public static RandomEngine makeDefaultGenerator() {
-	return cern.jet.random.engine.RandomEngine.makeDefault();
-}
-/**
- * Returns a random number from the distribution.
- */
-public abstract double nextDouble();
-/**
- * Returns a random number from the distribution; returns <tt>(int) Math.round(nextDouble())</tt>.
- * Override this method if necessary.
- */
-public int nextInt() {
-	return (int) Math.round(nextDouble());
-}
-/**
- * Sets the uniform random generator internally used.
- */
-protected void setRandomGenerator(RandomEngine randomGenerator) {
-	this.randomGenerator = randomGenerator;
-}
+    protected RandomEngine randomGenerator;
+
+    /**
+     * Makes this class non instantiable, but still let's others inherit from it.
+     */
+    protected AbstractDistribution() {
+    }
+
+    /**
+     * Constructs and returns a new uniform random number generation engine seeded with the current time.
+     * Currently this is {@link cern.jet.random.engine.MersenneTwister}.
+     */
+    public static RandomEngine makeDefaultGenerator() {
+        return cern.jet.random.engine.RandomEngine.makeDefault();
+    }
+
+    /**
+     * Equivalent to <tt>nextDouble()</tt>.
+     * This has the effect that distributions can now be used as function objects, returning a random number upon function evaluation.
+     */
+    public double apply(double dummy) {
+        return nextDouble();
+    }
+
+    /**
+     * Equivalent to <tt>nextInt()</tt>.
+     * This has the effect that distributions can now be used as function objects, returning a random number upon function evaluation.
+     */
+    public int apply(int dummy) {
+        return nextInt();
+    }
+
+    /**
+     * Returns a deep copy of the receiver; the copy will produce identical sequences.
+     * After this call has returned, the copy and the receiver have equal but separate state.
+     *
+     * @return a copy of the receiver.
+     */
+    public Object clone() {
+        AbstractDistribution copy = (AbstractDistribution) super.clone();
+        if (this.randomGenerator != null) copy.randomGenerator = (RandomEngine) this.randomGenerator.clone();
+        return copy;
+    }
+
+    /**
+     * Returns the used uniform random number generator;
+     */
+    protected RandomEngine getRandomGenerator() {
+        return randomGenerator;
+    }
+
+    /**
+     * Sets the uniform random generator internally used.
+     */
+    protected void setRandomGenerator(RandomEngine randomGenerator) {
+        this.randomGenerator = randomGenerator;
+    }
+
+    /**
+     * Returns a random number from the distribution.
+     */
+    public abstract double nextDouble();
+
+    /**
+     * Returns a random number from the distribution; returns <tt>(int) Math.round(nextDouble())</tt>.
+     * Override this method if necessary.
+     */
+    public int nextInt() {
+        return (int) Math.round(nextDouble());
+    }
 }

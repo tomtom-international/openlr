@@ -6,15 +6,40 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  This program is free software; you can redistribute it and/or modify
@@ -46,42 +71,27 @@
  */
 package openlr.binary;
 
-import static openlr.testutils.CommonObjectTestUtils.testCompare;
-import static openlr.testutils.CommonObjectTestUtils.testToString;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import openlr.LocationReferencePoint;
 import openlr.LocationType;
-import openlr.binary.data.AbsoluteCoordinates;
-import openlr.binary.data.Attr1;
-import openlr.binary.data.Attr2;
-import openlr.binary.data.Attr3;
-import openlr.binary.data.Attr4;
-import openlr.binary.data.FirstLRP;
-import openlr.binary.data.Header;
-import openlr.binary.data.IntermediateLRP;
-import openlr.binary.data.LastLRP;
-import openlr.binary.data.Offset;
-import openlr.binary.data.RelativeCoordinates;
+import openlr.binary.data.*;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.binary.impl.LocationReferencePointBinaryImpl;
 import openlr.binary.impl.OffsetsBinaryImpl;
 import openlr.location.data.Orientation;
 import openlr.location.data.SideOfRoad;
-import openlr.map.FormOfWay;
-import openlr.map.FunctionalRoadClass;
-import openlr.map.GeoCoordinates;
-import openlr.map.GeoCoordinatesImpl;
-import openlr.map.InvalidMapDataException;
+import openlr.map.*;
 import openlr.map.utils.GeometryUtils;
 import openlr.rawLocRef.RawInvalidLocRef;
 import openlr.rawLocRef.RawLineLocRef;
 import openlr.rawLocRef.RawPoiAccessLocRef;
 import openlr.rawLocRef.RawPointAlongLocRef;
-
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static openlr.testutils.CommonObjectTestUtils.testCompare;
+import static openlr.testutils.CommonObjectTestUtils.testToString;
 
 /**
  * This class performs tests of the toString, hashCode and equals methods of 
@@ -90,7 +100,7 @@ import org.testng.annotations.Test;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class EqualsHashCodeToStringTest {
@@ -111,43 +121,38 @@ public class EqualsHashCodeToStringTest {
             1, FunctionalRoadClass.FRC_1, FormOfWay.MOTORWAY, Double.MAX_VALUE,
             Double.MIN_VALUE, Double.MIN_NORMAL, 2, FunctionalRoadClass.FRC_4,
             false);
-    
-    /**
-     * An instance of {@link GeoCoordinates}.
-     */
-    private final GeoCoordinates geoCoordinate;
-    
-    /**
-     * An instance of {@link GeoCoordinates} that should be
-     * equal to {@link #geoCoordinate}.
-     */    
-    private final GeoCoordinates geoCoordinateEqual;
-    
-    /**
-     * An instance of {@link GeoCoordinates} that should not be
-     * equal to {@link #geoCoordinate}.
-     */        
-    private final GeoCoordinates geoCoordinateUnEqual;
-    
     /**
      * An instance of {@link OffsetsBinaryImpl}.
      */
     private static final OffsetsBinaryImpl OFFSETS_IMPL = new OffsetsBinaryImpl(
             2, 1);
-    
     /**
-     * An instance of {@link OffsetsBinaryImpl} that should be equal to 
+     * An instance of {@link OffsetsBinaryImpl} that should be equal to
      * {@link #OFFSETS_IMPL}.
-     */     
+     */
     private static final OffsetsBinaryImpl OFFSETS_IMPL_EQUAL = new OffsetsBinaryImpl(
             2, 1);
+    /**
+     * An instance of {@link GeoCoordinates}.
+     */
+    private final GeoCoordinates geoCoordinate;
+    /**
+     * An instance of {@link GeoCoordinates} that should be
+     * equal to {@link #geoCoordinate}.
+     */
+    private final GeoCoordinates geoCoordinateEqual;
+    /**
+     * An instance of {@link GeoCoordinates} that should not be
+     * equal to {@link #geoCoordinate}.
+     */
+    private final GeoCoordinates geoCoordinateUnEqual;
 
     /**
      * Sets up some fields
      * @throws InvalidMapDataException If an error occurs setting up some map objects
      */
     public EqualsHashCodeToStringTest() throws InvalidMapDataException {
-        
+
         geoCoordinate = new GeoCoordinatesImpl(GeometryUtils.MAX_LON,
                 GeometryUtils.MIN_LAT);
 
@@ -156,7 +161,7 @@ public class EqualsHashCodeToStringTest {
 
         geoCoordinateUnEqual = new GeoCoordinatesImpl(GeometryUtils.MAX_LON, 0);
     }
-    
+
     /**
      * Tests the raw location reference classes.
      */
@@ -191,7 +196,7 @@ public class EqualsHashCodeToStringTest {
 
         RawPointAlongLocRef palLoc = new RawPointAlongLocRef("pal", LRP_IMPL, LRP_IMPL_UNEQUAL, OFFSETS_IMPL,
                 SideOfRoad.LEFT, Orientation.BOTH);
-        RawPointAlongLocRef palLocEqual = new RawPointAlongLocRef("palEq", 
+        RawPointAlongLocRef palLocEqual = new RawPointAlongLocRef("palEq",
                 LRP_IMPL, LRP_IMPL_UNEQUAL, OFFSETS_IMPL_EQUAL,
                 SideOfRoad.LEFT, Orientation.BOTH);
         RawPointAlongLocRef palLocUnequal = new RawPointAlongLocRef("palUnEq", LRP_IMPL, LRP_IMPL_UNEQUAL,
@@ -242,9 +247,9 @@ public class EqualsHashCodeToStringTest {
     @Test
     public final void testDataObjects() {
 
-        ByteArray ba = new ByteArray(new byte[] {1, 2});
-        testCompare(ba, new ByteArray(new byte[] {1, 2}), new ByteArray(
-                new byte[] {1}));
+        ByteArray ba = new ByteArray(new byte[]{1, 2});
+        testCompare(ba, new ByteArray(new byte[]{1, 2}), new ByteArray(
+                new byte[]{1}));
         testToString(ba);
 
         AbsoluteCoordinates ac = new AbsoluteCoordinates(Integer.MIN_VALUE,

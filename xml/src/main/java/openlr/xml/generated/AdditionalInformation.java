@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -31,31 +42,30 @@
 
 package openlr.xml.generated;
 
-import java.io.Serializable;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import java.io.Serializable;
 
 /**
- * 
+ *
  * AdditionalInformation can be added if necessary. This includes the bounding
  * box covering the location and information on the map used for encoding. The
  * AdditionalData section also provides the freedom to add any other information
  * needed.
- * 
- * 
+ *
+ *
  * <p>
  * Java class for AdditionalInformation complex type.
- * 
+ *
  * <p>
  * The following schema fragment specifies the expected content contained within
  * this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="AdditionalInformation">
  *   &lt;complexContent>
@@ -70,8 +80,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AdditionalInformation", propOrder = {
@@ -79,143 +89,143 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 })
 public class AdditionalInformation implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1623974273151582143L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1623974273151582143L;
 
-	/** The bounding box. */
-	@XmlElement(name = "BoundingBox")
-	protected Rectangle boundingBox;
-	
-	/** The map database. */
-	@XmlElement(name = "MapDatabase")
-	protected String mapDatabase;
-	
-	/** The location name. */
-	@XmlElement(name = "LocationName")
-	protected LocationName locationName;
-	
-	/** The additional data. */
-	@XmlElement(name = "AdditionalData")
-	protected AdditionalData additionalData;
+    /** The bounding box. */
+    @XmlElement(name = "BoundingBox")
+    protected Rectangle boundingBox;
 
-	/**
-	 * Gets the value of the boundingBox property.
-	 * 
-	 * @return possible object is {@link Rectangle }
-	 * 
-	 */
-	public final Rectangle getBoundingBox() {
-		return boundingBox;
-	}
+    /** The map database. */
+    @XmlElement(name = "MapDatabase")
+    protected String mapDatabase;
 
-	/**
-	 * Sets the value of the boundingBox property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Rectangle }
-	 * 
-	 */
-	public final void setBoundingBox(final Rectangle value) {
-		this.boundingBox = value;
-	}
+    /** The location name. */
+    @XmlElement(name = "LocationName")
+    protected LocationName locationName;
 
-	/**
-	 * Gets the value of the mapDatabase property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public final String getMapDatabase() {
-		return mapDatabase;
-	}
+    /** The additional data. */
+    @XmlElement(name = "AdditionalData")
+    protected AdditionalData additionalData;
 
-	/**
-	 * Sets the value of the mapDatabase property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public final void setMapDatabase(final String value) {
-		this.mapDatabase = value;
-	}
+    /**
+     * Gets the value of the boundingBox property.
+     *
+     * @return possible object is {@link Rectangle }
+     *
+     */
+    public final Rectangle getBoundingBox() {
+        return boundingBox;
+    }
 
-	/**
-	 * Gets the value of the locationName property.
-	 * 
-	 * @return possible object is {@link LocationName }
-	 * 
-	 */
-	public final LocationName getLocationName() {
-		return locationName;
-	}
+    /**
+     * Sets the value of the boundingBox property.
+     *
+     * @param value
+     *            allowed object is {@link Rectangle }
+     *
+     */
+    public final void setBoundingBox(final Rectangle value) {
+        this.boundingBox = value;
+    }
 
-	/**
-	 * Sets the value of the locationName property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link LocationName }
-	 * 
-	 */
-	public final void setLocationName(final LocationName value) {
-		this.locationName = value;
-	}
+    /**
+     * Gets the value of the mapDatabase property.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public final String getMapDatabase() {
+        return mapDatabase;
+    }
 
-	/**
-	 * Gets the value of the additionalData property.
-	 * 
-	 * @return possible object is {@link AdditionalData }
-	 * 
-	 */
-	public final AdditionalData getAdditionalData() {
-		return additionalData;
-	}
+    /**
+     * Sets the value of the mapDatabase property.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public final void setMapDatabase(final String value) {
+        this.mapDatabase = value;
+    }
 
-	/**
-	 * Sets the value of the additionalData property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link AdditionalData }
-	 * 
-	 */
-	public final void setAdditionalData(final AdditionalData value) {
-		this.additionalData = value;
-	}
+    /**
+     * Gets the value of the locationName property.
+     *
+     * @return possible object is {@link LocationName }
+     *
+     */
+    public final LocationName getLocationName() {
+        return locationName;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final boolean equals(final Object o) {
-		if (o == null) {
-			return false;
-		}
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof AdditionalInformation)) {
-			return false;
-		}
-		AdditionalInformation other = (AdditionalInformation) o;
-		EqualsBuilder builder = new EqualsBuilder();
-		builder.append(boundingBox, other.boundingBox)
-				.append(mapDatabase, other.mapDatabase)
-				.append(locationName, other.locationName)
-				.append(additionalData, other.additionalData);
-		return builder.isEquals();
-	}
+    /**
+     * Sets the value of the locationName property.
+     *
+     * @param value
+     *            allowed object is {@link LocationName }
+     *
+     */
+    public final void setLocationName(final LocationName value) {
+        this.locationName = value;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final int hashCode() {
-		HashCodeBuilder builder = new HashCodeBuilder();
-		builder.append(boundingBox).append(mapDatabase).append(locationName)
-				.append(additionalData);
-		return builder.toHashCode();
-	}
+    /**
+     * Gets the value of the additionalData property.
+     *
+     * @return possible object is {@link AdditionalData }
+     *
+     */
+    public final AdditionalData getAdditionalData() {
+        return additionalData;
+    }
+
+    /**
+     * Sets the value of the additionalData property.
+     *
+     * @param value
+     *            allowed object is {@link AdditionalData }
+     *
+     */
+    public final void setAdditionalData(final AdditionalData value) {
+        this.additionalData = value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final boolean equals(final Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AdditionalInformation)) {
+            return false;
+        }
+        AdditionalInformation other = (AdditionalInformation) o;
+        EqualsBuilder builder = new EqualsBuilder();
+        builder.append(boundingBox, other.boundingBox)
+                .append(mapDatabase, other.mapDatabase)
+                .append(locationName, other.locationName)
+                .append(additionalData, other.additionalData);
+        return builder.isEquals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final int hashCode() {
+        HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(boundingBox).append(mapDatabase).append(locationName)
+                .append(additionalData);
+        return builder.toHashCode();
+    }
 
 }

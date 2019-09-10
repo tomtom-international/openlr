@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,19 +39,6 @@
  */
 package openlr.xml;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertSame;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
-
 import openlr.LocationReference;
 import openlr.LocationReferencePoint;
 import openlr.LocationType;
@@ -50,300 +48,314 @@ import openlr.rawLocRef.RawLocationReference;
 import openlr.xml.generated.LineLocationReference;
 import openlr.xml.generated.OpenLR;
 import openlr.xml.generated.XMLLocationReference;
-
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.testng.Assert.*;
 
 /**
  * The Class OpenLRBinaryEncoderTest.
  */
 public class OpenLRXMLEncoderTest {
 
-	/** The positive offset of the line location from the white paper example. */
-	private static final int POS_OFFSET_WP_LINE_EXAMPLE = 150;
+    /** The positive offset of the line location from the white paper example. */
+    private static final int POS_OFFSET_WP_LINE_EXAMPLE = 150;
 
-	/**
-	 * The encoder object used for the tests.
-	 */
-	private static final OpenLRXMLEncoder XML_ENCODER = new OpenLRXMLEncoder();
+    /**
+     * The encoder object used for the tests.
+     */
+    private static final OpenLRXMLEncoder XML_ENCODER = new OpenLRXMLEncoder();
 
-	/** The pointsWPLineExample. */
-	private List<LocationReferencePoint> pointsWPLineExample;
+    /** The pointsWPLineExample. */
+    private List<LocationReferencePoint> pointsWPLineExample;
 
-	/** A mocked offset object representing unset offsets. */
-	private Offsets nullOffsets;
+    /** A mocked offset object representing unset offsets. */
+    private Offsets nullOffsets;
 
-	/** The offsets of the white paper line location example. */
-	private Offsets offsetsWPLine;
+    /** The offsets of the white paper line location example. */
+    private Offsets offsetsWPLine;
 
-	/** The location reference of the White Paper (v. 1.3) example. */
-	private RawLocationReference lineLocWhitePaperExample;
+    /** The location reference of the White Paper (v. 1.3) example. */
+    private RawLocationReference lineLocWhitePaperExample;
 
-	/** A valid encoded location. */
-	private LocationReference validEncodeLocation;
+    /** A valid encoded location. */
+    private LocationReference validEncodeLocation;
 
-	/**
-	 * Setup.
-	 */
-	@BeforeTest
-	public final void setup() {
-		pointsWPLineExample = new ArrayList<LocationReferencePoint>();
-		Mockery context = new Mockery();
+    /**
+     * Setup.
+     */
+    @BeforeTest
+    public final void setup() {
+        pointsWPLineExample = new ArrayList<LocationReferencePoint>();
+        Mockery context = new Mockery();
 
-		mockOffsets(context);
-		Lrp[] lrpsToMock = new Lrp[] {Lrp.LINE_ENC_LRP1, Lrp.LINE_ENC_LRP2,
-				Lrp.LINE_ENC_LRP3};
-		pointsWPLineExample = Utils.mockLrps123(context, lrpsToMock);
+        mockOffsets(context);
+        Lrp[] lrpsToMock = new Lrp[]{Lrp.LINE_ENC_LRP1, Lrp.LINE_ENC_LRP2,
+                Lrp.LINE_ENC_LRP3};
+        pointsWPLineExample = Utils.mockLrps123(context, lrpsToMock);
 
-		lineLocWhitePaperExample = new RawLineLocRef("locOff",
-				pointsWPLineExample, offsetsWPLine);
-	}
+        lineLocWhitePaperExample = new RawLineLocRef("locOff",
+                pointsWPLineExample, offsetsWPLine);
+    }
 
-	/**
-	 * Mocks some offsets used in the tests.
-	 * 
-	 * @param context
-	 *            The mocking object.
-	 */
-	private void mockOffsets(final Mockery context) {
+    /**
+     * Mocks some offsets used in the tests.
+     *
+     * @param context
+     *            The mocking object.
+     */
+    private void mockOffsets(final Mockery context) {
 
-		nullOffsets = context.mock(Offsets.class, "nullOffsets");
-		offsetsWPLine = context.mock(Offsets.class, "offsetsWPLine");
-		context.checking(new Expectations() {
-			{
-				allowing(nullOffsets).hasNegativeOffset();
-				will(returnValue(false));
-			}
-			{
-				allowing(nullOffsets).hasPositiveOffset();
-				will(returnValue(false));
-			}
-			{
-				allowing(nullOffsets).getPositiveOffset(0);
-				will(returnValue(0));
-			}
-			{
-				allowing(nullOffsets).getNegativeOffset(0);
-				will(returnValue(0));
-			}
-		});
-		context.checking(new Expectations() {
-			{
-				allowing(offsetsWPLine).hasNegativeOffset();
-				will(returnValue(false));
-			}
-			{
-				allowing(offsetsWPLine).hasPositiveOffset();
-				will(returnValue(true));
-			}
-			{
-				allowing(offsetsWPLine).getPositiveOffset(
-						with(any(Integer.class)));
-				will(returnValue(POS_OFFSET_WP_LINE_EXAMPLE));
-			}
-			{
-				allowing(offsetsWPLine).getNegativeOffset(
-						with(any(Integer.class)));
-				will(returnValue(0));
-			}
-		});
-	}
+        nullOffsets = context.mock(Offsets.class, "nullOffsets");
+        offsetsWPLine = context.mock(Offsets.class, "offsetsWPLine");
+        context.checking(new Expectations() {
+            {
+                allowing(nullOffsets).hasNegativeOffset();
+                will(returnValue(false));
+            }
 
-	/**
-	 * Tests the encoding of the line location as described in the OpenLR white
-	 * paper (v. 1.3).
-	 */
-	@Test
-	public final void testWhitePaperLineLocation() {
-		LocationReference ref = XML_ENCODER
-				.encodeData(lineLocWhitePaperExample);
+            {
+                allowing(nullOffsets).hasPositiveOffset();
+                will(returnValue(false));
+            }
 
-		XMLLocationReference xmlLoc = ((OpenLR) ref.getLocationReferenceData())
-				.getXMLLocationReference();
+            {
+                allowing(nullOffsets).getPositiveOffset(0);
+                will(returnValue(0));
+            }
 
-		LineLocationReference lineLoc = xmlLoc.getLineLocationReference();
+            {
+                allowing(nullOffsets).getNegativeOffset(0);
+                will(returnValue(0));
+            }
+        });
+        context.checking(new Expectations() {
+            {
+                allowing(offsetsWPLine).hasNegativeOffset();
+                will(returnValue(false));
+            }
 
-		Utils.checkLRPs(lineLoc.getLocationReferencePoint(),
-				lineLoc.getLastLocationReferencePoint(), pointsWPLineExample);
+            {
+                allowing(offsetsWPLine).hasPositiveOffset();
+                will(returnValue(true));
+            }
 
-		Utils.checkOffsets(lineLoc.getOffsets(), offsetsWPLine);
+            {
+                allowing(offsetsWPLine).getPositiveOffset(
+                        with(any(Integer.class)));
+                will(returnValue(POS_OFFSET_WP_LINE_EXAMPLE));
+            }
 
-		validEncodeLocation = ref;
-	}
+            {
+                allowing(offsetsWPLine).getNegativeOffset(
+                        with(any(Integer.class)));
+                will(returnValue(0));
+            }
+        });
+    }
 
-	/**
-	 * Tests the case of missing offsets in the input location.
-	 */
-	@Test
-	public final void testMissingOffsets() {
-		RawLineLocRef rawLoc = new RawLineLocRef("1",
-				new ArrayList<LocationReferencePoint>(), null);
-		LocationReference locRef = XML_ENCODER.encodeData(rawLoc);
-		assertFalse(locRef.isValid());
+    /**
+     * Tests the encoding of the line location as described in the OpenLR white
+     * paper (v. 1.3).
+     */
+    @Test
+    public final void testWhitePaperLineLocation() {
+        LocationReference ref = XML_ENCODER
+                .encodeData(lineLocWhitePaperExample);
 
-	}
+        XMLLocationReference xmlLoc = ((OpenLR) ref.getLocationReferenceData())
+                .getXMLLocationReference();
 
-	/**
-	 * Tests encoding of a valid line location without offsets.
-	 */
-	@Test
-	public final void testWithoutOffsets() {
-		LocationReference ref = null;
-		RawLocationReference rawLocRef = new RawLineLocRef("no-offset",
-				pointsWPLineExample, nullOffsets);
+        LineLocationReference lineLoc = xmlLoc.getLineLocationReference();
 
-		ref = XML_ENCODER.encodeData(rawLocRef);
-		assertTrue(ref.isValid());
-		assertSame(ref.getLocationType(), LocationType.LINE_LOCATION);
+        Utils.checkLRPs(lineLoc.getLocationReferencePoint(),
+                lineLoc.getLastLocationReferencePoint(), pointsWPLineExample);
 
-		if (!XML_ENCODER.getDataFormatIdentifier().equals(
-				ref.getDataIdentifier())) {
-			fail("Invalid data identifier");
-		}
-		if (!checkDataClass(ref)) {
-			fail("invalid data class");
-		}
-		if (ref.getLocationReferenceData() == null) {
-			fail("loc ref data is null but valid");
-		}
+        Utils.checkOffsets(lineLoc.getOffsets(), offsetsWPLine);
 
-		XMLLocationReference xmlLocRef = ((OpenLR) ref
-				.getLocationReferenceData()).getXMLLocationReference();
+        validEncodeLocation = ref;
+    }
 
-		LineLocationReference lineLoc = xmlLocRef.getLineLocationReference();
+    /**
+     * Tests the case of missing offsets in the input location.
+     */
+    @Test
+    public final void testMissingOffsets() {
+        RawLineLocRef rawLoc = new RawLineLocRef("1",
+                new ArrayList<LocationReferencePoint>(), null);
+        LocationReference locRef = XML_ENCODER.encodeData(rawLoc);
+        assertFalse(locRef.isValid());
 
-		Utils.checkLRPs(lineLoc.getLocationReferencePoint(),
-				lineLoc.getLastLocationReferencePoint(), pointsWPLineExample);
-		Utils.checkOffsets(lineLoc.getOffsets(), nullOffsets);
-	}
+    }
 
-	/**
-	 * Check data class.
-	 * 
-	 * @param ref
-	 *            the ref
-	 * 
-	 * @return true, if successful
-	 */
-	private boolean checkDataClass(final LocationReference ref) {
-		return (ref.getDataClass() == XML_ENCODER.getDataClass());
-	}
+    /**
+     * Tests encoding of a valid line location without offsets.
+     */
+    @Test
+    public final void testWithoutOffsets() {
+        LocationReference ref = null;
+        RawLocationReference rawLocRef = new RawLineLocRef("no-offset",
+                pointsWPLineExample, nullOffsets);
 
-	/**
-	 * Test encoding with all supported versions.
-	 */
-	@Test
-	public final void testVersions() {
-		LocationReference ref;
+        ref = XML_ENCODER.encodeData(rawLocRef);
+        assertTrue(ref.isValid());
+        assertSame(ref.getLocationType(), LocationType.LINE_LOCATION);
 
-		int[] versions = XML_ENCODER.getSupportedVersions();
-		for (int version : versions) {
-			ref = XML_ENCODER.encodeData(lineLocWhitePaperExample, version);
-			assertTrue(ref.isValid(), "Invalid location after encoding with"
-					+ " xml version " + version);
-			assertSame(ref.getVersion(), version);
+        if (!XML_ENCODER.getDataFormatIdentifier().equals(
+                ref.getDataIdentifier())) {
+            fail("Invalid data identifier");
+        }
+        if (!checkDataClass(ref)) {
+            fail("invalid data class");
+        }
+        if (ref.getLocationReferenceData() == null) {
+            fail("loc ref data is null but valid");
+        }
 
-		}
+        XMLLocationReference xmlLocRef = ((OpenLR) ref
+                .getLocationReferenceData()).getXMLLocationReference();
 
-		// test unknown version
-		ref = XML_ENCODER.encodeData(lineLocWhitePaperExample,
-				Integer.MAX_VALUE);
-		assertSame(ref.getReturnCode(), XmlReturnCode.INVALID_VERSION);
+        LineLocationReference lineLoc = xmlLocRef.getLineLocationReference();
 
-	}
+        Utils.checkLRPs(lineLoc.getLocationReferencePoint(),
+                lineLoc.getLastLocationReferencePoint(), pointsWPLineExample);
+        Utils.checkOffsets(lineLoc.getOffsets(), nullOffsets);
+    }
 
-	/**
-	 * Tests writing an encoded location reference to a stream and checks the
-	 * result by re-creating the same location from the output.
-	 */
-	@Test(dependsOnMethods = {"testWhitePaperLineLocation"})
-	public final void testToStream() {
+    /**
+     * Check data class.
+     *
+     * @param ref
+     *            the ref
+     *
+     * @return true, if successful
+     */
+    private boolean checkDataClass(final LocationReference ref) {
+        return (ref.getDataClass() == XML_ENCODER.getDataClass());
+    }
 
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
+    /**
+     * Test encoding with all supported versions.
+     */
+    @Test
+    public final void testVersions() {
+        LocationReference ref;
 
-		try {
-			validEncodeLocation.toStream(os);
+        int[] versions = XML_ENCODER.getSupportedVersions();
+        for (int version : versions) {
+            ref = XML_ENCODER.encodeData(lineLocWhitePaperExample, version);
+            assertTrue(ref.isValid(), "Invalid location after encoding with"
+                    + " xml version " + version);
+            assertSame(ref.getVersion(), version);
 
-			ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
+        }
 
-			OpenLRXmlReader reader = new OpenLRXmlReader();
+        // test unknown version
+        ref = XML_ENCODER.encodeData(lineLocWhitePaperExample,
+                Integer.MAX_VALUE);
+        assertSame(ref.getReturnCode(), XmlReturnCode.INVALID_VERSION);
 
-			OpenLR readData = reader.readOpenLRXML(is, true);
+    }
 
-			assertEquals(readData,
-					validEncodeLocation.getLocationReferenceData(),
-					"Writing and re-reading of the "
-							+ "location delivered unequal results!");
-		} catch (Exception e) {
-			fail("Unexpected exception!", e);
-		}
-	}
+    /**
+     * Tests writing an encoded location reference to a stream and checks the
+     * result by re-creating the same location from the output.
+     */
+    @Test(dependsOnMethods = {"testWhitePaperLineLocation"})
+    public final void testToStream() {
 
-	/**
-	 * Tests a writing and re-reading of a XML location reference.
-	 */
-	@Test(dependsOnMethods = {"testWhitePaperLineLocation"})
-	public final void testStreamWriter() {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
 
-		OpenLR writtenData = (OpenLR) validEncodeLocation
-				.getLocationReferenceData();
-		OpenLR readData = null;
+        try {
+            validEncodeLocation.toStream(os);
 
-		try {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
 
-			OpenLRXmlWriter writer = new OpenLRXmlWriter();
-			writer.saveOpenLRXML(writtenData, out, true);
+            OpenLRXmlReader reader = new OpenLRXmlReader();
 
-			ByteArrayInputStream in = new ByteArrayInputStream(
-					out.toByteArray());
+            OpenLR readData = reader.readOpenLRXML(is, true);
 
-			OpenLRXmlReader reader = new OpenLRXmlReader();
+            assertEquals(readData,
+                    validEncodeLocation.getLocationReferenceData(),
+                    "Writing and re-reading of the "
+                            + "location delivered unequal results!");
+        } catch (Exception e) {
+            fail("Unexpected exception!", e);
+        }
+    }
 
-			readData = reader.readOpenLRXML(in, true);
+    /**
+     * Tests a writing and re-reading of a XML location reference.
+     */
+    @Test(dependsOnMethods = {"testWhitePaperLineLocation"})
+    public final void testStreamWriter() {
 
-		} catch (Exception e) {
-			fail("Unexpected exception!", e);
-		}
-		assertEquals(readData.toString(), writtenData.toString(),
-				"Writing and re-reading of the "
-						+ "location delivered unequal results!");
-	}
+        OpenLR writtenData = (OpenLR) validEncodeLocation
+                .getLocationReferenceData();
+        OpenLR readData = null;
 
-	
-	/**
-	 * Tests a writing and re-reading of a XML location reference.
-	 */
-	@Test(dependsOnMethods = {"testWhitePaperLineLocation"})
-	public final void testFileWriter() {
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		OpenLR writtenData = (OpenLR) validEncodeLocation
-				.getLocationReferenceData();
-		OpenLR readData = null;
+            OpenLRXmlWriter writer = new OpenLRXmlWriter();
+            writer.saveOpenLRXML(writtenData, out, true);
 
-		try {
+            ByteArrayInputStream in = new ByteArrayInputStream(
+                    out.toByteArray());
 
-			File file = File.createTempFile("testlocation", ".xml");
-			file.deleteOnExit();
-			FileWriter out = new FileWriter(file);
+            OpenLRXmlReader reader = new OpenLRXmlReader();
 
-			OpenLRXmlWriter writer = new OpenLRXmlWriter();
-			writer.saveOpenLRXML(writtenData, out, true);
+            readData = reader.readOpenLRXML(in, true);
 
-			out.close();
+        } catch (Exception e) {
+            fail("Unexpected exception!", e);
+        }
+        assertEquals(readData.toString(), writtenData.toString(),
+                "Writing and re-reading of the "
+                        + "location delivered unequal results!");
+    }
 
-			OpenLRXmlReader reader = new OpenLRXmlReader();
 
-			readData = reader.readOpenLRXML(file, false);
+    /**
+     * Tests a writing and re-reading of a XML location reference.
+     */
+    @Test(dependsOnMethods = {"testWhitePaperLineLocation"})
+    public final void testFileWriter() {
 
-		} catch (Exception e) {
-			fail("Unexpected exception!", e);
-		}
+        OpenLR writtenData = (OpenLR) validEncodeLocation
+                .getLocationReferenceData();
+        OpenLR readData = null;
 
-		assertEquals(readData, writtenData, "Writing and re-reading of the "
-				+ "location delivered unequal results!");
-	}
+        try {
+
+            File file = File.createTempFile("testlocation", ".xml");
+            file.deleteOnExit();
+            FileWriter out = new FileWriter(file);
+
+            OpenLRXmlWriter writer = new OpenLRXmlWriter();
+            writer.saveOpenLRXML(writtenData, out, true);
+
+            out.close();
+
+            OpenLRXmlReader reader = new OpenLRXmlReader();
+
+            readData = reader.readOpenLRXML(file, false);
+
+        } catch (Exception e) {
+            fail("Unexpected exception!", e);
+        }
+
+        assertEquals(readData, writtenData, "Writing and re-reading of the "
+                + "location delivered unequal results!");
+    }
 
 }

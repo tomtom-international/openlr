@@ -35,20 +35,20 @@ package openlr.map.sqlite.helpers.wkb;
  */
 public class WKBException extends Exception {
 
-	/**
-	 * serial id
-	 */
-	private static final long serialVersionUID = 6029240338305013993L;
+    /**
+     * serial id
+     */
+    private static final long serialVersionUID = 6029240338305013993L;
 
-	/**
-	 * Instantiates a new wKB exception.
-	 *
-	 * @param string the string
-	 */
-	public WKBException(final String string) {
-		super(string);
-	}
-	
+    /**
+     * Instantiates a new wKB exception.
+     *
+     * @param string the string
+     */
+    public WKBException(final String string) {
+        super(string);
+    }
+
     /**
      * Constructs a new exception with the specified detail message and
      * cause.  

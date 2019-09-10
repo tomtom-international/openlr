@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openlr:OpenLR xmlns:openlr="http://www.openlr.org/openlr"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.openlr.org/openlr openlr.xsd ">
-  <openlr:LocationID>ExampleLocation</openlr:LocationID>
-  <openlr:XMLLocationReference>
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.openlr.org/openlr openlr.xsd ">
+    <openlr:LocationID>ExampleLocation</openlr:LocationID>
+    <openlr:XMLLocationReference>
     <openlr:LineLocationReference>
 
 </openlr:OpenLR>

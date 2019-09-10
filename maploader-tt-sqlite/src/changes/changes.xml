@@ -1,69 +1,69 @@
 <document xmlns="http://maven.apache.org/changes/1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
-	<properties>
-		<title>OpenLR - TT-SQLite</title>
-		<author email="openlr@tomtom.com">TomTom International B.V.</author>
-	</properties>
-	<body>
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+    <properties>
+        <title>OpenLR - TT-SQLite</title>
+        <author email="openlr@tomtom.com">TomTom International B.V.</author>
+    </properties>
+    <body>
 
-		<!--
-			template for future releases <release version="<version number>"
-			date="<release date>" description="<textual description>"> <action
-			dev="<developer>" type="add"> Test 1 </action> <action
-			dev="<developer>" type="update"> Test 2 </action> <action
-			dev="<developer>" type="fix"> Test 3 </action> <action
-			dev="<developer>" type="remove"> Test 4 </action> </release>
-		-->
-		
-		<release version="1.4.3" date="" description="OpenLR release 1.4.3">
-		
-		</release>
-		
-		<release version="1.4.2" date="" description="OpenLR release 1.4.2">
-		
-		</release>
-		
-		<release version="1.4.1" date="" description="OpenLR release 1.4.1">
-		
-		</release>
-		
-		<release version="1.4.0" date="" description="OpenLR release 1.4.0">
-			<action dev="TomTom International B.V." type="update">
-                Improved performance of MapDatabase.getAllNodes() and MapDatabase.getAllLines 
-			</action>
-			<action dev="TomTom International B.V." type="update">
+        <!--
+            template for future releases <release version="<version number>"
+            date="<release date>" description="<textual description>"> <action
+            dev="<developer>" type="add"> Test 1 </action> <action
+            dev="<developer>" type="update"> Test 2 </action> <action
+            dev="<developer>" type="fix"> Test 3 </action> <action
+            dev="<developer>" type="remove"> Test 4 </action> </release>
+        -->
+
+        <release version="1.4.3" date="" description="OpenLR release 1.4.3">
+
+        </release>
+
+        <release version="1.4.2" date="" description="OpenLR release 1.4.2">
+
+        </release>
+
+        <release version="1.4.1" date="" description="OpenLR release 1.4.1">
+
+        </release>
+
+        <release version="1.4.0" date="" description="OpenLR release 1.4.0">
+            <action dev="TomTom International B.V." type="update">
+                Improved performance of MapDatabase.getAllNodes() and MapDatabase.getAllLines
+            </action>
+            <action dev="TomTom International B.V." type="update">
                 Remove dependency on geotools
-			</action>
-			<action dev="TomTom International B.V." type="update">
-                Changed license conditions from GPL v2 to Apache v2		
-			</action>
-			<action dev="TomTom International B.V." type="add">
-                Added possibility to provide map database via input stream			
-			</action>
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                Changed license conditions from GPL v2 to Apache v2
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                Added possibility to provide map database via input stream
+            </action>
             <action dev="TomTom International B.V." type="update">
                 Adapted to interface changes in OpenLR map interface:
-                Line provides now methods that deliver GeoCoordinates instead of 
-                Point2D instances. The former methods getShape and getPointAlongLine still exist 
+                Line provides now methods that deliver GeoCoordinates instead of
+                Point2D instances. The former methods getShape and getPointAlongLine still exist
                 for backwards compatibility but are with lower performance. They are marked "deprecated".
-            </action>	
+            </action>
             <action dev="TomTom International B.V." type="fix">
-                Removed log4j configuration included in this library which interfered 
+                Removed log4j configuration included in this library which interfered
                 with log4j configurations of applications using the library.
-            </action>		
-		</release>
-		
-		<release version="1.3.0" date="" description="OpenLR release 1.3.0">
-			<action dev="TomTom International B.V." type="fix">
-			
-			</action>
-		</release>
-		
-		<release version="1.2.2" date="" description="OpenLR release 1.2.2">
-			<action dev="TomTom International B.V." type="fix">
-			
-			</action>
-		</release>
+            </action>
+        </release>
 
-	</body>
+        <release version="1.3.0" date="" description="OpenLR release 1.3.0">
+            <action dev="TomTom International B.V." type="fix">
+
+            </action>
+        </release>
+
+        <release version="1.2.2" date="" description="OpenLR release 1.2.2">
+            <action dev="TomTom International B.V." type="fix">
+
+            </action>
+        </release>
+
+    </body>
 </document>

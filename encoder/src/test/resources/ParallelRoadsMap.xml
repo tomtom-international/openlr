@@ -1,128 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!--
-		Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
-		Email: legal@tomtom.com TomTom (Technical contact) Email:
-		openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
-		114, 1011DK Amsterdam, the Netherlands This program is free software;
-		you can redistribute it and/or modify it under the terms of the GNU
-		General Public License as published by the Free Software Foundation;
-		version 2 of the License and the extra conditions for OpenLR. (see
-		openlr-license.txt) This program is distributed in the hope that it
-		will be useful, but WITHOUT ANY WARRANTY; without even the implied
-		warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
-		the GNU General Public License for more details. You should have
-		received a copy of the GNU General Public License along with this
-		program; if not, write to the Free Software Foundation, Inc., 51
-		Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-	-->
+<!--
+    Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
+    Email: legal@tomtom.com TomTom (Technical contact) Email:
+    openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
+    114, 1011DK Amsterdam, the Netherlands This program is free software;
+    you can redistribute it and/or modify it under the terms of the GNU
+    General Public License as published by the Free Software Foundation;
+    version 2 of the License and the extra conditions for OpenLR. (see
+    openlr-license.txt) This program is distributed in the hope that it
+    will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+    the GNU General Public License for more details. You should have
+    received a copy of the GNU General Public License along with this
+    program; if not, write to the Free Software Foundation, Inc., 51
+    Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
 <MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
-	<Nodes>
-		<Node id="1">
-			<Latitude>40.75629</Latitude>
-			<Longitude>-73.96526</Longitude>
-		</Node>
-		<Node id="2">
-			<Latitude>40.75702</Latitude>
-			<Longitude>-73.96696</Longitude>
-		</Node>
-		<Node id="3">
-			<Latitude>40.75797</Latitude>
-			<Longitude>-73.96922</Longitude>
-		</Node>
-		<Node id="4">
-			<Latitude>40.75862</Latitude>
-			<Longitude>-73.97080</Longitude>
-		</Node>
-	</Nodes>
-	<Lines>
-		<Line id="1">
-			<StartNode>1</StartNode>
-			<EndNode>2</EndNode>
-			<Length>500</Length>
-			<FRC>FRC_5</FRC>
-						<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-		</Line>
-		<Line id="-1">
-			<StartNode>2</StartNode>
-			<EndNode>1</EndNode>
-			<Length>500</Length>
-			<FRC>FRC_5</FRC>
-						<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-		</Line>
-		<Line id="2">
-			<StartNode>2</StartNode>
-			<EndNode>3</EndNode>
-			<Length>750</Length>
-			<FRC>FRC_5</FRC>
-						<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-		</Line>
-		<Line id="-2">
-			<StartNode>3</StartNode>
-			<EndNode>2</EndNode>
-			<Length>750</Length>
-			<FRC>FRC_5</FRC>
-						<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-		</Line>
-		<Line id="3">
-			<StartNode>3</StartNode>
-			<EndNode>4</EndNode>
-			<Length>550</Length>
-			<FRC>FRC_5</FRC>
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>			
-		</Line>
-		<Line id="-3">
-			<StartNode>4</StartNode>
-			<EndNode>3</EndNode>
-			<Length>550</Length>
-			<FRC>FRC_5</FRC>
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>			
-		</Line>
-		<Line id="4">
-			<StartNode>3</StartNode>
-			<EndNode>2</EndNode>
-			<Length>800</Length>
-			<FRC>FRC_5</FRC>
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>			
-		</Line>
-		<Line id="-4">
-			<StartNode>2</StartNode>
-			<EndNode>3</EndNode>
-			<Length>800</Length>
-			<FRC>FRC_5</FRC>
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-		</Line>
-	</Lines>
-	<Calls>
-		<GetPointAlongLineCalls>
-			<GetPointAlongLine line="1">
-				<Input>20</Input>
-				<Output>
-					<Longitude>-73.96548</Longitude>
-					<Latitude>40.75632</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="3">
-				<Input>530</Input>
-				<Output>
-					<Longitude>-73.97064</Longitude>
-					<Latitude>40.75852</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="2">
-				<Input>20</Input>
-				<Output>
-					<Longitude>-73.96699</Longitude>
-					<Latitude>40.7572</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="2">
-				<Input>730</Input>
-				<Output>
-					<Longitude>-73.96894</Longitude>
-					<Latitude>40.75796</Latitude>
-				</Output>
-			</GetPointAlongLine>
-		</GetPointAlongLineCalls>
-	</Calls>
+                   xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+    <Nodes>
+        <Node id="1">
+            <Latitude>40.75629</Latitude>
+            <Longitude>-73.96526</Longitude>
+        </Node>
+        <Node id="2">
+            <Latitude>40.75702</Latitude>
+            <Longitude>-73.96696</Longitude>
+        </Node>
+        <Node id="3">
+            <Latitude>40.75797</Latitude>
+            <Longitude>-73.96922</Longitude>
+        </Node>
+        <Node id="4">
+            <Latitude>40.75862</Latitude>
+            <Longitude>-73.97080</Longitude>
+        </Node>
+    </Nodes>
+    <Lines>
+        <Line id="1">
+            <StartNode>1</StartNode>
+            <EndNode>2</EndNode>
+            <Length>500</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+        <Line id="-1">
+            <StartNode>2</StartNode>
+            <EndNode>1</EndNode>
+            <Length>500</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+        <Line id="2">
+            <StartNode>2</StartNode>
+            <EndNode>3</EndNode>
+            <Length>750</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+        <Line id="-2">
+            <StartNode>3</StartNode>
+            <EndNode>2</EndNode>
+            <Length>750</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+        <Line id="3">
+            <StartNode>3</StartNode>
+            <EndNode>4</EndNode>
+            <Length>550</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+        <Line id="-3">
+            <StartNode>4</StartNode>
+            <EndNode>3</EndNode>
+            <Length>550</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+        <Line id="4">
+            <StartNode>3</StartNode>
+            <EndNode>2</EndNode>
+            <Length>800</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+        <Line id="-4">
+            <StartNode>2</StartNode>
+            <EndNode>3</EndNode>
+            <Length>800</Length>
+            <FRC>FRC_5</FRC>
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+        </Line>
+    </Lines>
+    <Calls>
+        <GetPointAlongLineCalls>
+            <GetPointAlongLine line="1">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>-73.96548</Longitude>
+                    <Latitude>40.75632</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="3">
+                <Input>530</Input>
+                <Output>
+                    <Longitude>-73.97064</Longitude>
+                    <Latitude>40.75852</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="2">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>-73.96699</Longitude>
+                    <Latitude>40.7572</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="2">
+                <Input>730</Input>
+                <Output>
+                    <Longitude>-73.96894</Longitude>
+                    <Latitude>40.75796</Latitude>
+                </Output>
+            </GetPointAlongLine>
+        </GetPointAlongLineCalls>
+    </Calls>
 </MockedMapDatabase>

@@ -29,9 +29,9 @@
  *   the Netherlands
  */
 /**
- * 
+ *
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 package openlr.map.sqlite.helpers;

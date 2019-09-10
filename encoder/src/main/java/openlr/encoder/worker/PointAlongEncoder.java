@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -29,8 +40,6 @@
  *   the Netherlands
  */
 package openlr.encoder.worker;
-
-import java.util.List;
 
 import openlr.OpenLRProcessingException;
 import openlr.encoder.data.ExpansionHelper;
@@ -48,64 +57,66 @@ import openlr.rawLocRef.RawInvalidLocRef;
 import openlr.rawLocRef.RawLocationReference;
 import openlr.rawLocRef.RawPointAlongLocRef;
 
+import java.util.List;
+
 /**
  * The point along line encoder.
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class PointAlongEncoder extends AbstractEncoder {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final RawLocationReference doEncoding(final Location location,
-			final OpenLREncoderProperties prop, final MapDatabase mdb)
-			throws OpenLRProcessingException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final RawLocationReference doEncoding(final Location location,
+                                                 final OpenLREncoderProperties prop, final MapDatabase mdb)
+            throws OpenLRProcessingException {
 
-		// check if the location is valid and expand
-		LocationCheck locCheck = new PointAlongLocationCheck();
-		CheckResult retCode = locCheck.check(prop, mdb, location);
-		if (!retCode.checkPassed()) {
-			RawLocationReference invalid = new RawInvalidLocRef(
-					location.getID(), retCode.getError(),
-					location.getLocationType());
-			return invalid;
-		}
+        // check if the location is valid and expand
+        LocationCheck locCheck = new PointAlongLocationCheck();
+        CheckResult retCode = locCheck.check(prop, mdb, location);
+        if (!retCode.checkPassed()) {
+            RawLocationReference invalid = new RawInvalidLocRef(
+                    location.getID(), retCode.getError(),
+                    location.getLocationType());
+            return invalid;
+        }
 
-		retCode = locCheck.checkOffsets(prop, location);
-		if (!retCode.checkPassed()) {
-			RawLocationReference invalid = new RawInvalidLocRef(
-					location.getID(), retCode.getError(),
-					location.getLocationType());
-			return invalid;
-		}
+        retCode = locCheck.checkOffsets(prop, location);
+        if (!retCode.checkPassed()) {
+            RawLocationReference invalid = new RawInvalidLocRef(
+                    location.getID(), retCode.getError(),
+                    location.getLocationType());
+            return invalid;
+        }
 
-		LocRefData lrd = new LocRefData(location);
-		lrd.setExpansion(ExpansionHelper.createExpandedLocation(prop,
-				mdb, lrd));
+        LocRefData lrd = new LocRefData(location);
+        lrd.setExpansion(ExpansionHelper.createExpandedLocation(prop,
+                mdb, lrd));
 
-		// initialize location reference data array and start encoding
-		lrd.setLocRefPoints(generateLocRef(lrd, prop));
+        // initialize location reference data array and start encoding
+        lrd.setLocRefPoints(generateLocRef(lrd, prop));
 
-		// check if the location reference meets all restrictions and adjust
-		// length values
-		// if necessary
-		LocationReferenceAdjust locRefAdjust = new LrpBasedPointLocRefAdjust();
-		locRefAdjust.adjustLocationReference(prop, lrd);
+        // check if the location reference meets all restrictions and adjust
+        // length values
+        // if necessary
+        LocationReferenceAdjust locRefAdjust = new LrpBasedPointLocRefAdjust();
+        locRefAdjust.adjustLocationReference(prop, lrd);
 
-		List<LocRefPoint> lrps = lrd.getLocRefPoints();
+        List<LocRefPoint> lrps = lrd.getLocRefPoints();
 
-		RawLocationReference rawLocRef = new RawPointAlongLocRef(
-				location.getID(), lrps.get(0), lrps.get(1), lrd.getOffsets(),
-				location.getSideOfRoad(), location.getOrientation());
+        RawLocationReference rawLocRef = new RawPointAlongLocRef(
+                location.getID(), lrps.get(0), lrps.get(1), lrd.getOffsets(),
+                location.getSideOfRoad(), location.getOrientation());
 
-		return rawLocRef;
-	}
+        return rawLocRef;
+    }
 
 }

@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -35,7 +46,7 @@ import openlr.map.FunctionalRoadClass;
 /**
  * This is an implementation of {@link LocationReferencePoint} that is used in
  * test here.
- * 
+ *
  * @author berndtax
  */
 public class TestLocationReferencePointImpl implements LocationReferencePoint {
@@ -50,7 +61,7 @@ public class TestLocationReferencePointImpl implements LocationReferencePoint {
     private boolean isLast;
 
     /**
-     * 
+     *
      * @param longitude The longitude
      * @param latitude The latitude
      * @param dnp The DNP
@@ -62,8 +73,8 @@ public class TestLocationReferencePointImpl implements LocationReferencePoint {
      * @param sequenceNumber The LRP sequence number in the location
      */
     public TestLocationReferencePointImpl(final double longitude, double latitude, int dnp,
-            FunctionalRoadClass frc, FormOfWay fow, FunctionalRoadClass lfrcnp,
-            double bearing, boolean isLast, int sequenceNumber) {
+                                          FunctionalRoadClass frc, FormOfWay fow, FunctionalRoadClass lfrcnp,
+                                          double bearing, boolean isLast, int sequenceNumber) {
 
         this.lon = longitude;
         this.lat = latitude;

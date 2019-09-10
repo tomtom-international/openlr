@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -30,19 +41,18 @@
  */
 package openlr.location.utils;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
+import openlr.location.Location;
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.testng.annotations.Test;
 
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import openlr.location.Location;
-
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.testng.annotations.Test;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 /**
  * Tests the {@link LocationDataIterator}.
@@ -50,7 +60,7 @@ import org.testng.annotations.Test;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class LocationDataIteratorTest {
@@ -77,7 +87,7 @@ public class LocationDataIteratorTest {
         // init state
         assertTrue(iterator.hasNext());
         assertFalse(iterator.hasPrevious());
-        assertEquals(-1, iterator.currentIndex());              
+        assertEquals(-1, iterator.currentIndex());
 
         assertEquals(null, iterator.current());
 
@@ -153,13 +163,13 @@ public class LocationDataIteratorTest {
 
         assertEquals(-1, iterator.previousIndex());
         assertEquals(0, iterator.nextIndex());
-        
+
         int count = 0;
         while (iterator.hasNext()) {
             assertEquals(String.valueOf(count), iterator.next().getID());
             count++;
         }
-        
+
         assertEquals(numberLocations, iterator.nextIndex());
 
         assertTrue(count == numberLocations);
@@ -169,7 +179,7 @@ public class LocationDataIteratorTest {
      * Mocks a collection of locations with a count as specified in
      * {@code count}. Each will have the ID of its sequence number starting with
      * 0.
-     * 
+     *
      * @param count
      *            The number of locations to add
      * @return The mocked location data object
@@ -190,7 +200,7 @@ public class LocationDataIteratorTest {
 
     /**
      * Mocks a single location.
-     * 
+     *
      * @param id
      *            The id the location should deliver in {@link Location#getID()}
      * @return The mocked location

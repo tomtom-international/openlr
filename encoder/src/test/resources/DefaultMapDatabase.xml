@@ -1,366 +1,366 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!--
-		Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
-		Email: legal@tomtom.com TomTom (Technical contact) Email:
-		openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
-		114, 1011DK Amsterdam, the Netherlands This program is free software;
-		you can redistribute it and/or modify it under the terms of the GNU
-		General Public License as published by the Free Software Foundation;
-		version 2 of the License and the extra conditions for OpenLR. (see
-		openlr-license.txt) This program is distributed in the hope that it
-		will be useful, but WITHOUT ANY WARRANTY; without even the implied
-		warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
-		the GNU General Public License for more details. You should have
-		received a copy of the GNU General Public License along with this
-		program; if not, write to the Free Software Foundation, Inc., 51
-		Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-	-->
+<!--
+    Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
+    Email: legal@tomtom.com TomTom (Technical contact) Email:
+    openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
+    114, 1011DK Amsterdam, the Netherlands This program is free software;
+    you can redistribute it and/or modify it under the terms of the GNU
+    General Public License as published by the Free Software Foundation;
+    version 2 of the License and the extra conditions for OpenLR. (see
+    openlr-license.txt) This program is distributed in the hope that it
+    will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+    the GNU General Public License for more details. You should have
+    received a copy of the GNU General Public License along with this
+    program; if not, write to the Free Software Foundation, Inc., 51
+    Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
 <MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
-	<Nodes>
-		<!-- The following 15 nodes are part of the encoder example network from the White paper v. 1.3.-->
-		<Node id="1">
-			<Latitude>49.60851</Latitude>
-			<Longitude>6.12683</Longitude>
-		</Node>
-		<Node id="2">
-			<Latitude>49.60767</Latitude>
-			<Longitude>6.12529</Longitude>
-		</Node>
-		<Node id="3">
-			<Latitude>49.60754</Latitude>
-			<Longitude>6.12826</Longitude>
-		</Node>
-		<Node id="4">
-			<Latitude>49.60606</Latitude>
-			<Longitude>6.12579</Longitude>
-		</Node>
-		<Node id="5">
-			<Latitude>49.60597</Latitude>
-			<Longitude>6.12829</Longitude>
-		</Node>
-		<Node id="6">
-			<Latitude>49.60510</Latitude>
-			<Longitude>6.12711</Longitude>
-		</Node>
-		<Node id="7">
-			<Latitude>49.60521</Latitude>
-			<Longitude>6.12779</Longitude>
-		</Node>
-		<Node id="8">
-			<Latitude>49.60526</Latitude>
-			<Longitude>6.12893</Longitude>
-		</Node>
-		<Node id="9">
-			<Latitude>49.60435</Latitude>
-			<Longitude>6.12633</Longitude>
-		</Node>
-		<Node id="10">
-			<Latitude>49.60398</Latitude>
-			<Longitude>6.12838</Longitude>
-		</Node>
-		<Node id="11">
-			<Latitude>49.60356</Latitude>
-			<Longitude>6.12764</Longitude>
-		</Node>
-		<Node id="12">
-			<Latitude>49.60356</Latitude>
-			<Longitude>6.12882</Longitude>
-		</Node>
-		<Node id="13">
-			<Latitude>49.60356</Latitude>
-			<Longitude>6.12661</Longitude>
-		</Node>
-		<Node id="14">
-			<Latitude>49.60315</Latitude>
-			<Longitude>6.12786</Longitude>
-		</Node>
-		<Node id="15">
-			<Latitude>49.60305</Latitude>
-			<Longitude>6.12817</Longitude>
-		</Node>
-	</Nodes>
-	<Lines>
-		<Line id="1">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>1</StartNode>
-			<EndNode>2</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>145</Length>
-		</Line>
-		<Line id="2">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>1</StartNode>
-			<EndNode>3</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>150</Length>
-		</Line>
-		<Line id="3">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>2</StartNode>
-			<EndNode>4</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>205</Length>
-		</Line>
-		<Line id="4">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>3</StartNode>
-			<EndNode>5</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>175</Length>
-		</Line>
-		<Line id="5">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>4</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>200</Length>
-		</Line>
-		<Line id="6">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>5</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>92</Length>
-		</Line>
-		<Line id="7">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>5</StartNode>
-			<EndNode>8</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>96</Length>
-		</Line>
-		<Line id="8">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>7</StartNode>
-			<EndNode>6</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>50</Length>
-		</Line>
-		<Line id="9">
-			<FOW>OTHER</FOW>
-			<StartNode>6</StartNode>
-			<EndNode>9</EndNode>
-			<FRC>FRC_7</FRC>
-			<Length>99</Length>
-		</Line>
-		<Line id="10">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>7</StartNode>
-			<EndNode>10</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>144</Length>
-		</Line>
-		<Line id="11">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>8</StartNode>
-			<EndNode>10</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>150</Length>
-		</Line>
-		<Line id="12">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>8</StartNode>
-			<EndNode>12</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>210</Length>
-		</Line>
-		<Line id="13">
-			<FOW>OTHER</FOW>
-			<StartNode>9</StartNode>
-			<EndNode>13</EndNode>
-			<FRC>FRC_7</FRC>
-			<Length>86</Length>
-		</Line>
-		<Line id="14">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>10</StartNode>
-			<EndNode>11</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>73</Length>
-		</Line>
-		<Line id="15">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>10</StartNode>
-			<EndNode>12</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>56</Length>
-		</Line>
-		<Line id="16">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>11</StartNode>
-			<EndNode>13</EndNode>
-			<FRC>FRC_5</FRC>
-			<Length>75</Length>
-		</Line>
-		<Line id="17">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>12</StartNode>
-			<EndNode>14</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>83</Length>
-		</Line>
-		<Line id="18">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>13</StartNode>
-			<EndNode>14</EndNode>
-			<FRC>FRC_5</FRC>
-			<Length>101</Length>
-		</Line>
-		<Line id="19">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>14</StartNode>
-			<EndNode>15</EndNode>
-			<FRC>FRC_5</FRC>
-			<Length>25</Length>
-		</Line>
-		<Line id="20">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>4</StartNode>
-			<EndNode>2</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>205</Length>
-		</Line>
-		<Line id="21">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>7</StartNode>
-			<EndNode>4</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>200</Length>
-		</Line>
-		<Line id="22">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>10</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>144</Length>
-		</Line>
-		<Line id="23">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>12</StartNode>
-			<EndNode>10</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>56</Length>
-		</Line>
-		<!--	END lines of the encoder example network from the White paper v. 1.3.	-->
-		<Line id="24">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>7</StartNode>
-			<EndNode>5</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>92</Length>
-		</Line>
-		<Line id="25">
-			<FOW>OTHER</FOW>
-			<StartNode>13</StartNode>
-			<EndNode>9</EndNode>
-			<FRC>FRC_7</FRC>
-			<Length>86</Length>
-		</Line>
-		<Line id="26">
-			<FOW>OTHER</FOW>
-			<StartNode>9</StartNode>
-			<EndNode>6</EndNode>
-			<FRC>FRC_7</FRC>
-			<Length>99</Length>
-		</Line>
-		<Line id="27">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>6</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>50</Length>
-		</Line>
-		<Line id="28">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>2</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_5</FRC>
-			<Length>350</Length>
-		</Line>
-	</Lines>
-	<Calls>
-		<GetPointAlongLineCalls>
-			<GetPointAlongLine line="2">
-				<Input>20</Input>
-				<Output>
-					<Longitude>6.12703</Longitude>
-					<Latitude>49.60838</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="14">
-				<Input>20</Input>
-				<Output>
-					<Longitude>6.12820</Longitude>
-					<Latitude>49.60387</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="19">
-<!--								 line length minus bearing distance -->
-				<Input>5</Input>
-				<Output>
-					<Longitude>6.12791</Longitude>
-					<Latitude>49.60311</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<!--				for the point along the line test -->
-			<GetPointAlongLine line="6">
-				<!--	positive offset value		-->
-				<Input>28</Input>
-				<Output>
-					<Longitude>6.12819</Longitude>
-					<Latitude>49.6057</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="6">
-				<!--				 line length minus bearing distance -->
-				<Input>72</Input>
-				<Output>
-					<Longitude>6.12801</Longitude>
-					<Latitude>49.60537</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="6">
-				<!-- bearing distance -->
-				<Input>20</Input>
-				<Output>
-					<Longitude>6.128175</Longitude>
-					<Latitude>49.60579</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<!--		end		for the point along the line test -->
-			<!--			for POI with access at start node: -->
-			<GetPointAlongLine line="6">
-				<Input>0</Input>
-				<Output>
-					<!--			delivers start node	-->
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.60597</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<!--			end  POI with access at start node: -->
-			<GetPointAlongLine line="16">
-				<!--	line length -bearing distance	-->
-				<Input>55</Input>
-				<Output>
-					<Longitude>6.126869</Longitude>
-					<Latitude>49.603520</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="7">
-				<Input>20</Input>
-				<Output>
-					<Longitude>6.12851</Longitude>
-					<Latitude>49.60583</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="24">
-				<Input>72</Input>
-				<Output>
-					<Longitude>6.12744</Longitude>
-					<Latitude>49.60564</Latitude>
-				</Output>
-			</GetPointAlongLine>
-		</GetPointAlongLineCalls>
-	</Calls>
+                   xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+    <Nodes>
+        <!-- The following 15 nodes are part of the encoder example network from the White paper v. 1.3.-->
+        <Node id="1">
+            <Latitude>49.60851</Latitude>
+            <Longitude>6.12683</Longitude>
+        </Node>
+        <Node id="2">
+            <Latitude>49.60767</Latitude>
+            <Longitude>6.12529</Longitude>
+        </Node>
+        <Node id="3">
+            <Latitude>49.60754</Latitude>
+            <Longitude>6.12826</Longitude>
+        </Node>
+        <Node id="4">
+            <Latitude>49.60606</Latitude>
+            <Longitude>6.12579</Longitude>
+        </Node>
+        <Node id="5">
+            <Latitude>49.60597</Latitude>
+            <Longitude>6.12829</Longitude>
+        </Node>
+        <Node id="6">
+            <Latitude>49.60510</Latitude>
+            <Longitude>6.12711</Longitude>
+        </Node>
+        <Node id="7">
+            <Latitude>49.60521</Latitude>
+            <Longitude>6.12779</Longitude>
+        </Node>
+        <Node id="8">
+            <Latitude>49.60526</Latitude>
+            <Longitude>6.12893</Longitude>
+        </Node>
+        <Node id="9">
+            <Latitude>49.60435</Latitude>
+            <Longitude>6.12633</Longitude>
+        </Node>
+        <Node id="10">
+            <Latitude>49.60398</Latitude>
+            <Longitude>6.12838</Longitude>
+        </Node>
+        <Node id="11">
+            <Latitude>49.60356</Latitude>
+            <Longitude>6.12764</Longitude>
+        </Node>
+        <Node id="12">
+            <Latitude>49.60356</Latitude>
+            <Longitude>6.12882</Longitude>
+        </Node>
+        <Node id="13">
+            <Latitude>49.60356</Latitude>
+            <Longitude>6.12661</Longitude>
+        </Node>
+        <Node id="14">
+            <Latitude>49.60315</Latitude>
+            <Longitude>6.12786</Longitude>
+        </Node>
+        <Node id="15">
+            <Latitude>49.60305</Latitude>
+            <Longitude>6.12817</Longitude>
+        </Node>
+    </Nodes>
+    <Lines>
+        <Line id="1">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>1</StartNode>
+            <EndNode>2</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>145</Length>
+        </Line>
+        <Line id="2">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>1</StartNode>
+            <EndNode>3</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>150</Length>
+        </Line>
+        <Line id="3">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>2</StartNode>
+            <EndNode>4</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>205</Length>
+        </Line>
+        <Line id="4">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>3</StartNode>
+            <EndNode>5</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>175</Length>
+        </Line>
+        <Line id="5">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>4</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>200</Length>
+        </Line>
+        <Line id="6">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>5</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>92</Length>
+        </Line>
+        <Line id="7">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>5</StartNode>
+            <EndNode>8</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>96</Length>
+        </Line>
+        <Line id="8">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>7</StartNode>
+            <EndNode>6</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>50</Length>
+        </Line>
+        <Line id="9">
+            <FOW>OTHER</FOW>
+            <StartNode>6</StartNode>
+            <EndNode>9</EndNode>
+            <FRC>FRC_7</FRC>
+            <Length>99</Length>
+        </Line>
+        <Line id="10">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>7</StartNode>
+            <EndNode>10</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>144</Length>
+        </Line>
+        <Line id="11">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>8</StartNode>
+            <EndNode>10</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>150</Length>
+        </Line>
+        <Line id="12">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>8</StartNode>
+            <EndNode>12</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>210</Length>
+        </Line>
+        <Line id="13">
+            <FOW>OTHER</FOW>
+            <StartNode>9</StartNode>
+            <EndNode>13</EndNode>
+            <FRC>FRC_7</FRC>
+            <Length>86</Length>
+        </Line>
+        <Line id="14">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>10</StartNode>
+            <EndNode>11</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>73</Length>
+        </Line>
+        <Line id="15">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>10</StartNode>
+            <EndNode>12</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>56</Length>
+        </Line>
+        <Line id="16">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>11</StartNode>
+            <EndNode>13</EndNode>
+            <FRC>FRC_5</FRC>
+            <Length>75</Length>
+        </Line>
+        <Line id="17">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>12</StartNode>
+            <EndNode>14</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>83</Length>
+        </Line>
+        <Line id="18">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>13</StartNode>
+            <EndNode>14</EndNode>
+            <FRC>FRC_5</FRC>
+            <Length>101</Length>
+        </Line>
+        <Line id="19">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>14</StartNode>
+            <EndNode>15</EndNode>
+            <FRC>FRC_5</FRC>
+            <Length>25</Length>
+        </Line>
+        <Line id="20">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>4</StartNode>
+            <EndNode>2</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>205</Length>
+        </Line>
+        <Line id="21">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>7</StartNode>
+            <EndNode>4</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>200</Length>
+        </Line>
+        <Line id="22">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>10</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>144</Length>
+        </Line>
+        <Line id="23">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>12</StartNode>
+            <EndNode>10</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>56</Length>
+        </Line>
+        <!--	END lines of the encoder example network from the White paper v. 1.3.	-->
+        <Line id="24">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>7</StartNode>
+            <EndNode>5</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>92</Length>
+        </Line>
+        <Line id="25">
+            <FOW>OTHER</FOW>
+            <StartNode>13</StartNode>
+            <EndNode>9</EndNode>
+            <FRC>FRC_7</FRC>
+            <Length>86</Length>
+        </Line>
+        <Line id="26">
+            <FOW>OTHER</FOW>
+            <StartNode>9</StartNode>
+            <EndNode>6</EndNode>
+            <FRC>FRC_7</FRC>
+            <Length>99</Length>
+        </Line>
+        <Line id="27">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>6</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>50</Length>
+        </Line>
+        <Line id="28">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>2</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_5</FRC>
+            <Length>350</Length>
+        </Line>
+    </Lines>
+    <Calls>
+        <GetPointAlongLineCalls>
+            <GetPointAlongLine line="2">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>6.12703</Longitude>
+                    <Latitude>49.60838</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="14">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>6.12820</Longitude>
+                    <Latitude>49.60387</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="19">
+                <!--								 line length minus bearing distance -->
+                <Input>5</Input>
+                <Output>
+                    <Longitude>6.12791</Longitude>
+                    <Latitude>49.60311</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <!--				for the point along the line test -->
+            <GetPointAlongLine line="6">
+                <!--	positive offset value		-->
+                <Input>28</Input>
+                <Output>
+                    <Longitude>6.12819</Longitude>
+                    <Latitude>49.6057</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="6">
+                <!--				 line length minus bearing distance -->
+                <Input>72</Input>
+                <Output>
+                    <Longitude>6.12801</Longitude>
+                    <Latitude>49.60537</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="6">
+                <!-- bearing distance -->
+                <Input>20</Input>
+                <Output>
+                    <Longitude>6.128175</Longitude>
+                    <Latitude>49.60579</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <!--		end		for the point along the line test -->
+            <!--			for POI with access at start node: -->
+            <GetPointAlongLine line="6">
+                <Input>0</Input>
+                <Output>
+                    <!--			delivers start node	-->
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.60597</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <!--			end  POI with access at start node: -->
+            <GetPointAlongLine line="16">
+                <!--	line length -bearing distance	-->
+                <Input>55</Input>
+                <Output>
+                    <Longitude>6.126869</Longitude>
+                    <Latitude>49.603520</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="7">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>6.12851</Longitude>
+                    <Latitude>49.60583</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="24">
+                <Input>72</Input>
+                <Output>
+                    <Longitude>6.12744</Longitude>
+                    <Latitude>49.60564</Latitude>
+                </Output>
+            </GetPointAlongLine>
+        </GetPointAlongLineCalls>
+    </Calls>
 </MockedMapDatabase>

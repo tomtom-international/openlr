@@ -6,15 +6,40 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  This program is free software; you can redistribute it and/or modify
@@ -56,7 +81,6 @@ import openlr.map.InvalidMapDataException;
 import openlr.map.utils.GeometryUtils;
 import openlr.rawLocRef.RawLocationReference;
 import openlr.rawLocRef.RawRectangleLocRef;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -65,132 +89,131 @@ import org.testng.annotations.Test;
  */
 public class RectangleTest {
 
-	/** The Constant EXPECTED_RECTANGLE_RELATIVE_RESULT. */
-	private static final byte[] EXPECTED_RECTANGLE_RELATIVE_RESULT = { 0x43,
-			0x03, -0x62, -0x56, 0x25, 0x09, -0x0c, 0x0c, 0x27, 0x07, 0x36 };
+    /** The Constant EXPECTED_RECTANGLE_RELATIVE_RESULT. */
+    private static final byte[] EXPECTED_RECTANGLE_RELATIVE_RESULT = {0x43,
+            0x03, -0x62, -0x56, 0x25, 0x09, -0x0c, 0x0c, 0x27, 0x07, 0x36};
 
-	/** The Constant EXPECTED_RECTANGLE_ABSOLUTE_RESULT. */
-	private static final byte[] EXPECTED_RECTANGLE_ABSOLUTE_RESULT = { 0x43,
-			0x03, -0x7a, -0x2a, 0x24, -0x04, -0x72, 0x03, -0x02, 0x2d, 0x25,
-			0x2f, 0x6a };
+    /** The Constant EXPECTED_RECTANGLE_ABSOLUTE_RESULT. */
+    private static final byte[] EXPECTED_RECTANGLE_ABSOLUTE_RESULT = {0x43,
+            0x03, -0x7a, -0x2a, 0x24, -0x04, -0x72, 0x03, -0x02, 0x2d, 0x25,
+            0x2f, 0x6a};
 
 
+    /**
+     * Test rectangle1 encode.
+     */
+    @Test
+    public final void testRectangle1Encode() {
+        try {
+            GeoCoordinates ll = new GeoCoordinatesImpl(5.09030, 52.08591);
+            GeoCoordinates ur = new GeoCoordinatesImpl(5.12141, 52.10437);
 
-	/**
-	 * Test rectangle1 encode.
-	 */
-	@Test
-	public final void testRectangle1Encode() {
-		try {
-			GeoCoordinates ll = new GeoCoordinatesImpl(5.09030, 52.08591);
-			GeoCoordinates ur = new GeoCoordinatesImpl(5.12141, 52.10437);
+            RawLocationReference rawLocRef = new RawRectangleLocRef(
+                    "rectangle", ll, ur);
+            OpenLRBinaryEncoder encoder = new OpenLRBinaryEncoder();
+            LocationReference lr = encoder.encodeData(rawLocRef);
+            Assert.assertTrue(lr.isValid());
+            Assert.assertNotNull(lr.getLocationReferenceData());
+            Assert.assertEquals(lr.getLocationType(), LocationType.RECTANGLE);
 
-			RawLocationReference rawLocRef = new RawRectangleLocRef(
-					"rectangle", ll, ur);
-			OpenLRBinaryEncoder encoder = new OpenLRBinaryEncoder();
-			LocationReference lr = encoder.encodeData(rawLocRef);
-			Assert.assertTrue(lr.isValid());
-			Assert.assertNotNull(lr.getLocationReferenceData());
-			Assert.assertEquals(lr.getLocationType(), LocationType.RECTANGLE);
+            Utils.checkBinData((ByteArray) lr.getLocationReferenceData(),
+                    EXPECTED_RECTANGLE_RELATIVE_RESULT, 3);
+        } catch (InvalidMapDataException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
-			Utils.checkBinData((ByteArray) lr.getLocationReferenceData(),
-					EXPECTED_RECTANGLE_RELATIVE_RESULT, 3);
-		} catch (InvalidMapDataException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+    /**
+     * Test rectangle2 encode.
+     */
+    @Test
+    public final void testRectangle2Encode() {
+        try {
+            GeoCoordinates ll = new GeoCoordinatesImpl(4.95941, 52.01232);
+            GeoCoordinates ur = new GeoCoordinatesImpl(5.61497, 52.29168);
+            RawLocationReference rawLocRef = new RawRectangleLocRef(
+                    "rectangle", ll, ur);
+            OpenLRBinaryEncoder encoder = new OpenLRBinaryEncoder();
+            LocationReference lr = encoder.encodeData(rawLocRef);
+            Assert.assertTrue(lr.isValid());
+            Assert.assertNotNull(lr.getLocationReferenceData());
+            Assert.assertEquals(lr.getLocationType(), LocationType.RECTANGLE);
 
-	/**
-	 * Test rectangle2 encode.
-	 */
-	@Test
-	public final void testRectangle2Encode() {
-		try {
-			GeoCoordinates ll = new GeoCoordinatesImpl(4.95941, 52.01232);
-			GeoCoordinates ur = new GeoCoordinatesImpl(5.61497, 52.29168);
-			RawLocationReference rawLocRef = new RawRectangleLocRef(
-					"rectangle", ll, ur);
-			OpenLRBinaryEncoder encoder = new OpenLRBinaryEncoder();
-			LocationReference lr = encoder.encodeData(rawLocRef);
-			Assert.assertTrue(lr.isValid());
-			Assert.assertNotNull(lr.getLocationReferenceData());
-			Assert.assertEquals(lr.getLocationType(), LocationType.RECTANGLE);
+            Utils.checkBinData((ByteArray) lr.getLocationReferenceData(),
+                    EXPECTED_RECTANGLE_ABSOLUTE_RESULT, 3);
+        } catch (InvalidMapDataException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
-			Utils.checkBinData((ByteArray) lr.getLocationReferenceData(),
-					EXPECTED_RECTANGLE_ABSOLUTE_RESULT, 3);
-		} catch (InvalidMapDataException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+    /**
+     * Test rectangle1 decode.
+     */
+    @Test
+    public final void testRectangle1Decode() {
 
-	/**
-	 * Test rectangle1 decode.
-	 */
-	@Test
-	public final void testRectangle1Decode() {
+        try {
+            LocationReference lr = new LocationReferenceBinaryImpl("rectangle",
+                    new ByteArray(EXPECTED_RECTANGLE_RELATIVE_RESULT));
+            OpenLRBinaryDecoder decoder = new OpenLRBinaryDecoder();
+            RawLocationReference rawLocRef = decoder.decodeData(lr);
+            Assert.assertTrue(rawLocRef.isValid());
+            Assert.assertEquals(rawLocRef.getID(), "rectangle");
+            Assert.assertEquals(rawLocRef.getLocationType(),
+                    LocationType.RECTANGLE);
+            Assert.assertNotNull(rawLocRef.getLowerLeftPoint());
+            Assert.assertNotNull(rawLocRef.getUpperRightPoint());
+            GeoCoordinates ll = rawLocRef.getLowerLeftPoint();
+            GeoCoordinates ur = rawLocRef.getUpperRightPoint();
 
-		try {
-			LocationReference lr = new LocationReferenceBinaryImpl("rectangle",
-					new ByteArray(EXPECTED_RECTANGLE_RELATIVE_RESULT));
-			OpenLRBinaryDecoder decoder = new OpenLRBinaryDecoder();
-			RawLocationReference rawLocRef = decoder.decodeData(lr);
-			Assert.assertTrue(rawLocRef.isValid());
-			Assert.assertEquals(rawLocRef.getID(), "rectangle");
-			Assert.assertEquals(rawLocRef.getLocationType(),
-					LocationType.RECTANGLE);
-			Assert.assertNotNull(rawLocRef.getLowerLeftPoint());
-			Assert.assertNotNull(rawLocRef.getUpperRightPoint());
-			GeoCoordinates ll = rawLocRef.getLowerLeftPoint();
-			GeoCoordinates ur = rawLocRef.getUpperRightPoint();
+            Assert.assertEquals(GeometryUtils.round(ll.getLongitudeDeg()),
+                    5.09031);
+            Assert.assertEquals(GeometryUtils.round(ll.getLatitudeDeg()),
+                    52.08591);
 
-			Assert.assertEquals(GeometryUtils.round(ll.getLongitudeDeg()),
-					5.09031);
-			Assert.assertEquals(GeometryUtils.round(ll.getLatitudeDeg()),
-					52.08591);
+            Assert.assertEquals(GeometryUtils.round(ur.getLongitudeDeg()),
+                    5.12142);
+            Assert.assertEquals(GeometryUtils.round(ur.getLatitudeDeg()),
+                    52.10437);
 
-			Assert.assertEquals(GeometryUtils.round(ur.getLongitudeDeg()),
-					5.12142);
-			Assert.assertEquals(GeometryUtils.round(ur.getLatitudeDeg()),
-					52.10437);
+        } catch (PhysicalFormatException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
-		} catch (PhysicalFormatException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+    /**
+     * Test rectangle2 decode.
+     */
+    @Test
+    public final void testRectangle2Decode() {
 
-	/**
-	 * Test rectangle2 decode.
-	 */
-	@Test
-	public final void testRectangle2Decode() {
+        try {
+            LocationReference lr = new LocationReferenceBinaryImpl("rectangle",
+                    new ByteArray(EXPECTED_RECTANGLE_ABSOLUTE_RESULT));
+            OpenLRBinaryDecoder decoder = new OpenLRBinaryDecoder();
+            RawLocationReference rawLocRef = decoder.decodeData(lr);
+            Assert.assertTrue(rawLocRef.isValid());
+            Assert.assertEquals(rawLocRef.getID(), "rectangle");
+            Assert.assertEquals(rawLocRef.getLocationType(),
+                    LocationType.RECTANGLE);
+            Assert.assertNotNull(rawLocRef.getLowerLeftPoint());
+            Assert.assertNotNull(rawLocRef.getUpperRightPoint());
+            GeoCoordinates ll = rawLocRef.getLowerLeftPoint();
+            GeoCoordinates ur = rawLocRef.getUpperRightPoint();
 
-		try {
-			LocationReference lr = new LocationReferenceBinaryImpl("rectangle",
-					new ByteArray(EXPECTED_RECTANGLE_ABSOLUTE_RESULT));
-			OpenLRBinaryDecoder decoder = new OpenLRBinaryDecoder();
-			RawLocationReference rawLocRef = decoder.decodeData(lr);
-			Assert.assertTrue(rawLocRef.isValid());
-			Assert.assertEquals(rawLocRef.getID(), "rectangle");
-			Assert.assertEquals(rawLocRef.getLocationType(),
-					LocationType.RECTANGLE);
-			Assert.assertNotNull(rawLocRef.getLowerLeftPoint());
-			Assert.assertNotNull(rawLocRef.getUpperRightPoint());
-			GeoCoordinates ll = rawLocRef.getLowerLeftPoint();
-			GeoCoordinates ur = rawLocRef.getUpperRightPoint();
+            Assert.assertEquals(GeometryUtils.round(ll.getLongitudeDeg()),
+                    4.95942);
+            Assert.assertEquals(GeometryUtils.round(ll.getLatitudeDeg()),
+                    52.01231);
 
-			Assert.assertEquals(GeometryUtils.round(ll.getLongitudeDeg()),
-					4.95942);
-			Assert.assertEquals(GeometryUtils.round(ll.getLatitudeDeg()),
-					52.01231);
+            Assert.assertEquals(GeometryUtils.round(ur.getLongitudeDeg()),
+                    5.61497);
+            Assert.assertEquals(GeometryUtils.round(ur.getLatitudeDeg()),
+                    52.29169);
 
-			Assert.assertEquals(GeometryUtils.round(ur.getLongitudeDeg()),
-					5.61497);
-			Assert.assertEquals(GeometryUtils.round(ur.getLatitudeDeg()),
-					52.29169);
-
-		} catch (PhysicalFormatException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+        } catch (PhysicalFormatException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
 }

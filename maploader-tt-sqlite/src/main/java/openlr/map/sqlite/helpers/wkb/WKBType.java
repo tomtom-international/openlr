@@ -35,46 +35,61 @@ package openlr.map.sqlite.helpers.wkb;
  */
 public enum WKBType {
 
-	/** The POINT. */
-	POINT(1),
+    /**
+     * The POINT.
+     */
+    POINT(1),
 
-	/** The LINESTRING. */
-	LINESTRING(2),
+    /**
+     * The LINESTRING.
+     */
+    LINESTRING(2),
 
-	/** The POLYGON. */
-	POLYGON(3),
+    /**
+     * The POLYGON.
+     */
+    POLYGON(3),
 
-	/** The MULTIPOINT. */
-	MULTIPOINT(4),
+    /**
+     * The MULTIPOINT.
+     */
+    MULTIPOINT(4),
 
-	/** The MULTILINESTRING. */
-	MULTILINESTRING(5),
+    /**
+     * The MULTILINESTRING.
+     */
+    MULTILINESTRING(5),
 
-	/** The MULTIPOLYGON. */
-	MULTIPOLYGON(6),
+    /**
+     * The MULTIPOLYGON.
+     */
+    MULTIPOLYGON(6),
 
-	/** The GEOMETRYCOLLECTION. */
-	GEOMETRYCOLLECTION(7);
+    /**
+     * The GEOMETRYCOLLECTION.
+     */
+    GEOMETRYCOLLECTION(7);
 
-	/** The value. */
-	private final int value;
+    /**
+     * The value.
+     */
+    private final int value;
 
-	/**
-	 * Instantiates a new wKB type.
-	 * 
-	 * @param v
-	 *            the v
-	 */
-	private WKBType(final int v) {
-		value = v;
-	}
+    /**
+     * Instantiates a new wKB type.
+     *
+     * @param v the v
+     */
+    private WKBType(final int v) {
+        value = v;
+    }
 
-	/**
-	 * Gets the value.
-	 * 
-	 * @return the value
-	 */
-	public final int getValue() {
-		return value;
-	}
+    /**
+     * Gets the value.
+     *
+     * @return the value
+     */
+    public final int getValue() {
+        return value;
+    }
 }

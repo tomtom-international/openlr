@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -29,15 +40,6 @@
  *   the Netherlands
  */
 package openlr.encoder.locRefAdjust;
-
-import static java.util.Arrays.asList;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
-
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 import openlr.LocationType;
 import openlr.OpenLRProcessingException;
@@ -54,41 +56,42 @@ import openlr.map.GeoCoordinatesImpl;
 import openlr.map.Line;
 import openlr.map.Node;
 import openlr.properties.OpenLRPropertiesReader;
-
 import org.apache.commons.configuration.Configuration;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.testng.annotations.Test;
 
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
+
 /**
  * Tests the code that shrinkes location references of point locations to two LRPs if they have more than two.
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class FitToPointLocationTest {
 
     private static final double DOUBLE_DELTA_ALLOWED = 0.0001;
-
-    private final GeoCoordinates MIDDLE_OF_LINE2 = GeoCoordinatesImpl.newGeoCoordinatesUnchecked(1, 2.5);   
-    
-    private final GeoCoordinates MIDDLE_OF_LINE3 = GeoCoordinatesImpl.newGeoCoordinatesUnchecked(1, 1.5);    
-    
-    private final Mockery mockery = new Mockery();
-
-    private final OpenLREncoderProperties encProperties;
-
-    private final LrpBasedPointLocRefAdjust locRefAdjust = new LrpBasedPointLocRefAdjust();
-    
-       
     /**
      * Our simple map, a path providing three connected lines
      */
     final Line line1, line2, line3;
+    private final GeoCoordinates MIDDLE_OF_LINE2 = GeoCoordinatesImpl.newGeoCoordinatesUnchecked(1, 2.5);
+    private final GeoCoordinates MIDDLE_OF_LINE3 = GeoCoordinatesImpl.newGeoCoordinatesUnchecked(1, 1.5);
+    private final Mockery mockery = new Mockery();
+    private final OpenLREncoderProperties encProperties;
+    private final LrpBasedPointLocRefAdjust locRefAdjust = new LrpBasedPointLocRefAdjust();
 
     public FitToPointLocationTest() throws OpenLRProcessingException {
         InputStream propFile = TestData.class
@@ -106,12 +109,12 @@ public class FitToPointLocationTest {
         }
 
         encProperties = new OpenLREncoderProperties(config,
-                Collections.<PhysicalEncoder> emptyList());
-        
+                Collections.<PhysicalEncoder>emptyList());
+
         Line[] lines = mockMap();
-        line1 = lines[0];    
-        line2 = lines[1];    
-        line3 = lines[2];    
+        line1 = lines[0];
+        line2 = lines[1];
+        line3 = lines[2];
     }
 
 
@@ -146,10 +149,10 @@ public class FitToPointLocationTest {
         point3.setNextLRP(last);
 
         locRefData.setLocRefPoints(asList(point1, point2, point3, last));
-        
+
         locRefAdjust.adjustLocationReference(encProperties, locRefData);
-        
-        checkShrinkedLocationReference(locRefData, point2, point3);               
+
+        checkShrinkedLocationReference(locRefData, point2, point3);
     }
 
 
@@ -171,25 +174,25 @@ public class FitToPointLocationTest {
                 will(returnValue(line1));
             }
         });
-        
-        
+
+
         LocRefData locRefData = new LocRefData(loc);
         LocRefPoint point1 = new LocRefPoint(asList(line1), encProperties);
         LocRefPoint point2 = new LocRefPoint(asList(line2), encProperties);
         // this is the expansion defined by the second LRP
         locRefData.setExpansion(new ExpansionData(Collections.<Line>emptyList(), asList(line2)));
-        
+
         LocRefPoint last = new LocRefPoint(line2, encProperties);
         point1.setNextLRP(point2);
-        point2.setNextLRP(last);        
+        point2.setNextLRP(last);
 
         locRefData.setLocRefPoints(asList(point1, point2, last));
-        
+
         locRefAdjust.adjustLocationReference(encProperties, locRefData);
-        
-        checkShrinkedLocationReference(locRefData, point1, point2);   
+
+        checkShrinkedLocationReference(locRefData, point1, point2);
     }
-    
+
     /**
      * Checks reduction of a locref with 4 points and the POI line in the middle.
      * 2----------3======4
@@ -208,24 +211,24 @@ public class FitToPointLocationTest {
                 will(returnValue(line3));
             }
         });
-        
-        
+
+
         LocRefData locRefData = new LocRefData(loc);
         LocRefPoint point1 = new LocRefPoint(asList(line2), encProperties);
         // this is the expansion defined by the first LRP
         locRefData.setExpansion(new ExpansionData(asList(line2), Collections.<Line>emptyList()));
-        
+
         LocRefPoint point2 = new LocRefPoint(asList(line3), encProperties);
         LocRefPoint last = new LocRefPoint(line3, encProperties);
         point1.setNextLRP(point2);
         point2.setNextLRP(last);
         locRefData.setLocRefPoints(asList(point1, point2, last));
-        
+
         locRefAdjust.adjustLocationReference(encProperties, locRefData);
-        
-        checkShrinkedLocationReference(locRefData, point2, last);         
-    }      
-    
+
+        checkShrinkedLocationReference(locRefData, point2, last);
+    }
+
     /**
      * Tests a case where an intermediate LRP on a line is involved.
      * POI line is the last line of the two involved
@@ -245,13 +248,13 @@ public class FitToPointLocationTest {
                 will(returnValue(line3));
             }
         });
-        
-        
+
+
         LocRefData locRefData = new LocRefData(loc);
         LocRefPoint point1 = new LocRefPoint(asList(line2), encProperties);
         // this is the expansion defined by the first LRP
         locRefData.setExpansion(new ExpansionData(asList(line2), Collections.<Line>emptyList()));
-        
+
         // this is special, it's an LRP in the middle of the line
         LocRefPoint point2 = new LocRefPoint(line2,
                 MIDDLE_OF_LINE2.getLongitudeDeg(),
@@ -263,19 +266,19 @@ public class FitToPointLocationTest {
         point3.setNextLRP(last);
 
         locRefData.setLocRefPoints(asList(point1, point2, point3, last));
-        
+
         locRefAdjust.adjustLocationReference(encProperties, locRefData);
-        
-        checkShrinkedLocationReference(locRefData, point3, last);         
-    }     
-        
+
+        checkShrinkedLocationReference(locRefData, point3, last);
+    }
+
     /**
      * Tests a case where the last is on the line instead of at a node.
      * POI line is the last line of the two involved, LRP 2 and 3 are on a node.
      * 2---------3======(IM)=====4
      * Should result in:
      * 3======(IM)
-     */    
+     */
     @Test
     public final void testFitForLastLrpOnLine() throws OpenLRProcessingException {
 
@@ -288,13 +291,13 @@ public class FitToPointLocationTest {
                 will(returnValue(line3));
             }
         });
-        
-        
+
+
         LocRefData locRefData = new LocRefData(loc);
         LocRefPoint point1 = new LocRefPoint(asList(line2), encProperties);
         // this is the expansion defined by the first LRP
         locRefData.setExpansion(new ExpansionData(asList(line2), Collections.<Line>emptyList()));
-        
+
         LocRefPoint point2 = new LocRefPoint(asList(line3), encProperties);
         // this is special, it's an LRP in the middle of the line
         LocRefPoint point3 = new LocRefPoint(line3,
@@ -303,19 +306,19 @@ public class FitToPointLocationTest {
         LocRefPoint last = new LocRefPoint(line3, encProperties);
         point1.setNextLRP(point2);
         point2.setNextLRP(point3);
-        point3.setNextLRP(last);        
+        point3.setNextLRP(last);
 
         locRefData.setLocRefPoints(asList(point1, point2, point3, last));
-        
+
         locRefAdjust.adjustLocationReference(encProperties, locRefData);
-        
-        checkShrinkedLocationReference(locRefData, point2, point3);         
-    }  
-    
+
+        checkShrinkedLocationReference(locRefData, point2, point3);
+    }
+
     /**
      * Checks if the given loc ref data meets the expected shrinked Location
      * Reference.
-     * 
+     *
      * @param locRefData
      *            The loc ref data to check
      * @param expectedLrp1
@@ -324,8 +327,8 @@ public class FitToPointLocationTest {
      *            The expected LRP to be LRP #2 in the list
      */
     private void checkShrinkedLocationReference(final LocRefData locRefData,
-            final LocRefPoint expectedLrp1, final LocRefPoint expectedLrp2) {
-        
+                                                final LocRefPoint expectedLrp1, final LocRefPoint expectedLrp2) {
+
         // should be shrinked to two LRPs
         List<LocRefPoint> locRefPoints = locRefData.getLocRefPoints();
         assertEquals(locRefPoints.size(), 2);
@@ -333,7 +336,7 @@ public class FitToPointLocationTest {
         ExpansionData expansionData = locRefData.getExpansionData();
         assertEquals(expansionData.getExpansionStart().size(), 0);
         assertEquals(expansionData.getExpansionEnd().size(), 0);
- 
+
         LocRefPoint newFirstLrp = locRefPoints.get(0);
         assertEquals(newFirstLrp.getLongitudeDeg(), expectedLrp1.getLongitudeDeg(), DOUBLE_DELTA_ALLOWED);
         assertEquals(newFirstLrp.getLatitudeDeg(), expectedLrp1.getLatitudeDeg(), DOUBLE_DELTA_ALLOWED);
@@ -341,10 +344,10 @@ public class FitToPointLocationTest {
         assertEquals(newLastLrp.getLongitudeDeg(), expectedLrp2.getLongitudeDeg(), DOUBLE_DELTA_ALLOWED);
         assertEquals(newLastLrp.getLatitudeDeg(), expectedLrp2.getLatitudeDeg(), DOUBLE_DELTA_ALLOWED);
     }
-        
-    
+
+
     private final Location mockNewLocation(final int posOffset) {
-        
+
         final Location loc = mockery.mock(Location.class, "uniquename" + System.nanoTime());
         mockery.checking(new Expectations() {
             {
@@ -365,11 +368,11 @@ public class FitToPointLocationTest {
             }
         });
         return loc;
-    }    
-    
+    }
+
 
     private final Line mockLine(final Node startNode, final Node endNode,
-            final int length, final long id) {
+                                final int length, final long id) {
 
         final Line line = mockery.mock(Line.class, startNode + "-" + endNode);
         mockery.checking(new Expectations() {
@@ -422,7 +425,7 @@ public class FitToPointLocationTest {
         });
         return node;
     }
-    
+
     /**
      * [N1]---L1----[N2]----L2----[N3]----L3---[N4]
      */
@@ -435,19 +438,19 @@ public class FitToPointLocationTest {
         final Line line1 = mockLine(node1, node2, 200, 1);
         final Line line2 = mockLine(node2, node3, 200, 2);
         final Line line3 = mockLine(node3, node4, 200, 3);
-        
+
         mockConnectivity(node1, asList(line1));
         mockConnectivity(node2, asList(line1, line2));
         mockConnectivity(node3, asList(line2, line3));
-        mockConnectivity(node4, asList(line3));             
-        
+        mockConnectivity(node4, asList(line3));
+
         mockery.checking(new Expectations() {
             {
                 allowing(line1).getGeoCoordinateAlongLine(20);
                 will(returnValue(line1.getStartNode().getGeoCoordinates())); // simplified
             }
         });
-        
+
         mockery.checking(new Expectations() {
             {
                 allowing(line1).getGeoCoordinateAlongLine(180);
@@ -478,28 +481,28 @@ public class FitToPointLocationTest {
                 will(returnValue(line2.getEndNode().getGeoCoordinates())); // simplified
             }
         });
-        
+
         mockery.checking(new Expectations() {
             {
                 allowing(line2).measureAlongLine(MIDDLE_OF_LINE2.getLongitudeDeg(), MIDDLE_OF_LINE2.getLatitudeDeg());
                 will(returnValue(line2.getLineLength() / 2)); // simplified
             }
-        });        
-        
+        });
+
         mockery.checking(new Expectations() {
             {
                 allowing(line2).getGeoCoordinateAlongLine(100);
                 will(returnValue(MIDDLE_OF_LINE3));
             }
-        });        
-        
+        });
+
         mockery.checking(new Expectations() {
             {
                 allowing(line2).getGeoCoordinateAlongLine(120);
                 will(returnValue(MIDDLE_OF_LINE3)); // simplified
             }
-        });        
-        
+        });
+
         mockery.checking(new Expectations() {
             {
                 allowing(line3).measureAlongLine(MIDDLE_OF_LINE3.getLongitudeDeg(), MIDDLE_OF_LINE3.getLatitudeDeg());
@@ -515,7 +518,7 @@ public class FitToPointLocationTest {
         mockery.checking(new Expectations() {
             {
                 allowing(line3).getGeoCoordinateAlongLine(100);
-                will(returnValue(MIDDLE_OF_LINE3)); 
+                will(returnValue(MIDDLE_OF_LINE3));
             }
         });
         mockery.checking(new Expectations() {
@@ -524,10 +527,10 @@ public class FitToPointLocationTest {
                 will(returnValue(MIDDLE_OF_LINE3));  // simplified
             }
         });
-        
+
         return new Line[]{line1, line2, line3};
     }
-    
+
     private void mockConnectivity(final Node mockedNode, final Collection<Line> connectedLines) {
         mockery.checking(new Expectations() {
             {
@@ -542,7 +545,7 @@ public class FitToPointLocationTest {
             }
         });
     }
-    
+
 //
 //    /**
 //     * A sub class of {@link LocationReferenceAdjust}. It is our goal to test some protected methods in the parent class.

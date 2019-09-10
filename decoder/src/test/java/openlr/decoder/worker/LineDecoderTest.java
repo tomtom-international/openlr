@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,11 +39,6 @@
  */
 package openlr.decoder.worker;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.List;
-
 import openlr.LocationReferencePoint;
 import openlr.OpenLRProcessingException;
 import openlr.decoder.OpenLRDecoder;
@@ -45,9 +51,13 @@ import openlr.map.Line;
 import openlr.map.mockdb.InvalidConfigurationException;
 import openlr.map.mockdb.MockedMapDatabase;
 import openlr.rawLocRef.RawLineLocRef;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests the decoding and specially the offset calculation of
@@ -56,7 +66,7 @@ import org.testng.annotations.Test;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class LineDecoderTest {
@@ -160,29 +170,27 @@ public class LineDecoderTest {
     /**
      * The expected detected line on the decoder side
      */
-    private static final long[] EXPECTED_LINES_SMALL_LOCATION = new long[] {1};
+    private static final long[] EXPECTED_LINES_SMALL_LOCATION = new long[]{1};
     /**
      * The expected lines after decoding the long location.
      */
-    private static final long[] EXPECTED_LINES_LONG_LOCATION = new long[] {1,
+    private static final long[] EXPECTED_LINES_LONG_LOCATION = new long[]{1,
             2, 3};
 
     /**
      * The expected lines after decoding the long location.
      */
-    private static final long[] EXPECTED_LINES_LONG_LOCATION_LARGE_OFFSETS = new long[] {
+    private static final long[] EXPECTED_LINES_LONG_LOCATION_LARGE_OFFSETS = new long[]{
             2, 3};
-    /**
-     * 
-     * The mocked map database.
-     */
-    private final MockedMapDatabase mdb;
-
     /**
      * The used decoder reference
      */
     private static final OpenLRDecoder DECODER = new OpenLRDecoder();
-
+    /**
+     *
+     * The mocked map database.
+     */
+    private final MockedMapDatabase mdb;
     /**
      * The decoder parameters
      */
@@ -190,7 +198,7 @@ public class LineDecoderTest {
 
     /**
      * Initializes the map database.
-     * 
+     *
      * @throws InvalidConfigurationException
      *             If an error occurs initializing the map database from the
      *             configuration.
@@ -283,7 +291,7 @@ public class LineDecoderTest {
         RawLineLocRef locRef = new RawLineLocRef("longLocRef", lrpList,
                 LARGE_POS_OFFSET);
 
-        runDecoding(locRef, new long[] {3}, 374, 433);
+        runDecoding(locRef, new long[]{3}, 374, 433);
     }
 
     /**
@@ -321,7 +329,7 @@ public class LineDecoderTest {
     /**
      * Runs the decoder with the given location reference and checks the
      * provided parameters of the result
-     * 
+     *
      * @param locRef
      *            The location reference
      * @param expectedLines
@@ -332,8 +340,8 @@ public class LineDecoderTest {
      *            The expected negative offset
      */
     private void runDecoding(final RawLineLocRef locRef,
-            final long[] expectedLines, final int expectedPosOffset,
-            final int expectedNegOffset) {
+                             final long[] expectedLines, final int expectedPosOffset,
+                             final int expectedNegOffset) {
 
         try {
             Location loc = DECODER.decodeRaw(params, locRef);

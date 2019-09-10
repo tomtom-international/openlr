@@ -30,78 +30,86 @@
  */
 package openlr.map.sqlite.helpers.wkb;
 
+import openlr.map.GeoCoordinates;
+import openlr.map.GeoCoordinatesImpl;
+import openlr.map.InvalidMapDataException;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 
-import openlr.map.GeoCoordinates;
-import openlr.map.GeoCoordinatesImpl;
-import openlr.map.InvalidMapDataException;
-
 /**
  * The Class WKBReader.
  */
 public final class WKBReader {
-	
-	/** The Constant BITS_16. */
-	private static final int BYTE_COUNT_16 = 16;
-	
-	/** The Constant BITS_9. */
-	private static final int BYTE_COUNT_9 = 9;
 
-	/**
-	 * The Enum WKBByteOrder.
-	 */
-	public enum WKBByteOrder {
+    /**
+     * The Constant BITS_16.
+     */
+    private static final int BYTE_COUNT_16 = 16;
 
-		/** The WK b_ bi g_ endian. */
-		WKB_BIG_ENDIAN, // Big Endian
+    /**
+     * The Constant BITS_9.
+     */
+    private static final int BYTE_COUNT_9 = 9;
 
-		/** The WK b_ littl e_ endian. */
-		WKB_LITTLE_ENDIAN; // Little Endian
+    /**
+     * The Enum WKBByteOrder.
+     */
+    public enum WKBByteOrder {
 
-	}
-	
-	/**
-	 * Utility class shall not be instantiated.
-	 */
-	private WKBReader() {
-		throw new UnsupportedOperationException();
-	}
+        /**
+         * The WK b_ bi g_ endian.
+         */
+        WKB_BIG_ENDIAN, // Big Endian
 
-	/**
-	 * Read shape.
-	 *
-	 * @param bytes the bytes
-	 * @return the ordered shape coordinates
-	 * @throws WKBException the wKB exception
-	 */
-	public static List<GeoCoordinates> readShape(final byte[] bytes)
-			throws WKBException {
+        /**
+         * The WK b_ littl e_ endian.
+         */
+        WKB_LITTLE_ENDIAN; // Little Endian
 
-		ByteBuffer bb = ByteBuffer.wrap(bytes);
-		byte byteOrder = bb.get();
-		if (byteOrder == WKBByteOrder.WKB_LITTLE_ENDIAN.ordinal()) {
-			bb = bb.order(ByteOrder.LITTLE_ENDIAN);
-		} else if (byteOrder == WKBByteOrder.WKB_BIG_ENDIAN.ordinal()) {
-			bb = bb.order(ByteOrder.BIG_ENDIAN);
-		} else {
-			throw new WKBException("invalid byte order");
-		}
-		int typeValue = bb.getInt();
-		if (typeValue != WKBType.LINESTRING.getValue()) {
-			throw new WKBException("unknown wkb type: " + typeValue);
-		}
-		int nrPoints = bb.getInt();
-		
-		List<GeoCoordinates> shape = new ArrayList<GeoCoordinates>();
-		
-		if (((bytes.length - BYTE_COUNT_9) % BYTE_COUNT_16) != 0) {
-			throw new WKBException("invalid number of bytes: " + bytes.length);
-		}
-		int nrCoordinates = (bytes.length - BYTE_COUNT_9) / BYTE_COUNT_16;
-		if (nrCoordinates != nrPoints) {
+    }
+
+    /**
+     * Utility class shall not be instantiated.
+     */
+    private WKBReader() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Read shape.
+     *
+     * @param bytes the bytes
+     * @return the ordered shape coordinates
+     * @throws WKBException the wKB exception
+     */
+    public static List<GeoCoordinates> readShape(final byte[] bytes)
+            throws WKBException {
+
+        ByteBuffer bb = ByteBuffer.wrap(bytes);
+        byte byteOrder = bb.get();
+        if (byteOrder == WKBByteOrder.WKB_LITTLE_ENDIAN.ordinal()) {
+            bb = bb.order(ByteOrder.LITTLE_ENDIAN);
+        } else if (byteOrder == WKBByteOrder.WKB_BIG_ENDIAN.ordinal()) {
+            bb = bb.order(ByteOrder.BIG_ENDIAN);
+        } else {
+            throw new WKBException("invalid byte order");
+        }
+        int typeValue = bb.getInt();
+        if (typeValue != WKBType.LINESTRING.getValue()) {
+            throw new WKBException("unknown wkb type: " + typeValue);
+        }
+        int nrPoints = bb.getInt();
+
+        List<GeoCoordinates> shape = new ArrayList<GeoCoordinates>();
+
+        if (((bytes.length - BYTE_COUNT_9) % BYTE_COUNT_16) != 0) {
+            throw new WKBException("invalid number of bytes: " + bytes.length);
+        }
+        int nrCoordinates = (bytes.length - BYTE_COUNT_9) / BYTE_COUNT_16;
+        if (nrCoordinates != nrPoints) {
             throw new WKBException("not enough bytes");
         }
 
