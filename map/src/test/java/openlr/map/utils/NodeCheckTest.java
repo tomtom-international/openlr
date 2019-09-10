@@ -89,6 +89,12 @@ public class NodeCheckTest {
 
         context.checking(new Expectations() {
             {
+                allowing(valid2).getID();
+                will(returnValue(2l));
+            }
+        });
+        context.checking(new Expectations() {
+            {
                 allowing(valid1).getNumberConnectedLines();
                 will(returnValue(1));
             }
@@ -106,6 +112,22 @@ public class NodeCheckTest {
             {
                 allowing(valid2).getConnectedLines();
                 will(returnValue(set2.iterator()));
+            }
+        });
+        context.checking(new Expectations() {
+            {
+                allowing(n1).getID();
+                will(returnValue(1l));
+            }
+
+            {
+                allowing(n2).getID();
+                will(returnValue(2l));
+            }
+
+            {
+                allowing(n3).getID();
+                will(returnValue(3l));
             }
         });
         context.checking(new Expectations() {
