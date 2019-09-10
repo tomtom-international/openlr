@@ -274,6 +274,53 @@
         <dependencies>
 
             <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>1.9</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>openlr</groupId>
+                <artifactId>data</artifactId>
+                <version>1.4.3-SNAPSHOT</version>
+                <classifier>tests</classifier>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>openlr</groupId>
+                <artifactId>map</artifactId>
+                <version>1.4.3-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>openlr</groupId>
+                <artifactId>map</artifactId>
+                <version>1.4.3-SNAPSHOT</version>
+                <classifier>tests</classifier>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>openlr</groupId>
+                <artifactId>data</artifactId>
+                <version>1.4.3-SNAPSHOT</version>
+            </dependency>
+
+
+            <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.17</version>
@@ -283,14 +330,61 @@
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>6.8</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.jmock</groupId>
                 <artifactId>jmock-legacy</artifactId>
                 <version>2.5.1</version>
-                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>colt</groupId>
+                <artifactId>colt</artifactId>
+                <version>1.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>openlr</groupId>
+                <artifactId>data</artifactId>
+                <version>1.4.3-SNAPSHOT</version>
+                <classifier>tests</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>openlr</groupId>
+                <artifactId>data</artifactId>
+                <version>1.4.3-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>openlr</groupId>
+                <artifactId>maploader-tt-sqlite</artifactId>
+                <version>1.4.3-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.micromata.jak</groupId>
+                <artifactId>JavaAPIforKml</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-xjc</artifactId>
+                <version>2.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.xerial</groupId>
+                <artifactId>sqlite-jdbc</artifactId>
+                <version>3.7.2</version>
             </dependency>
 
         </dependencies>
