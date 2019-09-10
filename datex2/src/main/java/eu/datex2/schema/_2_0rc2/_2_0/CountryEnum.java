@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -34,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CountryEnum.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
@@ -88,7 +99,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
- * 
+ *
  */
 @XmlType(name = "CountryEnum")
 @XmlEnum
@@ -97,183 +108,183 @@ public enum CountryEnum {
     /** The AT. */
     @XmlEnumValue("at")
     AT("at"),
-    
+
     /** The BE. */
     @XmlEnumValue("be")
     BE("be"),
-    
+
     /** The BG. */
     @XmlEnumValue("bg")
     BG("bg"),
-    
+
     /** The CH. */
     @XmlEnumValue("ch")
     CH("ch"),
-    
+
     /** The CS. */
     @XmlEnumValue("cs")
     CS("cs"),
-    
+
     /** The CY. */
     @XmlEnumValue("cy")
     CY("cy"),
-    
+
     /** The CZ. */
     @XmlEnumValue("cz")
     CZ("cz"),
-    
+
     /** The DE. */
     @XmlEnumValue("de")
     DE("de"),
-    
+
     /** The DK. */
     @XmlEnumValue("dk")
     DK("dk"),
-    
+
     /** The EE. */
     @XmlEnumValue("ee")
     EE("ee"),
-    
+
     /** The ES. */
     @XmlEnumValue("es")
     ES("es"),
-    
+
     /** The FI. */
     @XmlEnumValue("fi")
     FI("fi"),
-    
+
     /** The FO. */
     @XmlEnumValue("fo")
     FO("fo"),
-    
+
     /** The FR. */
     @XmlEnumValue("fr")
     FR("fr"),
-    
+
     /** The GB. */
     @XmlEnumValue("gb")
     GB("gb"),
-    
+
     /** The GG. */
     @XmlEnumValue("gg")
     GG("gg"),
-    
+
     /** The GI. */
     @XmlEnumValue("gi")
     GI("gi"),
-    
+
     /** The GR. */
     @XmlEnumValue("gr")
     GR("gr"),
-    
+
     /** The HR. */
     @XmlEnumValue("hr")
     HR("hr"),
-    
+
     /** The HU. */
     @XmlEnumValue("hu")
     HU("hu"),
-    
+
     /** The IE. */
     @XmlEnumValue("ie")
     IE("ie"),
-    
+
     /** The IM. */
     @XmlEnumValue("im")
     IM("im"),
-    
+
     /** The IS. */
     @XmlEnumValue("is")
     IS("is"),
-    
+
     /** The IT. */
     @XmlEnumValue("it")
     IT("it"),
-    
+
     /** The JE. */
     @XmlEnumValue("je")
     JE("je"),
-    
+
     /** The LI. */
     @XmlEnumValue("li")
     LI("li"),
-    
+
     /** The LT. */
     @XmlEnumValue("lt")
     LT("lt"),
-    
+
     /** The LU. */
     @XmlEnumValue("lu")
     LU("lu"),
-    
+
     /** The LV. */
     @XmlEnumValue("lv")
     LV("lv"),
-    
+
     /** The MA. */
     @XmlEnumValue("ma")
     MA("ma"),
-    
+
     /** The MC. */
     @XmlEnumValue("mc")
     MC("mc"),
-    
+
     /** The MK. */
     @XmlEnumValue("mk")
     MK("mk"),
-    
+
     /** The MT. */
     @XmlEnumValue("mt")
     MT("mt"),
-    
+
     /** The NL. */
     @XmlEnumValue("nl")
     NL("nl"),
-    
+
     /** The NO. */
     @XmlEnumValue("no")
     NO("no"),
-    
+
     /** The PL. */
     @XmlEnumValue("pl")
     PL("pl"),
-    
+
     /** The PT. */
     @XmlEnumValue("pt")
     PT("pt"),
-    
+
     /** The RO. */
     @XmlEnumValue("ro")
     RO("ro"),
-    
+
     /** The SE. */
     @XmlEnumValue("se")
     SE("se"),
-    
+
     /** The SI. */
     @XmlEnumValue("si")
     SI("si"),
-    
+
     /** The SK. */
     @XmlEnumValue("sk")
     SK("sk"),
-    
+
     /** The SM. */
     @XmlEnumValue("sm")
     SM("sm"),
-    
+
     /** The TR. */
     @XmlEnumValue("tr")
     TR("tr"),
-    
+
     /** The VA. */
     @XmlEnumValue("va")
     VA("va"),
-    
+
     /** The OTHER. */
     @XmlEnumValue("other")
     OTHER("other");
-    
+
     /** The value. */
     private final String value;
 
@@ -284,15 +295,6 @@ public enum CountryEnum {
      */
     CountryEnum(final String v) {
         value = v;
-    }
-
-    /**
-     * Value.
-     *
-     * @return the string
-     */
-    public final String value() {
-        return value;
     }
 
     /**
@@ -308,6 +310,15 @@ public enum CountryEnum {
             }
         }
         throw new IllegalArgumentException(v);
+    }
+
+    /**
+     * Value.
+     *
+     * @return the string
+     */
+    public final String value() {
+        return value;
     }
 
 }

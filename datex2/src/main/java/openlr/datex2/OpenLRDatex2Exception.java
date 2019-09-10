@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -36,110 +47,110 @@ import openlr.StatusCode;
 /**
  * An OpenLRXMLException will be thrown if reading/writing/encoding/decoding of
  * XML data failed.
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class OpenLRDatex2Exception extends PhysicalFormatException {
-	
-	/**
-	 * Serial ID.
-	 */
-	private static final long serialVersionUID = -1174502068736890324L;
 
-	/**
-	 * The Enum XMLErrorType.
-	 */
-	public enum XMLErrorType implements StatusCode {
-		
-		/** The XM l_ error. */
-		XML_ERROR("xml error"),
-		
-		/** The I o_ error. */
-		IO_ERROR("i/o error"), 
-		
-		/** The DAT a_ error. */
-		DATA_ERROR("data error"), 
-		
-		/** The UNKNOW n_ locatio n_ type. */
-		UNKNOWN_LOCATION_TYPE("location type is unknown"), 
-		
-		/** The INVALI d_ version. */
-		INVALID_VERSION("invalid version");
-		
-		/** The explanation. */
-		private final String explanation;
-		
-		/**
-		 * Instantiates a new xML error type.
-		 *
-		 * @param s the explanation
-		 */
-		XMLErrorType(final String s) {
-			explanation = s;
-		}
-		
-		
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public final int getID() {
-			return ordinal();
-		}
-		
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public final String toString() {
-			return explanation;
-		}
-		
-	}
+    /**
+     * Serial ID.
+     */
+    private static final long serialVersionUID = -1174502068736890324L;
 
-	/**
-	 * Instantiates a new openlr xml exception due to a previously thrown exception.
-	 * 
-	 * @param e the error
-	 * @param t the previously thrown exception
-	 */
-	public OpenLRDatex2Exception(final StatusCode e, final Throwable t) {
-		super(e, t);
-	}
-	
-	/**
-	 * Instantiates a new openlr xml exception with an error message.
-	 * 
-	 * @param e the error
-	 * @param s the error message
-	 */
-	public OpenLRDatex2Exception(final StatusCode e, final String s) {
-		super(e, s);
-	}
-	
-	/**
-	 * Instantiates a new openlr xml exception with an error message.
-	 *
-	 * @param e the error
-	 * @param s the error message
-	 * @param t the t
-	 */
-	public OpenLRDatex2Exception(final StatusCode e, final String s, final Throwable t) {
-		super(e, s, t);
-	}
-	
-	/**
-	 * Instantiates a new openlr xml exception.
-	 * 
-	 * @param e the error
-	 */
-	public OpenLRDatex2Exception(final StatusCode e) {
-		super(e);
-	}
+    /**
+     * Instantiates a new openlr xml exception due to a previously thrown exception.
+     *
+     * @param e the error
+     * @param t the previously thrown exception
+     */
+    public OpenLRDatex2Exception(final StatusCode e, final Throwable t) {
+        super(e, t);
+    }
+
+    /**
+     * Instantiates a new openlr xml exception with an error message.
+     *
+     * @param e the error
+     * @param s the error message
+     */
+    public OpenLRDatex2Exception(final StatusCode e, final String s) {
+        super(e, s);
+    }
+
+    /**
+     * Instantiates a new openlr xml exception with an error message.
+     *
+     * @param e the error
+     * @param s the error message
+     * @param t the t
+     */
+    public OpenLRDatex2Exception(final StatusCode e, final String s, final Throwable t) {
+        super(e, s, t);
+    }
+
+    /**
+     * Instantiates a new openlr xml exception.
+     *
+     * @param e the error
+     */
+    public OpenLRDatex2Exception(final StatusCode e) {
+        super(e);
+    }
+
+    /**
+     * The Enum XMLErrorType.
+     */
+    public enum XMLErrorType implements StatusCode {
+
+        /** The XM l_ error. */
+        XML_ERROR("xml error"),
+
+        /** The I o_ error. */
+        IO_ERROR("i/o error"),
+
+        /** The DAT a_ error. */
+        DATA_ERROR("data error"),
+
+        /** The UNKNOW n_ locatio n_ type. */
+        UNKNOWN_LOCATION_TYPE("location type is unknown"),
+
+        /** The INVALI d_ version. */
+        INVALID_VERSION("invalid version");
+
+        /** The explanation. */
+        private final String explanation;
+
+        /**
+         * Instantiates a new xML error type.
+         *
+         * @param s the explanation
+         */
+        XMLErrorType(final String s) {
+            explanation = s;
+        }
+
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public final int getID() {
+            return ordinal();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public final String toString() {
+            return explanation;
+        }
+
+    }
 
 }

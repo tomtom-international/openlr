@@ -16,7 +16,6 @@ import openlr.map.MapDatabase;
 import openlr.map.mockdb.InvalidConfigurationException;
 import openlr.map.mockdb.MockedMapDatabase;
 import openlr.rawLocRef.RawPointAlongLocRef;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,59 +24,72 @@ import org.testng.annotations.Test;
  */
 public class PointAlongDecoderTest {
 
-	/** The Constant LRP_START. */
-	private static final LocationReferencePoint LRP_START = new TestLocationReferencePointImpl(
-			10.887121, 51.663269, 5000, FunctionalRoadClass.FRC_0,
-			FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 90.0, false, 0);
+    /**
+     * The Constant LRP_START.
+     */
+    private static final LocationReferencePoint LRP_START = new TestLocationReferencePointImpl(
+            10.887121, 51.663269, 5000, FunctionalRoadClass.FRC_0,
+            FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 90.0, false, 0);
 
-	/** The Constant LRP_END. */
-	private static final LocationReferencePoint LRP_END = new TestLocationReferencePointImpl(
-			10.958748, 51.663104, 0, FunctionalRoadClass.FRC_0,
-			FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 270.0, true, 1);;
+    /**
+     * The Constant LRP_END.
+     */
+    private static final LocationReferencePoint LRP_END = new TestLocationReferencePointImpl(
+            10.958748, 51.663104, 0, FunctionalRoadClass.FRC_0,
+            FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 270.0, true, 1);
+    ;
 
-	/** The Constant OFFSETS. */
-	private static final Offsets OFFSETS = new RelativeOffsetsImpl(20, 0); //20%
+    /**
+     * The Constant OFFSETS.
+     */
+    private static final Offsets OFFSETS = new RelativeOffsetsImpl(20, 0); //20%
 
-	/** The Constant DECODER. */
-	private static final OpenLRDecoder DECODER = new OpenLRDecoder();
+    /**
+     * The Constant DECODER.
+     */
+    private static final OpenLRDecoder DECODER = new OpenLRDecoder();
 
-	/** The mdb. */
-	private final MapDatabase mdb;
+    /**
+     * The mdb.
+     */
+    private final MapDatabase mdb;
 
-	/** The params. */
-	private final OpenLRDecoderParameter params;
+    /**
+     * The params.
+     */
+    private final OpenLRDecoderParameter params;
 
-	/**
-	 * Instantiates a new point along decoder test.
-	 *
-	 * @throws InvalidConfigurationException the invalid configuration exception
-	 */
-	public PointAlongDecoderTest() throws InvalidConfigurationException {
-		mdb = new MockedMapDatabase("PointAlongLineDecoderMap.xml", false);
-		params = new OpenLRDecoderParameter.Builder().with(mdb)
-				.buildParameter();
-	}
+    /**
+     * Instantiates a new point along decoder test.
+     *
+     * @throws InvalidConfigurationException the invalid configuration exception
+     */
+    public PointAlongDecoderTest() throws InvalidConfigurationException {
+        mdb = new MockedMapDatabase("PointAlongLineDecoderMap.xml", false);
+        params = new OpenLRDecoderParameter.Builder().with(mdb)
+                .buildParameter();
+    }
 
-	/**
-	 * Test point along line with lr pon line.
-	 */
-	@Test
-	public final void testPointAlongLineWithLRPonLine() {
+    /**
+     * Test point along line with lr pon line.
+     */
+    @Test
+    public final void testPointAlongLineWithLRPonLine() {
 
-		RawPointAlongLocRef locRef = new RawPointAlongLocRef("", LRP_START,
-				LRP_END, OFFSETS, SideOfRoad.ON_ROAD_OR_UNKNOWN,
-				Orientation.NO_ORIENTATION_OR_UNKNOWN);
+        RawPointAlongLocRef locRef = new RawPointAlongLocRef("", LRP_START,
+                LRP_END, OFFSETS, SideOfRoad.ON_ROAD_OR_UNKNOWN,
+                Orientation.NO_ORIENTATION_OR_UNKNOWN);
 
-		try {
-			Location loc = DECODER.decodeRaw(params, locRef);
-			Assert.assertTrue(loc.isValid());
-			GeoCoordinates coord = loc.getAccessPoint();
-			Assert.assertEquals(coord.getLongitudeDeg(), 10.0);
-			Assert.assertEquals(coord.getLatitudeDeg(), 51.0);
+        try {
+            Location loc = DECODER.decodeRaw(params, locRef);
+            Assert.assertTrue(loc.isValid());
+            GeoCoordinates coord = loc.getAccessPoint();
+            Assert.assertEquals(coord.getLongitudeDeg(), 10.0);
+            Assert.assertEquals(coord.getLatitudeDeg(), 51.0);
 
-		} catch (OpenLRProcessingException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+        } catch (OpenLRProcessingException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
 }

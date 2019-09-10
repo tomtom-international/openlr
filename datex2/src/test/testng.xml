@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-  
-<suite name="datex2" verbose="1" >
-  <test name="All Tests">
-    <packages>
-      <package name="openlr.datex2.*"/>
-    </packages>
-  </test>
+
+<suite name="datex2" verbose="1">
+    <test name="All Tests">
+        <packages>
+            <package name="openlr.datex2.*"/>
+        </packages>
+    </test>
 </suite>

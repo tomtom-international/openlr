@@ -1,55 +1,56 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>openlr</groupId>
-	<artifactId>openlr</artifactId>
-	<packaging>pom</packaging>
-	<version>1.4.3-SNAPSHOT</version>
-	
-	<name>OpenLR - openlr</name>
-	<url>http://www.openlr.org</url>
-	<description>OpenLR - open standard for location referencing</description>
+    <groupId>openlr</groupId>
+    <artifactId>openlr</artifactId>
+    <packaging>pom</packaging>
+    <version>1.4.3-SNAPSHOT</version>
 
-	<developers>
-		<developer>
-			<name>TomTom International B.V.</name>
-			<email>openlr@tomtom.com</email>
-			<url>http://www.tomtom.com</url>
-		</developer>
-	</developers>
+    <name>OpenLR - openlr</name>
+    <url>http://www.openlr.org</url>
+    <description>OpenLR - open standard for location referencing</description>
 
-	<organization>
-		<name>TomTom International B.V.</name>
-		<url>http://www.tomtom.com</url>
-	</organization>
+    <developers>
+        <developer>
+            <name>TomTom International B.V.</name>
+            <email>openlr@tomtom.com</email>
+            <url>http://www.tomtom.com</url>
+        </developer>
+    </developers>
 
-	<licenses>
-		<license>
-			<name>Apache v2.0</name>
-			<comments>This program is free software; you can redistribute it and/or modify
- it under the terms of the Apache license version 2 and the extra
- condition for OpenLR. (see LICENSE)</comments>
-			<url>src/main/resources/LICENSE</url>
-		</license>
-	</licenses>
+    <organization>
+        <name>TomTom International B.V.</name>
+        <url>http://www.tomtom.com</url>
+    </organization>
 
-	<modules>
-		<module>openlr-parent</module>
-		<module>encoder</module>
-		<module>map</module>
-		<module>maploader-tt-sqlite</module>
-		<module>decoder</module>
-		<module>data</module>
-		<module>xml</module>
-		<module>binary</module>
-		<module>datex2</module>
-	</modules>
+    <licenses>
+        <license>
+            <name>Apache v2.0</name>
+            <comments>This program is free software; you can redistribute it and/or modify
+                it under the terms of the Apache license version 2 and the extra
+                condition for OpenLR. (see LICENSE)
+            </comments>
+            <url>src/main/resources/LICENSE</url>
+        </license>
+    </licenses>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-         <maven.compiler.source>1.8</maven.compiler.source>
-         <maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
+    <modules>
+        <module>openlr-parent</module>
+        <module>encoder</module>
+        <module>map</module>
+        <module>maploader-tt-sqlite</module>
+        <module>decoder</module>
+        <module>data</module>
+        <module>xml</module>
+        <module>binary</module>
+        <module>datex2</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
 </project>

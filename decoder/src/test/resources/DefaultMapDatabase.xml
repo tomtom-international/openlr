@@ -1,748 +1,749 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!--
-		Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
-		Email: legal@tomtom.com TomTom (Technical contact) Email:
-		openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
-		114, 1011DK Amsterdam, the Netherlands This program is free software;
-		you can redistribute it and/or modify it under the terms of the GNU
-		General Public License as published by the Free Software Foundation;
-		version 2 of the License and the extra conditions for OpenLR. (see
-		openlr-license.txt) This program is distributed in the hope that it
-		will be useful, but WITHOUT ANY WARRANTY; without even the implied
-		warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
-		the GNU General Public License for more details. You should have
-		received a copy of the GNU General Public License along with this
-		program; if not, write to the Free Software Foundation, Inc., 51
-		Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-	-->
-<MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">	
-	<Nodes>
-		<Node id="1">
-			<Latitude>49.60851</Latitude>
-			<Longitude>6.12683</Longitude>
-		</Node>
-		<Node id="2">
-			<Latitude>49.60767</Latitude>
-			<Longitude>6.12529</Longitude>
-		</Node>
-		<Node id="3">
-			<Latitude>49.60723</Latitude>
-			<Longitude>6.12756</Longitude>
-		</Node>
-		<Node id="4">
-			<Latitude>49.60606</Latitude>
-			<Longitude>6.12579</Longitude>
-		</Node>
-		<Node id="5">
-			<Latitude>49.60597</Latitude>
-			<Longitude>6.12828</Longitude>
-		</Node>
-		<Node id="6">
-			<Latitude>49.60510</Latitude>
-			<Longitude>6.12711</Longitude>
-		</Node>
-		<Node id="7">
-			<Latitude>49.60521</Latitude>
-			<Longitude>6.12778</Longitude>
-		</Node>
-		<Node id="8">
-			<Latitude>49.60526</Latitude>
-			<Longitude>6.12893</Longitude>
-		</Node>
-		<Node id="9">
-			<Latitude>49.60435</Latitude>
-			<Longitude>6.12633</Longitude>
-		</Node>
-		<Node id="10">
-			<Latitude>49.60398</Latitude>
-			<Longitude>6.12838</Longitude>
-		</Node>
-		<Node id="11">
-			<Latitude>49.60356</Latitude>
-			<Longitude>6.12764</Longitude>
-		</Node>
-		<Node id="12">
-			<Latitude>49.60356</Latitude>
-			<Longitude>6.12882</Longitude>
-		</Node>
-		<Node id="13">
-			<Latitude>49.60356</Latitude>
-			<Longitude>6.12661</Longitude>
-		</Node>
-		<Node id="14">
-			<Latitude>49.60315</Latitude>
-			<Longitude>6.12786</Longitude>
-		</Node>
-		<Node id="15">
-			<Latitude>49.60305</Latitude>
-			<Longitude>6.12817</Longitude>
-		</Node>
-		<Node id="16">
-			<Latitude>49.60306</Latitude>
-			<Longitude>6.12846</Longitude>
-		</Node>
-		<Node id="17">
-			<Latitude>49.60355</Latitude>
-			<Longitude>6.12825</Longitude>
-		</Node>
-	</Nodes>
-	<Lines>
-		<Line id="1">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>1</StartNode>
-			<EndNode>2</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>145</Length>
-		</Line>
-		<Line id="2">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>1</StartNode>
-			<EndNode>3</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>150</Length>
-		</Line>
-		<Line id="3">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>2</StartNode>
-			<EndNode>4</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>205</Length>
-		</Line>
-		<Line id="4">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>3</StartNode>
-			<EndNode>5</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>172</Length>
-		</Line>
-		<Line id="5">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>4</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>200</Length>
-		</Line>
-		<Line id="6">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>5</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>90</Length>
-		</Line>
-		<Line id="7">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>5</StartNode>
-			<EndNode>8</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>99</Length>
-		</Line>
-		<Line id="8">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>7</StartNode>
-			<EndNode>6</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>50</Length>
-		</Line>
-		<Line id="9">
-			<FOW>OTHER</FOW>
-			<StartNode>6</StartNode>
-			<EndNode>9</EndNode>
-			<FRC>FRC_7</FRC>
-			<Length>99</Length>
-		</Line>
-		<Line id="10">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>7</StartNode>
-			<EndNode>10</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>145</Length>
-		</Line>
-		<Line id="11">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>8</StartNode>
-			<EndNode>10</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>150</Length>
-		</Line>
-		<Line id="12">
-			<FOW>MULTIPLE_CARRIAGEWAY</FOW>
-			<StartNode>8</StartNode>
-			<EndNode>12</EndNode>
-			<FRC>FRC_2</FRC>
-			<Length>208</Length>
-		</Line>
-		<Line id="13">
-			<FOW>OTHER</FOW>
-			<StartNode>9</StartNode>
-			<EndNode>13</EndNode>
-			<FRC>FRC_7</FRC>
-			<Length>86</Length>
-		</Line>
-		<Line id="14">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>10</StartNode>
-			<EndNode>11</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>73</Length>
-		</Line>
-		<Line id="15">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>10</StartNode>
-			<EndNode>12</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>56</Length>
-		</Line>
-		<Line id="16">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>11</StartNode>
-			<EndNode>13</EndNode>
-			<FRC>FRC_4</FRC>
-			<Length>75</Length>
-		</Line>
-		<Line id="17">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>12</StartNode>
-			<EndNode>14</EndNode>
-			<FRC>FRC_3</FRC>
-			<Length>84</Length>
-		</Line>
-		<Line id="18">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>13</StartNode>
-			<EndNode>14</EndNode>
-			<FRC>FRC_5</FRC>
-			<Length>105</Length>
-		</Line>
-		<Line id="19">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>14</StartNode>
-			<EndNode>15</EndNode>
-			<FRC>FRC_5</FRC>
-			<Length>24</Length>
-		</Line>
-		<Line id="20">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>4</StartNode>
-			<EndNode>2</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>205</Length>
-		</Line>
-		<Line id="21">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>7</StartNode>
-			<EndNode>4</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>200</Length>
-		</Line>
-		<Line id="22">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>10</StartNode>
-			<EndNode>7</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>145</Length>
-		</Line>
-		<Line id="23">
-			<FOW>MOTORWAY</FOW>
-			<StartNode>12</StartNode>
-			<EndNode>10</EndNode>
-			<FRC>FRC_0</FRC>
-			<Length>56</Length>
-		</Line>
-		<Line id="24">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>12</StartNode>
-			<EndNode>16</EndNode>
-			<FRC>FRC_4</FRC>
-			<Length>75</Length>
-		</Line>
-		<Line id="25">
-			<FOW>SINGLE_CARRIAGEWAY</FOW>
-			<StartNode>10</StartNode>
-			<EndNode>17</EndNode>
-			<FRC>FRC_6</FRC>
-			<Length>45</Length>
-		</Line>
-		<Line id="26">
-			<FOW>UNDEFINED</FOW>
-			<StartNode>17</StartNode>
-			<EndNode>12</EndNode>
-			<FRC>FRC_6</FRC>
-			<Length>35</Length>
-		</Line>
-	</Lines>
-	<Calls>
-		<GetPointAlongLineCalls>
-			<GetPointAlongLine line="2">
-				<Input>20</Input>
-				<Output>
-					<Longitude>6.12703</Longitude>
-					<Latitude>49.60838</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="14">
-				<Input>20</Input>
-				<Output>
-					<Longitude>6.12820</Longitude>
-					<Latitude>49.60387</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="1">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="4">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="6">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="7">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="10">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<!--			 for OpenLRRatingImplTest -->
-			<GetPointAlongLine line="10">
-				<!--				 line length minus bearing distance -->
-				<Input>125</Input>
-				<Output>
-					<Longitude>6.12825</Longitude>
-					<Latitude>49.60412</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<!--			 end for OpenLRRatingImplTest -->
-			<GetPointAlongLine line="11">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="16">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="17">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="23">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="24">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="26">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="19">
-				<!--				 line length minus bearing distance -->
-				<Input>4</Input>
-				<Output>
-					<Longitude>6.12791</Longitude>
-					<Latitude>49.60311</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="12">
-				<!--				 line length minus bearing distance -->
-				<Input>188</Input>
-				<Output>
-					<Longitude>6.12887</Longitude>
-					<Latitude>49.60381</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="14">
-				<!--				 line length minus bearing distance -->
-				<Input>53</Input>
-				<Output>
-					<Longitude>6.12785</Longitude>
-					<Latitude>49.60362</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="15">
-				<!--				 line length minus bearing distance -->
-				<Input>36</Input>
-				<Output>
-					<Longitude>6.12864</Longitude>
-					<Latitude>49.603705</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="15">
-				<Input>20</Input>
-				<Output>
-					<Longitude>10</Longitude>
-					<Latitude>10</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="17">
-				<!--				 line length minus bearing distance -->
-				<Input>64</Input>
-				<Output>
-					<Longitude>6.12809</Longitude>
-					<Latitude>49.60323</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="18">
-				<!--				 line length minus bearing distance -->
-				<Input>85</Input>
-				<Output>
-					<Longitude>6.12764</Longitude>
-					<Latitude>49.60319</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="24">
-				<!--				 line length minus bearing distance -->
-				<Input>55</Input>
-				<Output>
-					<Longitude>6.12854</Longitude>
-					<Latitude>49.60312</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="6">
-				<!--				 line length minus bearing distance -->
-				<Input>70</Input>
-				<Output>
-					<Longitude>6.12792</Longitude>
-					<Latitude>49.60538</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="5">
-				<!--				 line length minus bearing distance -->
-				<Input>180</Input>
-				<Output>
-					<Longitude>6.12752</Longitude>
-					<Latitude>49.60528</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="22">
-				<!--				 line length minus bearing distance -->
-				<Input>125</Input>
-				<Output>
-					<Longitude>6.12826</Longitude>
-					<Latitude>49.60411</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="8">
-				<!--				 line length minus bearing distance -->
-				<Input>30</Input>
-				<Output>
-					<Longitude>6.12738</Longitude>
-					<Latitude>49.60512</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="4">
-				<!--				 line length minus bearing distance -->
-				<Input>152</Input>
-				<Output>
-					<Longitude>6.12819</Longitude>
-					<Latitude>49.60611</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="6">
-				<!--				  positive offset in point along line example -->
-				<Input>28</Input>
-				<Output>
-					<Longitude>6.12821</Longitude>
-					<Latitude>49.60572</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="26">
-				<!--				 line length minus bearing distance -->
-				<Input>15</Input>
-				<Output>
-					<Longitude>6.12856</Longitude>
-					<Latitude>49.60354</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<!--			 for OpenLRRatingImplTest -->
-			<GetPointAlongLine line="26">
-				<!--				 value of the projectionAlongLine parameter  -->
-				<Input>22</Input>
-				<Output>
-					<Longitude>6.12856</Longitude>
-					<Latitude>49.60354</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="26">
-				<Input>2</Input>
-				<Output>
-					<Longitude>6.1283</Longitude>
-					<Latitude>49.60355</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			<!--			 end for OpenLRRatingImplTest 	-->
-		</GetPointAlongLineCalls>
-		<DistanceToPointCalls>
-		<DistanceToPoint line="1">
-				<Input>
-					<Longitude>6.12683</Longitude>
-					<Latitude>49.60851</Latitude>
-				</Input>
-				<Output>150</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="2">
-				<Input>
-					<Longitude>6.12683</Longitude>
-					<Latitude>49.60851</Latitude>
-				</Input>
-				<Output>150</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="4">
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-				</Input>
-				<Output>0</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="6">
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-				</Input>
-				<Output>0</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="7">
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-				</Input>
-				<Output>0</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="10">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="11">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="14">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</DistanceToPoint>
-			<DistanceToPoint line="15">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</DistanceToPoint>
-		</DistanceToPointCalls>
-		<MeasureAlongLineCalls>
-			<MeasureAlongLine line="4">
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-				</Input>
-				<Output>0</Output>
-			</MeasureAlongLine>
-			<MeasureAlongLine line="6">
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-				</Input>
-				<Output>0</Output>
-			</MeasureAlongLine>
-			<MeasureAlongLine line="7">
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-				</Input>
-				<Output>0</Output>
-			</MeasureAlongLine>
-			<MeasureAlongLine line="10">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</MeasureAlongLine>
-			<MeasureAlongLine line="11">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</MeasureAlongLine>
-			<MeasureAlongLine line="14">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</MeasureAlongLine>
-			<MeasureAlongLine line="15">
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-				</Input>
-				<Output>0</Output>
-			</MeasureAlongLine>
-		</MeasureAlongLineCalls>
-		<FindNodesCloseByCoordinateCalls>
-			<FindNodesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12683</Longitude>
-					<Latitude>49.60851</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Node>1</Node>
-				</Output>
-			</FindNodesCloseByCoordinate>
-			<FindNodesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Node>11</Node>
-					<Node>12</Node>
-					<Node>17</Node>
-				</Output>
-			</FindNodesCloseByCoordinate>
-			<FindNodesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12817</Longitude>
-					<Latitude>49.60305</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Node>12</Node>
-					<Node>14</Node>
-					<Node>15</Node>
-					<Node>16</Node>
-				</Output>
-			</FindNodesCloseByCoordinate>
-			<FindNodesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Node>5</Node>
-					<Node>7</Node>
-				</Output>
-			</FindNodesCloseByCoordinate>
-			<FindNodesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12779</Longitude>
-					<Latitude>49.60521</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Node>5</Node>
-					<Node>6</Node>
-					<Node>7</Node>
-				</Output>
-			</FindNodesCloseByCoordinate>
-		</FindNodesCloseByCoordinateCalls>
-		<FindLinesCloseByCoordinateCalls>
-			<FindLinesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12779</Longitude>
-					<Latitude>49.60521</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					
-				</Output>
-			</FindLinesCloseByCoordinate>
-			<FindLinesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12817</Longitude>
-					<Latitude>49.60305</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					
-				</Output>
-			</FindLinesCloseByCoordinate>
-			<FindLinesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12683</Longitude>
-					<Latitude>49.60851</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Line>1</Line>
-					<Line>2</Line>
-				</Output>
-			</FindLinesCloseByCoordinate>
-			<FindLinesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12838</Longitude>
-					<Latitude>49.60398</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Line>10</Line>
-					<Line>11</Line>
-					<Line>14</Line>
-					<Line>15</Line>
-				</Output>
-			</FindLinesCloseByCoordinate>
-			<FindLinesCloseByCoordinate>
-				<Input>
-					<Longitude>6.12829</Longitude>
-					<Latitude>49.6</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Line>4</Line>
-					<Line>6</Line>
-					<Line>7</Line>
-				</Output>
-			</FindLinesCloseByCoordinate>
-		</FindLinesCloseByCoordinateCalls>
-	</Calls>
+<!--
+    Copyright (C) 2009 TomTom International B.V. TomTom (Legal Department)
+    Email: legal@tomtom.com TomTom (Technical contact) Email:
+    openlr@tomtom.com Address: TomTom International B.V., Oosterdoksstraat
+    114, 1011DK Amsterdam, the Netherlands This program is free software;
+    you can redistribute it and/or modify it under the terms of the GNU
+    General Public License as published by the Free Software Foundation;
+    version 2 of the License and the extra conditions for OpenLR. (see
+    openlr-license.txt) This program is distributed in the hope that it
+    will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+    the GNU General Public License for more details. You should have
+    received a copy of the GNU General Public License along with this
+    program; if not, write to the Free Software Foundation, Inc., 51
+    Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+<MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+    <Nodes>
+        <Node id="1">
+            <Latitude>49.60851</Latitude>
+            <Longitude>6.12683</Longitude>
+        </Node>
+        <Node id="2">
+            <Latitude>49.60767</Latitude>
+            <Longitude>6.12529</Longitude>
+        </Node>
+        <Node id="3">
+            <Latitude>49.60723</Latitude>
+            <Longitude>6.12756</Longitude>
+        </Node>
+        <Node id="4">
+            <Latitude>49.60606</Latitude>
+            <Longitude>6.12579</Longitude>
+        </Node>
+        <Node id="5">
+            <Latitude>49.60597</Latitude>
+            <Longitude>6.12828</Longitude>
+        </Node>
+        <Node id="6">
+            <Latitude>49.60510</Latitude>
+            <Longitude>6.12711</Longitude>
+        </Node>
+        <Node id="7">
+            <Latitude>49.60521</Latitude>
+            <Longitude>6.12778</Longitude>
+        </Node>
+        <Node id="8">
+            <Latitude>49.60526</Latitude>
+            <Longitude>6.12893</Longitude>
+        </Node>
+        <Node id="9">
+            <Latitude>49.60435</Latitude>
+            <Longitude>6.12633</Longitude>
+        </Node>
+        <Node id="10">
+            <Latitude>49.60398</Latitude>
+            <Longitude>6.12838</Longitude>
+        </Node>
+        <Node id="11">
+            <Latitude>49.60356</Latitude>
+            <Longitude>6.12764</Longitude>
+        </Node>
+        <Node id="12">
+            <Latitude>49.60356</Latitude>
+            <Longitude>6.12882</Longitude>
+        </Node>
+        <Node id="13">
+            <Latitude>49.60356</Latitude>
+            <Longitude>6.12661</Longitude>
+        </Node>
+        <Node id="14">
+            <Latitude>49.60315</Latitude>
+            <Longitude>6.12786</Longitude>
+        </Node>
+        <Node id="15">
+            <Latitude>49.60305</Latitude>
+            <Longitude>6.12817</Longitude>
+        </Node>
+        <Node id="16">
+            <Latitude>49.60306</Latitude>
+            <Longitude>6.12846</Longitude>
+        </Node>
+        <Node id="17">
+            <Latitude>49.60355</Latitude>
+            <Longitude>6.12825</Longitude>
+        </Node>
+    </Nodes>
+    <Lines>
+        <Line id="1">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>1</StartNode>
+            <EndNode>2</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>145</Length>
+        </Line>
+        <Line id="2">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>1</StartNode>
+            <EndNode>3</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>150</Length>
+        </Line>
+        <Line id="3">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>2</StartNode>
+            <EndNode>4</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>205</Length>
+        </Line>
+        <Line id="4">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>3</StartNode>
+            <EndNode>5</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>172</Length>
+        </Line>
+        <Line id="5">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>4</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>200</Length>
+        </Line>
+        <Line id="6">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>5</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>90</Length>
+        </Line>
+        <Line id="7">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>5</StartNode>
+            <EndNode>8</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>99</Length>
+        </Line>
+        <Line id="8">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>7</StartNode>
+            <EndNode>6</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>50</Length>
+        </Line>
+        <Line id="9">
+            <FOW>OTHER</FOW>
+            <StartNode>6</StartNode>
+            <EndNode>9</EndNode>
+            <FRC>FRC_7</FRC>
+            <Length>99</Length>
+        </Line>
+        <Line id="10">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>7</StartNode>
+            <EndNode>10</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>145</Length>
+        </Line>
+        <Line id="11">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>8</StartNode>
+            <EndNode>10</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>150</Length>
+        </Line>
+        <Line id="12">
+            <FOW>MULTIPLE_CARRIAGEWAY</FOW>
+            <StartNode>8</StartNode>
+            <EndNode>12</EndNode>
+            <FRC>FRC_2</FRC>
+            <Length>208</Length>
+        </Line>
+        <Line id="13">
+            <FOW>OTHER</FOW>
+            <StartNode>9</StartNode>
+            <EndNode>13</EndNode>
+            <FRC>FRC_7</FRC>
+            <Length>86</Length>
+        </Line>
+        <Line id="14">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>10</StartNode>
+            <EndNode>11</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>73</Length>
+        </Line>
+        <Line id="15">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>10</StartNode>
+            <EndNode>12</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>56</Length>
+        </Line>
+        <Line id="16">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>11</StartNode>
+            <EndNode>13</EndNode>
+            <FRC>FRC_4</FRC>
+            <Length>75</Length>
+        </Line>
+        <Line id="17">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>12</StartNode>
+            <EndNode>14</EndNode>
+            <FRC>FRC_3</FRC>
+            <Length>84</Length>
+        </Line>
+        <Line id="18">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>13</StartNode>
+            <EndNode>14</EndNode>
+            <FRC>FRC_5</FRC>
+            <Length>105</Length>
+        </Line>
+        <Line id="19">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>14</StartNode>
+            <EndNode>15</EndNode>
+            <FRC>FRC_5</FRC>
+            <Length>24</Length>
+        </Line>
+        <Line id="20">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>4</StartNode>
+            <EndNode>2</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>205</Length>
+        </Line>
+        <Line id="21">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>7</StartNode>
+            <EndNode>4</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>200</Length>
+        </Line>
+        <Line id="22">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>10</StartNode>
+            <EndNode>7</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>145</Length>
+        </Line>
+        <Line id="23">
+            <FOW>MOTORWAY</FOW>
+            <StartNode>12</StartNode>
+            <EndNode>10</EndNode>
+            <FRC>FRC_0</FRC>
+            <Length>56</Length>
+        </Line>
+        <Line id="24">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>12</StartNode>
+            <EndNode>16</EndNode>
+            <FRC>FRC_4</FRC>
+            <Length>75</Length>
+        </Line>
+        <Line id="25">
+            <FOW>SINGLE_CARRIAGEWAY</FOW>
+            <StartNode>10</StartNode>
+            <EndNode>17</EndNode>
+            <FRC>FRC_6</FRC>
+            <Length>45</Length>
+        </Line>
+        <Line id="26">
+            <FOW>UNDEFINED</FOW>
+            <StartNode>17</StartNode>
+            <EndNode>12</EndNode>
+            <FRC>FRC_6</FRC>
+            <Length>35</Length>
+        </Line>
+    </Lines>
+    <Calls>
+        <GetPointAlongLineCalls>
+            <GetPointAlongLine line="2">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>6.12703</Longitude>
+                    <Latitude>49.60838</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="14">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>6.12820</Longitude>
+                    <Latitude>49.60387</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="1">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="4">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="6">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="7">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="10">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <!--			 for OpenLRRatingImplTest -->
+            <GetPointAlongLine line="10">
+                <!--				 line length minus bearing distance -->
+                <Input>125</Input>
+                <Output>
+                    <Longitude>6.12825</Longitude>
+                    <Latitude>49.60412</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <!--			 end for OpenLRRatingImplTest -->
+            <GetPointAlongLine line="11">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="16">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="17">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="23">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="24">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="26">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="19">
+                <!--				 line length minus bearing distance -->
+                <Input>4</Input>
+                <Output>
+                    <Longitude>6.12791</Longitude>
+                    <Latitude>49.60311</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="12">
+                <!--				 line length minus bearing distance -->
+                <Input>188</Input>
+                <Output>
+                    <Longitude>6.12887</Longitude>
+                    <Latitude>49.60381</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="14">
+                <!--				 line length minus bearing distance -->
+                <Input>53</Input>
+                <Output>
+                    <Longitude>6.12785</Longitude>
+                    <Latitude>49.60362</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="15">
+                <!--				 line length minus bearing distance -->
+                <Input>36</Input>
+                <Output>
+                    <Longitude>6.12864</Longitude>
+                    <Latitude>49.603705</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="15">
+                <Input>20</Input>
+                <Output>
+                    <Longitude>10</Longitude>
+                    <Latitude>10</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="17">
+                <!--				 line length minus bearing distance -->
+                <Input>64</Input>
+                <Output>
+                    <Longitude>6.12809</Longitude>
+                    <Latitude>49.60323</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="18">
+                <!--				 line length minus bearing distance -->
+                <Input>85</Input>
+                <Output>
+                    <Longitude>6.12764</Longitude>
+                    <Latitude>49.60319</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="24">
+                <!--				 line length minus bearing distance -->
+                <Input>55</Input>
+                <Output>
+                    <Longitude>6.12854</Longitude>
+                    <Latitude>49.60312</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="6">
+                <!--				 line length minus bearing distance -->
+                <Input>70</Input>
+                <Output>
+                    <Longitude>6.12792</Longitude>
+                    <Latitude>49.60538</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="5">
+                <!--				 line length minus bearing distance -->
+                <Input>180</Input>
+                <Output>
+                    <Longitude>6.12752</Longitude>
+                    <Latitude>49.60528</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="22">
+                <!--				 line length minus bearing distance -->
+                <Input>125</Input>
+                <Output>
+                    <Longitude>6.12826</Longitude>
+                    <Latitude>49.60411</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="8">
+                <!--				 line length minus bearing distance -->
+                <Input>30</Input>
+                <Output>
+                    <Longitude>6.12738</Longitude>
+                    <Latitude>49.60512</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="4">
+                <!--				 line length minus bearing distance -->
+                <Input>152</Input>
+                <Output>
+                    <Longitude>6.12819</Longitude>
+                    <Latitude>49.60611</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="6">
+                <!--				  positive offset in point along line example -->
+                <Input>28</Input>
+                <Output>
+                    <Longitude>6.12821</Longitude>
+                    <Latitude>49.60572</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="26">
+                <!--				 line length minus bearing distance -->
+                <Input>15</Input>
+                <Output>
+                    <Longitude>6.12856</Longitude>
+                    <Latitude>49.60354</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <!--			 for OpenLRRatingImplTest -->
+            <GetPointAlongLine line="26">
+                <!--				 value of the projectionAlongLine parameter  -->
+                <Input>22</Input>
+                <Output>
+                    <Longitude>6.12856</Longitude>
+                    <Latitude>49.60354</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="26">
+                <Input>2</Input>
+                <Output>
+                    <Longitude>6.1283</Longitude>
+                    <Latitude>49.60355</Latitude>
+                </Output>
+            </GetPointAlongLine>
+            <!--			 end for OpenLRRatingImplTest 	-->
+        </GetPointAlongLineCalls>
+        <DistanceToPointCalls>
+            <DistanceToPoint line="1">
+                <Input>
+                    <Longitude>6.12683</Longitude>
+                    <Latitude>49.60851</Latitude>
+                </Input>
+                <Output>150</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="2">
+                <Input>
+                    <Longitude>6.12683</Longitude>
+                    <Latitude>49.60851</Latitude>
+                </Input>
+                <Output>150</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="4">
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                </Input>
+                <Output>0</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="6">
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                </Input>
+                <Output>0</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="7">
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                </Input>
+                <Output>0</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="10">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="11">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="14">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </DistanceToPoint>
+            <DistanceToPoint line="15">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </DistanceToPoint>
+        </DistanceToPointCalls>
+        <MeasureAlongLineCalls>
+            <MeasureAlongLine line="4">
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                </Input>
+                <Output>0</Output>
+            </MeasureAlongLine>
+            <MeasureAlongLine line="6">
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                </Input>
+                <Output>0</Output>
+            </MeasureAlongLine>
+            <MeasureAlongLine line="7">
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                </Input>
+                <Output>0</Output>
+            </MeasureAlongLine>
+            <MeasureAlongLine line="10">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </MeasureAlongLine>
+            <MeasureAlongLine line="11">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </MeasureAlongLine>
+            <MeasureAlongLine line="14">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </MeasureAlongLine>
+            <MeasureAlongLine line="15">
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                </Input>
+                <Output>0</Output>
+            </MeasureAlongLine>
+        </MeasureAlongLineCalls>
+        <FindNodesCloseByCoordinateCalls>
+            <FindNodesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12683</Longitude>
+                    <Latitude>49.60851</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Node>1</Node>
+                </Output>
+            </FindNodesCloseByCoordinate>
+            <FindNodesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Node>11</Node>
+                    <Node>12</Node>
+                    <Node>17</Node>
+                </Output>
+            </FindNodesCloseByCoordinate>
+            <FindNodesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12817</Longitude>
+                    <Latitude>49.60305</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Node>12</Node>
+                    <Node>14</Node>
+                    <Node>15</Node>
+                    <Node>16</Node>
+                </Output>
+            </FindNodesCloseByCoordinate>
+            <FindNodesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Node>5</Node>
+                    <Node>7</Node>
+                </Output>
+            </FindNodesCloseByCoordinate>
+            <FindNodesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12779</Longitude>
+                    <Latitude>49.60521</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Node>5</Node>
+                    <Node>6</Node>
+                    <Node>7</Node>
+                </Output>
+            </FindNodesCloseByCoordinate>
+        </FindNodesCloseByCoordinateCalls>
+        <FindLinesCloseByCoordinateCalls>
+            <FindLinesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12779</Longitude>
+                    <Latitude>49.60521</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+
+                </Output>
+            </FindLinesCloseByCoordinate>
+            <FindLinesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12817</Longitude>
+                    <Latitude>49.60305</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+
+                </Output>
+            </FindLinesCloseByCoordinate>
+            <FindLinesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12683</Longitude>
+                    <Latitude>49.60851</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Line>1</Line>
+                    <Line>2</Line>
+                </Output>
+            </FindLinesCloseByCoordinate>
+            <FindLinesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12838</Longitude>
+                    <Latitude>49.60398</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Line>10</Line>
+                    <Line>11</Line>
+                    <Line>14</Line>
+                    <Line>15</Line>
+                </Output>
+            </FindLinesCloseByCoordinate>
+            <FindLinesCloseByCoordinate>
+                <Input>
+                    <Longitude>6.12829</Longitude>
+                    <Latitude>49.6</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Line>4</Line>
+                    <Line>6</Line>
+                    <Line>7</Line>
+                </Output>
+            </FindLinesCloseByCoordinate>
+        </FindLinesCloseByCoordinateCalls>
+    </Calls>
 </MockedMapDatabase>

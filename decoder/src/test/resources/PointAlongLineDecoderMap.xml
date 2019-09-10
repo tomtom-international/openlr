@@ -13,163 +13,163 @@
 	to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
 	MA 02110-1301 USA. -->
 <MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
-	<Nodes>
-		<Node id="1">
-			<Latitude>51.663090</Latitude>
-			<Longitude>10.856862</Longitude>
-		</Node>
-		<Node id="2">
-			<Latitude>51.663213</Latitude>
-			<Longitude>11.002753</Longitude>
-		</Node>
-	</Nodes>
-	<Lines>
-		<Line id="1">
-			<StartNode>1</StartNode>
-			<EndNode>2</EndNode>
-			<Length>10000</Length>
-			<FRC>FRC_0</FRC>
-			<FOW>MOTORWAY</FOW>
-		</Line>
-	</Lines>
-	<Calls>
-		<GetPointAlongLineCalls>
-		
-			<GetPointAlongLine line="1">
-				<Input>2000</Input>
-				<Output>
-					<Longitude>10.887121</Longitude>
-					<Latitude>51.663269</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			
-			<GetPointAlongLine line="1">
-				<Input>2020</Input>
-				<Output>
-					<Longitude>10.887125</Longitude>
-					<Latitude>51.663269</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			
-			<GetPointAlongLine line="1">
-				<Input>7000</Input>
-				<Output>
-					<Longitude>10.958748</Longitude>
-					<Latitude>51.663104</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			
-			<GetPointAlongLine line="1">
-				<Input>6980</Input>
-				<Output>
-					<Longitude>10.958742</Longitude>
-					<Latitude>51.663104</Latitude>
-				</Output>
-			</GetPointAlongLine>
-			
-			<GetPointAlongLine line="1">
-				<Input>3000</Input>
-				<Output>
-					<Longitude>10.0</Longitude>
-					<Latitude>51.0</Latitude>
-				</Output>
-			</GetPointAlongLine>
-					
-		</GetPointAlongLineCalls>
-		
-		<DistanceToPointCalls>
-			<DistanceToPoint line="1">
-				<Input>
-					<Longitude>10.887121</Longitude>
-					<Latitude>51.663269</Latitude>
-				</Input>
-				<Output>
-					0
-				</Output>
-			</DistanceToPoint>
-			
-			<DistanceToPoint line="1">
-				<Input>
-					<Longitude>10.958748</Longitude>
-					<Latitude>51.663104</Latitude>
-				</Input>
-				<Output>
-					0
-				</Output>
-			</DistanceToPoint>
+                   xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+    <Nodes>
+        <Node id="1">
+            <Latitude>51.663090</Latitude>
+            <Longitude>10.856862</Longitude>
+        </Node>
+        <Node id="2">
+            <Latitude>51.663213</Latitude>
+            <Longitude>11.002753</Longitude>
+        </Node>
+    </Nodes>
+    <Lines>
+        <Line id="1">
+            <StartNode>1</StartNode>
+            <EndNode>2</EndNode>
+            <Length>10000</Length>
+            <FRC>FRC_0</FRC>
+            <FOW>MOTORWAY</FOW>
+        </Line>
+    </Lines>
+    <Calls>
+        <GetPointAlongLineCalls>
 
-		</DistanceToPointCalls>
-		
-		<MeasureAlongLineCalls>
-			<MeasureAlongLine line="1">
-				<Input>
-					<Longitude>10.887121</Longitude>
-					<Latitude>51.663269</Latitude>
-				</Input>
-				<Output>
-					2000
-				</Output>
-			</MeasureAlongLine>
-			
-			<MeasureAlongLine line="1">
-				<Input>
-					<Longitude>10.958748</Longitude>
-					<Latitude>51.663104</Latitude>
-				</Input>
-				<Output>
-					7000
-				</Output>
-			</MeasureAlongLine>
+            <GetPointAlongLine line="1">
+                <Input>2000</Input>
+                <Output>
+                    <Longitude>10.887121</Longitude>
+                    <Latitude>51.663269</Latitude>
+                </Output>
+            </GetPointAlongLine>
 
-		</MeasureAlongLineCalls>
-		<FindNodesCloseByCoordinateCalls>
-		
-			<FindNodesCloseByCoordinate>
-				<Input>
-					<Longitude>10.887121</Longitude>
-					<Latitude>51.663269</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-				</Output>
-			</FindNodesCloseByCoordinate>
-			
-			<FindNodesCloseByCoordinate>
-				<Input>
-					<Longitude>10.958748</Longitude>
-					<Latitude>51.663104</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-				</Output>
-			</FindNodesCloseByCoordinate>
+            <GetPointAlongLine line="1">
+                <Input>2020</Input>
+                <Output>
+                    <Longitude>10.887125</Longitude>
+                    <Latitude>51.663269</Latitude>
+                </Output>
+            </GetPointAlongLine>
 
-		</FindNodesCloseByCoordinateCalls>
-		
-		<FindLinesCloseByCoordinateCalls>
-			<FindLinesCloseByCoordinate>
-				<Input>
-					<Longitude>10.887121</Longitude>
-					<Latitude>51.663269</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Line>1</Line>
-				</Output>
-			</FindLinesCloseByCoordinate>
-			
-			<FindLinesCloseByCoordinate>
-				<Input>
-					<Longitude>10.958748</Longitude>
-					<Latitude>51.663104</Latitude>
-					<Distance>100</Distance>
-				</Input>
-				<Output>
-					<Line>1</Line>
-				</Output>
-			</FindLinesCloseByCoordinate>
-			
-		</FindLinesCloseByCoordinateCalls>
-	</Calls>
+            <GetPointAlongLine line="1">
+                <Input>7000</Input>
+                <Output>
+                    <Longitude>10.958748</Longitude>
+                    <Latitude>51.663104</Latitude>
+                </Output>
+            </GetPointAlongLine>
+
+            <GetPointAlongLine line="1">
+                <Input>6980</Input>
+                <Output>
+                    <Longitude>10.958742</Longitude>
+                    <Latitude>51.663104</Latitude>
+                </Output>
+            </GetPointAlongLine>
+
+            <GetPointAlongLine line="1">
+                <Input>3000</Input>
+                <Output>
+                    <Longitude>10.0</Longitude>
+                    <Latitude>51.0</Latitude>
+                </Output>
+            </GetPointAlongLine>
+
+        </GetPointAlongLineCalls>
+
+        <DistanceToPointCalls>
+            <DistanceToPoint line="1">
+                <Input>
+                    <Longitude>10.887121</Longitude>
+                    <Latitude>51.663269</Latitude>
+                </Input>
+                <Output>
+                    0
+                </Output>
+            </DistanceToPoint>
+
+            <DistanceToPoint line="1">
+                <Input>
+                    <Longitude>10.958748</Longitude>
+                    <Latitude>51.663104</Latitude>
+                </Input>
+                <Output>
+                    0
+                </Output>
+            </DistanceToPoint>
+
+        </DistanceToPointCalls>
+
+        <MeasureAlongLineCalls>
+            <MeasureAlongLine line="1">
+                <Input>
+                    <Longitude>10.887121</Longitude>
+                    <Latitude>51.663269</Latitude>
+                </Input>
+                <Output>
+                    2000
+                </Output>
+            </MeasureAlongLine>
+
+            <MeasureAlongLine line="1">
+                <Input>
+                    <Longitude>10.958748</Longitude>
+                    <Latitude>51.663104</Latitude>
+                </Input>
+                <Output>
+                    7000
+                </Output>
+            </MeasureAlongLine>
+
+        </MeasureAlongLineCalls>
+        <FindNodesCloseByCoordinateCalls>
+
+            <FindNodesCloseByCoordinate>
+                <Input>
+                    <Longitude>10.887121</Longitude>
+                    <Latitude>51.663269</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                </Output>
+            </FindNodesCloseByCoordinate>
+
+            <FindNodesCloseByCoordinate>
+                <Input>
+                    <Longitude>10.958748</Longitude>
+                    <Latitude>51.663104</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                </Output>
+            </FindNodesCloseByCoordinate>
+
+        </FindNodesCloseByCoordinateCalls>
+
+        <FindLinesCloseByCoordinateCalls>
+            <FindLinesCloseByCoordinate>
+                <Input>
+                    <Longitude>10.887121</Longitude>
+                    <Latitude>51.663269</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Line>1</Line>
+                </Output>
+            </FindLinesCloseByCoordinate>
+
+            <FindLinesCloseByCoordinate>
+                <Input>
+                    <Longitude>10.958748</Longitude>
+                    <Latitude>51.663104</Latitude>
+                    <Distance>100</Distance>
+                </Input>
+                <Output>
+                    <Line>1</Line>
+                </Output>
+            </FindLinesCloseByCoordinate>
+
+        </FindLinesCloseByCoordinateCalls>
+    </Calls>
 </MockedMapDatabase>

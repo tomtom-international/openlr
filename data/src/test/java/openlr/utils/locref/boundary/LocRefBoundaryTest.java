@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,12 +39,6 @@
  */
 package openlr.utils.locref.boundary;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import openlr.LocationReferencePoint;
 import openlr.location.data.Orientation;
 import openlr.location.data.SideOfRoad;
@@ -41,19 +46,17 @@ import openlr.map.GeoCoordinates;
 import openlr.map.GeoCoordinatesImpl;
 import openlr.map.InvalidMapDataException;
 import openlr.map.RectangleCorners;
-import openlr.rawLocRef.RawCircleLocRef;
-import openlr.rawLocRef.RawGeoCoordLocRef;
-import openlr.rawLocRef.RawGridLocRef;
-import openlr.rawLocRef.RawLineLocRef;
-import openlr.rawLocRef.RawLocationReference;
-import openlr.rawLocRef.RawPointAlongLocRef;
-import openlr.rawLocRef.RawPolygonLocRef;
-import openlr.rawLocRef.RawRectangleLocRef;
-
+import openlr.rawLocRef.*;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static junit.framework.Assert.assertEquals;
 
 /**
  * Tests the bounding box calculation on location references.
@@ -61,7 +64,7 @@ import org.testng.annotations.Test;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class LocRefBoundaryTest {
@@ -109,7 +112,7 @@ public class LocRefBoundaryTest {
 
     /**
      * Tests calculation of a bounding box for a rectangle location reference
-     * 
+     *
      * @throws InvalidMapDataException
      *             never
      */
@@ -118,7 +121,7 @@ public class LocRefBoundaryTest {
             throws InvalidMapDataException {
 
         GeoCoordinates ll = new GeoCoordinatesImpl(5.10007, 52.10321);
-        GeoCoordinates ur = new GeoCoordinatesImpl(5.10398, 52.10704); 
+        GeoCoordinates ur = new GeoCoordinatesImpl(5.10398, 52.10704);
 
         RawRectangleLocRef lineLocRef = new RawRectangleLocRef("id", ll, ur);
 
@@ -128,7 +131,7 @@ public class LocRefBoundaryTest {
 
     /**
      * Tests calculation of a bounding box for a grid location reference
-     * 
+     *
      * @throws InvalidMapDataException
      *             never
      */
@@ -147,7 +150,7 @@ public class LocRefBoundaryTest {
 
     /**
      * Tests calculation of a bounding box for a circle location reference
-     * 
+     *
      * @throws InvalidMapDataException
      *             never
      */
@@ -165,7 +168,7 @@ public class LocRefBoundaryTest {
     /**
      * Tests calculation of a bounding box for a geo-coordinate location
      * reference
-     * 
+     *
      * @throws InvalidMapDataException
      *             never
      */
@@ -182,7 +185,7 @@ public class LocRefBoundaryTest {
 
     /**
      * Tests calculation of a bounding box for a circle location reference
-     * 
+     *
      * @throws InvalidMapDataException
      *             never
      */
@@ -205,7 +208,7 @@ public class LocRefBoundaryTest {
     /**
      * Executes the calculation of the bounding box and checks it against the
      * given expected coordinates
-     * 
+     *
      * @param locRef
      * @param expectedLatLL
      * @param expectedLonLL
@@ -213,8 +216,8 @@ public class LocRefBoundaryTest {
      * @param expectedLongUR
      */
     private void calculateBox(RawLocationReference locRef,
-            double expectedLatLL, double expectedLonLL, double expectedLatUR,
-            double expectedLongUR) {
+                              double expectedLatLL, double expectedLonLL, double expectedLatUR,
+                              double expectedLongUR) {
         try {
             RectangleCorners bbox = LocRefBoundary
                     .calculateLocRefBoundary(locRef);
@@ -236,7 +239,7 @@ public class LocRefBoundaryTest {
 
     /**
      * Mocks an LRP
-     * 
+     *
      * @param latitude
      *            The latitude
      * @param longitude
@@ -246,7 +249,7 @@ public class LocRefBoundaryTest {
      * @return The mocked LRP
      */
     private LocationReferencePoint mockLRP(final double latitude,
-            final double longitude, final int dnp) {
+                                           final double longitude, final int dnp) {
 
         final LocationReferencePoint lrp = mockery.mock(
                 LocationReferencePoint.class, "lrp" + latitude + "-"

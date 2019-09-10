@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,13 +39,6 @@
  */
 package openlr.encoder;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
-
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-
 import openlr.LocationReferencePoint;
 import openlr.OpenLRProcessingException;
 import openlr.location.Location;
@@ -42,18 +46,22 @@ import openlr.location.LocationFactory;
 import openlr.map.Line;
 import openlr.map.mockdb.InvalidConfigurationException;
 import openlr.map.mockdb.MockedMapDatabase;
-
 import org.testng.annotations.Test;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+
+import static org.testng.Assert.*;
 
 /**
  * This class tests cases with encoding locations in parts of the map with
  * parallel roads.
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class ParallelRoadsTest {
@@ -88,14 +96,14 @@ public class ParallelRoadsTest {
      * The mocked map database. Its structure looks as follows: 
      *        ____
      * N1---N2____N3---N4
-     * 
+     *
      * Each connection is drivable in both directions.
      */
     private final MockedMapDatabase mdb;
 
     /**
      * Initializes the map database.
-     * 
+     *
      * @throws InvalidConfigurationException
      *             If an error occurs initializing the map database from the
      *             configuration.
@@ -164,7 +172,7 @@ public class ParallelRoadsTest {
     /**
      * Executes the encoding of the given location. Checks validity and number
      * of expected LRP afterwards.
-     * 
+     *
      * @param loc
      *            The location to encode.
      * @param expectedLrpCoordinates
@@ -172,15 +180,15 @@ public class ParallelRoadsTest {
      *            result was the expected.
      */
     private void runTest(final Location loc,
-            final Point2D... expectedLrpCoordinates) {
+                         final Point2D... expectedLrpCoordinates) {
 
         LocationReferenceHolder locationRef = null;
         try {
-        	OpenLREncoder encoder = new OpenLREncoder();
-        	OpenLREncoderParameter params = 
-        		new OpenLREncoderParameter.Builder().with(mdb).with(TestData.getInstance()
-                        .getConfiguration()).buildParameter();
-            locationRef = encoder.encodeLocation(params , loc);
+            OpenLREncoder encoder = new OpenLREncoder();
+            OpenLREncoderParameter params =
+                    new OpenLREncoderParameter.Builder().with(mdb).with(TestData.getInstance()
+                            .getConfiguration()).buildParameter();
+            locationRef = encoder.encodeLocation(params, loc);
         } catch (OpenLRProcessingException e) {
             fail("Encoding location failed with exception: " + e.getErrorCode(),
                     e);

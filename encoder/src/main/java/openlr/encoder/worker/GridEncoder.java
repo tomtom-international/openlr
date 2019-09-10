@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -43,36 +54,36 @@ import openlr.rawLocRef.RawLocationReference;
 
 /**
  * The encoder for the grid location type.
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author DLR e.V. (RE)
  */
 public class GridEncoder extends AbstractEncoder {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final RawLocationReference doEncoding(final Location location,
-			final OpenLREncoderProperties prop, final MapDatabase mdb) throws OpenLRProcessingException {
-		// check if the location is valid
-		LocationCheck locCheck = new GridLocationCheck();
-		CheckResult retCode = locCheck.check(prop, mdb,
-				location);
-		if (!retCode.checkPassed()) {
-			RawLocationReference invalid = new RawInvalidLocRef(
-					location.getID(), retCode.getError(),
-					location.getLocationType());
-			return invalid;
-		}
-		RawLocationReference rawLocRef = new RawGridLocRef(location.getID(),
-				location.getLowerLeftPoint(), location.getUpperRightPoint(),
-				location.getNumberOfColumns(), location.getNumberOfRows());
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final RawLocationReference doEncoding(final Location location,
+                                                 final OpenLREncoderProperties prop, final MapDatabase mdb) throws OpenLRProcessingException {
+        // check if the location is valid
+        LocationCheck locCheck = new GridLocationCheck();
+        CheckResult retCode = locCheck.check(prop, mdb,
+                location);
+        if (!retCode.checkPassed()) {
+            RawLocationReference invalid = new RawInvalidLocRef(
+                    location.getID(), retCode.getError(),
+                    location.getLocationType());
+            return invalid;
+        }
+        RawLocationReference rawLocRef = new RawGridLocRef(location.getID(),
+                location.getLowerLeftPoint(), location.getUpperRightPoint(),
+                location.getNumberOfColumns(), location.getNumberOfRows());
 
-		return rawLocRef;
-	}
+        return rawLocRef;
+    }
 }

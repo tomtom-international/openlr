@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,11 +39,7 @@
  */
 package openlr.testutils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +72,7 @@ import java.util.regex.Pattern;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 final class CoberturaCoverageAnalyzer {
@@ -73,7 +80,7 @@ final class CoberturaCoverageAnalyzer {
     /**
      * The analyzed OpenLR packages.
      */
-    private static final String[] ANALYZED_PACKAGES = new String[] {"data",
+    private static final String[] ANALYZED_PACKAGES = new String[]{"data",
             "map", "encoder", "decoder", "xml", "binary", "datex2"};
 
     /**
@@ -90,68 +97,6 @@ final class CoberturaCoverageAnalyzer {
     private static final String PATH_TO_COVERAGE_REPORT = "target/site/cobertura/coverage.xml";
 
     /**
-     * Defines setup data for methods that should be checked for insufficient
-     * test coverage.
-     */
-    private enum AnalyzedMethods {
-
-        /**
-         * The pattern that searches insufficient coverage of equals methods in
-         * Cobertura reports
-         */
-        EQUALS(Pattern.compile("\"equals\".*" + PATTERN_BASE_LINE_RATE),
-                "equals"),
-
-        /**
-         * The pattern that searches insufficient coverage of hashCode methods
-         * in Cobertura reports
-         */
-        HASH_CODE(Pattern.compile("\"hashCode\".*" + PATTERN_BASE_LINE_RATE),
-                "hashCode"),
-
-        /**
-         * The pattern that searches insufficient coverage of toString methods
-         * in Cobertura reports
-         */
-        TO_STRING(Pattern.compile("\"toString\".*" + PATTERN_BASE_LINE_RATE),
-                "toString");
-
-        /** The regex pattern. */
-        private Pattern pattern;
-
-        /**
-         * The method name.
-         */
-        private String methodName;
-
-        /**
-         * Creates a new instance.
-         * 
-         * @param pat
-         *            The regex pattern.
-         * @param name
-         *            The method name.
-         */
-        private AnalyzedMethods(final Pattern pat, final String name) {
-            pattern = pat;
-            methodName = name;
-        }
-
-        /** The Constant VALUES. */
-        private static final List<AnalyzedMethods> VALUES = Collections
-                .unmodifiableList(Arrays.asList(values()));
-
-        /**
-         * Delivers all configured method types.
-         * 
-         * @return all configured method types.
-         */
-        public static List<AnalyzedMethods> getMethods() {
-            return VALUES;
-        }
-    }
-
-    /**
      * Disabled constructor.
      */
     private CoberturaCoverageAnalyzer() {
@@ -161,7 +106,7 @@ final class CoberturaCoverageAnalyzer {
     /**
      * Runs a check over all OpenLR packages for insufficient test coverage of
      * methods toString, hashCode and equals. <br>
-     * 
+     *
      * @param args
      *            Is ignored.
      */
@@ -181,7 +126,7 @@ final class CoberturaCoverageAnalyzer {
     /**
      * Checks the test coverage of the relevant methods for the given OpenLR
      * package.
-     * 
+     *
      * @param pack
      *            The package to check.
      * @return <code>true</code> if no insufficient coverage was found,
@@ -223,7 +168,7 @@ final class CoberturaCoverageAnalyzer {
             } catch (IOException e) {
                 System.out.println("ERROR: " + e.getMessage());
             }
-            
+
             if (coverageOk) {
                 System.out.println("Coverage OK!");
             }
@@ -235,5 +180,65 @@ final class CoberturaCoverageAnalyzer {
         }
 
         return coverageOk;
+    }
+
+    /**
+     * Defines setup data for methods that should be checked for insufficient
+     * test coverage.
+     */
+    private enum AnalyzedMethods {
+
+        /**
+         * The pattern that searches insufficient coverage of equals methods in
+         * Cobertura reports
+         */
+        EQUALS(Pattern.compile("\"equals\".*" + PATTERN_BASE_LINE_RATE),
+                "equals"),
+
+        /**
+         * The pattern that searches insufficient coverage of hashCode methods
+         * in Cobertura reports
+         */
+        HASH_CODE(Pattern.compile("\"hashCode\".*" + PATTERN_BASE_LINE_RATE),
+                "hashCode"),
+
+        /**
+         * The pattern that searches insufficient coverage of toString methods
+         * in Cobertura reports
+         */
+        TO_STRING(Pattern.compile("\"toString\".*" + PATTERN_BASE_LINE_RATE),
+                "toString");
+
+        /** The Constant VALUES. */
+        private static final List<AnalyzedMethods> VALUES = Collections
+                .unmodifiableList(Arrays.asList(values()));
+        /** The regex pattern. */
+        private Pattern pattern;
+        /**
+         * The method name.
+         */
+        private String methodName;
+
+        /**
+         * Creates a new instance.
+         *
+         * @param pat
+         *            The regex pattern.
+         * @param name
+         *            The method name.
+         */
+        private AnalyzedMethods(final Pattern pat, final String name) {
+            pattern = pat;
+            methodName = name;
+        }
+
+        /**
+         * Delivers all configured method types.
+         *
+         * @return all configured method types.
+         */
+        public static List<AnalyzedMethods> getMethods() {
+            return VALUES;
+        }
     }
 }

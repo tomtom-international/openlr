@@ -1,195 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified">
-	<xs:element name="MockedMapDatabase">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="Nodes" minOccurs="1" maxOccurs="1"/>
-				<xs:element ref="Lines" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="Calls" minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="Nodes">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element maxOccurs="unbounded" ref="Node" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="Node">
-		<xs:complexType>
-			<xs:all>
-				<xs:element ref="Latitude" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="Longitude" minOccurs="1" maxOccurs="1" />
-			</xs:all>
-			<xs:attribute name="id" use="required" type="xs:integer" />
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="Lines">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element maxOccurs="unbounded" ref="Line" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="Line">
-		<xs:complexType>
-			<xs:all>
-				<xs:element name="FOW" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
-				<xs:element name="StartNode" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-				<xs:element name="EndNode" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-				<xs:element name="FRC" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
-				<xs:element name="Length" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-			</xs:all>
-			<xs:attribute name="id" use="required" type="xs:integer" />
-		</xs:complexType>
-	</xs:element>
+           elementFormDefault="qualified">
+    <xs:element name="MockedMapDatabase">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Nodes" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="Lines" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Calls" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Nodes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Node"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Node">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="Latitude" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="Longitude" minOccurs="1" maxOccurs="1"/>
+            </xs:all>
+            <xs:attribute name="id" use="required" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Lines">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Line"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Line">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="FOW" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="StartNode" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="EndNode" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="FRC" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Length" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            </xs:all>
+            <xs:attribute name="id" use="required" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="Calls">
-		<xs:complexType>
-			<xs:all>
-				<xs:element name="GetPointAlongLineCalls" minOccurs="0">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="GetPointAlongLine" minOccurs="1"
-								maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="DistanceToPointCalls" minOccurs="0">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="DistanceToPoint" minOccurs="1"
-								maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="MeasureAlongLineCalls" minOccurs="0">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="MeasureAlongLine" minOccurs="1"
-								maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="FindNodesCloseByCoordinateCalls"
-					minOccurs="0">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="FindNodesCloseByCoordinate"
-								minOccurs="1" maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="FindLinesCloseByCoordinateCalls"
-					minOccurs="0">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element ref="FindLinesCloseByCoordinate"
-								minOccurs="1" maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:all>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="GetPointAlongLine">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Input" type="xs:int" />
-				<xs:element name="Output">
-					<xs:complexType>
-						<xs:all>
-							<xs:element ref="Latitude" minOccurs="1" maxOccurs="1" />
-							<xs:element ref="Longitude" minOccurs="1" maxOccurs="1" />
-						</xs:all>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-			<xs:attribute name="line" use="required" type="xs:string" />
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="DistanceToPoint">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Input">
-					<xs:complexType>
-						<xs:all>
-							<xs:element ref="Latitude" minOccurs="1" maxOccurs="1" />
-							<xs:element ref="Longitude" minOccurs="1" maxOccurs="1" />
-						</xs:all>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Output" type="xs:int" />
-			</xs:sequence>
-			<xs:attribute name="line" use="required" type="xs:string" />
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="MeasureAlongLine">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Input">
-					<xs:complexType>
-						<xs:all>
-							<xs:element ref="Latitude" minOccurs="1" maxOccurs="1" />
-							<xs:element ref="Longitude" minOccurs="1" maxOccurs="1" />
-						</xs:all>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Output" type="xs:int" />
-			</xs:sequence>
-			<xs:attribute name="line" use="required" type="xs:string" />
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="FindNodesCloseByCoordinate">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Input">
-					<xs:complexType>
-						<xs:all>
-							<xs:element ref="Latitude" minOccurs="1" maxOccurs="1" />
-							<xs:element ref="Longitude" minOccurs="1" maxOccurs="1" />
-							<xs:element name="Distance" type="xs:int" />
-						</xs:all>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Output">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Node" type="xs:long" minOccurs="1"
-								maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="FindLinesCloseByCoordinate">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Input">
-					<xs:complexType>
-						<xs:all>
-							<xs:element ref="Latitude" minOccurs="1" maxOccurs="1" />
-							<xs:element ref="Longitude" minOccurs="1" maxOccurs="1" />
-							<xs:element name="Distance" type="xs:int" />
-						</xs:all>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Output">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Line" type="xs:long" minOccurs="1"
-								maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+    <xs:element name="Calls">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="GetPointAlongLineCalls" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="GetPointAlongLine" minOccurs="1"
+                                        maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DistanceToPointCalls" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="DistanceToPoint" minOccurs="1"
+                                        maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="MeasureAlongLineCalls" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="MeasureAlongLine" minOccurs="1"
+                                        maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FindNodesCloseByCoordinateCalls"
+                            minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="FindNodesCloseByCoordinate"
+                                        minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FindLinesCloseByCoordinateCalls"
+                            minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="FindLinesCloseByCoordinate"
+                                        minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPointAlongLine">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Input" type="xs:int"/>
+                <xs:element name="Output">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element ref="Latitude" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="Longitude" minOccurs="1" maxOccurs="1"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="line" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DistanceToPoint">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Input">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element ref="Latitude" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="Longitude" minOccurs="1" maxOccurs="1"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Output" type="xs:int"/>
+            </xs:sequence>
+            <xs:attribute name="line" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MeasureAlongLine">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Input">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element ref="Latitude" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="Longitude" minOccurs="1" maxOccurs="1"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Output" type="xs:int"/>
+            </xs:sequence>
+            <xs:attribute name="line" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FindNodesCloseByCoordinate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Input">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element ref="Latitude" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="Longitude" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="Distance" type="xs:int"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Output">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Node" type="xs:long" minOccurs="1"
+                                        maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FindLinesCloseByCoordinate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Input">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element ref="Latitude" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="Longitude" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="Distance" type="xs:int"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Output">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Line" type="xs:long" minOccurs="1"
+                                        maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="Latitude" type="xs:double" />
-	<xs:element name="Longitude" type="xs:double" />
+    <xs:element name="Latitude" type="xs:double"/>
+    <xs:element name="Longitude" type="xs:double"/>
 
 </xs:schema>

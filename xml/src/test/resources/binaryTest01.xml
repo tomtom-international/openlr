@@ -2,6 +2,6 @@
 <OpenLR xmlns="http://www.openlr.org/openlr">
     <LocationID>1</LocationID>
     <BinaryLocationReferences>
-    	<BinaryLocationReference version="3" id="1">CwOiqCUTgxt6JfUBA4gbLAI=</BinaryLocationReference>
+        <BinaryLocationReference version="3" id="1">CwOiqCUTgxt6JfUBA4gbLAI=</BinaryLocationReference>
     </BinaryLocationReferences>
 </OpenLR>

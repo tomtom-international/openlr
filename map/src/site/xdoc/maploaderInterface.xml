@@ -1,48 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+<document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/XDOC/2.0"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
-	<properties>
-		<title>Map load interface</title>
-	</properties>
-	
-	<body>
-	<section name="Map load interface">
-	<a name="_top" />
-	<p>
-	The map load interface package defines methods which needs to be implemented
-  in order to provide a new map to be shown in the MapViewer. The map loader
-  implementation is aware of the underlying layout of the map data and makes
-  this data available through this map loader interface and the OpenLR map interface.
- </p><p> 
-  An implementation of the map loader interface needs to be registered as a service
-  so that the MapViewer is able to use it during runtime. The implementation needs
-  to be in the class path and will be found at runtime automatically. All required
-  classes must be packaged into a jar-file including a file named
-   </p><p> 
-  META-INF/services/openlr.map.loader.OpenLRMapLoader
-   </p><p> 
-  The content of this text file is the fully qualified name of the map loader
-  interface implementation. 
- </p><p>
- The parameters used to load a map are defined in the interface MapLoadParameter. It
-  defines methods for the identification and the
-  type of a parameter. Parameters are used by the map loader to e.g. detect the 
-  location of the map data and/or to identify a region to be loaded. They may
-  be required or optional and each parameter has a type. The type is used to present
-  a file load dialog, a directory load dialog or a single text field.
-</p>	
-<p>
-The following interfaces are defined:
-</p>
-<ul>
-<li>OpenLRMapLoader</li>
-<li>MapLoadParameter</li>
-<li>OpenLRMapLoaderException</li>
-</ul>
+    <properties>
+        <title>Map load interface</title>
+    </properties>
 
-	</section>	
-	
-	</body>
-	
+    <body>
+        <section name="Map load interface">
+            <a name="_top"/>
+            <p>
+                The map load interface package defines methods which needs to be implemented
+                in order to provide a new map to be shown in the MapViewer. The map loader
+                implementation is aware of the underlying layout of the map data and makes
+                this data available through this map loader interface and the OpenLR map interface.
+            </p>
+            <p>
+                An implementation of the map loader interface needs to be registered as a service
+                so that the MapViewer is able to use it during runtime. The implementation needs
+                to be in the class path and will be found at runtime automatically. All required
+                classes must be packaged into a jar-file including a file named
+            </p>
+            <p>
+                META-INF/services/openlr.map.loader.OpenLRMapLoader
+            </p>
+            <p>
+                The content of this text file is the fully qualified name of the map loader
+                interface implementation.
+            </p>
+            <p>
+                The parameters used to load a map are defined in the interface MapLoadParameter. It
+                defines methods for the identification and the
+                type of a parameter. Parameters are used by the map loader to e.g. detect the
+                location of the map data and/or to identify a region to be loaded. They may
+                be required or optional and each parameter has a type. The type is used to present
+                a file load dialog, a directory load dialog or a single text field.
+            </p>
+            <p>
+                The following interfaces are defined:
+            </p>
+            <ul>
+                <li>OpenLRMapLoader</li>
+                <li>MapLoadParameter</li>
+                <li>OpenLRMapLoaderException</li>
+            </ul>
+
+        </section>
+
+    </body>
+
 </document>

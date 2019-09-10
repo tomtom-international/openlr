@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,25 +39,14 @@
  */
 package openlr.encoder.database;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertSame;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
 import openlr.OpenLRProcessingException;
-import openlr.encoder.LRDatabase;
-import openlr.encoder.LRDatabaseFactory;
-import openlr.encoder.LocationReferenceHolder;
-import openlr.encoder.OpenLREncoder;
-import openlr.encoder.OpenLREncoderParameter;
-import openlr.encoder.TestData;
+import openlr.encoder.*;
 import openlr.location.Location;
 import openlr.map.InvalidMapDataException;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 /**
  * Tests the functionality of the location reference database.
@@ -54,153 +54,151 @@ import org.testng.annotations.Test;
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author TomTom International B.V.
  */
 public class LRDatabaseTest {
 
-	/** The max size of the cache. */
-	private static final int CACHE_SIZE = 20;
+    /** The max size of the cache. */
+    private static final int CACHE_SIZE = 20;
 
-	/** The central cache object for all the subclasses of this one. */
-	private static final LRDatabase CACHE = LRDatabaseFactory
-			.createLRDatabase(CACHE_SIZE);
+    /** The central cache object for all the subclasses of this one. */
+    private static final LRDatabase CACHE = LRDatabaseFactory
+            .createLRDatabase(CACHE_SIZE);
+    /** The name of the tests group that fills the cache. */
+    private static final String TEST_GROUP_FILL_CACHE = "fillCache";
+    /**
+     * An utility class holding prepared/mocked test data.
+     */
+    protected static TestData td = TestData.getInstance();
 
-	/**
-	 * An utility class holding prepared/mocked test data.
-	 */
-	protected static TestData td = TestData.getInstance();
+    /**
+     * Tests using Geo coordinate locations.
+     */
+    @Test(groups = {TEST_GROUP_FILL_CACHE})
+    public final void testGeoCoordinate() {
+        try {
+            testCommon(td.getWhitepaperGeoCoordinateLocation());
+        } catch (InvalidMapDataException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
-	/** The name of the tests group that fills the cache. */
-	private static final String TEST_GROUP_FILL_CACHE = "fillCache";
+    /**
+     * Tests using POI with access point locations.
+     */
+    @Test(groups = {TEST_GROUP_FILL_CACHE})
+    public final void testPOIWithAccess() {
+        try {
+            testCommon(td.getWhitepaperPOIWithAccessPointLocation());
+        } catch (InvalidMapDataException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
-	/**
-	 * Tests using Geo coordinate locations.
-	 */
-	@Test(groups = {TEST_GROUP_FILL_CACHE})
-	public final void testGeoCoordinate() {
-		try {
-			testCommon(td.getWhitepaperGeoCoordinateLocation());
-		} catch (InvalidMapDataException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+    /**
+     * Tests using point along line locations.
+     */
+    @Test(groups = {TEST_GROUP_FILL_CACHE})
+    public final void testPointAlongLine() {
+        try {
+            testCommon(td.getWhitepaperPointAlongLineLocation());
+        } catch (InvalidMapDataException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
-	/**
-	 * Tests using POI with access point locations.
-	 */
-	@Test(groups = {TEST_GROUP_FILL_CACHE})
-	public final void testPOIWithAccess() {
-		try {
-			testCommon(td.getWhitepaperPOIWithAccessPointLocation());
-		} catch (InvalidMapDataException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+    /**
+     * Tests using Line locations.
+     */
+    @Test(groups = {TEST_GROUP_FILL_CACHE})
+    public final void testLineLocation() {
 
-	/**
-	 * Tests using point along line locations.
-	 */
-	@Test(groups = {TEST_GROUP_FILL_CACHE})
-	public final void testPointAlongLine() {
-		try {
-			testCommon(td.getWhitepaperPointAlongLineLocation());
-		} catch (InvalidMapDataException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+        testCommon(td.getWhitepaperLineLocation());
+    }
 
-	/**
-	 * Tests using Line locations.
-	 */
-	@Test(groups = {TEST_GROUP_FILL_CACHE})
-	public final void testLineLocation() {
+    /**
+     * Performs some common tests for different location types.
+     *
+     * @param loc
+     *            The input location data.
+     */
+    private void testCommon(final Location loc) {
 
-		testCommon(td.getWhitepaperLineLocation());
-	}
+        LocationReferenceHolder deLoc = encodeLocation(loc);
+        LocationReferenceHolder deLo2 = encodeLocation(loc);
 
-	/**
-	 * Performs some common tests for different location types.
-	 * 
-	 * @param loc
-	 *            The input location data.
-	 */
-	private void testCommon(final Location loc) {
+        int sizeBefore = CACHE.getCurrentNrEntries();
 
-		LocationReferenceHolder deLoc = encodeLocation(loc);
-		LocationReferenceHolder deLo2 = encodeLocation(loc);
+        CACHE.storeResult(loc, deLoc);
+        CACHE.storeResult(loc, deLo2);
 
-		int sizeBefore = CACHE.getCurrentNrEntries();
+        assertSame(CACHE.getCurrentNrEntries(), sizeBefore + 1);
 
-		CACHE.storeResult(loc, deLoc);
-		CACHE.storeResult(loc, deLo2);
+        assertEquals(deLoc.getID(), CACHE.getResult(loc).getID());
+        assertEquals(deLo2.getID(), CACHE.getResult(loc).getID());
 
-		assertSame(CACHE.getCurrentNrEntries(), sizeBefore + 1);
+        assertTrue(deLoc.hashCode() == deLoc.hashCode());
+    }
 
-		assertEquals(deLoc.getID(), CACHE.getResult(loc).getID());
-		assertEquals(deLo2.getID(), CACHE.getResult(loc).getID());
+    /**
+     * Tests the filled cache object.
+     */
+    @Test(dependsOnGroups = {TEST_GROUP_FILL_CACHE})
+    public final void testDatabaseObject() {
+        try {
+            assertTrue(CACHE
+                    .containsLR(td.getWhitepaperGeoCoordinateLocation()));
+            assertTrue(CACHE.containsLR(td.getWhitepaperLineLocation()));
+            assertTrue(CACHE.containsLR(td
+                    .getWhitepaperPointAlongLineLocation()));
+            assertTrue(CACHE.containsLR(td
+                    .getWhitepaperPOIWithAccessPointLocation()));
 
-		assertTrue(deLoc.hashCode() == deLoc.hashCode());
-	}
+            CACHE.storeResult(null, null);
+            assertFalse(CACHE.containsLR(null));
 
-	/**
-	 * Tests the filled cache object.
-	 */
-	@Test(dependsOnGroups = {TEST_GROUP_FILL_CACHE})
-	public final void testDatabaseObject() {
-		try {
-			assertTrue(CACHE
-					.containsLR(td.getWhitepaperGeoCoordinateLocation()));
-			assertTrue(CACHE.containsLR(td.getWhitepaperLineLocation()));
-			assertTrue(CACHE.containsLR(td
-					.getWhitepaperPointAlongLineLocation()));
-			assertTrue(CACHE.containsLR(td
-					.getWhitepaperPOIWithAccessPointLocation()));
+            assertNotNull(CACHE.toString());
+            assertEquals(CACHE.getCacheSize(), CACHE_SIZE);
 
-			CACHE.storeResult(null, null);
-			assertFalse(CACHE.containsLR(null));
+            CACHE.clear();
+            assertEquals(0, CACHE.getCurrentNrEntries());
+            assertNull(CACHE.getResult(td.getWhitepaperGeoCoordinateLocation()));
+            assertFalse(CACHE.containsLR(td
+                    .getWhitepaperGeoCoordinateLocation()));
+        } catch (InvalidMapDataException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+    }
 
-			assertNotNull(CACHE.toString());
-			assertEquals(CACHE.getCacheSize(), CACHE_SIZE);
+    @Test(dependsOnGroups = {TEST_GROUP_FILL_CACHE}, expectedExceptions = IllegalArgumentException.class)
+    public final void testDatabaseObjectFailure() {
+        assertNull(CACHE.getResult(null));
+    }
 
-			CACHE.clear();
-			assertEquals(0, CACHE.getCurrentNrEntries());
-			assertNull(CACHE.getResult(td.getWhitepaperGeoCoordinateLocation()));
-			assertFalse(CACHE.containsLR(td
-					.getWhitepaperGeoCoordinateLocation()));
-		} catch (InvalidMapDataException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-	}
+    /**
+     * Encodes the given location.
+     *
+     * @param inputLoc
+     *            The input data.
+     * @return the decoded location reference.
+     */
+    private LocationReferenceHolder encodeLocation(final Location inputLoc) {
+        LocationReferenceHolder encLocRef = null;
 
-	@Test(dependsOnGroups = {TEST_GROUP_FILL_CACHE}, expectedExceptions = IllegalArgumentException.class)
-	public final void testDatabaseObjectFailure() {
-		assertNull(CACHE.getResult(null));
-	}
+        try {
+            OpenLREncoder encoder = new OpenLREncoder();
+            OpenLREncoderParameter params = new OpenLREncoderParameter.Builder()
+                    .with(td.getMapDatabase()).with(td.getConfiguration())
+                    .buildParameter();
+            encLocRef = encoder.encodeLocation(params, inputLoc);
 
-	/**
-	 * Encodes the given location.
-	 * 
-	 * @param inputLoc
-	 *            The input data.
-	 * @return the decoded location reference.
-	 */
-	private LocationReferenceHolder encodeLocation(final Location inputLoc) {
-		LocationReferenceHolder encLocRef = null;
+        } catch (OpenLRProcessingException e) {
+            fail("Decoding location failed with exception: " + e.getErrorCode(),
+                    e);
+        }
 
-		try {
-			OpenLREncoder encoder = new OpenLREncoder();
-			OpenLREncoderParameter params = new OpenLREncoderParameter.Builder()
-					.with(td.getMapDatabase()).with(td.getConfiguration())
-					.buildParameter();
-			encLocRef = encoder.encodeLocation(params, inputLoc);
-
-		} catch (OpenLRProcessingException e) {
-			fail("Decoding location failed with exception: " + e.getErrorCode(),
-					e);
-		}
-
-		return encLocRef;
-	}
+        return encLocRef;
+    }
 
 }

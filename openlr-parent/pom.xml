@@ -1,528 +1,532 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>openlr</groupId>
-	<artifactId>openlr-parent</artifactId>
-	<packaging>pom</packaging>
-	<version>1.4.3-SNAPSHOT</version>
+    <groupId>openlr</groupId>
+    <artifactId>openlr-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.4.3-SNAPSHOT</version>
 
-	<name>OpenLR - parent</name>
-	<url>http://www.openlr.org</url>
-	<description>OpenLR - open standard for location referencing</description>
+    <name>OpenLR - parent</name>
+    <url>http://www.openlr.org</url>
+    <description>OpenLR - open standard for location referencing</description>
 
-	<developers>
-		<developer>
-			<name>TomTom International B.V.</name>
-			<email>openlr@tomtom.com</email>
-			<url>http://www.tomtom.com</url>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <name>TomTom International B.V.</name>
+            <email>openlr@tomtom.com</email>
+            <url>http://www.tomtom.com</url>
+        </developer>
+    </developers>
 
-	<organization>
-		<name>TomTom International B.V.</name>
-		<url>http://www.tomtom.com</url>
-	</organization>
+    <organization>
+        <name>TomTom International B.V.</name>
+        <url>http://www.tomtom.com</url>
+    </organization>
 
-	<licenses>
-		<license>
-			<name>Apache v2.0</name>
-			<comments>This program is free software; you can redistribute it and/or modify
- it under the terms of the Apache license version 2 and the extra
- condition for OpenLR. (see LICENSE)</comments>
-			<url>src/main/resources/LICENSE</url>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>Apache v2.0</name>
+            <comments>This program is free software; you can redistribute it and/or modify
+                it under the terms of the Apache license version 2 and the extra
+                condition for OpenLR. (see LICENSE)
+            </comments>
+            <url>src/main/resources/LICENSE</url>
+        </license>
+    </licenses>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.license.plugin.version>1.10.b1</maven.license.plugin.version>
-		<maven.surefire.plugin.version>3.0.0-M3</maven.surefire.plugin.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.license.plugin.version>1.10.b1</maven.license.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M3</maven.surefire.plugin.version>
+    </properties>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
-					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-					</configuration>
-				</plugin>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
 
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.0</version>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.0</version>
+                </plugin>
 
-				<plugin>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.8</version>
-					<configuration>
-						<archive>
-							<manifestFile>src/main/resources/templates/MANIFEST.MF</manifestFile>
-						</archive>
-						<doctitle>OpenLR&#8482; API</doctitle>
-						<windowtitle>OpenLR&#8482; API</windowtitle>
-					</configuration>
-					<executions>
-						<execution>
-							<id>create-javadoc-jar</id>
-							<phase>package</phase>
-							<goals>
-								<goal>jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.8</version>
+                    <configuration>
+                        <archive>
+                            <manifestFile>src/main/resources/templates/MANIFEST.MF</manifestFile>
+                        </archive>
+                        <doctitle>OpenLR&#8482; API</doctitle>
+                        <windowtitle>OpenLR&#8482; API</windowtitle>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>create-javadoc-jar</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-				<plugin>
-					<groupId>com.mycila</groupId>
-					<artifactId>license-maven-plugin</artifactId>
-					<version>${maven.license.plugin.version}</version>
-					<configuration>
-						<header>${basedir}/src/main/resources/templates/HEADER</header>
-						<includes>
-							<include>**/*.java</include>
-						</includes>
-						<excludes>
-							<exclude>**/autogen/**</exclude>
-							<exclude>**/cern/**</exclude>
-							<exclude>**/test/**</exclude>
-						</excludes>
-						<strictCheck>true</strictCheck>
-					</configuration>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${maven.license.plugin.version}</version>
+                    <configuration>
+                        <header>${basedir}/src/main/resources/templates/HEADER</header>
+                        <includes>
+                            <include>**/*.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/autogen/**</exclude>
+                            <exclude>**/cern/**</exclude>
+                            <exclude>**/test/**</exclude>
+                        </excludes>
+                        <strictCheck>true</strictCheck>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-changes-plugin</artifactId>
-					<version>2.8</version>
-					<configuration>
-						<template>changelog.txt</template>
-						<templateDirectory>src/main/resources/templates</templateDirectory>
-						<xmlPath>src/changes/changes.xml</xmlPath>
-					</configuration>
-					<executions>
-						<execution>
-							<goals>
-								<goal>announcement-generate</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-changes-plugin</artifactId>
+                    <version>2.8</version>
+                    <configuration>
+                        <template>changelog.txt</template>
+                        <templateDirectory>src/main/resources/templates</templateDirectory>
+                        <xmlPath>src/changes/changes.xml</xmlPath>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>announcement-generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-				<plugin>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.1.2</version>
-					<configuration>
-						<attach>true</attach>
-						<archive>
-							<manifestFile>src/main/resources/templates/MANIFEST.MF</manifestFile>
-							<manifestEntries>
-								<Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source</Bundle-SymbolicName>
-								<Bundle-Version>${project.version}</Bundle-Version>
-								<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-								<Bundle-Name>${project.groupId} ${project.artifactId} package sources</Bundle-Name>
-								<Eclipse-SourceBundle>${project.groupId}.${project.artifactId};version="${project.version}";roots:="."</Eclipse-SourceBundle>
-							</manifestEntries>
-						</archive>
-					</configuration>
-					<executions>
-						<execution>
-							<id>create-source-jar</id>
-							<phase>package</phase>
-							<goals>
-								<goal>jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.1.2</version>
+                    <configuration>
+                        <attach>true</attach>
+                        <archive>
+                            <manifestFile>src/main/resources/templates/MANIFEST.MF</manifestFile>
+                            <manifestEntries>
+                                <Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source
+                                </Bundle-SymbolicName>
+                                <Bundle-Version>${project.version}</Bundle-Version>
+                                <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                                <Bundle-Name>${project.groupId} ${project.artifactId} package sources</Bundle-Name>
+                                <Eclipse-SourceBundle>
+                                    ${project.groupId}.${project.artifactId};version="${project.version}";roots:="."
+                                </Eclipse-SourceBundle>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>create-source-jar</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.3.1</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>jar</goal>
-								<goal>test-jar</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<archive>
-							<manifestFile>src/main/resources/templates/MANIFEST.MF</manifestFile>
-							<manifestEntries>
-								<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-								<Bundle-Version>${project.version}</Bundle-Version>
-								<Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-								<Bundle-Name>${project.groupId} ${project.artifactId} package</Bundle-Name>
-							</manifestEntries>
-						</archive>
-					</configuration>
-				</plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.3.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>jar</goal>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <archive>
+                            <manifestFile>src/main/resources/templates/MANIFEST.MF</manifestFile>
+                            <manifestEntries>
+                                <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                                <Bundle-Version>${project.version}</Bundle-Version>
+                                <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                                <Bundle-Name>${project.groupId} ${project.artifactId} package</Bundle-Name>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
 
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>truezip-maven-plugin</artifactId>
-					<version>1.0-beta-5</version>
-				</plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>truezip-maven-plugin</artifactId>
+                    <version>1.0-beta-5</version>
+                </plugin>
 
-			</plugins>
-		</pluginManagement>
-	</build>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>2.3.1</version>
-			</plugin>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>2.3.1</version>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changes-plugin</artifactId>
-				<version>2.5</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>changes-report</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>2.5</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>changes-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<configLocation>${basedir}/checkstyle_openlr.xml</configLocation>
-					<excludes>
-						**/generated/**/*, **/autogen/**/*, **/test/**/*
-					</excludes>
-					<linkXRef>false</linkXRef>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <configLocation>${basedir}/checkstyle_openlr.xml</configLocation>
+                    <excludes>
+                        **/generated/**/*, **/autogen/**/*, **/test/**/*
+                    </excludes>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
-				<configuration>
-					<doctitle>OpenLR&#8482; API</doctitle>
-					<windowtitle>OpenLR&#8482; API</windowtitle>
-				</configuration>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <doctitle>OpenLR&#8482; API</doctitle>
+                    <windowtitle>OpenLR&#8482; API</windowtitle>
+                </configuration>
 
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>javadoc</report>
-						</reports>
-					</reportSet>
-					<reportSet>
-						<reports>
-							<report>aggregate</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<targetJdk>1.6</targetJdk>
-					<excludes>
-						<exclude>**/*Bean.java</exclude>
-						<exclude>**/generated/*.java</exclude>
-					</excludes>
-					<linkXRef>false</linkXRef>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <targetJdk>1.6</targetJdk>
+                    <excludes>
+                        <exclude>**/*Bean.java</exclude>
+                        <exclude>**/generated/*.java</exclude>
+                    </excludes>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+            </plugin>
 
-			<plugin>   
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>javancss-maven-plugin</artifactId>
-				<version>2.0</version>
-				<configuration>
-					<linkXRef>false</linkXRef>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+            </plugin>
 
-		</plugins>
-	</reporting>
+        </plugins>
+    </reporting>
 
-	<dependencyManagement>
-		<dependencies>
+    <dependencyManagement>
+        <dependencies>
 
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-			</dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>6.8</version>
-				<scope>test</scope>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.jmock</groupId>
-				<artifactId>jmock-legacy</artifactId>
-				<version>2.5.1</version>
-				<scope>test</scope>
-			</dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.8</version>
+                <scope>test</scope>
+            </dependency>
 
-		</dependencies>
-	</dependencyManagement>
+            <dependency>
+                <groupId>org.jmock</groupId>
+                <artifactId>jmock-legacy</artifactId>
+                <version>2.5.1</version>
+                <scope>test</scope>
+            </dependency>
 
-	<profiles>
-		<profile>
-			<id>development</id>
+        </dependencies>
+    </dependencyManagement>
 
-			<activation>
-				<property>
-					<name>build.type</name>
-					<value>dev</value>
-				</property>
-			</activation>
+    <profiles>
+        <profile>
+            <id>development</id>
 
-			<build>
-				<pluginManagement>
-					<plugins>
+            <activation>
+                <property>
+                    <name>build.type</name>
+                    <value>dev</value>
+                </property>
+            </activation>
 
-						<plugin>
-							<artifactId>maven-source-plugin</artifactId>
-							<version>2.1.2</version>
-							<configuration>
-								<attach>true</attach>
-								<archive>
-									<manifestFile>src/main/resources/templates/MANIFEST.MF
-									</manifestFile>
-								</archive>
-							</configuration>
-							<executions>
-								<execution>
-									<id>create-test-sources-jar</id>
-									<goals>
-										<goal>test-jar</goal>
-									</goals>
-								</execution>
-							</executions>
-						</plugin>
+            <build>
+                <pluginManagement>
+                    <plugins>
 
-						<plugin>
-							<artifactId>maven-jar-plugin</artifactId>
-							<executions>
-								<execution>
-									<goals>
-										<goal>test-jar</goal>
-									</goals>
-								</execution>
-							</executions>
-							<configuration>
-								<archive>
-									<manifestFile>src/main/resources/templates/MANIFEST.MF
-									</manifestFile>
-								</archive>
-							</configuration>
-						</plugin>
+                        <plugin>
+                            <artifactId>maven-source-plugin</artifactId>
+                            <version>2.1.2</version>
+                            <configuration>
+                                <attach>true</attach>
+                                <archive>
+                                    <manifestFile>src/main/resources/templates/MANIFEST.MF
+                                    </manifestFile>
+                                </archive>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>create-test-sources-jar</id>
+                                    <goals>
+                                        <goal>test-jar</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
 
-					</plugins>
-				</pluginManagement>
-			</build>
+                        <plugin>
+                            <artifactId>maven-jar-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>test-jar</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                            <configuration>
+                                <archive>
+                                    <manifestFile>src/main/resources/templates/MANIFEST.MF
+                                    </manifestFile>
+                                </archive>
+                            </configuration>
+                        </plugin>
 
-			<distributionManagement>
+                    </plugins>
+                </pluginManagement>
+            </build>
 
-				<snapshotRepository>
-					<id>dev_repository</id>
-					<url>${dev.snapshot.url}</url>
-				</snapshotRepository>
+            <distributionManagement>
 
-				<repository>
-					<id>dev_repository</id>
-					<url>${dev.release.url}</url>
-				</repository>
+                <snapshotRepository>
+                    <id>dev_repository</id>
+                    <url>${dev.snapshot.url}</url>
+                </snapshotRepository>
 
-				<site>
-					<id>dev_site</id>
-					<url>${dev.site.url}</url>
-				</site>
+                <repository>
+                    <id>dev_repository</id>
+                    <url>${dev.release.url}</url>
+                </repository>
 
-			</distributionManagement>
+                <site>
+                    <id>dev_site</id>
+                    <url>${dev.site.url}</url>
+                </site>
 
-			<reporting>
-				<plugins>
+            </distributionManagement>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-project-info-reports-plugin</artifactId>
-						<version>2.4</version>
-						<reportSets>
-							<reportSet>
-								<reports>
-									<report>summary</report>
-									<report>license</report>
-									<report>index</report>
-									<report>dependencies</report>
-									<report>project-team</report>
-									<report>plugins</report>
-								</reports>
-							</reportSet>
-						</reportSets>
-					</plugin>
+            <reporting>
+                <plugins>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-report-plugin</artifactId>
-						<version>2.9</version>
-						<configuration>
-							<excludedGroups>broken</excludedGroups>
-						</configuration>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>2.4</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>summary</report>
+                                    <report>license</report>
+                                    <report>index</report>
+                                    <report>dependencies</report>
+                                    <report>project-team</report>
+                                    <report>plugins</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.9</version>
-						<configuration>
-							<excludedGroups>broken</excludedGroups>
-						</configuration>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-report-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <excludedGroups>broken</excludedGroups>
+                        </configuration>
+                    </plugin>
 
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>cobertura-maven-plugin</artifactId>
-						<version>2.5.1</version>
-						<configuration>
-							<check>
-								<lineRate>0</lineRate>
-								<branchRate>0</branchRate>
-							</check>
-							<instrumentation>
-								<excludes>
-									<exclude>**/package-info.*</exclude>
-									<exclude>**/generated/*</exclude>
-									<exclude>**/autogen/*</exclude>
-									<exclude>**/eu/datex2/schema/**</exclude>
-								</excludes>
-							</instrumentation>
-							<formats>
-								<format>html</format>
-								<format>xml</format>
-							</formats>
-						</configuration>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <excludedGroups>broken</excludedGroups>
+                        </configuration>
+                    </plugin>
 
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>taglist-maven-plugin</artifactId>
-						<version>2.4</version>
-						<configuration>
-							<tagListOptions>
-								<tagClasses>
-									<tagClass>
-										<displayName>ToDo</displayName>
-										<tags>
-											<tag>
-												<matchString>todo</matchString>
-												<matchType>ignoreCase</matchType>
-											</tag>
-										</tags>
-									</tagClass>
-									<tagClass>
-										<displayName>FixMe</displayName>
-										<tags>
-											<tag>
-												<matchString>fixme</matchString>
-												<matchType>ignoreCase</matchType>
-											</tag>
-										</tags>
-									</tagClass>
-								</tagClasses>
-							</tagListOptions>
-						</configuration>
-					</plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>cobertura-maven-plugin</artifactId>
+                        <version>2.5.1</version>
+                        <configuration>
+                            <check>
+                                <lineRate>0</lineRate>
+                                <branchRate>0</branchRate>
+                            </check>
+                            <instrumentation>
+                                <excludes>
+                                    <exclude>**/package-info.*</exclude>
+                                    <exclude>**/generated/*</exclude>
+                                    <exclude>**/autogen/*</exclude>
+                                    <exclude>**/eu/datex2/schema/**</exclude>
+                                </excludes>
+                            </instrumentation>
+                            <formats>
+                                <format>html</format>
+                                <format>xml</format>
+                            </formats>
+                        </configuration>
+                    </plugin>
 
-				</plugins>
-			</reporting>
-		</profile>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>taglist-maven-plugin</artifactId>
+                        <version>2.4</version>
+                        <configuration>
+                            <tagListOptions>
+                                <tagClasses>
+                                    <tagClass>
+                                        <displayName>ToDo</displayName>
+                                        <tags>
+                                            <tag>
+                                                <matchString>todo</matchString>
+                                                <matchType>ignoreCase</matchType>
+                                            </tag>
+                                        </tags>
+                                    </tagClass>
+                                    <tagClass>
+                                        <displayName>FixMe</displayName>
+                                        <tags>
+                                            <tag>
+                                                <matchString>fixme</matchString>
+                                                <matchType>ignoreCase</matchType>
+                                            </tag>
+                                        </tags>
+                                    </tagClass>
+                                </tagClasses>
+                            </tagListOptions>
+                        </configuration>
+                    </plugin>
 
-		<!-- ******************************************************************************************* -->
+                </plugins>
+            </reporting>
+        </profile>
 
-		<profile>
-			<id>openlr</id>
+        <!-- ******************************************************************************************* -->
 
-			<activation>
-				<property>
-					<name>build.type</name>
-					<value>prod</value>
-				</property>
-			</activation>
+        <profile>
+            <id>openlr</id>
 
-			<distributionManagement>
+            <activation>
+                <property>
+                    <name>build.type</name>
+                    <value>prod</value>
+                </property>
+            </activation>
 
-				<downloadUrl>http://www.openlr.org</downloadUrl>
+            <distributionManagement>
 
-				<site>
-					<id>prod_site</id>
-					<url>${prod.site.url}</url>
-				</site>
+                <downloadUrl>http://www.openlr.org</downloadUrl>
 
-				<snapshotRepository>
-					<id>prod_repository</id>
-					<url>${prod.snapshot.url}</url>
-				</snapshotRepository>
+                <site>
+                    <id>prod_site</id>
+                    <url>${prod.site.url}</url>
+                </site>
 
-				<repository>
-					<id>prod_repository</id>
-					<url>${prod.release.url}</url>
-				</repository>
+                <snapshotRepository>
+                    <id>prod_repository</id>
+                    <url>${prod.snapshot.url}</url>
+                </snapshotRepository>
 
-			</distributionManagement>
+                <repository>
+                    <id>prod_repository</id>
+                    <url>${prod.release.url}</url>
+                </repository>
 
-			<reporting>
-				<plugins>
+            </distributionManagement>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-project-info-reports-plugin</artifactId>
-						<version>2.4</version>
-						<reportSets>
-							<reportSet>
-								<reports>
-									<report>summary</report>
-									<report>license</report>
-									<report>index</report>
-									<report>dependencies</report>
-									<report>project-team</report>
-									<report>plugins</report>
-								</reports>
-							</reportSet>
-						</reportSets>
-					</plugin>
+            <reporting>
+                <plugins>
 
-				</plugins>
-			</reporting>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>2.4</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>summary</report>
+                                    <report>license</report>
+                                    <report>index</report>
+                                    <report>dependencies</report>
+                                    <report>project-team</report>
+                                    <report>plugins</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
 
-		</profile>
+                </plugins>
+            </reporting>
 
-	</profiles>
+        </profile>
+
+    </profiles>
 
 </project>

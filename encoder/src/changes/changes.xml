@@ -1,163 +1,163 @@
-<document xmlns="http://maven.apache.org/changes/1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
-	<properties>
-		<title>OpenLR - encoder package</title>
-		<author email="openlr@tomtom.com">TomTom International B.V.</author>
-	</properties>
-	<body>
+<document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/changes/1.0.0"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+    <properties>
+        <title>OpenLR - encoder package</title>
+        <author email="openlr@tomtom.com">TomTom International B.V.</author>
+    </properties>
+    <body>
 
-		<!--
-			template for future releases <release version="<version number>"
-			date="<release date>" description="<textual description>"> <action
-			dev="<developer>" type="add"> Test 1 </action> <action
-			dev="<developer>" type="update"> Test 2 </action> <action
-			dev="<developer>" type="fix"> Test 3 </action> <action
-			dev="<developer>" type="remove"> Test 4 </action> </release>
-		-->
-		
-		<release version="1.4.1" date="" description="OpenLR release 1.4.1">
-		
-		</release>
-		
-		<release version="1.4.0" date="" description="Release 1.4.0">
-	        <action dev="TomTom International B.V." type="update">
-				Changed name of OpenLREncoderRuntimeException to OpenLREncoderProcessingException to avoid confusion 
-				about the fact that it's not of type java.lang.RuntimeException
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				Bug fixes.
-			</action>
-		</release>		
-		
-		<release version="1.3.0" date="" description="Release 1.3.0">
-		<action dev="TomTom International B.V." type="add">
-				Add area location support.
-			</action>
-		</release>
-		
-				
-		<release version="1.2.2" date="" description="Release 1.2.2">
-			<action dev="TomTom International B.V." type="fix">
-				Fix handling of locations longer than 15km.
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				Adapt changes in the data package.
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				Make use of lfrc value to reduce the size of the search area during shortest-path calculation.
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				Refactor adding of intermediate LRP is max diatsnce is exceeded.
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				Refactor determination of intermediates during shortest-path calculation.
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				Implementation of location interface moved to data package.
-			</action>
-		</release>
-		
+        <!--
+            template for future releases <release version="<version number>"
+            date="<release date>" description="<textual description>"> <action
+            dev="<developer>" type="add"> Test 1 </action> <action
+            dev="<developer>" type="update"> Test 2 </action> <action
+            dev="<developer>" type="fix"> Test 3 </action> <action
+            dev="<developer>" type="remove"> Test 4 </action> </release>
+        -->
 
-		<release version="1.2.1" date="2010-08-04" description="Release 1.2.1">
-			<action dev="TomTom International B.V." type="add">
-				add hashCode and equals method to all data classes
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				location/location reference database make use of hashCodes
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				encapsulate open list and best value storage into one class RouteSearchData
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				use of consistent location/(raw) location reference identifier
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				add name and explanation to error code
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				implement return code instead of exceptions
-			</action>
-			<action dev="TomTom International B.V." type="update">
-				split location and raw location depending on location type
-			</action>
-		</release>
+        <release version="1.4.1" date="" description="OpenLR release 1.4.1">
 
-		<release version="1.2.0" date="2010-07-01" description="Major OpenLR release 1.2.0">
-			<action dev="TomTom International B.V." type="fix">
-				check for loops
-				of a single line and add intermediate lrp
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				create location
-				factory
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				add raw location
-				reference data to location reference holder
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				adapt raw
-				location reference interface
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				add toString
-				methods for data classes
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				enable encoding
-				using a properties object (instead of inputstream)				
-			</action>
-			<action dev="TomTom International B.V." type="fix">
-				reduce memory
-				consumption
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				add side of road
-				and orientation for point locations
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				implement point
-				location support
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				check offset
-				values
-			</action>
-			<action dev="TomTom International B.V." type="add">
-				add property to
-				encoder configuration for choosing a physical format version
-			</action>
-		</release>
+        </release>
 
-		<release version="1.1.0" date="2010-02-01" description="Major OpenLR release 1.1.0">
-			<action dev="TomTom International B.V." type="change">
-				Encoder package
-				does not depend on binary package anymore.
-      		</action>
-			<action dev="TomTom International B.V." type="add">
-				Encoder finds
-				available output formats using Java services.
-      		</action>
-			<action dev="TomTom International B.V." type="change">
-				Encoder reads and
-				provides data using the OpenLR data interfaces.
-      		</action>
-			<action dev="TomTom International B.V." type="change">
-				Encoder throws
-				OpenLRRuntimeException if encoding is not possible at all and
-				it
-				reports not encodable locations using OpenLREncoderExceptions.
-			</action>
-		</release>
+        <release version="1.4.0" date="" description="Release 1.4.0">
+            <action dev="TomTom International B.V." type="update">
+                Changed name of OpenLREncoderRuntimeException to OpenLREncoderProcessingException to avoid confusion
+                about the fact that it's not of type java.lang.RuntimeException
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                Bug fixes.
+            </action>
+        </release>
 
-		<release version="1.0.0" date="2009-11-09"
-			description="Initial release - reference implementation">
-			<action dev="TomTom International B.V." type="add">
-				Initial release
-				of the OpenLR encoder package.
-      		</action>
-		</release>
+        <release version="1.3.0" date="" description="Release 1.3.0">
+            <action dev="TomTom International B.V." type="add">
+                Add area location support.
+            </action>
+        </release>
 
-	</body>
+
+        <release version="1.2.2" date="" description="Release 1.2.2">
+            <action dev="TomTom International B.V." type="fix">
+                Fix handling of locations longer than 15km.
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                Adapt changes in the data package.
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                Make use of lfrc value to reduce the size of the search area during shortest-path calculation.
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                Refactor adding of intermediate LRP is max diatsnce is exceeded.
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                Refactor determination of intermediates during shortest-path calculation.
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                Implementation of location interface moved to data package.
+            </action>
+        </release>
+
+
+        <release version="1.2.1" date="2010-08-04" description="Release 1.2.1">
+            <action dev="TomTom International B.V." type="add">
+                add hashCode and equals method to all data classes
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                location/location reference database make use of hashCodes
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                encapsulate open list and best value storage into one class RouteSearchData
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                use of consistent location/(raw) location reference identifier
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                add name and explanation to error code
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                implement return code instead of exceptions
+            </action>
+            <action dev="TomTom International B.V." type="update">
+                split location and raw location depending on location type
+            </action>
+        </release>
+
+        <release version="1.2.0" date="2010-07-01" description="Major OpenLR release 1.2.0">
+            <action dev="TomTom International B.V." type="fix">
+                check for loops
+                of a single line and add intermediate lrp
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                create location
+                factory
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                add raw location
+                reference data to location reference holder
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                adapt raw
+                location reference interface
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                add toString
+                methods for data classes
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                enable encoding
+                using a properties object (instead of inputstream)
+            </action>
+            <action dev="TomTom International B.V." type="fix">
+                reduce memory
+                consumption
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                add side of road
+                and orientation for point locations
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                implement point
+                location support
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                check offset
+                values
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                add property to
+                encoder configuration for choosing a physical format version
+            </action>
+        </release>
+
+        <release version="1.1.0" date="2010-02-01" description="Major OpenLR release 1.1.0">
+            <action dev="TomTom International B.V." type="change">
+                Encoder package
+                does not depend on binary package anymore.
+            </action>
+            <action dev="TomTom International B.V." type="add">
+                Encoder finds
+                available output formats using Java services.
+            </action>
+            <action dev="TomTom International B.V." type="change">
+                Encoder reads and
+                provides data using the OpenLR data interfaces.
+            </action>
+            <action dev="TomTom International B.V." type="change">
+                Encoder throws
+                OpenLRRuntimeException if encoding is not possible at all and
+                it
+                reports not encodable locations using OpenLREncoderExceptions.
+            </action>
+        </release>
+
+        <release version="1.0.0" date="2009-11-09"
+                 description="Initial release - reference implementation">
+            <action dev="TomTom International B.V." type="add">
+                Initial release
+                of the OpenLR encoder package.
+            </action>
+        </release>
+
+    </body>
 </document>

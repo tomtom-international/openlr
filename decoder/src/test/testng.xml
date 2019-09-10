@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-  
-<suite name="decoder" verbose="1" >
-  <test name="All Tests">
-    <packages>
-      <package name="openlr.decoder.*"/>
-    </packages>
-  </test>
+
+<suite name="decoder" verbose="1">
+    <test name="All Tests">
+        <packages>
+            <package name="openlr.decoder.*"/>
+        </packages>
+    </test>
 </suite>

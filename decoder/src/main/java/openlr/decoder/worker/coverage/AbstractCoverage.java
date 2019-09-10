@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -30,11 +41,6 @@
  */
 package openlr.decoder.worker.coverage;
 
-import java.awt.Polygon;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import openlr.decoder.OpenLRDecoderProcessingException;
 import openlr.decoder.OpenLRDecoderProcessingException.DecoderProcessingError;
 import openlr.decoder.location.AffectedLinesImpl;
@@ -44,116 +50,121 @@ import openlr.map.InvalidMapDataException;
 import openlr.map.Line;
 import openlr.map.MapDatabase;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
- * 
+ *
  * <p>
  * OpenLR is a trade mark of TomTom International B.V.
  * <p>
  * email: software@openlr.org
- * 
+ *
  * @author DLR e.V. (RE)
  */
 public abstract class AbstractCoverage {
 
-	/** the Constant MINIMUM_ADDITIONAL_DISTANCE. */
-	public static final int MINIMUM_ADDITIONAL_DISTANCE = 100;
+    /** the Constant MINIMUM_ADDITIONAL_DISTANCE. */
+    public static final int MINIMUM_ADDITIONAL_DISTANCE = 100;
 
-	/** The Constant COORD_TO_INT_FACTOR. */
-	public static final int COORD_TO_INT_FACTOR = 100000;
+    /** The Constant COORD_TO_INT_FACTOR. */
+    public static final int COORD_TO_INT_FACTOR = 100000;
 
-	/** the Constant PATH_ITERATOR_COORDINATE_SIZE. */
-	public static final int PATH_ITERATOR_COORDINATE_SIZE = 6;
+    /** the Constant PATH_ITERATOR_COORDINATE_SIZE. */
+    public static final int PATH_ITERATOR_COORDINATE_SIZE = 6;
 
-	/**
-	 * Find all lines covered (i.e., completely covered or partially covered,
-	 * i.e. intersected) by an area location. For the returned iterator to be
-	 * different from null, the location has to be an area location that is a
-	 * circle, a rectangle or grid or a polygon location.
-	 * 
-	 * @param mdb
-	 *            the mdb
-	 * @return the iterator<? extends line>
-	 * @throws OpenLRDecoderProcessingException
-	 *             the open lr decoder processing exception
-	 */
-	abstract Iterator<? extends Line> determineCoveredLines(
-			final MapDatabase mdb) throws OpenLRDecoderProcessingException;
+    /**
+     * Find all lines covered (i.e., completely covered or partially covered,
+     * i.e. intersected) by an area location. For the returned iterator to be
+     * different from null, the location has to be an area location that is a
+     * circle, a rectangle or grid or a polygon location.
+     *
+     * @param mdb
+     *            the mdb
+     * @return the iterator<? extends line>
+     * @throws OpenLRDecoderProcessingException
+     *             the open lr decoder processing exception
+     */
+    abstract Iterator<? extends Line> determineCoveredLines(
+            final MapDatabase mdb) throws OpenLRDecoderProcessingException;
 
-	/**
-	 * Checks if is contained in.
-	 * 
-	 * @param longitude
-	 *            the longitude
-	 * @param latitude
-	 *            the latitude
-	 * @return true, if is contained in
-	 * @throws InvalidMapDataException
-	 *             the invalid map data exception
-	 */
-	abstract boolean isContainedIn(final double longitude, final double latitude)
-			throws InvalidMapDataException;
-	
-	/**
-	 * Intersects boundary.
-	 *
-	 * @param gcStart the gc start
-	 * @param gcEnd the gc end
-	 * @return true, if successful
-	 * @throws InvalidMapDataException the invalid map data exception
-	 */
-	abstract boolean intersectsBoundary(final GeoCoordinates gcStart, final GeoCoordinates gcEnd) throws InvalidMapDataException;
+    /**
+     * Checks if is contained in.
+     *
+     * @param longitude
+     *            the longitude
+     * @param latitude
+     *            the latitude
+     * @return true, if is contained in
+     * @throws InvalidMapDataException
+     *             the invalid map data exception
+     */
+    abstract boolean isContainedIn(final double longitude, final double latitude)
+            throws InvalidMapDataException;
 
-	/**
-	 * Gets the affected lines.
-	 * 
-	 * @param mdb
-	 *            the mdb
-	 * @return the affected lines
-	 * @throws OpenLRDecoderProcessingException
-	 *             the open lr decoder processing exception
-	 */
-	public final AffectedLines getAffectedLines(final MapDatabase mdb)
-			throws OpenLRDecoderProcessingException {
-		if (mdb == null) {
-			return AffectedLinesImpl.EMPTY;
-		}
-		return makeCoveredAndIntersectedLinesList(determineCoveredLines(mdb));
-	}
+    /**
+     * Intersects boundary.
+     *
+     * @param gcStart the gc start
+     * @param gcEnd the gc end
+     * @return true, if successful
+     * @throws InvalidMapDataException the invalid map data exception
+     */
+    abstract boolean intersectsBoundary(final GeoCoordinates gcStart, final GeoCoordinates gcEnd) throws InvalidMapDataException;
 
-	/** 
-	 * Create a polygon from the list of corner points.
-	 * 
-	 * @param corners
-	 *            the corners
-	 * @return the polygon
-	 */
-	final Polygon createPolygon(final List<? extends GeoCoordinates> corners) {
-		int[] xpoints = new int[corners.size()];
-		int[] ypoints = new int[corners.size()];
-		int i = 0;
-		for (GeoCoordinates geoCoord : corners) {
-			double xrep = geoCoord.getLongitudeDeg() * COORD_TO_INT_FACTOR;
-			int intxrep = (int) xrep;
-			xpoints[i] = intxrep;
-			double yrep = geoCoord.getLatitudeDeg() * COORD_TO_INT_FACTOR;
-			int intyrep = (int) yrep;
-			ypoints[i++] = intyrep;
-		}
-		return new Polygon(xpoints, ypoints, corners.size());
-	}
+    /**
+     * Gets the affected lines.
+     *
+     * @param mdb
+     *            the mdb
+     * @return the affected lines
+     * @throws OpenLRDecoderProcessingException
+     *             the open lr decoder processing exception
+     */
+    public final AffectedLines getAffectedLines(final MapDatabase mdb)
+            throws OpenLRDecoderProcessingException {
+        if (mdb == null) {
+            return AffectedLinesImpl.EMPTY;
+        }
+        return makeCoveredAndIntersectedLinesList(determineCoveredLines(mdb));
+    }
 
-	/** 
-	 * Generate and return a pair of two lists: the list of lines covered by the
-	 * area location given by the raw location reference and the list of lines
-	 * intersected by the boundary of the aforementioned area location.
-	 * 
-	 * @param coveredLinesIter
-	 *            the covered lines iter
-	 * @return a pair containing the list of covered lines and the list of
-	 *         intersected lines
-	 * @throws OpenLRDecoderProcessingException
-	 *             the open lr decoder runtime exception
-	 */
+    /**
+     * Create a polygon from the list of corner points.
+     *
+     * @param corners
+     *            the corners
+     * @return the polygon
+     */
+    final Polygon createPolygon(final List<? extends GeoCoordinates> corners) {
+        int[] xpoints = new int[corners.size()];
+        int[] ypoints = new int[corners.size()];
+        int i = 0;
+        for (GeoCoordinates geoCoord : corners) {
+            double xrep = geoCoord.getLongitudeDeg() * COORD_TO_INT_FACTOR;
+            int intxrep = (int) xrep;
+            xpoints[i] = intxrep;
+            double yrep = geoCoord.getLatitudeDeg() * COORD_TO_INT_FACTOR;
+            int intyrep = (int) yrep;
+            ypoints[i++] = intyrep;
+        }
+        return new Polygon(xpoints, ypoints, corners.size());
+    }
+
+    /**
+     * Generate and return a pair of two lists: the list of lines covered by the
+     * area location given by the raw location reference and the list of lines
+     * intersected by the boundary of the aforementioned area location.
+     *
+     * @param coveredLinesIter
+     *            the covered lines iter
+     * @return a pair containing the list of covered lines and the list of
+     *         intersected lines
+     * @throws OpenLRDecoderProcessingException
+     *             the open lr decoder runtime exception
+     */
     public final AffectedLines makeCoveredAndIntersectedLinesList(
             final Iterator<? extends Line> coveredLinesIter)
             throws OpenLRDecoderProcessingException {
@@ -216,10 +227,10 @@ public abstract class AbstractCoverage {
                         line.getEndNode().getLongitudeDeg(), line.getEndNode()
                                 .getLatitudeDeg()))
                         || (!isContainedIn(line.getStartNode()
-                                .getLongitudeDeg(), line.getStartNode()
-                                .getLatitudeDeg()) && isContainedIn(line
-                                .getEndNode().getLongitudeDeg(), line
-                                .getEndNode().getLatitudeDeg()))) {
+                        .getLongitudeDeg(), line.getStartNode()
+                        .getLatitudeDeg()) && isContainedIn(line
+                        .getEndNode().getLongitudeDeg(), line
+                        .getEndNode().getLatitudeDeg()))) {
                     intersectedLines.add(line);
                 }
             }
@@ -229,18 +240,18 @@ public abstract class AbstractCoverage {
         }
         return new AffectedLinesImpl(coveredLines, intersectedLines);
     }
-	
-	/**
-	 * Check mid point.
-	 *
-	 * @param l the l
-	 * @return true, if successful
-	 * @throws InvalidMapDataException the invalid map data exception
-	 */
-	private boolean checkMidPoint(final Line l) throws InvalidMapDataException {
-		int dist = l.getLineLength() / 2;
-		GeoCoordinates p = l.getGeoCoordinateAlongLine(dist);
-		return isContainedIn(p.getLongitudeDeg(), p.getLatitudeDeg());
-	}
+
+    /**
+     * Check mid point.
+     *
+     * @param l the l
+     * @return true, if successful
+     * @throws InvalidMapDataException the invalid map data exception
+     */
+    private boolean checkMidPoint(final Line l) throws InvalidMapDataException {
+        int dist = l.getLineLength() / 2;
+        GeoCoordinates p = l.getGeoCoordinateAlongLine(dist);
+        return isContainedIn(p.getLongitudeDeg(), p.getLatitudeDeg());
+    }
 
 }

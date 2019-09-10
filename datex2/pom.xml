@@ -1,277 +1,293 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>openlr</groupId>
-  <artifactId>datex2</artifactId>
-  <packaging>jar</packaging>
-  <version>1.4.3-SNAPSHOT</version>
-  <name>OpenLR - datex2</name>
-  <url>http://www.openlr.org</url>
-  
-  	<parent>
-		<groupId>openlr</groupId>
-		<artifactId>openlr-parent</artifactId>
-		<version>1.4.3-SNAPSHOT</version>
-		<relativePath>../openlr-parent/pom.xml</relativePath>
-	</parent>
-	
-		
-	<dependencies>
-	
-	<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-		    <version>2.6</version>
-		</dependency>
-        
+    <groupId>openlr</groupId>
+    <artifactId>datex2</artifactId>
+    <packaging>jar</packaging>
+    <version>1.4.3-SNAPSHOT</version>
+    <name>OpenLR - datex2</name>
+    <url>http://www.openlr.org</url>
+
+    <parent>
+        <groupId>openlr</groupId>
+        <artifactId>openlr-parent</artifactId>
+        <version>1.4.3-SNAPSHOT</version>
+        <relativePath>../openlr-parent/pom.xml</relativePath>
+    </parent>
+
+
+    <dependencies>
+
         <dependency>
-			<groupId>openlr</groupId>
-			<artifactId>data</artifactId>
-			<version>1.4.3-SNAPSHOT</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
         </dependency>
-        
+
         <dependency>
-			<groupId>openlr</groupId>
-			<artifactId>data</artifactId>
-			<version>1.4.3-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<scope>test</scope>
-		</dependency>
+            <groupId>openlr</groupId>
+            <artifactId>data</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jmock</groupId>
-			<artifactId>jmock-legacy</artifactId>
-			<scope>test</scope>
-		</dependency>
-			
-	</dependencies>
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>data</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
+        </dependency>
 
-	<build>
-		<plugins>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<doctitle>OpenLR&#8482; - Datex II package ${project.version} API</doctitle>
-					<windowtitle>OpenLR&#8482; - Datex II package ${project.version} API</windowtitle>
-				</configuration>
-			</plugin>
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-legacy</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
+    </dependencies>
 
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-			</plugin>
+    <build>
+        <plugins>
 
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <doctitle>OpenLR&#8482; - Datex II package ${project.version} API</doctitle>
+                    <windowtitle>OpenLR&#8482; - Datex II package ${project.version} API</windowtitle>
+                </configuration>
+            </plugin>
 
-			<plugin>
-				<groupId>com.mycila.maven-license-plugin</groupId>
-				<artifactId>maven-license-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>src/main/java/eu/**</exclude>
-						<exclude>src/test/**</exclude>
-					</excludes>
-				</configuration>
-				<version>${maven.license.plugin.version}</version>
-			</plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
 
-			<plugin>
-				<artifactId>maven-changes-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<excludedGroups>broken</excludedGroups>
-				</configuration>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>src/main/java/eu/**</exclude>
+                        <exclude>src/test/**</exclude>
+                    </excludes>
+                </configuration>
+                <version>${maven.license.plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-changes-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludedGroups>broken</excludedGroups>
+                </configuration>
                 <version>${maven.surefire.plugin.version}</version>
-			</plugin>
+            </plugin>
 
-		<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>truezip-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-additional-resources</id>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<phase>package</phase>
-						<configuration>
-							<files>
-								<file>
-									<source>src/changes/changes.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes</outputDirectory>
-								</file>
-								<file>
-									<source>checkstyle_openlr.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/</outputDirectory>
-								</file>
-								<file>
-									<source>findbugs.filter.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/templates/HEADER</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/templates/changelog.txt</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/templates/MANIFEST.MF</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/META-INF/services/openlr.PhysicalDecoder</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/META-INF/services</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/META-INF/services/openlr.PhysicalEncoder</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/META-INF/services</outputDirectory>
-								</file>
-							</files>
-						</configuration>
-					</execution>
-				</executions>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-additional-resources</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <files>
+                                <file>
+                                    <source>src/changes/changes.xml</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>checkstyle_openlr.xml</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>findbugs.filter.xml</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/templates/HEADER</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/templates/changelog.txt</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/templates/MANIFEST.MF</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/META-INF/services/openlr.PhysicalDecoder</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/META-INF/services
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/META-INF/services/openlr.PhysicalEncoder</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/META-INF/services
+                                    </outputDirectory>
+                                </file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
 
-			</plugin>
+            </plugin>
 
-		</plugins>
+        </plugins>
 
-		<resources>
+        <resources>
 
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<excludes>
-					<exclude>**/templates/**</exclude>
-				</excludes>
-			</resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <excludes>
+                    <exclude>**/templates/**</exclude>
+                </excludes>
+            </resource>
 
-			<resource>
-				<directory>${project.build.directory}/announcement</directory>
-				<includes>
-					<include>*.txt</include>
-				</includes>
-			</resource>
+            <resource>
+                <directory>${project.build.directory}/announcement</directory>
+                <includes>
+                    <include>*.txt</include>
+                </includes>
+            </resource>
 
-		</resources>
-	</build>
+        </resources>
+    </build>
 
-	<reporting>
-		<plugins>
+    <reporting>
+        <plugins>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<doctitle>OpenLR&#8482; - Datex II package ${project.version} API</doctitle>
-					<windowtitle>OpenLR&#8482; - Datex II ${project.version} API</windowtitle>
-				</configuration>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>javadoc</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<configuration>
-          <excludeFilterFile>findbugs.filter.xml</excludeFilterFile>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<configuration>
-					<excludes>
-						**/eu/**
-					</excludes>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <doctitle>OpenLR&#8482; - Datex II package ${project.version} API</doctitle>
+                    <windowtitle>OpenLR&#8482; - Datex II ${project.version} API</windowtitle>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
 
-		</plugins>
-	</reporting>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <configuration>
+                    <excludeFilterFile>findbugs.filter.xml</excludeFilterFile>
+                </configuration>
+            </plugin>
 
-	<profiles>
-		<profile>
-			<id>development</id>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        **/eu/**
+                    </excludes>
+                </configuration>
+            </plugin>
 
-			<activation>
-				<property>
-					<name>build.type</name>
-					<value>dev</value>
-				</property>
-			</activation>
+        </plugins>
+    </reporting>
 
-			<distributionManagement>
+    <profiles>
+        <profile>
+            <id>development</id>
 
-				<snapshotRepository>
-					<id>dev_repository</id>
-					<url>${dev.snapshot.url}</url>
-				</snapshotRepository>
+            <activation>
+                <property>
+                    <name>build.type</name>
+                    <value>dev</value>
+                </property>
+            </activation>
 
-				<repository>
-					<id>dev_repository</id>
-					<url>${dev.release.url}</url>
-				</repository>
+            <distributionManagement>
 
-				<site>
-					<id>dev_site</id>
-					<url>${dev.site.url}/datex2/</url>
-				</site>
+                <snapshotRepository>
+                    <id>dev_repository</id>
+                    <url>${dev.snapshot.url}</url>
+                </snapshotRepository>
 
-			</distributionManagement>
-		</profile>
-		<profile>
-			<id>openlr</id>
+                <repository>
+                    <id>dev_repository</id>
+                    <url>${dev.release.url}</url>
+                </repository>
 
-			<activation>
-				<property>
-					<name>build.type</name>
-					<value>prod</value>
-				</property>
-			</activation>
+                <site>
+                    <id>dev_site</id>
+                    <url>${dev.site.url}/datex2/</url>
+                </site>
 
-			<distributionManagement>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>openlr</id>
 
-				<downloadUrl>http://www.openlr.org</downloadUrl>
+            <activation>
+                <property>
+                    <name>build.type</name>
+                    <value>prod</value>
+                </property>
+            </activation>
 
-				<site>
-					<id>prod_site</id>
-					<url>${prod.site.url}/datex2/</url>
-				</site>
+            <distributionManagement>
 
-				<snapshotRepository>
-					<id>prod_repository</id>
-					<url>${prod.snapshot.url}</url>
-				</snapshotRepository>
+                <downloadUrl>http://www.openlr.org</downloadUrl>
 
-				<repository>
-					<id>prod_repository</id>
-					<url>${prod.release.url}</url>
-				</repository>
+                <site>
+                    <id>prod_site</id>
+                    <url>${prod.site.url}/datex2/</url>
+                </site>
 
-			</distributionManagement>
-		</profile>
-	</profiles>
+                <snapshotRepository>
+                    <id>prod_repository</id>
+                    <url>${prod.snapshot.url}</url>
+                </snapshotRepository>
+
+                <repository>
+                    <id>prod_repository</id>
+                    <url>${prod.release.url}</url>
+                </repository>
+
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>

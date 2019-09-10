@@ -1,5 +1,5 @@
 <FindBugsFilter>
-	<Match>
-		<Package name="~cern.*" />
-	</Match>
+    <Match>
+        <Package name="~cern.*"/>
+    </Match>
 </FindBugsFilter>

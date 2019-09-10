@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="OpenLR decoder" xmlns="http://maven.apache.org/DECORATION/1.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
-	<bannerRight>
-		<src>images/banner_openlr.jpg</src>
-		<alt>OpenLR banner</alt>
-	</bannerRight>
-	<version position="left" />
-	<body>
-		<menu name="OpenLR">
-			<item name="Home" href="../../" />
-			<item name="Overview" href="../" />
-		</menu>
-		<menu name="OpenLR - packages">
-			<item name="Map" href="../map/" />
-			<item name="Encoder" href="../encoder/" />
-			<item name="Decoder" href="../decoder/" />
-			<item name="Data" href="../data/" />
-		</menu>
-		<menu name="OpenLR - formats">
-			<item name="Binary" href="../binary/" />
-			<item name="XML" href="../xml/" />
-			<item name="Datex II" href="../datex2/" />
-		</menu>
-		<menu name="OpenLR - decoder">
-			<item name="Usage" href="usage.html" />
-			<item name="Code example" href="code-example.html" />
-			<item name="Configuration" href="configuration.html" />
-		</menu>
-		<menu ref="reports" />
-	</body>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="OpenLR decoder"
+         xmlns="http://maven.apache.org/DECORATION/1.0.0"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+    <bannerRight>
+        <src>images/banner_openlr.jpg</src>
+        <alt>OpenLR banner</alt>
+    </bannerRight>
+    <version position="left"/>
+    <body>
+        <menu name="OpenLR">
+            <item name="Home" href="../../"/>
+            <item name="Overview" href="../"/>
+        </menu>
+        <menu name="OpenLR - packages">
+            <item name="Map" href="../map/"/>
+            <item name="Encoder" href="../encoder/"/>
+            <item name="Decoder" href="../decoder/"/>
+            <item name="Data" href="../data/"/>
+        </menu>
+        <menu name="OpenLR - formats">
+            <item name="Binary" href="../binary/"/>
+            <item name="XML" href="../xml/"/>
+            <item name="Datex II" href="../datex2/"/>
+        </menu>
+        <menu name="OpenLR - decoder">
+            <item name="Usage" href="usage.html"/>
+            <item name="Code example" href="code-example.html"/>
+            <item name="Configuration" href="configuration.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
 </project>

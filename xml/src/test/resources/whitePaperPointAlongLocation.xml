@@ -17,25 +17,25 @@
                     <openlr:PathAttributes>
                         <openlr:LFRCNP>FRC2</openlr:LFRCNP>
                         <openlr:DNP>92</openlr:DNP>
-                          </openlr:PathAttributes>
-                    </openlr:LocationReferencePoint>
-                    <openlr:LastLocationReferencePoint>
-                          <openlr:Coordinates>
-                                 <openlr:Longitude>6.12779</openlr:Longitude>
-                                 <openlr:Latitude>49.60521</openlr:Latitude>
-                          </openlr:Coordinates>
-                          <openlr:LineAttributes>
-                                 <openlr:FRC>FRC2</openlr:FRC>
-                                 <openlr:FOW>MULTIPLE_CARRIAGEWAY</openlr:FOW>
-                                 <openlr:BEAR>227</openlr:BEAR>
-                          </openlr:LineAttributes>
-                    </openlr:LastLocationReferencePoint>
-                    <openlr:Offsets>
-                          <openlr:PosOff>28</openlr:PosOff>
-                    </openlr:Offsets>
-                    <openlr:SideOfRoad>LEFT</openlr:SideOfRoad>
-                    <openlr:Orientation>NO_ORIENTATION_OR_UNKNOWN</openlr:Orientation>
-               </openlr:PointAlongLine>
-          </openlr:PointLocationReference>
-     </openlr:XMLLocationReference>
+                    </openlr:PathAttributes>
+                </openlr:LocationReferencePoint>
+                <openlr:LastLocationReferencePoint>
+                    <openlr:Coordinates>
+                        <openlr:Longitude>6.12779</openlr:Longitude>
+                        <openlr:Latitude>49.60521</openlr:Latitude>
+                    </openlr:Coordinates>
+                    <openlr:LineAttributes>
+                        <openlr:FRC>FRC2</openlr:FRC>
+                        <openlr:FOW>MULTIPLE_CARRIAGEWAY</openlr:FOW>
+                        <openlr:BEAR>227</openlr:BEAR>
+                    </openlr:LineAttributes>
+                </openlr:LastLocationReferencePoint>
+                <openlr:Offsets>
+                    <openlr:PosOff>28</openlr:PosOff>
+                </openlr:Offsets>
+                <openlr:SideOfRoad>LEFT</openlr:SideOfRoad>
+                <openlr:Orientation>NO_ORIENTATION_OR_UNKNOWN</openlr:Orientation>
+            </openlr:PointAlongLine>
+        </openlr:PointLocationReference>
+    </openlr:XMLLocationReference>
 </openlr:OpenLR>

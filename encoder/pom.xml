@@ -1,290 +1,303 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>openlr</groupId>
-		<artifactId>openlr-parent</artifactId>
-		<version>1.4.3-SNAPSHOT</version>
-		<relativePath>../openlr-parent/pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>openlr</groupId>
+        <artifactId>openlr-parent</artifactId>
+        <version>1.4.3-SNAPSHOT</version>
+        <relativePath>../openlr-parent/pom.xml</relativePath>
+    </parent>
 
-	<groupId>openlr</groupId>
-	<artifactId>encoder</artifactId>
-	<version>1.4.3-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>openlr</groupId>
+    <artifactId>encoder</artifactId>
+    <version>1.4.3-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<name>OpenLR - encoder</name>
-	<description>The encoder package holds the reference implementation for the OpenLR encoder. It
-	takes a (map-dependent) location as input and generates a corresponding (map-agnostic)
-	location reference. This package uses the OpenLR map package and the OpenLR data
-	package.</description>
-	<url>http://www.openlr.org</url>
-
-
-	<build>
-		<plugins>
-
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<doctitle>OpenLR&#8482; - Encoder package ${project.version} API</doctitle>
-					<windowtitle>OpenLR&#8482; - Encoder package ${project.version}
-						API</windowtitle>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>com.mycila.maven-license-plugin</groupId>
-				<artifactId>maven-license-plugin</artifactId>
-				<version>${maven.license.plugin.version}</version>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-changes-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<excludedGroups>broken</excludedGroups>
-				</configuration>
-				<version>${maven.surefire.plugin.version}</version>
-			</plugin>
-	
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>truezip-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-additional-resources</id>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<phase>package</phase>
-						<configuration>
-							<files>
-								<file>
-									<source>src/changes/changes.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes</outputDirectory>
-								</file>
-								<file>
-									<source>checkstyle_openlr.xml</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/templates/HEADER</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/templates/changelog.txt</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates</outputDirectory>
-								</file>
-								<file>
-									<source>src/main/resources/templates/MANIFEST.MF</source>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates</outputDirectory>
-								</file>
-							</files>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-		</plugins>
-
-		<resources>
-
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<excludes>
-					<exclude>**/templates/**</exclude>
-				</excludes>
-			</resource>
-			
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-				<excludes>
-					<exclude>**/templates/**</exclude>
-				</excludes>
-			</resource>
-
-			<resource>
-				<directory>${project.build.directory}/announcement</directory>
-				<includes>
-					<include>*.txt</include>
-				</includes>
-			</resource>
-
-		</resources>
-	</build>
-
-	<dependencies>
-	
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
-
-		<dependency>
-			<groupId>openlr</groupId>
-			<artifactId>map</artifactId>
-			<version>1.4.3-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>openlr</groupId>
-			<artifactId>data</artifactId>
-			<version>1.4.3-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
+    <name>OpenLR - encoder</name>
+    <description>The encoder package holds the reference implementation for the OpenLR encoder. It
+        takes a (map-dependent) location as input and generates a corresponding (map-agnostic)
+        location reference. This package uses the OpenLR map package and the OpenLR data
+        package.
+    </description>
+    <url>http://www.openlr.org</url>
 
 
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<scope>test</scope>
-		</dependency>
+    <build>
+        <plugins>
 
-		<dependency>
-			<groupId>org.jmock</groupId>
-			<artifactId>jmock-legacy</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>openlr</groupId>
-			<artifactId>map</artifactId>
-			<version>1.4.3-SNAPSHOT</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<version>1.9</version>
-		</dependency>	
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <doctitle>OpenLR&#8482; - Encoder package ${project.version} API</doctitle>
+                    <windowtitle>OpenLR&#8482; - Encoder package ${project.version}
+                        API
+                    </windowtitle>
+                </configuration>
+            </plugin>
 
-		<dependency>
-			<groupId>openlr</groupId>
-			<artifactId>data</artifactId>
-			<version>1.4.3-SNAPSHOT</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>	
-	</dependencies>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
 
-	<reporting>
-		<plugins>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<doctitle>OpenLR&#8482; - Encoder package ${project.version} API</doctitle>
-					<windowtitle>OpenLR&#8482; - Encoder package ${project.version}
-						API</windowtitle>
-				</configuration>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>javadoc</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
 
-		</plugins>
-	</reporting>
-	
-	<profiles>
-		<profile>
-			<id>development</id>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>${maven.license.plugin.version}</version>
+            </plugin>
 
-			<activation>
-				<property>
-					<name>build.type</name>
-					<value>dev</value>
-				</property>
-			</activation>
+            <plugin>
+                <artifactId>maven-changes-plugin</artifactId>
+            </plugin>
 
-			<distributionManagement>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
 
-				<snapshotRepository>
-					<id>dev_repository</id>
-					<url>${dev.snapshot.url}</url>
-				</snapshotRepository>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludedGroups>broken</excludedGroups>
+                </configuration>
+                <version>${maven.surefire.plugin.version}</version>
+            </plugin>
 
-				<repository>
-					<id>dev_repository</id>
-					<url>${dev.release.url}</url>
-				</repository>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-additional-resources</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <files>
+                                <file>
+                                    <source>src/changes/changes.xml</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>checkstyle_openlr.xml</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/templates/HEADER</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/templates/changelog.txt</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+                                    </outputDirectory>
+                                </file>
+                                <file>
+                                    <source>src/main/resources/templates/MANIFEST.MF</source>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
+                                    </outputDirectory>
+                                </file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
-				<site>
-					<id>dev_site</id>
-					<url>${dev.site.url}/encoder/</url>
-				</site>
+        </plugins>
 
-			</distributionManagement>
-		</profile>
-		<profile>
-			<id>openlr</id>
+        <resources>
 
-			<activation>
-				<property>
-					<name>build.type</name>
-					<value>prod</value>
-				</property>
-			</activation>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <excludes>
+                    <exclude>**/templates/**</exclude>
+                </excludes>
+            </resource>
 
-			<distributionManagement>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/templates/**</exclude>
+                </excludes>
+            </resource>
 
-				<downloadUrl>http://www.openlr.org</downloadUrl>
+            <resource>
+                <directory>${project.build.directory}/announcement</directory>
+                <includes>
+                    <include>*.txt</include>
+                </includes>
+            </resource>
 
-				<site>
-					<id>prod_site</id>
-					<url>${prod.site.url}/encoder/</url>
-				</site>
+        </resources>
+    </build>
 
-				<snapshotRepository>
-					<id>prod_repository</id>
-					<url>${prod.snapshot.url}</url>
-				</snapshotRepository>
+    <dependencies>
 
-				<repository>
-					<id>prod_repository</id>
-					<url>${prod.release.url}</url>
-				</repository>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
 
-			</distributionManagement>
-		</profile>
-	</profiles>
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>map</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>data</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-legacy</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>map</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>data</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <reporting>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <doctitle>OpenLR&#8482; - Encoder package ${project.version} API</doctitle>
+                    <windowtitle>OpenLR&#8482; - Encoder package ${project.version}
+                        API
+                    </windowtitle>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+        </plugins>
+    </reporting>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+
+            <activation>
+                <property>
+                    <name>build.type</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+
+            <distributionManagement>
+
+                <snapshotRepository>
+                    <id>dev_repository</id>
+                    <url>${dev.snapshot.url}</url>
+                </snapshotRepository>
+
+                <repository>
+                    <id>dev_repository</id>
+                    <url>${dev.release.url}</url>
+                </repository>
+
+                <site>
+                    <id>dev_site</id>
+                    <url>${dev.site.url}/encoder/</url>
+                </site>
+
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>openlr</id>
+
+            <activation>
+                <property>
+                    <name>build.type</name>
+                    <value>prod</value>
+                </property>
+            </activation>
+
+            <distributionManagement>
+
+                <downloadUrl>http://www.openlr.org</downloadUrl>
+
+                <site>
+                    <id>prod_site</id>
+                    <url>${prod.site.url}/encoder/</url>
+                </site>
+
+                <snapshotRepository>
+                    <id>prod_repository</id>
+                    <url>${prod.snapshot.url}</url>
+                </snapshotRepository>
+
+                <repository>
+                    <id>prod_repository</id>
+                    <url>${prod.release.url}</url>
+                </repository>
+
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>

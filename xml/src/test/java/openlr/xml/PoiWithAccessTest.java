@@ -1,17 +1,28 @@
 /**
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; version 2 of the License and the extra
- *  conditions for OpenLR. (see openlr-license.txt)
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License along
- *  with this program; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License and the extra
+ * conditions for OpenLR. (see openlr-license.txt)
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * <p>
+ * Copyright (C) 2009,2010 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -28,25 +39,7 @@
  */
 package openlr.xml;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertSame;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
-
-import java.awt.geom.Point2D;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import openlr.LocationReference;
-import openlr.LocationReferencePoint;
-import openlr.LocationType;
-import openlr.Offsets;
-import openlr.PhysicalFormatException;
+import openlr.*;
 import openlr.location.data.Orientation;
 import openlr.location.data.SideOfRoad;
 import openlr.map.GeoCoordinates;
@@ -61,345 +54,358 @@ import openlr.xml.generated.PoiWithAccessPoint;
 import openlr.xml.generated.PointLocationReference;
 import openlr.xml.generated.XMLLocationReference;
 import openlr.xml.impl.LocationReferenceXmlImpl;
-
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.awt.geom.Point2D;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.testng.Assert.*;
+
 /**
  * The Class OpenLRBinaryEncoderTest.
  */
 public class PoiWithAccessTest {
 
-	/** The Constant BINARY_ENCODER. */
-	private static final OpenLRXMLEncoder XML_ENCODER = new OpenLRXMLEncoder();
+    /** The Constant BINARY_ENCODER. */
+    private static final OpenLRXMLEncoder XML_ENCODER = new OpenLRXMLEncoder();
 
-	/** The used XML encoder object. */
-	private static final OpenLRXMLDecoder XML_DECODER = new OpenLRXMLDecoder();
+    /** The used XML encoder object. */
+    private static final OpenLRXMLDecoder XML_DECODER = new OpenLRXMLDecoder();
 
-	/**
-	 * The positive offset value of the mocked offset for the white paper
-	 * encoder example.
-	 */
-	private static final int POS_OFFSET_WP_EXAMPLE = 28;
+    /**
+     * The positive offset value of the mocked offset for the white paper
+     * encoder example.
+     */
+    private static final int POS_OFFSET_WP_EXAMPLE = 28;
 
-	/**
-	 * The geo coordinates of the point of interest of the White Paper example
-	 * as input for encoding (x = longitude, y latitude).
-	 */
-	private static final Point2D.Double WP_GEO_COORDINATE = new Point2D.Double(
-			6.12699, 49.60728);
+    /**
+     * The geo coordinates of the point of interest of the White Paper example
+     * as input for encoding (x = longitude, y latitude).
+     */
+    private static final Point2D.Double WP_GEO_COORDINATE = new Point2D.Double(
+            6.12699, 49.60728);
+    /** The LRP data used for the white paper example. */
+    private static final Lrp[] LRP_WP_EXAMPLE = new Lrp[]{Lrp.PL_ENC_LRP1,
+            Lrp.PL_ENC_LRP2};
+    /**
+     * The LRPs of the white paper encoding example.
+     */
+    private List<LocationReferencePoint> lrpsWpEaxmple;
+    /** The offsets of the white paper encoding example. */
+    private Offsets offsetsWpExample;
+    /** A reference to the valid encoded location of the white paper example. */
+    private LocationReference encodedWhitePaperLocation;
 
-	/**
-	 * The LRPs of the white paper encoding example.
-	 */
-	private List<LocationReferencePoint> lrpsWpEaxmple;
+    /**
+     * Setup.
+     */
+    @BeforeTest
+    public final void setup() {
+        Mockery context = new Mockery();
+        offsetsWpExample = context.mock(Offsets.class, "offsetsWpExample");
 
-	/** The offsets of the white paper encoding example. */
-	private Offsets offsetsWpExample;
+        context.checking(new Expectations() {
+            {
+                allowing(offsetsWpExample).hasNegativeOffset();
+                will(returnValue(false));
+            }
 
-	/** A reference to the valid encoded location of the white paper example. */
-	private LocationReference encodedWhitePaperLocation;
+            {
+                allowing(offsetsWpExample).hasPositiveOffset();
+                will(returnValue(true));
+            }
 
-	/** The LRP data used for the white paper example. */
-	private static final Lrp[] LRP_WP_EXAMPLE = new Lrp[] {Lrp.PL_ENC_LRP1,
-			Lrp.PL_ENC_LRP2};
+            {
+                allowing(offsetsWpExample).getPositiveOffset(
+                        with(any(int.class)));
+                will(returnValue(POS_OFFSET_WP_EXAMPLE));
+            }
 
-	/**
-	 * Setup.
-	 */
-	@BeforeTest
-	public final void setup() {
-		Mockery context = new Mockery();
-		offsetsWpExample = context.mock(Offsets.class, "offsetsWpExample");
+            {
+                allowing(offsetsWpExample).getNegativeOffset(
+                        with(any(int.class)));
+                will(returnValue(0));
+            }
+        });
 
-		context.checking(new Expectations() {
-			{
-				allowing(offsetsWpExample).hasNegativeOffset();
-				will(returnValue(false));
-			}
-			{
-				allowing(offsetsWpExample).hasPositiveOffset();
-				will(returnValue(true));
-			}
-			{
-				allowing(offsetsWpExample).getPositiveOffset(
-						with(any(int.class)));
-				will(returnValue(POS_OFFSET_WP_EXAMPLE));
-			}
+        lrpsWpEaxmple = mockLrps12(context);
+    }
 
-			{
-				allowing(offsetsWpExample).getNegativeOffset(
-						with(any(int.class)));
-				will(returnValue(0));
-			}
-		});
+    /**
+     * Mocks LRPs 1 and 2 that are used in tests of this class.
+     *
+     * @param context
+     *            The mocking context.
+     * @return A list of both LRPs ordered in sequence 1, 2.
+     */
+    private List<LocationReferencePoint> mockLrps12(final Mockery context) {
 
-		lrpsWpEaxmple = mockLrps12(context);
-	}
+        final List<LocationReferencePoint> lrps = new ArrayList<LocationReferencePoint>(
+                2);
 
-	/**
-	 * Mocks LRPs 1 and 2 that are used in tests of this class.
-	 * 
-	 * @param context
-	 *            The mocking context.
-	 * @return A list of both LRPs ordered in sequence 1, 2.
-	 */
-	private List<LocationReferencePoint> mockLrps12(final Mockery context) {
+        for (final Lrp lrp : LRP_WP_EXAMPLE) {
 
-		final List<LocationReferencePoint> lrps = new ArrayList<LocationReferencePoint>(
-				2);
+            final LocationReferencePoint mockedLrp = context.mock(
+                    LocationReferencePoint.class, lrp.name());
 
-		for (final Lrp lrp : LRP_WP_EXAMPLE) {
+            context.checking(new Expectations() {
+                {
+                    allowing(mockedLrp).getLongitudeDeg();
+                    will(returnValue(lrp.getLongitude()));
+                }
 
-			final LocationReferencePoint mockedLrp = context.mock(
-					LocationReferencePoint.class, lrp.name());
+                {
+                    allowing(mockedLrp).getLatitudeDeg();
+                    will(returnValue(lrp.getLatitude()));
+                }
 
-			context.checking(new Expectations() {
-				{
-					allowing(mockedLrp).getLongitudeDeg();
-					will(returnValue(lrp.getLongitude()));
-				}
-				{
-					allowing(mockedLrp).getLatitudeDeg();
-					will(returnValue(lrp.getLatitude()));
-				}
-				{
-					allowing(mockedLrp).getBearing();
-					will(returnValue(lrp.getBearing()));
-				}
-				{
-					allowing(mockedLrp).getDistanceToNext();
-					will(returnValue(lrp.getDistanceToNext()));
-				}
-				{
-					allowing(mockedLrp).getFOW();
-					will(returnValue(lrp.getFow()));
-				}
-				{
-					allowing(mockedLrp).getFRC();
-					will(returnValue(lrp.getFrc()));
-				}
-				{
-					allowing(mockedLrp).getLfrc();
-					will(returnValue(lrp.getLfrcnp()));
-				}
-				{
-					allowing(mockedLrp).isLastLRP();
-					if (lrp == Lrp.LINE_ENC_LRP2) {
-						will(returnValue(true));
-					} else {
-						will(returnValue(false));
-					}
-				}
-			});
+                {
+                    allowing(mockedLrp).getBearing();
+                    will(returnValue(lrp.getBearing()));
+                }
 
-			lrps.add(mockedLrp);
-		}
+                {
+                    allowing(mockedLrp).getDistanceToNext();
+                    will(returnValue(lrp.getDistanceToNext()));
+                }
 
-		return lrps;
-	}
+                {
+                    allowing(mockedLrp).getFOW();
+                    will(returnValue(lrp.getFow()));
+                }
 
-	/**
-	 * Tests encoding of the white paper example.
-	 */
-	@Test
-	public final void testWhitePaperExampleEncoding() {
-		try {
-			RawLocationReference rawLocRef = new RawPoiAccessLocRef("",
-					lrpsWpEaxmple.get(0), lrpsWpEaxmple.get(1),
-					offsetsWpExample, new GeoCoordinatesImpl(WP_GEO_COORDINATE.x,
-							WP_GEO_COORDINATE.y), SideOfRoad.LEFT,
-					Orientation.NO_ORIENTATION_OR_UNKNOWN);
-			encodedWhitePaperLocation = XML_ENCODER.encodeData(rawLocRef);
-			checkWhitePaperEncodedLocation(encodedWhitePaperLocation);
+                {
+                    allowing(mockedLrp).getFRC();
+                    will(returnValue(lrp.getFrc()));
+                }
 
-		} catch (Exception e) {
-			fail("Unexpected exception!", e);
-		}
+                {
+                    allowing(mockedLrp).getLfrc();
+                    will(returnValue(lrp.getLfrcnp()));
+                }
 
-		if (!XML_ENCODER.getDataFormatIdentifier().equals(
-				encodedWhitePaperLocation.getDataIdentifier())) {
-			fail("Invalid data identifier");
-		}
+                {
+                    allowing(mockedLrp).isLastLRP();
+                    if (lrp == Lrp.LINE_ENC_LRP2) {
+                        will(returnValue(true));
+                    } else {
+                        will(returnValue(false));
+                    }
+                }
+            });
 
-		assertEquals(encodedWhitePaperLocation.getDataClass(),
-				XML_ENCODER.getDataClass(), "invalid data class");
+            lrps.add(mockedLrp);
+        }
 
-		if (encodedWhitePaperLocation.getLocationReferenceData() == null) {
-			fail("loc ref data is null but valid");
-		}
-	}
+        return lrps;
+    }
 
-	/**
-	 * Checks the given encode geo coordinates against the expected geo
-	 * coordinates.
-	 * 
-	 * @param encodePointAlongLoc
-	 *            The encoded geo coordinate location.
-	 */
-	private void checkWhitePaperEncodedLocation(
-			final LocationReference encodePointAlongLoc) {
+    /**
+     * Tests encoding of the white paper example.
+     */
+    @Test
+    public final void testWhitePaperExampleEncoding() {
+        try {
+            RawLocationReference rawLocRef = new RawPoiAccessLocRef("",
+                    lrpsWpEaxmple.get(0), lrpsWpEaxmple.get(1),
+                    offsetsWpExample, new GeoCoordinatesImpl(WP_GEO_COORDINATE.x,
+                    WP_GEO_COORDINATE.y), SideOfRoad.LEFT,
+                    Orientation.NO_ORIENTATION_OR_UNKNOWN);
+            encodedWhitePaperLocation = XML_ENCODER.encodeData(rawLocRef);
+            checkWhitePaperEncodedLocation(encodedWhitePaperLocation);
 
-		assertSame(encodePointAlongLoc.getLocationType(),
-				LocationType.POI_WITH_ACCESS_POINT);
-		assertTrue(encodePointAlongLoc.isValid());
-		assertNull(encodePointAlongLoc.getReturnCode());
+        } catch (Exception e) {
+            fail("Unexpected exception!", e);
+        }
 
-		XMLLocationReference xmLoc = ((OpenLR) encodePointAlongLoc
-				.getLocationReferenceData()).getXMLLocationReference();
+        if (!XML_ENCODER.getDataFormatIdentifier().equals(
+                encodedWhitePaperLocation.getDataIdentifier())) {
+            fail("Invalid data identifier");
+        }
 
-		assertNull(xmLoc.getLineLocationReference());
+        assertEquals(encodedWhitePaperLocation.getDataClass(),
+                XML_ENCODER.getDataClass(), "invalid data class");
 
-		PointLocationReference pLoc = xmLoc.getPointLocationReference();
-		assertNull(pLoc.getGeoCoordinate());
-		assertNull(pLoc.getPointAlongLine());
+        if (encodedWhitePaperLocation.getLocationReferenceData() == null) {
+            fail("loc ref data is null but valid");
+        }
+    }
 
-		PoiWithAccessPoint poi = pLoc.getPoiWithAccessPoint();
+    /**
+     * Checks the given encode geo coordinates against the expected geo
+     * coordinates.
+     *
+     * @param encodePointAlongLoc
+     *            The encoded geo coordinate location.
+     */
+    private void checkWhitePaperEncodedLocation(
+            final LocationReference encodePointAlongLoc) {
 
-		Utils.checkLRPs(Arrays.asList(poi.getLocationReferencePoint()),
-				poi.getLastLocationReferencePoint(), lrpsWpEaxmple);
+        assertSame(encodePointAlongLoc.getLocationType(),
+                LocationType.POI_WITH_ACCESS_POINT);
+        assertTrue(encodePointAlongLoc.isValid());
+        assertNull(encodePointAlongLoc.getReturnCode());
 
-		Utils.checkOffsets(poi.getOffsets(), offsetsWpExample);
+        XMLLocationReference xmLoc = ((OpenLR) encodePointAlongLoc
+                .getLocationReferenceData()).getXMLLocationReference();
 
-		assertEquals(poi.getOrientation().name(),
-				Orientation.NO_ORIENTATION_OR_UNKNOWN.name());
-		assertEquals(poi.getSideOfRoad().name(), SideOfRoad.LEFT.name());
-	}
+        assertNull(xmLoc.getLineLocationReference());
 
-	/**
-	 * Tests the binary encoding with an invalid version specified.
-	 */
-	@Test
-	public final void testWrongVersion() {
-		RawLocationReference rawLocRef = null;
-		try {
-			rawLocRef = new RawPoiAccessLocRef("", lrpsWpEaxmple.get(0),
-					lrpsWpEaxmple.get(1), offsetsWpExample, new GeoCoordinatesImpl(
-							WP_GEO_COORDINATE.x, WP_GEO_COORDINATE.y),
-					SideOfRoad.RIGHT, Orientation.BOTH);
-		} catch (InvalidMapDataException e) {
-			Assert.fail("Unexpected exception", e);
-		}
-		LocationReference result = XML_ENCODER.encodeData(rawLocRef,
-				Integer.MAX_VALUE);
-		assertFalse(result.isValid());
-		assertSame(result.getReturnCode(), XmlReturnCode.INVALID_VERSION);
+        PointLocationReference pLoc = xmLoc.getPointLocationReference();
+        assertNull(pLoc.getGeoCoordinate());
+        assertNull(pLoc.getPointAlongLine());
 
-	}
+        PoiWithAccessPoint poi = pLoc.getPoiWithAccessPoint();
 
-	/**
-	 * Tests a writing and re-reading of a XML location reference.
-	 */
-	@Test(dependsOnMethods = {"testWhitePaperExampleEncoding"})
-	public final void testWriter() {
+        Utils.checkLRPs(Arrays.asList(poi.getLocationReferencePoint()),
+                poi.getLastLocationReferencePoint(), lrpsWpEaxmple);
 
-		OpenLR writtenData = (OpenLR) encodedWhitePaperLocation
-				.getLocationReferenceData();
-		OpenLR readData = null;
+        Utils.checkOffsets(poi.getOffsets(), offsetsWpExample);
 
-		try {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
+        assertEquals(poi.getOrientation().name(),
+                Orientation.NO_ORIENTATION_OR_UNKNOWN.name());
+        assertEquals(poi.getSideOfRoad().name(), SideOfRoad.LEFT.name());
+    }
 
-			OpenLRXmlWriter writer = new OpenLRXmlWriter();
-			writer.saveOpenLRXML(writtenData, out, true);
+    /**
+     * Tests the binary encoding with an invalid version specified.
+     */
+    @Test
+    public final void testWrongVersion() {
+        RawLocationReference rawLocRef = null;
+        try {
+            rawLocRef = new RawPoiAccessLocRef("", lrpsWpEaxmple.get(0),
+                    lrpsWpEaxmple.get(1), offsetsWpExample, new GeoCoordinatesImpl(
+                    WP_GEO_COORDINATE.x, WP_GEO_COORDINATE.y),
+                    SideOfRoad.RIGHT, Orientation.BOTH);
+        } catch (InvalidMapDataException e) {
+            Assert.fail("Unexpected exception", e);
+        }
+        LocationReference result = XML_ENCODER.encodeData(rawLocRef,
+                Integer.MAX_VALUE);
+        assertFalse(result.isValid());
+        assertSame(result.getReturnCode(), XmlReturnCode.INVALID_VERSION);
 
-			ByteArrayInputStream in = new ByteArrayInputStream(
-					out.toByteArray());
+    }
 
-			OpenLRXmlReader reader = new OpenLRXmlReader();
+    /**
+     * Tests a writing and re-reading of a XML location reference.
+     */
+    @Test(dependsOnMethods = {"testWhitePaperExampleEncoding"})
+    public final void testWriter() {
 
-			readData = reader.readOpenLRXML(in, true);
+        OpenLR writtenData = (OpenLR) encodedWhitePaperLocation
+                .getLocationReferenceData();
+        OpenLR readData = null;
 
-		} catch (Exception e) {
-			fail("Unexpected exception!", e);
-		}
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		assertEquals(readData, writtenData, "Writing and re-reading of the "
-				+ "location delivered unequal results!");
-	}
+            OpenLRXmlWriter writer = new OpenLRXmlWriter();
+            writer.saveOpenLRXML(writtenData, out, true);
 
-	/**
-	 * Tests decoding of the white paper example.
-	 */
-	@Test
-	public final void testWhitePaperExampleDecoding() {
+            ByteArrayInputStream in = new ByteArrayInputStream(
+                    out.toByteArray());
 
-		OpenLR wpPointAlongLocation = Utils.readLocationFromFile(
-				"whitePaperPoiAccessLocation.xml", true);
+            OpenLRXmlReader reader = new OpenLRXmlReader();
 
-		try {
-			LocationReference lr = new LocationReferenceXmlImpl("",
-					wpPointAlongLocation, 1);
-			RawLocationReference rawLocRef = XML_DECODER.decodeData(lr);
+            readData = reader.readOpenLRXML(in, true);
 
-			assertSame(rawLocRef.getLocationType(),
-					LocationType.POI_WITH_ACCESS_POINT);
-			assertTrue(rawLocRef.isValid());
-			assertNull(rawLocRef.getReturnCode());
+        } catch (Exception e) {
+            fail("Unexpected exception!", e);
+        }
 
-			Utils.checkDecodedLrps(rawLocRef, LRP_WP_EXAMPLE, true);
-			checkOffsets(rawLocRef.getOffsets(), POS_OFFSET_WP_EXAMPLE, null);
+        assertEquals(readData, writtenData, "Writing and re-reading of the "
+                + "location delivered unequal results!");
+    }
 
-			assertEquals(rawLocRef.getOrientation(),
-					Orientation.NO_ORIENTATION_OR_UNKNOWN);
-			assertEquals(rawLocRef.getSideOfRoad(), SideOfRoad.LEFT);
+    /**
+     * Tests decoding of the white paper example.
+     */
+    @Test
+    public final void testWhitePaperExampleDecoding() {
 
-			GeoCoordinates coords = rawLocRef.getGeoCoordinates();
-			assertEquals(coords.getLatitudeDeg(), WP_GEO_COORDINATE.y);
-			assertEquals(coords.getLongitudeDeg(), WP_GEO_COORDINATE.x);
+        OpenLR wpPointAlongLocation = Utils.readLocationFromFile(
+                "whitePaperPoiAccessLocation.xml", true);
 
-		} catch (PhysicalFormatException e) {
-			fail("Unexpected exception!", e);
-		}
-	}
+        try {
+            LocationReference lr = new LocationReferenceXmlImpl("",
+                    wpPointAlongLocation, 1);
+            RawLocationReference rawLocRef = XML_DECODER.decodeData(lr);
 
-	/**
-	 * Checks the given offsets against the specified values. .
-	 * 
-	 * @param offset
-	 *            The offsets object to check.
-	 * @param expectedPosOffset
-	 *            The expected positive offset or <code>null</code> if none is
-	 *            expected.
-	 * @param expectedNegativeOffset
-	 *            The expected negative offset or <code>null</code> if none is
-	 *            expected.
-	 */
-	private void checkOffsets(final Offsets offset,
-			final Integer expectedPosOffset,
-			final Integer expectedNegativeOffset) {
+            assertSame(rawLocRef.getLocationType(),
+                    LocationType.POI_WITH_ACCESS_POINT);
+            assertTrue(rawLocRef.isValid());
+            assertNull(rawLocRef.getReturnCode());
 
-		assertTrue(offset.hasPositiveOffset() == (expectedPosOffset != null));
-		assertTrue(offset.hasNegativeOffset() == (expectedNegativeOffset != null));
-		if (expectedPosOffset != null) {
-			assertEquals(offset.getPositiveOffset(0),
-					expectedPosOffset.intValue());
-		}
-		if (expectedNegativeOffset != null) {
-			assertEquals(offset.getNegativeOffset(0),
-					expectedNegativeOffset.intValue());
-		}
-	}
+            Utils.checkDecodedLrps(rawLocRef, LRP_WP_EXAMPLE, true);
+            checkOffsets(rawLocRef.getOffsets(), POS_OFFSET_WP_EXAMPLE, null);
 
-	/**
-	 * Tests the case of providing an invalid location class to the
-	 * {@link PoiAccessDecoder}.
-	 */
-	@Test
-	public final void testWrongDataClassDecoding() {
+            assertEquals(rawLocRef.getOrientation(),
+                    Orientation.NO_ORIENTATION_OR_UNKNOWN);
+            assertEquals(rawLocRef.getSideOfRoad(), SideOfRoad.LEFT);
 
-		OpenLR wpPaperLineLocation = Utils.readLocationFromFile(
-				"whitePaperLineLocation.xml", true);
+            GeoCoordinates coords = rawLocRef.getGeoCoordinates();
+            assertEquals(coords.getLatitudeDeg(), WP_GEO_COORDINATE.y);
+            assertEquals(coords.getLongitudeDeg(), WP_GEO_COORDINATE.x);
 
-		try {
-			new PoiAccessDecoder().decodeData("", wpPaperLineLocation);
-			fail("Exception expected!");
+        } catch (PhysicalFormatException e) {
+            fail("Unexpected exception!", e);
+        }
+    }
 
-		} catch (PhysicalFormatException e) {
-			assertSame(e.getErrorCode(), XMLErrorType.DATA_ERROR);
-		}
-	}
+    /**
+     * Checks the given offsets against the specified values. .
+     *
+     * @param offset
+     *            The offsets object to check.
+     * @param expectedPosOffset
+     *            The expected positive offset or <code>null</code> if none is
+     *            expected.
+     * @param expectedNegativeOffset
+     *            The expected negative offset or <code>null</code> if none is
+     *            expected.
+     */
+    private void checkOffsets(final Offsets offset,
+                              final Integer expectedPosOffset,
+                              final Integer expectedNegativeOffset) {
+
+        assertTrue(offset.hasPositiveOffset() == (expectedPosOffset != null));
+        assertTrue(offset.hasNegativeOffset() == (expectedNegativeOffset != null));
+        if (expectedPosOffset != null) {
+            assertEquals(offset.getPositiveOffset(0),
+                    expectedPosOffset.intValue());
+        }
+        if (expectedNegativeOffset != null) {
+            assertEquals(offset.getNegativeOffset(0),
+                    expectedNegativeOffset.intValue());
+        }
+    }
+
+    /**
+     * Tests the case of providing an invalid location class to the
+     * {@link PoiAccessDecoder}.
+     */
+    @Test
+    public final void testWrongDataClassDecoding() {
+
+        OpenLR wpPaperLineLocation = Utils.readLocationFromFile(
+                "whitePaperLineLocation.xml", true);
+
+        try {
+            new PoiAccessDecoder().decodeData("", wpPaperLineLocation);
+            fail("Exception expected!");
+
+        } catch (PhysicalFormatException e) {
+            assertSame(e.getErrorCode(), XMLErrorType.DATA_ERROR);
+        }
+    }
 }

@@ -6,15 +6,26 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ * Copyright (C) 2009-2012 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -32,9 +43,8 @@
 
 package openlr.xml.generated;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlRegistry;
+import java.io.Serializable;
 
 /**
  * This object contains factory methods for each 
@@ -48,20 +58,20 @@ import javax.xml.bind.annotation.XmlRegistry;
  * type definitions, element declarations and model 
  * groups.  Factory methods for each of these are 
  * provided in this class.
- * 
+ *
  */
 @XmlRegistry
 public class ObjectFactory implements Serializable {
 
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 459907868066633369L;
+     *
+     */
+    private static final long serialVersionUID = 459907868066633369L;
 
-	/**
+    /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: openlr.xml.autogen
-     * 
+     *
      */
     public ObjectFactory() {
     }

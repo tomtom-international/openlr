@@ -13,137 +13,137 @@
 	to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
 	MA 02110-1301 USA. -->
 <MockedMapDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
-	<Nodes>
-		<Node id="1">
-			<Latitude>49.60315</Latitude>
-			<Longitude>6.272792</Longitude>
-		</Node>
-		<Node id="2">
-			<Latitude>49.600315</Latitude>
-			<Longitude>6.316112</Longitude>
-		</Node>
-		<Node id="3">
+                   xsi:noNamespaceSchemaLocation="openlr/map/mockdb/MockDatabase.xsd">
+    <Nodes>
+        <Node id="1">
+            <Latitude>49.60315</Latitude>
+            <Longitude>6.272792</Longitude>
+        </Node>
+        <Node id="2">
+            <Latitude>49.600315</Latitude>
+            <Longitude>6.316112</Longitude>
+        </Node>
+        <Node id="3">
             <Latitude>49.600315</Latitude>
             <Longitude>6.409</Longitude>
-		</Node>
+        </Node>
 
-		<Node id="4">
-			<Latitude>49.600315</Latitude>
-			<Longitude>6.409211</Longitude>
-		</Node>
-
-
-		<Node id="5">
-			<Latitude>49.600315</Latitude>
-			<Longitude>6.484729</Longitude>
-		</Node>
-		<Node id="6">
-			<Latitude>49.600315</Latitude>
-			<Longitude>6.485</Longitude>
-		</Node>
-	</Nodes>
-
-	<Lines>
-		<Line id="1">
-			<StartNode>1</StartNode>
-			<EndNode>2</EndNode>
-			<Length>200</Length>
-			<FRC>FRC_5</FRC>
-		</Line>
-		<Line id="2">
-			<StartNode>2</StartNode>
-			<EndNode>3</EndNode>
-			<Length>15000</Length>
-			<FRC>FRC_5</FRC>
-		</Line>
-		<Line id="3">
-			<StartNode>3</StartNode>
-			<EndNode>4</EndNode>
-			<Length>200</Length>
-			<FRC>FRC_5</FRC>
-		</Line>
-		<Line id="4">
-			<StartNode>4</StartNode>
-			<EndNode>5</EndNode>
-			<Length>14800</Length>
-			<FRC>FRC_5</FRC>
-		</Line>
-		<Line id="5">
-			<StartNode>5</StartNode>
-			<EndNode>6</EndNode>
-			<Length>200</Length>
-			<FRC>FRC_5</FRC>
-		</Line>
-	</Lines>
-
-	<Calls>
-		<GetPointAlongLineCalls>
-			<GetPointAlongLine line="3">
-				<Input>180</Input>
-				<Output>
-					<Latitude>49.600315</Latitude>
-					<Longitude>6.40918</Longitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="3">
-				<Input>20</Input>
-				<Output>
-					<Latitude>49.600315</Latitude>
-					<Longitude>6.31786</Longitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="2">
-				<Input>20</Input>
-				<Output>
-					<Latitude>49.600315</Latitude>
-					<Longitude>6.3162</Longitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="5">
-				<Input>180</Input>
-				<Output>
-					<Latitude>49.600315</Latitude>
-					<Longitude>6.4080</Longitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="5">
-				<Input>20</Input>
-				<Output>
-					<Latitude>49.600315</Latitude>
-					<Longitude>6.4102</Longitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="5">
-				<Input>199</Input>
-				<Output>
-		            <Latitude>49.600315</Latitude>
-		            <Longitude>6.4845</Longitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="4">
-				<Input>20</Input>
-				<Output>
-					<Latitude>49.600315</Latitude>
-					<Longitude>6.40922</Longitude>
-				</Output>
-			</GetPointAlongLine>
-			<GetPointAlongLine line="4">
-				<Input>14780</Input>
-				<Output>
+        <Node id="4">
             <Latitude>49.600315</Latitude>
-            <Longitude>6.41</Longitude>
-				</Output>
-			</GetPointAlongLine>
-		</GetPointAlongLineCalls>
-		<MeasureAlongLineCalls>
-			<MeasureAlongLine line="1">
-				<Input>
-					<Longitude>6.12806</Longitude>
-					<Latitude>49.60302</Latitude>
-				</Input>
-				<Output>15000</Output>
-			</MeasureAlongLine>
-		</MeasureAlongLineCalls>
-	</Calls>
+            <Longitude>6.409211</Longitude>
+        </Node>
+
+
+        <Node id="5">
+            <Latitude>49.600315</Latitude>
+            <Longitude>6.484729</Longitude>
+        </Node>
+        <Node id="6">
+            <Latitude>49.600315</Latitude>
+            <Longitude>6.485</Longitude>
+        </Node>
+    </Nodes>
+
+    <Lines>
+        <Line id="1">
+            <StartNode>1</StartNode>
+            <EndNode>2</EndNode>
+            <Length>200</Length>
+            <FRC>FRC_5</FRC>
+        </Line>
+        <Line id="2">
+            <StartNode>2</StartNode>
+            <EndNode>3</EndNode>
+            <Length>15000</Length>
+            <FRC>FRC_5</FRC>
+        </Line>
+        <Line id="3">
+            <StartNode>3</StartNode>
+            <EndNode>4</EndNode>
+            <Length>200</Length>
+            <FRC>FRC_5</FRC>
+        </Line>
+        <Line id="4">
+            <StartNode>4</StartNode>
+            <EndNode>5</EndNode>
+            <Length>14800</Length>
+            <FRC>FRC_5</FRC>
+        </Line>
+        <Line id="5">
+            <StartNode>5</StartNode>
+            <EndNode>6</EndNode>
+            <Length>200</Length>
+            <FRC>FRC_5</FRC>
+        </Line>
+    </Lines>
+
+    <Calls>
+        <GetPointAlongLineCalls>
+            <GetPointAlongLine line="3">
+                <Input>180</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.40918</Longitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="3">
+                <Input>20</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.31786</Longitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="2">
+                <Input>20</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.3162</Longitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="5">
+                <Input>180</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.4080</Longitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="5">
+                <Input>20</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.4102</Longitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="5">
+                <Input>199</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.4845</Longitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="4">
+                <Input>20</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.40922</Longitude>
+                </Output>
+            </GetPointAlongLine>
+            <GetPointAlongLine line="4">
+                <Input>14780</Input>
+                <Output>
+                    <Latitude>49.600315</Latitude>
+                    <Longitude>6.41</Longitude>
+                </Output>
+            </GetPointAlongLine>
+        </GetPointAlongLineCalls>
+        <MeasureAlongLineCalls>
+            <MeasureAlongLine line="1">
+                <Input>
+                    <Longitude>6.12806</Longitude>
+                    <Latitude>49.60302</Latitude>
+                </Input>
+                <Output>15000</Output>
+            </MeasureAlongLine>
+        </MeasureAlongLineCalls>
+    </Calls>
 </MockedMapDatabase>

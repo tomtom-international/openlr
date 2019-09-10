@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-  
-<suite name="xml" verbose="1" >
-  <test name="All Tests">
-    <packages>
-      <package name="openlr.xml.*"/>
-    </packages>
-  </test>
+
+<suite name="xml" verbose="1">
+    <test name="All Tests">
+        <packages>
+            <package name="openlr.xml.*"/>
+        </packages>
+    </test>
 </suite>
