@@ -402,8 +402,14 @@ public class FitToPointLocationTest {
         return line;
     }
 
-    private final Node mockNode(final String mockID, final double lon, final double lat) {
+    private final Node mockNode(final String mockID, final long id, final double lon, final double lat) {
         final Node node = mockery.mock(Node.class, mockID);
+        mockery.checking(new Expectations() {
+            {
+                allowing(node).getID();
+                will(returnValue(id));
+            }
+        });
         mockery.checking(new Expectations() {
             {
                 allowing(node).getGeoCoordinates();
@@ -430,10 +436,10 @@ public class FitToPointLocationTest {
      * [N1]---L1----[N2]----L2----[N3]----L3---[N4]
      */
     private final Line[] mockMap() {
-        final Node node1 = mockNode("1", 1, 1);
-        final Node node2 = mockNode("2", 1, 2);
-        final Node node3 = mockNode("3", 1, 3);
-        final Node node4 = mockNode("4", 1, 4);
+        final Node node1 = mockNode("1", 1, 1, 1);
+        final Node node2 = mockNode("2", 2, 1, 2);
+        final Node node3 = mockNode("3", 3, 1, 3);
+        final Node node4 = mockNode("4", 4, 1, 4);
 
         final Line line1 = mockLine(node1, node2, 200, 1);
         final Line line2 = mockLine(node2, node3, 200, 2);
