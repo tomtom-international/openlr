@@ -175,7 +175,7 @@ public class RouteSearch {
 			if (isLast && actualElement.getLine().getID() == destline.getID()) {
 				setRouteFound(actualElement);
 				break;
-			} else if (!isLast && actualElement.getLine().getEndNode().equals(e)) {
+			} else if (!isLast && actualElement.getLine().getEndNode().getID() == e.getID()) {
 				Iterator<? extends Line> iter = actualElement.getLine()
 						.getNextLines();
 				boolean destFound = false;

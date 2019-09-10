@@ -162,8 +162,8 @@ public final class NodeCheck {
 	 *         different directions
 	 */
 	public static boolean isPair(final Line line1, final Line line2) {
-		return (line1.getStartNode().equals(line2.getEndNode()) && line1.getEndNode()
-				.equals(line2.getStartNode()));
+		return (line1.getStartNode().getID() == line2.getEndNode().getID()) && (line1.getEndNode().getID() ==
+				line2.getStartNode().getID());
 	}
 
 }
