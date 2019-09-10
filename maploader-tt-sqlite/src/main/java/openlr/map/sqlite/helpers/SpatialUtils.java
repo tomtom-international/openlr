@@ -6,26 +6,15 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -68,16 +57,24 @@ import static openlr.map.sqlite.impl.Configuration.*;
  */
 public final class SpatialUtils {
 
-    /** The Constant QUARTER_CIRCLE. */
+    /**
+     * The Constant QUARTER_CIRCLE.
+     */
     private static final int QUARTER_CIRCLE = 90;
 
-    /** The Constant HALF_CIRCLE. */
+    /**
+     * The Constant HALF_CIRCLE.
+     */
     private static final int HALF_CIRCLE = 180;
 
-    /** The Constant THREE_QUARTER_CIRCLE. */
+    /**
+     * The Constant THREE_QUARTER_CIRCLE.
+     */
     private static final int THREE_QUARTER_CIRCLE = 270;
 
-    /** The Constant METER_PER_KM. */
+    /**
+     * The Constant METER_PER_KM.
+     */
     private static final float METER_PER_KM = 1000.0f;
 
     /**
@@ -91,8 +88,7 @@ public final class SpatialUtils {
      * Creates a simple thread safe LRU cache with default settings defined in
      * {@link openlr.map.sqlite.impl.Configuration}.
      *
-     * @param <E>
-     *            the data type of the cached features.
+     * @param <E> the data type of the cached features.
      * @return a {@link java.util.LinkedHashMap} based LRU cache.
      */
     public static <E> Map<Long, E> createLRUCache() {
@@ -110,10 +106,8 @@ public final class SpatialUtils {
     /**
      * Checks whether a given WGS84 coordinate is within the allowed bounds.
      *
-     * @param longitude
-     *            the longitude value of the coordinate.
-     * @param latitude
-     *            the latitude value of the coordinate.
+     * @param longitude the longitude value of the coordinate.
+     * @param latitude  the latitude value of the coordinate.
      * @return true if the coordinate is within the allowed bounds.
      */
     public static boolean isCoordinateValid(final double longitude,
@@ -125,15 +119,11 @@ public final class SpatialUtils {
     /**
      * Calc bounding box.
      *
-     * @param longitude
-     *            the longitude
-     * @param latitude
-     *            the latitude
-     * @param distance
-     *            the distance
+     * @param longitude the longitude
+     * @param latitude  the latitude
+     * @param distance  the distance
      * @return the rectangle corners
-     * @throws InvalidMapDataException
-     *             the invalid map data exception
+     * @throws InvalidMapDataException the invalid map data exception
      */
     public static RectangleCorners calcBoundingBox(final double longitude,
                                                    final double latitude, final int distance)
@@ -157,15 +147,14 @@ public final class SpatialUtils {
     /**
      * Shape from wkb.
      *
-     * @param bytes
-     *            the bytes
+     * @param bytes the bytes
      * @return the path2 d. double
      */
     public static List<GeoCoordinates> shapeFromWKB(final byte[] bytes) {
         try {
             return WKBReader.readShape(bytes);
         } catch (WKBException e) {
-            throw new IllegalStateException(e);
-        }
-    }
+			throw new IllegalStateException(e);
+		}
+	}
 }

@@ -6,26 +6,15 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -59,12 +48,14 @@ import static org.testng.Assert.*;
  */
 public class NodeTest {
 
-    /** The path to the map database file. */
+    /**
+     * The path to the map database file.
+     */
     private static final String PATH_TO_MAP = "src/test/resources/test-db.sqlite";
-
+    
     /** The mdb. */
     private MapDatabase mdb;
-
+    
     /**
      * Inits the.
      */
@@ -76,7 +67,7 @@ public class NodeTest {
             fail("Unexpected exception", e);
         }
     }
-
+    
     /**
      * Test node fail.
      */
@@ -84,7 +75,7 @@ public class NodeTest {
     public final void testNodeFail() {
         assertNull(mdb.getNode(-1));
     }
-
+    
     /**
      * Test node success01.
      */
@@ -107,7 +98,7 @@ public class NodeTest {
         assertEquals(convertToList(n.getConnectedLines()).size(), 5);
         assertEquals(n.getNumberConnectedLines(), 5);
     }
-
+    
     /**
      * Test node success02.
      */
@@ -132,7 +123,7 @@ public class NodeTest {
     /**
      * Convert to list.
      *
-     * @param <T> the generic type
+     * @param <T>  the generic type
      * @param iter the iter
      * @return the list
      */
@@ -142,6 +133,6 @@ public class NodeTest {
             list.add(iter.next());
         }
         return list;
-    }
+	}
 
 }

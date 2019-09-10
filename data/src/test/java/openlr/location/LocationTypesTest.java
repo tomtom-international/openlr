@@ -113,6 +113,30 @@ public class LocationTypesTest {
     private static final List<GeoCoordinates> CORNERS = new ArrayList<GeoCoordinates>();
     private static final GeoCoordinates SCALED_UR;
     private static final List<GeoCoordinates> SCALED_RECTANGLE_CORNERS = new ArrayList<GeoCoordinates>();
+
+    /**
+     * Gets the default mocked map database. <br>
+     * <b>Note! This global instance of map database shouldn't be used any more.
+     * Our new approach is to generate smaller instances of mocked map databases
+     * via configuration for each single test. For future tests please create
+     * {@link MockedMapDatabase} instances with smaller map configurations.</b>
+     *
+     * @return the map database
+     *
+     * @see MockedMapDatabase
+     */
+    static {
+        try {
+            MDB = new MockedMapDatabase(DEFAULT_MAP_DB_CONFIG, false);
+        } catch (InvalidConfigurationException e) {
+            throw new RuntimeException(
+                    "Unexpected exception during mock build-up from config "
+                            + "file " + DEFAULT_MAP_DB_CONFIG, e);
+        }
+    }
+
+
+
     /**
      * The list of lines used for creating the line locations.
      */
@@ -161,27 +185,6 @@ public class LocationTypesTest {
     private static final PolygonLocation polygon;
     /** The Constant closedLine. */
     private static final ClosedLineLocation closedLine;
-
-    /**
-     * Gets the default mocked map database. <br>
-     * <b>Note! This global instance of map database shouldn't be used any more.
-     * Our new approach is to generate smaller instances of mocked map databases
-     * via configuration for each single test. For future tests please create
-     * {@link MockedMapDatabase} instances with smaller map configurations.</b>
-     *
-     * @return the map database
-     *
-     * @see MockedMapDatabase
-     */
-    static {
-        try {
-            MDB = new MockedMapDatabase(DEFAULT_MAP_DB_CONFIG, false);
-        } catch (InvalidConfigurationException e) {
-            throw new RuntimeException(
-                    "Unexpected exception during mock build-up from config "
-                            + "file " + DEFAULT_MAP_DB_CONFIG, e);
-        }
-    }
 
     static {
         GeoCoordinates ll = null;

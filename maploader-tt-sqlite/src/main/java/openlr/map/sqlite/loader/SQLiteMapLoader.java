@@ -6,26 +6,15 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -63,14 +52,17 @@ import java.util.Collection;
  */
 public class SQLiteMapLoader implements OpenLRMapLoader {
 
+    /**
+     * The map descriptor.
+     */
+    private String mapDescriptor;
+
     private static final Collection<MapLoadParameter> PARAMS = new ArrayList<MapLoadParameter>();
 
     static {
         PARAMS.add(new DBFileNameParameter());
     }
 
-    /** The map descriptor. */
-    private String mapDescriptor;
 
     /**
      * {@inheritDoc}
@@ -95,8 +87,7 @@ public class SQLiteMapLoader implements OpenLRMapLoader {
     /**
      * Extract the database file name from the parameter list.
      *
-     * @param params
-     *            the parameter list
+     * @param params the parameter list
      * @return the database filename
      * @throws OpenLRMapLoaderException if no map can be found
      */

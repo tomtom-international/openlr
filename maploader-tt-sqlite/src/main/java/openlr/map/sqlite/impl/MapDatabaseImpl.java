@@ -6,26 +6,15 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -69,10 +58,14 @@ import static openlr.map.sqlite.impl.Configuration.TURN_RESTRICTIONS_SUPPORTED;
  */
 public final class MapDatabaseImpl implements openlr.map.MapDatabase {
 
-    /** The Constant KILO_BYTE. */
+    /**
+     * The Constant KILO_BYTE.
+     */
     private static final int KILO_BYTE = 1024;
 
-    /** The Constant STREAM_READ_BUFFER_SIZE. */
+    /**
+     * The Constant STREAM_READ_BUFFER_SIZE.
+     */
     private static final int STREAM_READ_BUFFER_SIZE = 1024;
 
     /**
@@ -99,8 +92,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * Number of cache misses.
      */
     private final AtomicLong cacheMisses = new AtomicLong(0);
-    /** The connection. */
-    private final DBConnection connection;
+
     /**
      * The name of this instance. This field should be populated on first access
      * to the getter method.
@@ -108,11 +100,15 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     private String name;
 
     /**
+     * The connection.
+     */
+    private final DBConnection connection;
+
+    /**
      * Creates an instance of this {@link openlr.map.MapDatabase} implementation
      * which uses the given SQLite database.
      *
-     * @param db
-     *            a SQLite database which holds the network.
+     * @param db a SQLite database which holds the network.
      */
     public MapDatabaseImpl(final String db) {
         /* Validate arguments. */
@@ -148,14 +144,11 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * temporary file in the systems default temporary file directory holding
      * the database content.
      *
-     * @param databaseStream
-     *            The input stream providing the map database content, must not
-     *            be <code>null</code>
-     * @throws IOException
-     *             If an error occurs when reading the stream or writing
-     *             internal content to the system temporary file directory
-     * @throws SQLException
-     *             If opening the database connection fails
+     * @param databaseStream The input stream providing the map database content, must not
+     *                       be <code>null</code>
+     * @throws IOException  If an error occurs when reading the stream or writing
+     *                      internal content to the system temporary file directory
+     * @throws SQLException If opening the database connection fails
      */
     public MapDatabaseImpl(final InputStream databaseStream)
             throws IOException, SQLException {
@@ -169,22 +162,18 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * closed after successful processing. The application will create a
      * temporary file in in the specified target holding the database content.
      *
-     * @param databaseStream
-     *            The input stream providing the map database content, must not
-     *            be <code>null</code>
-     * @param tempDataTarget
-     *            A file object defining the path to a file system location the
-     *            application is allowed to write to. If
-     *            <code>tempDataTarget</code> points to a directory the
-     *            application will create its temporary file in that directory.
-     *            If <code>tempDataTarget</code> is a concrete file it will use
-     *            exactly this file. The temporary file will be deleted on
-     *            system exit.
-     * @throws IOException
-     *             If an error occurs when reading the stream or writing
-     *             internal content to the specified temporary target file
-     * @throws SQLException
-     *             If opening the database connection fails
+     * @param databaseStream The input stream providing the map database content, must not
+     *                       be <code>null</code>
+     * @param tempDataTarget A file object defining the path to a file system location the
+     *                       application is allowed to write to. If
+     *                       <code>tempDataTarget</code> points to a directory the
+     *                       application will create its temporary file in that directory.
+     *                       If <code>tempDataTarget</code> is a concrete file it will use
+     *                       exactly this file. The temporary file will be deleted on
+     *                       system exit.
+     * @throws IOException  If an error occurs when reading the stream or writing
+     *                      internal content to the specified temporary target file
+     * @throws SQLException If opening the database connection fails
      */
     public MapDatabaseImpl(final InputStream databaseStream,
                            final File tempDataTarget) throws IOException, SQLException {
@@ -231,8 +220,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * Stores a {@link openlr.map.Line} object in the cache, removes the first
      * object from cache if the size is the defined maximum size.
      *
-     * @param line
-     *            the {@link openlr.map.Line} to store in the cache.
+     * @param line the {@link openlr.map.Line} to store in the cache.
      */
     private void cacheLine(final Line line) {
         if (line == null) {
@@ -245,8 +233,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * Stores a {@link openlr.map.Node} object in the cache, removes the first
      * object from cache if the size is the defined maximum size.
      *
-     * @param node
-     *            the {@link openlr.map.Node} to store in the cache.
+     * @param node the {@link openlr.map.Node} to store in the cache.
      */
     private void cacheNode(final Node node) {
         if (node == null) {
@@ -259,8 +246,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * Closes a {@link java.sql.ResultSet} and a
      * {@link java.sql.PreparedStatement} quietly.
      *
-     * @param rs
-     *            an object of type {@link java.sql.ResultSet}.
+     * @param rs an object of type {@link java.sql.ResultSet}.
      */
     private void closeQuietly(final ResultSet rs) {
         if (rs != null) {
@@ -366,10 +352,8 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Gets the line.
      *
-     * @param id
-     *            the id
-     * @param useCache
-     *            the use cache
+     * @param id       the id
+     * @param useCache the use cache
      * @return the line
      */
     private Line getLine(final long id, final boolean useCache) {
@@ -394,8 +378,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Read line.
      *
-     * @param id
-     *            the id
+     * @param id the id
      * @return the line
      */
     private Line readLine(final long id) {
@@ -418,11 +401,9 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Creates the line.
      *
-     * @param rs
-     *            the rs
+     * @param rs the rs
      * @return the line
-     * @throws SQLException
-     *             the sQL exception
+     * @throws SQLException the sQL exception
      */
     private Line createLine(final ResultSet rs) throws SQLException {
         long id = rs.getLong(1);
@@ -432,13 +413,10 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Creates the line.
      *
-     * @param id
-     *            the id
-     * @param rs
-     *            the rs
+     * @param id the id
+     * @param rs the rs
      * @return the line
-     * @throws SQLException
-     *             the sQL exception
+     * @throws SQLException the sQL exception
      */
     private Line createLine(final long id, final ResultSet rs)
             throws SQLException {
@@ -479,10 +457,8 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Gets the node.
      *
-     * @param id
-     *            the id
-     * @param useCache
-     *            the use cache
+     * @param id       the id
+     * @param useCache the use cache
      * @return the node
      */
     private Node getNode(final long id, final boolean useCache) {
@@ -507,8 +483,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Creates the node.
      *
-     * @param id
-     *            the id
+     * @param id the id
      * @return the node
      */
     private Node createNode(final long id) {
@@ -530,11 +505,9 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Creates the node.
      *
-     * @param rsNode
-     *            the rs node
+     * @param rsNode the rs node
      * @return the node
-     * @throws SQLException
-     *             the sQL exception
+     * @throws SQLException the sQL exception
      */
     private Node createNode(final ResultSet rsNode) throws SQLException {
         long id = rsNode.getLong(1);
@@ -544,13 +517,10 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * Creates the node.
      *
-     * @param rsNode
-     *            the rs node
-     * @param id
-     *            the id
+     * @param rsNode the rs node
+     * @param id     the id
      * @return the node
-     * @throws SQLException
-     *             the sQL exception
+     * @throws SQLException the sQL exception
      */
     private Node createNode(final ResultSet rsNode, final long id)
             throws SQLException {
@@ -743,12 +713,12 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
                 nrNodes = rs.getInt(1);
             } else {
                 LOG.warn("Cannot resolve number of nodes.");
-            }
-        } catch (SQLException e) {
-            LOG.error(e);
-        } finally {
-            closeQuietly(rs);
-        }
-        return nrNodes;
-    }
+			}
+		} catch (SQLException e) {
+			LOG.error(e);
+		} finally {
+			closeQuietly(rs);
+		}
+		return nrNodes;
+	}
 }

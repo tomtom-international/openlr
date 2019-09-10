@@ -6,26 +6,15 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -54,10 +43,14 @@ import static org.testng.Assert.*;
 
 public class LineTest {
 
-    /** The path to the map database file. */
+    /**
+     * The path to the map database file.
+     */
     private static final String PATH_TO_MAP = "src/test/resources/test-db.sqlite";
 
-    /** The mdb. */
+    /**
+     * The mdb.
+     */
     private MapDatabase mdb;
 
     /**
@@ -110,7 +103,7 @@ public class LineTest {
         assertTrue(prev.contains(mdb.getLine(-15280002185158L)));
         assertEquals(prev.size(), 3);
 
-        double[] coordsExpected = new double[]{5.0991692, 52.1037243,
+        double[] coordsExpected = new double[] {5.0991692, 52.1037243,
                 5.0985446, 52.103149};
         assertTrue(checkShapeCoordinates(line.getShapeCoordinates(),
                 coordsExpected));
@@ -127,7 +120,7 @@ public class LineTest {
         assertEquals(line.getFRC(), FunctionalRoadClass.FRC_4);
         assertEquals(line.getNames().toString(), "{=[Van der Marckstraat]}");
         assertEquals(line.distanceToPoint(5.12345, 51.3241), 87664);
-
+		
         GeoCoordinates expectedPointAlong = GeoCoordinatesImpl
                 .newGeoCoordinatesUnchecked(5.097857006797935, 52.111972794658);
         assertEquals(line.getGeoCoordinateAlongLine(20), expectedPointAlong);
@@ -148,7 +141,7 @@ public class LineTest {
         assertTrue(prev.contains(mdb.getLine(15280001836911L)));
         assertEquals(prev.size(), 4);
 
-        double[] coordsExpected = new double[]{5.0976537,
+        double[] coordsExpected = new double[] {5.0976537,
                 52.1118438, 5.0980597, 52.1121014};
         assertTrue(checkShapeCoordinates(line.getShapeCoordinates(),
                 coordsExpected));
@@ -165,8 +158,8 @@ public class LineTest {
         assertEquals(line.getFRC(), FunctionalRoadClass.FRC_4);
         assertEquals(line.getNames().toString(), "{=[Esdoornstraat]}");
         assertEquals(line.distanceToPoint(5.12345, 51.3241), 86409);
-
-
+		
+        
         GeoCoordinates expectedPointAlong = GeoCoordinatesImpl
                 .newGeoCoordinatesUnchecked(5.1010161156332305, 52.10103891977444);
         assertEquals(line.getGeoCoordinateAlongLine(20), expectedPointAlong);
@@ -186,7 +179,7 @@ public class LineTest {
         assertTrue(prev.contains(mdb.getLine(15280001229438L)));
         assertEquals(prev.size(), 2);
 
-        double[] coordsExpected = new double[]{5.1007911,
+        double[] coordsExpected = new double[] { 5.1007911,
                 52.1011534, 5.1010706, 52.1010112, 5.1012007, 52.1009611,
                 5.1017395, 52.1007831, 5.1019401, 52.1007102, 5.1020738,
                 52.1006554, 5.1021449, 52.1006148};
@@ -197,21 +190,19 @@ public class LineTest {
     /**
      * Convert to list.
      *
-     * @param <T>
-     *            the generic type
-     * @param iter
-     *            the iter
+     * @param <T>  the generic type
+     * @param iter the iter
      * @return the list
      */
     private <T> List<T> convertToList(Iterator<? extends T> iter) {
         List<T> list = new ArrayList<T>();
         while (iter.hasNext()) {
             list.add(iter.next());
-        }
-        return list;
-    }
+		}
+		return list;
+	}
 
-
+	
     private boolean checkShapeCoordinates(List<GeoCoordinates> path,
                                           double... coords) {
         if (coords.length < 2) {

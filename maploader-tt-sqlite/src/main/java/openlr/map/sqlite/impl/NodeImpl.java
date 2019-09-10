@@ -6,26 +6,15 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -60,34 +49,43 @@ import java.util.*;
  */
 public class NodeImpl implements Node {
 
-    /** The incoming lines. */
+    /**
+     * The incoming lines.
+     */
     private final Set<Long> incoming = new HashSet<Long>();
 
-    /** The outgoing lines. */
+    /**
+     * The outgoing lines.
+     */
     private final Set<Long> outgoing = new HashSet<Long>();
 
     /**
      * The unique ID of this {@link openlr.map.Node}.
      */
     private final long id;
-    /**
-     * Latitude value of the spatial position of this {@link openlr.map.Node}.
-     */
-    private final double latitudeDeg;
-    /**
-     * Longitude value of the spatial position of this {@link openlr.map.Node}.
-     */
-    private final double longitudeDeg;
-    /**
-     * The {@link openlr.map.MapDatabase} instance which manages this feature.
-     */
-    private final MapDatabase mdb;
+
     /**
      * A set of {@link openlr.map.Line} objects having a incoming topological
      * connection to this {@link openlr.map.Node}. This set should be populated
      * on first access to the getter method.
      */
     private List<Line> incomingLines;
+
+    /**
+     * Latitude value of the spatial position of this {@link openlr.map.Node}.
+     */
+    private final double latitudeDeg;
+
+    /**
+     * Longitude value of the spatial position of this {@link openlr.map.Node}.
+     */
+    private final double longitudeDeg;
+
+    /**
+     * The {@link openlr.map.MapDatabase} instance which manages this feature.
+     */
+    private final MapDatabase mdb;
+
     /**
      * A set of {@link openlr.map.Line} objects having a outgoing topological
      * connection to this {@link openlr.map.Node}. This set should be populated
@@ -99,20 +97,14 @@ public class NodeImpl implements Node {
      * Creates an instance of this class representing a {@link openlr.map.Node}
      * feature with a given ID in the network managed by the given
      *
-     * @param map
-     *            the {@link openlr.map.MapDatabase} this feature is managed by
-     * @param idValue
-     *            the unique ID of this {@link openlr.map.Node}
-     * @param lonDeg
-     *            the longitude value of the coordinate in WGS84 coordinate
-     *            system
-     * @param latDeg
-     *            the longitude value of the coordinate in WGS84 coordinate
-     *            system
-     * @param in
-     *            the incoming line ids
-     * @param out
-     *            the outgoing line ids {@link openlr.map.MapDatabase} instance.
+     * @param map     the {@link openlr.map.MapDatabase} this feature is managed by
+     * @param idValue the unique ID of this {@link openlr.map.Node}
+     * @param lonDeg  the longitude value of the coordinate in WGS84 coordinate
+     *                system
+     * @param latDeg  the longitude value of the coordinate in WGS84 coordinate
+     *                system
+     * @param in      the incoming line ids
+     * @param out     the outgoing line ids {@link openlr.map.MapDatabase} instance.
      */
     NodeImpl(final MapDatabase map, final long idValue, final double lonDeg,
              final double latDeg, final Set<Long> in, final Set<Long> out) {

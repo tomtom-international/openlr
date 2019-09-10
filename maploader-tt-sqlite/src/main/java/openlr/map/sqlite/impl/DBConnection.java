@@ -6,26 +6,15 @@
  * licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.  You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2012 TomTom International B.V.
@@ -65,31 +54,49 @@ public class DBConnection {
      */
     private final Connection connection;
 
-    /** The ps get line. */
+    /**
+     * The ps get line.
+     */
     private final PreparedStatement psGetLine;
 
-    /** The ps nodes close by. */
+    /**
+     * The ps nodes close by.
+     */
     private final PreparedStatement psNodesCloseBy;
 
-    /** The ps lines close by. */
+    /**
+     * The ps lines close by.
+     */
     private final PreparedStatement psLinesCloseBy;
 
-    /** The ps get node. */
+    /**
+     * The ps get node.
+     */
     private final PreparedStatement psGetNode;
 
-    /** The ps meta data. */
+    /**
+     * The ps meta data.
+     */
     private final PreparedStatement psMetaData;
 
-    /** The ps line count. */
+    /**
+     * The ps line count.
+     */
     private final PreparedStatement psLineCount;
 
-    /** The ps node count. */
+    /**
+     * The ps node count.
+     */
     private final PreparedStatement psNodeCount;
 
-    /** The ps incoming. */
+    /**
+     * The ps incoming.
+     */
     private final PreparedStatement psIncoming;
 
-    /** The ps outgoing. */
+    /**
+     * The ps outgoing.
+     */
     private final PreparedStatement psOutgoing;
 
 
@@ -98,7 +105,7 @@ public class DBConnection {
      *
      * @param db the db
      * @throws ClassNotFoundException the class not found exception
-     * @throws SQLException the sQL exception
+     * @throws SQLException           the sQL exception
      */
     public DBConnection(final String db) throws ClassNotFoundException, SQLException {
         connection = getDatabaseConnection(db);
@@ -220,13 +227,10 @@ public class DBConnection {
     /**
      * Gets the connection to a given SQLite database.
      *
-     * @param db
-     *            path to the SQLite database.
+     * @param db path to the SQLite database.
      * @return a connection to the specified SQLite database.
-     * @throws ClassNotFoundException
-     *             if the driver was not found in classpath.
-     * @throws SQLException
-     *             if opening the database connection fails.
+     * @throws ClassNotFoundException if the driver was not found in classpath.
+     * @throws SQLException           if opening the database connection fails.
      */
     private Connection getDatabaseConnection(final String db)
             throws ClassNotFoundException, SQLException {
@@ -245,15 +249,15 @@ public class DBConnection {
 
         return config.createConnection(url);
     }
-
-    /**
-     * Creates the statement.
-     *
-     * @return the statement
-     * @throws SQLException the sQL exception
-     */
-    public final Statement createStatement() throws SQLException {
-        return connection.createStatement();
-    }
+	
+	/**
+	 * Creates the statement.
+	 *
+	 * @return the statement
+	 * @throws SQLException the sQL exception
+	 */
+	public final Statement createStatement() throws SQLException {
+		return connection.createStatement();
+	}
 
 }
