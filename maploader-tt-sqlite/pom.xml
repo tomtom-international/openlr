@@ -74,7 +74,6 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -83,12 +82,10 @@
 
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0</version>
 			</plugin>
 
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
 				<configuration>
 					<attach>true</attach>
 					<archive>
@@ -108,7 +105,6 @@
 
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
 				<configuration>
 					<doctitle>OpenLR&#8482; - Map-SQLite package ${project.version} API
 					</doctitle>
@@ -133,7 +129,6 @@
 
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -150,13 +145,11 @@
 				<configuration>
 					<excludedGroups>broken</excludedGroups>
 				</configuration>
-				<version>${maven.surefire.plugin.version}</version>
 			</plugin>
 
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
-				<version>${maven.license.plugin.version}</version>
 				<configuration>
 					<strictCheck>true</strictCheck>
 					<header>${basedir}/src/main/resources/templates/HEADER</header>
@@ -179,7 +172,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
-				<version>2.6</version>
 				<configuration>
 					<template>changelog.txt</template>
 					<templateDirectory>src/main/resources/templates</templateDirectory>
@@ -340,12 +332,10 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>2.3.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
-				<version>2.6</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -357,7 +347,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.7</version>
 				<configuration>
 					<configLocation>${basedir}/checkstyle_openlr.xml</configLocation>
 					<excludes>**/generated/**</excludes>
@@ -367,7 +356,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
 				<configuration>
 					<doctitle>OpenLR&#8482; - Map-SQLite package ${project.version} API
 					</doctitle>
@@ -387,7 +375,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>2.5</version>
 				<configuration>
 					<targetJdk>1.6</targetJdk>
 					<excludes>
@@ -401,7 +388,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>javancss-maven-plugin</artifactId>
-				<version>2.0</version>
 				<configuration>
 					<linkXRef>false</linkXRef>
 				</configuration>
@@ -510,7 +496,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-project-info-reports-plugin</artifactId>
-						<version>2.4</version>
 						<reportSets>
 							<reportSet>
 								<reports>
@@ -528,13 +513,11 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-report-plugin</artifactId>
-						<version>2.9</version>
 					</plugin>
 
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>cobertura-maven-plugin</artifactId>
-						<version>2.5.1</version>
 						<configuration>
 							<check>
 								<lineRate>0</lineRate>
@@ -550,7 +533,6 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>taglist-maven-plugin</artifactId>
-						<version>2.4</version>
 						<configuration>
 							<tagListOptions>
 								<tagClasses>
@@ -620,7 +602,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-project-info-reports-plugin</artifactId>
-						<version>2.4</version>
 						<reportSets>
 							<reportSet>
 								<reports>
