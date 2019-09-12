@@ -12,7 +12,6 @@
     <groupId>openlr</groupId>
     <artifactId>data</artifactId>
     <packaging>jar</packaging>
-    <version>${project.parent.version}</version>
 
     <name>OpenLR - data</name>
 
