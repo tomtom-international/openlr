@@ -5,7 +5,7 @@
     <groupId>openlr</groupId>
     <artifactId>openlr-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.3-SNAPSHOT</version>
+    <version>${project.parent.version}</version>
 
     <name>OpenLR - parent</name>
     <url>http://www.openlr.org</url>

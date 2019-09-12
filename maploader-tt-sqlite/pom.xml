@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>maploader-tt-sqlite</artifactId>
-	<version>1.4.3-SNAPSHOT</version>
+	<version>${project.parent.version}</version>
 	<packaging>jar</packaging>
 
 	<name>OpenLR - maploader-tt-sqlite</name>

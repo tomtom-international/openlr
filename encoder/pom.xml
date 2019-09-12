@@ -11,7 +11,7 @@
 
     <groupId>openlr</groupId>
     <artifactId>encoder</artifactId>
-    <version>1.4.3-SNAPSHOT</version>
+    <version>${project.parent.version}</version>
     <packaging>jar</packaging>
 
     <name>OpenLR - encoder</name>
