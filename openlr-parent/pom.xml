@@ -330,7 +330,7 @@
             <dependency>
                 <groupId>openlr</groupId>
                 <artifactId>data</artifactId>
-                <version>1.4.3-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <classifier>tests</classifier>
                 <scope>test</scope>
             </dependency>
@@ -338,13 +338,13 @@
             <dependency>
                 <groupId>openlr</groupId>
                 <artifactId>map</artifactId>
-                <version>1.4.3-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>openlr</groupId>
                 <artifactId>map</artifactId>
-                <version>1.4.3-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <classifier>tests</classifier>
                 <scope>test</scope>
             </dependency>
@@ -352,7 +352,7 @@
             <dependency>
                 <groupId>openlr</groupId>
                 <artifactId>data</artifactId>
-                <version>1.4.3-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
 
 
@@ -383,7 +383,7 @@
             <dependency>
                 <groupId>openlr</groupId>
                 <artifactId>maploader-tt-sqlite</artifactId>
-                <version>1.4.3-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
