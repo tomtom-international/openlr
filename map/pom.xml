@@ -11,7 +11,6 @@
 
     <groupId>openlr</groupId>
     <artifactId>map</artifactId>
-    <version>1.4.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OpenLR - map</name>
@@ -39,7 +38,6 @@
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
-            <version>1.9</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -49,7 +47,6 @@
         <dependency>
             <groupId>de.micromata.jak</groupId>
             <artifactId>JavaAPIforKml</artifactId>
-            <version>2.2.0</version>
             <scope>test</scope>
             <exclusions>
                 <!--            Exclude the following since JAK of version 2.2.0 depends on snapshots!  -->
@@ -68,19 +65,16 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-xjc</artifactId>
-            <version>2.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
     </dependencies>
 
@@ -108,7 +102,6 @@
                 <configuration>
                     <excludedGroups>broken</excludedGroups>
                 </configuration>
-                <version>${maven.surefire.plugin.version}</version>
             </plugin>
 
             <plugin>
@@ -118,7 +111,6 @@
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
-                <version>${maven.license.plugin.version}</version>
             </plugin>
 
             <plugin>

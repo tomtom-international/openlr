@@ -12,7 +12,6 @@
     <groupId>openlr</groupId>
     <artifactId>data</artifactId>
     <packaging>jar</packaging>
-    <version>1.4.3-SNAPSHOT</version>
 
     <name>OpenLR - data</name>
 
@@ -27,17 +26,14 @@
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>map</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
-            <version>1.9</version>
         </dependency>
 
         <dependency>
@@ -57,7 +53,6 @@
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>map</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
@@ -70,7 +65,6 @@
         <dependency>
             <groupId>colt</groupId>
             <artifactId>colt</artifactId>
-            <version>1.2.0</version>
         </dependency>
 
 
@@ -104,7 +98,6 @@
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
-                <version>${maven.license.plugin.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>src/main/java/cern/**</exclude>
@@ -118,7 +111,6 @@
                 <configuration>
                     <excludedGroups>broken</excludedGroups>
                 </configuration>
-                <version>${maven.surefire.plugin.version}</version>
             </plugin>
 
             <plugin>

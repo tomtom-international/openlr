@@ -11,7 +11,6 @@
 
     <groupId>openlr</groupId>
     <artifactId>encoder</artifactId>
-    <version>1.4.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OpenLR - encoder</name>
@@ -51,7 +50,6 @@
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
-                <version>${maven.license.plugin.version}</version>
             </plugin>
 
             <plugin>
@@ -61,7 +59,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4</version>
                 <configuration>
                     <!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
                     <encoding>UTF-8</encoding>
@@ -73,7 +70,6 @@
                 <configuration>
                     <excludedGroups>broken</excludedGroups>
                 </configuration>
-                <version>${maven.surefire.plugin.version}</version>
             </plugin>
 
             <plugin>
@@ -158,19 +154,16 @@
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
 
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>map</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>data</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -194,7 +187,6 @@
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>map</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
@@ -202,13 +194,11 @@
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
-            <version>1.9</version>
         </dependency>
 
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>data</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>

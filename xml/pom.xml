@@ -12,7 +12,6 @@
     <groupId>openlr</groupId>
     <artifactId>xml</artifactId>
     <name>OpenLR - xml</name>
-    <version>1.4.3-SNAPSHOT</version>
     <description>OpenLR XML physical format</description>
 
     <url>http://www.openlr.org</url>
@@ -22,7 +21,6 @@
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>data</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -45,13 +43,11 @@
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
 
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>data</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
@@ -88,13 +84,11 @@
                 <configuration>
                     <excludedGroups>broken</excludedGroups>
                 </configuration>
-                <version>${maven.surefire.plugin.version}</version>
             </plugin>
 
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
-                <version>${maven.license.plugin.version}</version>
             </plugin>
 
             <plugin>
