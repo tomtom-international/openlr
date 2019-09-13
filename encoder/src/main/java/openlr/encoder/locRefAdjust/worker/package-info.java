@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  * <p>
- * Copyright (C) 2009-2012 TomTom International B.V.
+ * Copyright (C) 2009-2019 TomTom International B.V.
  * <p>
  * TomTom (Legal Department)
  * Email: legal@tomtom.com
@@ -30,7 +30,7 @@
  * Contains concrete worker classes per location type for adjustment of locations during encoding.
  */
 /**
- *  Copyright (C) 2009-2012 TomTom International B.V.
+ *  Copyright (C) 2009-2019 TomTom International B.V.
  *
  *   TomTom (Legal Department)
  *   Email: legal@tomtom.com
