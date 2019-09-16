@@ -100,7 +100,7 @@
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>${maven.license.plugin.version}</version>
+                    <version>3.0</version>
                     <configuration>
                         <header>${basedir}/src/main/resources/templates/HEADER</header>
                         <includes>
@@ -231,7 +231,11 @@
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>2.3.1</version>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
