@@ -80,10 +80,6 @@
 			</plugin>
 
 			<plugin>
-				<artifactId>maven-site-plugin</artifactId>
-			</plugin>
-
-			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<configuration>
 					<attach>true</attach>
