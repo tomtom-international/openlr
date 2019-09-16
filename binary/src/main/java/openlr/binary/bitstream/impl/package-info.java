@@ -30,7 +30,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  * <p>
- * Copyright (C) 2009,2010 TomTom International B.V.
+ * Copyright (C) 2009-2019 TomTom International B.V.
  * <p>
  * TomTom (Legal Department)
  * Email: legal@tomtom.com
@@ -66,7 +66,7 @@
  */
 
 /**
- *  Copyright (C) 2009,2010 TomTom International B.V.
+ *  Copyright (C) 2009-2019 TomTom International B.V.
  *
  *   TomTom (Legal Department)
  *   Email: legal@tomtom.com
