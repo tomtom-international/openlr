@@ -1,6 +1,0 @@
-OpenLR - encoder
-
-  The encoder package holds the reference implementation for the OpenLR encoder. It
-takes a (map-dependent) location as input and generates a corresponding (map-agnostic)
-location reference. This package uses the OpenLR map package and the OpenLR data
-package. 

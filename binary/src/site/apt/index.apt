@@ -1,5 +1,0 @@
-OpenLR - binary
-
- The binary package consists of classes for reading and writing binary location 
-reference data. This package implements the OpenLR data interfaces and provides
-physical encoder and physical decoder services.
