@@ -1,7 +1,0 @@
-OpenLR - XML
-
- The xml package consists of classes for reading and writing xml location 
-reference data as a service. The OpenLR encoder may use this package to create a xml 
-representation of a location reference. The OpenLR decoder may use this package to
-receive and decode xml location reference data. This package implements a
-{{{./schema.html}schema}} as described in the OpenLR white paper. 
