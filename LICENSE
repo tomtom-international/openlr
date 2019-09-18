@@ -1,3 +1,4 @@
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -172,6 +173,20 @@
       defend, and hold each Contributor harmless for any liability
       incurred by, or claims asserted against, such Contributor by reason
       of your accepting any such warranty or additional liability.
+
+Extra condition for OpenLR:
+
+The assertion by licensee of any intellectual property claim with respect to
+OpenLR against TomTom International B.V., Tele Atlas or any affiliate or
+parent company of TomTom and Tele Atlas shall be deemed a breach by licensee
+of this Agreement and the license shall automatically terminate.
+
+Subject to the terms of the Apache v2 open source license, TomTom
+International B.V. hereby grants to the user of OpenLR, which accepts, a
+non-exclusive, non-royalty bearing, free license to use the following OpenLR
+trademark in connection with the OpenLR software:
+
+<see OpenLR.png>
 
    END OF TERMS AND CONDITIONS
 
