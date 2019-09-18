@@ -45,13 +45,15 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.0-M3</version>
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>3.8.1</version>
                     <configuration>
                         <source>1.7</source>
                         <target>1.7</target>
@@ -59,10 +61,11 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.8</version>
+                    <version>3.1.1</version>
                     <configuration>
-                        <additionalparam>-Xdoclint:none</additionalparam>
+                        <doclint>on</doclint>
                         <archive>
                             <manifestFile>src/main/resources/templates/MANIFEST.MF</manifestFile>
                         </archive>
@@ -121,7 +124,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-changes-plugin</artifactId>
-                    <version>2.8</version>
+                    <version>2.12.1</version>
                     <configuration>
                         <template>changelog.txt</template>
                         <templateDirectory>src/main/resources/templates</templateDirectory>
@@ -137,8 +140,9 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.1.2</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <attach>true</attach>
                         <archive>
@@ -167,8 +171,9 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.3.1</version>
+                    <version>3.1.2</version>
                     <executions>
                         <execution>
                             <goals>
@@ -193,10 +198,11 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>truezip-maven-plugin</artifactId>
-                    <version>1.0-beta-5</version>
+                    <version>1.2</version>
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
                         <excludedGroups>broken</excludedGroups>
@@ -205,14 +211,15 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.1.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>2.3.1</version>
+                    <version>3.0.5</version>
                 </plugin>
 
             </plugins>
@@ -224,17 +231,17 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.3.1</version>
+                <version>3.0.5</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.0.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.5</version>
+                <version>2.12.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -247,7 +254,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.7</version>
+                <version>3.1.0</version>
                 <configuration>
                     <configLocation>${basedir}/checkstyle_openlr.xml</configLocation>
                     <excludes>
@@ -260,7 +267,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8</version>
+                <version>3.1.1</version>
                 <configuration>
                     <doctitle>OpenLR&#8482; API</doctitle>
                     <windowtitle>OpenLR&#8482; API</windowtitle>
@@ -283,7 +290,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>2.5</version>
+                <version>3.12.0</version>
                 <configuration>
                     <targetJdk>1.6</targetJdk>
                     <excludes>
@@ -297,7 +304,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>javancss-maven-plugin</artifactId>
-                <version>2.0</version>
+                <version>2.1</version>
                 <configuration>
                     <linkXRef>false</linkXRef>
                 </configuration>
@@ -312,13 +319,13 @@
             <dependency>
                 <groupId>commons-configuration</groupId>
                 <artifactId>commons-configuration</artifactId>
-                <version>1.9</version>
+                <version>1.10</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.7</version>
+                <version>1.13</version>
             </dependency>
 
             <dependency>
@@ -365,13 +372,13 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>6.8</version>
+                <version>7.0.0</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jmock</groupId>
                 <artifactId>jmock-legacy</artifactId>
-                <version>2.5.1</version>
+                <version>2.12.0</version>
             </dependency>
 
             <dependency>
@@ -389,25 +396,25 @@
             <dependency>
                 <groupId>de.micromata.jak</groupId>
                 <artifactId>JavaAPIforKml</artifactId>
-                <version>2.2.0</version>
+                <version>2.2.1</version>
             </dependency>
 
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.2</version>
+                <version>2.4.0-b180830.0438</version>
             </dependency>
 
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-xjc</artifactId>
-                <version>2.2</version>
+                <version>2.4.0-b180830.0438</version>
             </dependency>
 
             <dependency>
                 <groupId>org.xerial</groupId>
                 <artifactId>sqlite-jdbc</artifactId>
-                <version>3.7.2</version>
+                <version>3.28.0</version>
             </dependency>
 
         </dependencies>
@@ -429,8 +436,9 @@
                     <plugins>
 
                         <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-source-plugin</artifactId>
-                            <version>2.1.2</version>
+                            <version>3.1.0</version>
                             <configuration>
                                 <attach>true</attach>
                                 <archive>
@@ -494,7 +502,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <version>2.4</version>
+                        <version>3.0.0</version>
                         <reportSets>
                             <reportSet>
                                 <reports>
@@ -509,10 +517,12 @@
                         </reportSets>
                     </plugin>
 
+
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-report-plugin</artifactId>
-                        <version>2.9</version>
+                        <version>3.0.0-M3</version>
                         <configuration>
                             <excludedGroups>broken</excludedGroups>
                         </configuration>
@@ -521,7 +531,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.9</version>
+                        <version>3.0.0-M3</version>
                         <configuration>
                             <excludedGroups>broken</excludedGroups>
                         </configuration>
@@ -530,7 +540,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>cobertura-maven-plugin</artifactId>
-                        <version>2.5.1</version>
+                        <version>2.7</version>
                         <configuration>
                             <check>
                                 <lineRate>0</lineRate>
@@ -624,7 +634,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <version>2.4</version>
+                        <version>3.0.0</version>
                         <reportSets>
                             <reportSet>
                                 <reports>
