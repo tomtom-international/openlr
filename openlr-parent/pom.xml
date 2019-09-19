@@ -8,7 +8,6 @@
     <version>1.4.3-SNAPSHOT</version>
 
     <name>OpenLR - parent</name>
-    <url>http://www.openlr.org</url>
     <description>OpenLR - open standard for location referencing</description>
 
     <developers>
@@ -212,9 +211,14 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>2.3.1</version>
+                    <version>3.0.5</version>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -224,7 +228,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.3.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -469,32 +472,12 @@
                 </pluginManagement>
             </build>
 
-            <distributionManagement>
-
-                <snapshotRepository>
-                    <id>dev_repository</id>
-                    <url>${dev.snapshot.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>dev_repository</id>
-                    <url>${dev.release.url}</url>
-                </repository>
-
-                <site>
-                    <id>dev_site</id>
-                    <url>${dev.site.url}</url>
-                </site>
-
-            </distributionManagement>
-
             <reporting>
                 <plugins>
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <version>2.4</version>
                         <reportSets>
                             <reportSet>
                                 <reports>
@@ -597,34 +580,12 @@
                 </property>
             </activation>
 
-            <distributionManagement>
-
-                <downloadUrl>http://www.openlr.org</downloadUrl>
-
-                <site>
-                    <id>prod_site</id>
-                    <url>${prod.site.url}</url>
-                </site>
-
-                <snapshotRepository>
-                    <id>prod_repository</id>
-                    <url>${prod.snapshot.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>prod_repository</id>
-                    <url>${prod.release.url}</url>
-                </repository>
-
-            </distributionManagement>
-
             <reporting>
                 <plugins>
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <version>2.4</version>
                         <reportSets>
                             <reportSet>
                                 <reports>
