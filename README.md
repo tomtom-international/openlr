@@ -10,7 +10,7 @@ mvn clean install
 
 ## Usage
 
-###9 Modules:
+### 9 Modules:
 OpenLR - parent: OpenLR - open standard for location referencing
 OpenLR - encoder:	The encoder package holds the reference implementation for the OpenLR encoder. It takes a (map-dependent) location as input and generates a corresponding (map-agnostic) location reference. This package uses the OpenLR map package and the OpenLR data package.
 OpenLR - map:	The map package consists of the map interface and map tools being used by the OpenLR encoder and decoder. The user of this package needs to implement the required methods and needs to translate the internal data structure to the OpenLR map interface.
