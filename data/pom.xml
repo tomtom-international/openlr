@@ -15,8 +15,6 @@
 
     <name>OpenLR - data</name>
 
-    <url>http://www.openlr.org</url>
-
     <description>The OpenLR data package comprises interfaces for OpenLR location references and
         also interfaces for encoding and decoding the internal data into a defined physical format and
         the other way round.
@@ -252,25 +250,6 @@
                     <value>dev</value>
                 </property>
             </activation>
-
-            <distributionManagement>
-
-                <snapshotRepository>
-                    <id>dev_repository</id>
-                    <url>${dev.snapshot.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>dev_repository</id>
-                    <url>${dev.release.url}</url>
-                </repository>
-
-                <site>
-                    <id>dev_site</id>
-                    <url>${dev.site.url}/data/</url>
-                </site>
-
-            </distributionManagement>
         </profile>
         <profile>
             <id>openlr</id>
@@ -281,27 +260,6 @@
                     <value>prod</value>
                 </property>
             </activation>
-
-            <distributionManagement>
-
-                <downloadUrl>http://www.openlr.org</downloadUrl>
-
-                <site>
-                    <id>prod_site</id>
-                    <url>${prod.site.url}/data/</url>
-                </site>
-
-                <snapshotRepository>
-                    <id>prod_repository</id>
-                    <url>${prod.snapshot.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>prod_repository</id>
-                    <url>${prod.release.url}</url>
-                </repository>
-
-            </distributionManagement>
         </profile>
     </profiles>
 

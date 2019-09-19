@@ -19,7 +19,6 @@
         location reference. This package uses the OpenLR map package and the OpenLR data
         package.
     </description>
-    <url>http://www.openlr.org</url>
 
 
     <build>
@@ -238,25 +237,6 @@
                     <value>dev</value>
                 </property>
             </activation>
-
-            <distributionManagement>
-
-                <snapshotRepository>
-                    <id>dev_repository</id>
-                    <url>${dev.snapshot.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>dev_repository</id>
-                    <url>${dev.release.url}</url>
-                </repository>
-
-                <site>
-                    <id>dev_site</id>
-                    <url>${dev.site.url}/encoder/</url>
-                </site>
-
-            </distributionManagement>
         </profile>
         <profile>
             <id>openlr</id>
@@ -267,27 +247,6 @@
                     <value>prod</value>
                 </property>
             </activation>
-
-            <distributionManagement>
-
-                <downloadUrl>http://www.openlr.org</downloadUrl>
-
-                <site>
-                    <id>prod_site</id>
-                    <url>${prod.site.url}/encoder/</url>
-                </site>
-
-                <snapshotRepository>
-                    <id>prod_repository</id>
-                    <url>${prod.snapshot.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>prod_repository</id>
-                    <url>${prod.release.url}</url>
-                </repository>
-
-            </distributionManagement>
         </profile>
     </profiles>
 </project>
