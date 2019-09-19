@@ -4,9 +4,9 @@
 
 Go to the openlr folder:
 
-'''
+```maven
 mvn clean install
-'''
+```
 
 ## Usage
 
