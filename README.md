@@ -1,14 +1,25 @@
 # openlr
+----------
 
 ## Installation
+----------------
 
-Go to the openlr folder:
+To build all the modules go to the project folder:
 
 ```maven
 mvn clean install
 ```
 
+To build modules invidually go to module folder:
+
+
+```maven
+mvn clean install
+```
+
+
 ## Usage
+---------
 
 ### 9 Modules:
 #### OpenLR - parent: OpenLR - open standard for location referencing
