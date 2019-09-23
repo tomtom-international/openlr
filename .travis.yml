@@ -1,0 +1,23 @@
+
+language: java
+
+sudo: false
+
+jdk:
+  - openjdk8
+
+install:
+  - export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+  - mvn install -DskipTests
+
+script:
+  - export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+  - mvn verify
+
+after_success:
+  - export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+  - mvn coveralls:report
+
+cache:
+  directories:
+    - $HOME/.m2
