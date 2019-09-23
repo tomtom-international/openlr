@@ -10,7 +10,7 @@ import openlr.decoder.properties.OpenLRDecoderProperties;
 import openlr.map.Line;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

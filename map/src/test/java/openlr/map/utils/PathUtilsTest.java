@@ -39,7 +39,7 @@
  */
 package openlr.map.utils;
 
-import junit.framework.Assert;
+import org.testng.Assert;
 import openlr.map.Line;
 import openlr.map.utils.PQElem.PQElemComparator;
 import org.jmock.Expectations;
