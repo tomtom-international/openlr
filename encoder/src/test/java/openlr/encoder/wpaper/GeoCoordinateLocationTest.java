@@ -44,7 +44,7 @@ import openlr.map.GeoCoordinates;
 import openlr.map.InvalidMapDataException;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests the encoding examples from the OpenLr White paper.
