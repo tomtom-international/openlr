@@ -15,7 +15,6 @@ script:
   - mvn verify
 
 after_success:
-  - export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
 
 cache:
