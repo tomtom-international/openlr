@@ -110,7 +110,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      *
      * @param db a SQLite database which holds the network.
      */
-    public MapDatabaseImpl(final String db) {
+    public MapDatabaseImpl(final String db) throws Exception {
         /* Validate arguments. */
         if (db == null) {
             throw new IllegalArgumentException("Database file not specified.");
@@ -151,7 +151,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * @throws SQLException If opening the database connection fails
      */
     public MapDatabaseImpl(final InputStream databaseStream)
-            throws IOException, SQLException {
+            throws Exception {
         this(databaseStream, File.createTempFile("openlrMap", ".sqlite"));
     }
 
@@ -176,7 +176,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
      * @throws SQLException If opening the database connection fails
      */
     public MapDatabaseImpl(final InputStream databaseStream,
-                           final File tempDataTarget) throws IOException, SQLException {
+                           final File tempDataTarget) throws Exception {
         if (databaseStream == null) {
             throw new IllegalArgumentException(
                     "Database stream must not be null.");

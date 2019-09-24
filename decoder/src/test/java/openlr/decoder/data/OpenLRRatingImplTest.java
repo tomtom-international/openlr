@@ -58,7 +58,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import static junit.framework.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 /**

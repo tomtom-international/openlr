@@ -44,7 +44,7 @@ import openlr.map.GeoCoordinates;
 import openlr.map.InvalidMapDataException;
 import org.testng.annotations.Test;
 
-import static junit.framework.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests the encoding examples from the OpenLr White paper.
@@ -99,9 +99,9 @@ public class GeoCoordinateLocationTest extends AbstractEncoderTest {
         GeoCoordinates inputPoi = inputLocation.getPointLocation();
 
         String message = "Encoded GEO-coordinate doesn't match the input data.";
-        assertEquals(message, coords.getLatitudeDeg(), inputPoi
-                .getLatitudeDeg());
-        assertEquals(message, coords.getLongitudeDeg(), inputPoi
-                .getLongitudeDeg());
+        assertEquals(coords.getLatitudeDeg(), inputPoi
+                .getLatitudeDeg(), message);
+        assertEquals(coords.getLongitudeDeg(), inputPoi
+                .getLongitudeDeg(), message);
     }
 }

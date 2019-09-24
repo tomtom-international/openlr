@@ -107,7 +107,7 @@ public class DBConnection {
      * @throws ClassNotFoundException the class not found exception
      * @throws SQLException           the sQL exception
      */
-    public DBConnection(final String db) throws ClassNotFoundException, SQLException {
+    public DBConnection(final String db) throws Exception {
         connection = getDatabaseConnection(db);
         try {
             psGetLine = connection
@@ -233,7 +233,7 @@ public class DBConnection {
      * @throws SQLException           if opening the database connection fails.
      */
     private Connection getDatabaseConnection(final String db)
-            throws ClassNotFoundException, SQLException {
+            throws Exception {
         assert db != null;
         if (LOG.isDebugEnabled()) {
             String mode = "pure-java";

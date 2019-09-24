@@ -113,6 +113,8 @@ public class MapDatabaseImplTest {
             Assert.fail("Unexpected exception", e);
         } catch (SQLException e) {
             Assert.fail("Unexpected exception", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -138,6 +140,8 @@ public class MapDatabaseImplTest {
             Assert.fail("Unexpected exception", e);
         } catch (SQLException e) {
             Assert.fail("Unexpected exception", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -160,6 +164,8 @@ public class MapDatabaseImplTest {
             Assert.fail("Unexpected exception", e);
         } catch (SQLException e) {
             Assert.fail("Unexpected exception", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -195,7 +201,12 @@ public class MapDatabaseImplTest {
 
     @Test
     public final void testAllLinesAndNodes() {
-        MapDatabase map = new MapDatabaseImpl(PATH_TO_MAP);
+        MapDatabase map = null;
+        try {
+            map = new MapDatabaseImpl(PATH_TO_MAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Assert.assertEquals(convertToList(map.getAllLines()).size(),
                 EXPECTED_NUMBER_OF_LINES);
         Assert.assertEquals(convertToList(map.getAllNodes()).size(),
@@ -204,7 +215,12 @@ public class MapDatabaseImplTest {
 
     @Test
     public final void testAllBBox() {
-        MapDatabase map = new MapDatabaseImpl(PATH_TO_MAP);
+        MapDatabase map = null;
+        try {
+            map = new MapDatabaseImpl(PATH_TO_MAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Rectangle2D.Double bbox = map.getMapBoundingBox();
         Assert.assertEquals(bbox.x, 5.0953228);
         Assert.assertEquals(bbox.y, 52.0995754);
@@ -214,7 +230,12 @@ public class MapDatabaseImplTest {
 
     @Test
     public final void testClosestLines() {
-        MapDatabase map = new MapDatabaseImpl(PATH_TO_MAP);
+        MapDatabase map = null;
+        try {
+            map = new MapDatabaseImpl(PATH_TO_MAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<Line> lines = convertToList(map.findLinesCloseByCoordinate(
                 5.09500, 52.10000, 200));
         Assert.assertTrue(lines.contains(map.getLine(15280001229410L)));
@@ -231,7 +252,12 @@ public class MapDatabaseImplTest {
 
     @Test
     public final void testClosestNodes() {
-        MapDatabase map = new MapDatabaseImpl(PATH_TO_MAP);
+        MapDatabase map = null;
+        try {
+            map = new MapDatabaseImpl(PATH_TO_MAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<Node> nodes = convertToList(map.findNodesCloseByCoordinate(
                 5.09500, 52.10000, 200));
         Assert.assertTrue(nodes.contains(map.getNode(15280200242589L)));

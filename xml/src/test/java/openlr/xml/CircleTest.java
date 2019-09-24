@@ -39,7 +39,7 @@
  */
 package openlr.xml;
 
-import junit.framework.Assert;
+import org.testng.Assert;
 import openlr.LocationReference;
 import openlr.LocationType;
 import openlr.PhysicalFormatException;
