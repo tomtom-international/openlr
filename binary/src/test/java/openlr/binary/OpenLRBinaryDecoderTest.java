@@ -103,6 +103,7 @@ import openlr.PhysicalFormatException;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.rawLocRef.RawLocationReference;
 import org.apache.commons.codec.binary.Base64;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.*;
@@ -514,7 +515,7 @@ public class OpenLRBinaryDecoderTest {
      * Tests encoding of an invalid stream because of non-zero RFU (reserved for
      * future use) bits.
      */
-    @Test(groups = {"broken"})
+    @Ignore
     public final void testInvalidRFU() {
         byte[] invalidRFU = new byte[VALID_BIN_DATA_OFFSETS_V3.length];
         System.arraycopy(VALID_BIN_DATA_OFFSETS_V3, 0, invalidRFU, 0,

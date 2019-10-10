@@ -4,16 +4,13 @@
 
     <parent>
         <groupId>openlr</groupId>
-        <artifactId>openlr-parent</artifactId>
+        <artifactId>openlr</artifactId>
         <version>1.4.3-SNAPSHOT</version>
-        <relativePath>../openlr-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>openlr</groupId>
     <artifactId>map</artifactId>
     <packaging>jar</packaging>
 
-    <name>OpenLR - map</name>
     <description>The map package consists of the map interface and map tools being used by the
         OpenLR encoder and decoder. The user of this package needs to implement the
         required methods and needs to translate the internal data structure to the
@@ -21,6 +18,51 @@
     </description>
 
     <dependencies>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.micromata.jak</groupId>
+            <artifactId>JavaAPIforKml</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <!-- Exclude the following since JAK of version 2.2.0 depends on snapshots!  -->
+                <!-- Can be removed if they update sometimes! -->
+                <exclusion>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-xjc</artifactId>
+                </exclusion>
+            </exclusions>
+            <!-- Dependencies just because JavaAPIforKml requires them  -->
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-xjc</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -33,195 +75,21 @@
             <artifactId>jmock-legacy</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.micromata.jak</groupId>
-            <artifactId>JavaAPIforKml</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <!--            Exclude the following since JAK of version 2.2.0 depends on snapshots!  -->
-                <!--            Can be removed if they update sometimes! -->
-                <exclusion>
-                    <groupId>com.sun.xml.bind</groupId>
-                    <artifactId>jaxb-impl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.xml.bind</groupId>
-                    <artifactId>jaxb-xjc</artifactId>
-                </exclusion>
-            </exclusions>
-            <!--           Dependencies just because JavaAPIforKml requires them  -->
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-xjc</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-
             <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>OpenLR&#8482; - Map package ${project.version} API</doctitle>
-                    <windowtitle>OpenLR&#8482; - Map package ${project.version} API</windowtitle>
-                </configuration>
-            </plugin>
-
-            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludedGroups>broken</excludedGroups>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-changes-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>add-additional-resources</id>
                         <goals>
-                            <goal>copy</goal>
+                            <goal>test-jar</goal>
                         </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <files>
-                                <file>
-                                    <source>src/changes/changes.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/HEADER</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/changelog.txt</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/MANIFEST.MF</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                            </files>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
-
-        <resources>
-
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <excludes>
-                    <exclude>**/templates/**</exclude>
-                </excludes>
-            </resource>
-
-            <resource>
-                <directory>${project.build.directory}/announcement</directory>
-                <includes>
-                    <include>*.txt</include>
-                </includes>
-            </resource>
-
-        </resources>
     </build>
-
-    <reporting>
-        <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>OpenLR&#8482; - Map package ${project.version} API</doctitle>
-                    <windowtitle>OpenLR&#8482; - Map package ${project.version} API</windowtitle>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-
-    <profiles>
-        <profile>
-            <id>development</id>
-
-            <activation>
-                <property>
-                    <name>build.type</name>
-                    <value>dev</value>
-                </property>
-            </activation>
-        </profile>
-        <profile>
-            <id>openlr</id>
-
-            <activation>
-                <property>
-                    <name>build.type</name>
-                    <value>prod</value>
-                </property>
-            </activation>
-        </profile>
-    </profiles>
-
 </project>

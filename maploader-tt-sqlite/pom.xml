@@ -5,501 +5,59 @@
 
     <parent>
         <groupId>openlr</groupId>
-        <artifactId>openlr-parent</artifactId>
+        <artifactId>openlr</artifactId>
         <version>1.4.3-SNAPSHOT</version>
-        <relativePath>../openlr-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>maploader-tt-sqlite</artifactId>
     <packaging>jar</packaging>
 
-    <name>OpenLR - maploader-tt-sqlite</name>
     <description>This library provides an access layer which enables OpenLR
         to use TomTom Digital Maps in SQLite Format.
     </description>
 
-    <licenses>
-        <license>
-            <name>Apache v2.0</name>
-        </license>
-    </licenses>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <developers>
-        <developer>
-            <name>TomTom International B.V.</name>
-            <email>openlr@tomtom.com</email>
-            <url>http://www.tomtom.com</url>
-        </developer>
-    </developers>
-
-    <organization>
-        <name>TomTom International B.V.</name>
-        <url>http://www.tomtom.com</url>
-    </organization>
-
     <dependencies>
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>map</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <scope>test</scope>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
-            <artifactId>map</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                    <archive>
-                        <manifestFile>src/main/resources/templates/MANIFEST.MF
-                        </manifestFile>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>OpenLR&#8482; - Map-SQLite package ${project.version} API
-                    </doctitle>
-                    <windowtitle>OpenLR&#8482; - Map-SQLite package ${project.version}
-                        API
-                    </windowtitle>
-                    <archive>
-                        <manifestFile>src/main/resources/templates/MANIFEST.MF
-                        </manifestFile>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-            </plugin>
-
-            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                        <manifestFile>src/main/resources/templates/MANIFEST.MF
-                        </manifestFile>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludedGroups>broken</excludedGroups>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <configuration>
-                    <template>changelog.txt</template>
-                    <templateDirectory>src/main/resources/templates</templateDirectory>
-                </configuration>
-
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>announcement-generate</goal>
+                            <goal>test-jar</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.1</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/with-dependencies.xml</descriptor>
-                    </descriptors>
-                    <archiverConfig>
-                        <duplicateBehavior>skip</duplicateBehavior>
-                        <manifestFile>src/main/resources/templates/MANIFEST_with_dependencies.MF
-                        </manifestFile>
-                    </archiverConfig>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
-                <version>1.0-beta-5</version>
-                <executions>
-                    <execution>
-                        <id>add-additional-resources</id>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <files>
-                                <file>
-                                    <source>src/changes/changes.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/HEADER</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/changelog.txt</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/MANIFEST.MF</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/assembly/with-dependencies.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/assembly
-                                    </outputDirectory>
-                                </file>
-                            </files>
-                        </configuration>
-                    </execution>
-                </executions>
-
             </plugin>
         </plugins>
-
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <excludes>
-                    <exclude>**/templates/**</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>${project.build.directory}/announcement</directory>
-                <includes>
-                    <include>*.txt</include>
-                </includes>
-            </resource>
-
-        </resources>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>changes-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>OpenLR&#8482; - Map-SQLite package ${project.version} API
-                    </doctitle>
-                    <windowtitle>OpenLR&#8482; - Map-SQLite package ${project.version}
-                        API
-                    </windowtitle>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <configuration>
-                    <targetJdk>1.6</targetJdk>
-                    <excludes>
-                        <exclude>**/*Bean.java</exclude>
-                        <exclude>**/generated/*.java</exclude>
-                    </excludes>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>javancss-maven-plugin</artifactId>
-                <configuration>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </reporting>
-
-
-    <profiles>
-        <profile>
-            <id>development</id>
-
-            <activation>
-                <property>
-                    <name>build.type</name>
-                    <value>dev</value>
-                </property>
-            </activation>
-
-            <build>
-                <pluginManagement>
-                    <plugins>
-
-                        <plugin>
-                            <artifactId>maven-source-plugin</artifactId>
-                            <version>2.1.2</version>
-                            <configuration>
-                                <attach>true</attach>
-                                <archive>
-                                    <manifestFile>src/main/resources/templates/MANIFEST.MF
-                                    </manifestFile>
-                                    <manifestEntries>
-                                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source
-                                        </Bundle-SymbolicName>
-                                        <Bundle-Version>${project.version}</Bundle-Version>
-                                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                                        <Bundle-Name>${project.groupId} ${project.artifactId} sources
-                                        </Bundle-Name>
-                                        <Eclipse-SourceBundle>
-                                            ${project.groupId}.${project.artifactId};version="${project.version}";roots:="."
-                                        </Eclipse-SourceBundle>
-                                    </manifestEntries>
-                                </archive>
-                            </configuration>
-                            <executions>
-                                <execution>
-                                    <id>attach-test-sources</id>
-                                    <goals>
-                                        <goal>test-jar</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
-
-                        <plugin>
-                            <artifactId>maven-jar-plugin</artifactId>
-                            <executions>
-                                <execution>
-                                    <goals>
-                                        <goal>test-jar</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                            <configuration>
-                                <archive>
-                                    <manifestFile>src/main/resources/templates/MANIFEST.MF
-                                    </manifestFile>
-                                    <manifestEntries>
-                                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}
-                                        </Bundle-SymbolicName>
-                                        <Bundle-Version>${project.version}</Bundle-Version>
-                                        <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-                                        <Bundle-Name>${project.groupId} ${project.artifactId}</Bundle-Name>
-                                    </manifestEntries>
-                                </archive>
-                            </configuration>
-                        </plugin>
-
-                    </plugins>
-                </pluginManagement>
-            </build>
-            <reporting>
-                <plugins>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>summary</report>
-                                    <report>license</report>
-                                    <report>index</report>
-                                    <report>dependencies</report>
-                                    <report>project-team</report>
-                                    <report>plugins</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-report-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>cobertura-maven-plugin</artifactId>
-                        <configuration>
-                            <check>
-                                <lineRate>0</lineRate>
-                                <branchRate>0</branchRate>
-                            </check>
-                            <formats>
-                                <format>html</format>
-                                <format>xml</format>
-                            </formats>
-                        </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>taglist-maven-plugin</artifactId>
-                        <configuration>
-                            <tagListOptions>
-                                <tagClasses>
-                                    <tagClass>
-                                        <displayName>ToDo</displayName>
-                                        <tags>
-                                            <tag>
-                                                <matchString>todo</matchString>
-                                                <matchType>ignoreCase</matchType>
-                                            </tag>
-                                        </tags>
-                                    </tagClass>
-                                    <tagClass>
-                                        <displayName>FixMe</displayName>
-                                        <tags>
-                                            <tag>
-                                                <matchString>fixme</matchString>
-                                                <matchType>ignoreCase</matchType>
-                                            </tag>
-                                        </tags>
-                                    </tagClass>
-                                </tagClasses>
-                            </tagListOptions>
-                        </configuration>
-                    </plugin>
-
-                </plugins>
-            </reporting>
-        </profile>
-
-        <!-- ******************************************************************************************* -->
-
-        <profile>
-            <id>openlr</id>
-
-            <activation>
-                <property>
-                    <name>build.type</name>
-                    <value>prod</value>
-                </property>
-            </activation>
-
-            <reporting>
-                <plugins>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>summary</report>
-                                    <report>license</report>
-                                    <report>index</report>
-                                    <report>dependencies</report>
-                                    <report>project-team</report>
-                                    <report>plugins</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                </plugins>
-            </reporting>
-
-        </profile>
-
-    </profiles>
-
 </project>
