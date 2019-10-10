@@ -45,6 +45,7 @@
         <module>xml</module>
         <module>binary</module>
         <module>datex2</module>
+        <module>proto</module>
     </modules>
 
     <properties>
