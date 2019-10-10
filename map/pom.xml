@@ -37,19 +37,6 @@
             <groupId>de.micromata.jak</groupId>
             <artifactId>JavaAPIforKml</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <!-- Exclude the following since JAK of version 2.2.0 depends on snapshots!  -->
-                <!-- Can be removed if they update sometimes! -->
-                <exclusion>
-                    <groupId>com.sun.xml.bind</groupId>
-                    <artifactId>jaxb-impl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.xml.bind</groupId>
-                    <artifactId>jaxb-xjc</artifactId>
-                </exclusion>
-            </exclusions>
-            <!-- Dependencies just because JavaAPIforKml requires them  -->
         </dependency>
 
         <dependency>
