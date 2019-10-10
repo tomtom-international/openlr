@@ -23,7 +23,7 @@ import cern.colt.list.IntArrayList;
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
- * @see     java.util.HashMap
+ * @see java.util.HashMap
  */
 public abstract class AbstractIntIntMap extends AbstractMap {
     //public static int hashCollisions = 0; // for debug only

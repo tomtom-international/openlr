@@ -34,6 +34,24 @@
  * email: software@openlr.org
  *
  * @author TomTom International B.V.
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * The binary package consists of classes for reading and writing binary location
+ * reference data. The data classes hold the relevant data and offer methods to
+ * read from an binary input stream and to write into a binary input stream.
+ * <p>
+ * email: software@openlr.org
+ * @author TomTom International B.V.
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.

@@ -21,7 +21,7 @@ import cern.colt.list.IntArrayList;
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
- * @see     java.util.HashMap
+ * @see java.util.HashMap
  */
 public class OpenIntIntHashMap extends AbstractIntIntMap {
     protected static final byte FREE = 0;

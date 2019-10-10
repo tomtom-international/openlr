@@ -34,6 +34,24 @@
  * email: software@openlr.org
  *
  * @author TomTom International B.V.
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * This package contains the database storing decoded locations. This
+ * database shall speed up the decoding process and avoid decoding a location
+ * reference more than once.
+ * <p>
+ * email: software@openlr.org
+ * @author TomTom International B.V.
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.

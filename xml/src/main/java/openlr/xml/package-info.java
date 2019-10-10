@@ -34,6 +34,24 @@
  * email: software@openlr.org
  *
  * @author TomTom International B.V.
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * The xml package consists of classes used to create and read XML OpenLR
+ * data for a sequence of location reference points. It implements the physical
+ * format interfaces of the OpenLR data packages.
+ * <p>
+ * email: software@openlr.org
+ * @author TomTom International B.V.
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.

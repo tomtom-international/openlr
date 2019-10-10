@@ -28,6 +28,19 @@
  * the Netherlands
  * <p>
  * Contains concrete processor classes per location type used in general location utilities.
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * Contains concrete processor classes per location type used in general location utilities.
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.

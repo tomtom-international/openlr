@@ -16,7 +16,7 @@ package cern.colt.map;
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
- * @see     java.util.HashMap
+ * @see java.util.HashMap
  */
 public abstract class AbstractMap extends cern.colt.PersistentObject {
     //public static boolean debug = false; // debug only

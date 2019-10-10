@@ -37,6 +37,27 @@
  * email: software@openlr.org
  *
  * @author TomTom International B.V.
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * This package defines interfaces for map data loader. These interfaces need to
+ * be implemented and the implementation needs to registered as a service in order
+ * to enable an application to make use of the corresponding map.
+ *
+ * <p>
+ * OpenLR is a trade mark of TomTom International B.V.
+ * <p>
+ * email: software@openlr.org
+ * @author TomTom International B.V.
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.

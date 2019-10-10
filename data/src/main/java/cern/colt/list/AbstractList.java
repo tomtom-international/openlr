@@ -16,8 +16,8 @@ package cern.colt.list;
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
- * @see     java.util.Vector
- * @see     java.util.Arrays
+ * @see java.util.Vector
+ * @see java.util.Arrays
  * @see java.util.ArrayList
  */
 public abstract class AbstractList extends AbstractCollection {
