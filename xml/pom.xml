@@ -113,12 +113,6 @@
                                     </outputDirectory>
                                 </file>
                                 <file>
-                                    <source>checkstyle_openlr.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
-                                    </outputDirectory>
-                                </file>
-                                <file>
                                     <source>findbugs.filter.xml</source>
                                     <outputDirectory>
                                         ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/

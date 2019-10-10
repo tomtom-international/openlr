@@ -256,19 +256,6 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <configLocation>${basedir}/checkstyle_openlr.xml</configLocation>
-                    <excludes>
-                        **/generated/**/*, **/autogen/**/*, **/test/**/*
-                    </excludes>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>

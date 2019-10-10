@@ -136,12 +136,6 @@
                                     </outputDirectory>
                                 </file>
                                 <file>
-                                    <source>checkstyle_openlr.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
-                                    </outputDirectory>
-                                </file>
-                                <file>
                                     <source>src/main/resources/templates/HEADER</source>
                                     <outputDirectory>
                                         ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates

@@ -142,28 +142,6 @@
             </plugin>
 
             <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <configuration>
-                    <strictCheck>true</strictCheck>
-                    <header>${basedir}/src/main/resources/templates/HEADER</header>
-                    <includes>
-                        <include>**/*.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/generated/**</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
                 <configuration>
@@ -227,12 +205,6 @@
                                     <source>src/changes/changes.xml</source>
                                     <outputDirectory>
                                         ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>checkstyle_openlr.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
                                     </outputDirectory>
                                 </file>
                                 <file>
@@ -300,15 +272,6 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>${basedir}/checkstyle_openlr.xml</configLocation>
-                    <excludes>**/generated/**</excludes>
-                    <linkXRef>false</linkXRef>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

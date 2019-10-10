@@ -141,12 +141,6 @@
                                     </outputDirectory>
                                 </file>
                                 <file>
-                                    <source>checkstyle_openlr.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
-                                    </outputDirectory>
-                                </file>
-                                <file>
                                     <source>src/main/resources/templates/HEADER</source>
                                     <outputDirectory>
                                         ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
@@ -211,17 +205,6 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>${basedir}/checkstyle_openlr.xml</configLocation>
-                    <excludes>
-                        **/generated/**/*, **/autogen/**/*, **/test/**/*,
-                        **/cern/**/*
-                    </excludes>
-                </configuration>
             </plugin>
 
             <plugin>
