@@ -24,7 +24,7 @@ import cern.colt.list.ObjectArrayList;
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
- * @see     java.util.HashMap
+ * @see java.util.HashMap
  */
 public abstract class AbstractIntObjectMap extends AbstractMap {
     //public static int hashCollisions = 0; // for debug only

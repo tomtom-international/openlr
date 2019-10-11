@@ -1,5 +1,0 @@
-Built-By: TomTom International B.V.
-Export-Package: openlr.map,
- openlr.map.loader,
- openlr.map.utils
- 

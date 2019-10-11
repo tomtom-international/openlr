@@ -23,6 +23,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -47,13 +58,7 @@ import openlr.rawLocRef.RawLocationReference;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertSame;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 /**
  * Tests the LRU cache.

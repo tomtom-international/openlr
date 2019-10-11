@@ -1,6 +1,0 @@
-Built-By: TomTom International B.V.
-Export-Package: openlr.encoder
-Require-Bundle: openlr.data;bundle-version="1.2.3",
- openlr.map;bundle-version="1.2.3",
-  org.apache.commons.lang
-Eclipse-BuddyPolicy: global

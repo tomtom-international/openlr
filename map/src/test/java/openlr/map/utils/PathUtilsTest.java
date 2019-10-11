@@ -23,6 +23,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -39,11 +50,11 @@
  */
 package openlr.map.utils;
 
-import org.testng.Assert;
 import openlr.map.Line;
 import openlr.map.utils.PQElem.PQElemComparator;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 

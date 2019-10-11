@@ -23,6 +23,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -39,7 +50,6 @@
  */
 package openlr.xml;
 
-import org.testng.Assert;
 import openlr.LocationReference;
 import openlr.LocationType;
 import openlr.PhysicalFormatException;
@@ -53,6 +63,7 @@ import openlr.xml.generated.Coordinates;
 import openlr.xml.generated.OpenLR;
 import openlr.xml.generated.XMLLocationReference;
 import openlr.xml.impl.LocationReferenceXmlImpl;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;

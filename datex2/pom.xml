@@ -2,20 +2,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>openlr</groupId>
-    <artifactId>datex2</artifactId>
-    <packaging>jar</packaging>
-    <name>OpenLR - datex2</name>
-
     <parent>
         <groupId>openlr</groupId>
-        <artifactId>openlr-parent</artifactId>
+        <artifactId>openlr</artifactId>
         <version>1.4.3-SNAPSHOT</version>
-        <relativePath>../openlr-parent/pom.xml</relativePath>
     </parent>
 
+    <artifactId>datex2</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>openlr</groupId>
+            <artifactId>map</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>commons-lang</groupId>
@@ -25,18 +32,9 @@
         <dependency>
             <groupId>openlr</groupId>
             <artifactId>data</artifactId>
+            <version>${project.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>openlr</groupId>
-            <artifactId>data</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>openlr</groupId>
-            <artifactId>map</artifactId>
         </dependency>
 
         <dependency>
@@ -50,202 +48,5 @@
             <artifactId>jmock-legacy</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
-    <build>
-        <plugins>
-
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>OpenLR&#8482; - Datex II package ${project.version} API</doctitle>
-                    <windowtitle>OpenLR&#8482; - Datex II package ${project.version} API</windowtitle>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>src/main/java/eu/**</exclude>
-                        <exclude>src/test/**</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-changes-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludedGroups>broken</excludedGroups>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>truezip-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>add-additional-resources</id>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <files>
-                                <file>
-                                    <source>src/changes/changes.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/changes
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>checkstyle_openlr.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>findbugs.filter.xml</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/HEADER</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/changelog.txt</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/templates/MANIFEST.MF</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/templates
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/META-INF/services/openlr.PhysicalDecoder</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/META-INF/services
-                                    </outputDirectory>
-                                </file>
-                                <file>
-                                    <source>src/main/resources/META-INF/services/openlr.PhysicalEncoder</source>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-sources.jar/resources/META-INF/services
-                                    </outputDirectory>
-                                </file>
-                            </files>
-                        </configuration>
-                    </execution>
-                </executions>
-
-            </plugin>
-
-        </plugins>
-
-        <resources>
-
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <excludes>
-                    <exclude>**/templates/**</exclude>
-                </excludes>
-            </resource>
-
-            <resource>
-                <directory>${project.build.directory}/announcement</directory>
-                <includes>
-                    <include>*.txt</include>
-                </includes>
-            </resource>
-
-        </resources>
-    </build>
-
-    <reporting>
-        <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <doctitle>OpenLR&#8482; - Datex II package ${project.version} API</doctitle>
-                    <windowtitle>OpenLR&#8482; - Datex II ${project.version} API</windowtitle>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <configuration>
-                    <excludeFilterFile>findbugs.filter.xml</excludeFilterFile>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        **/eu/**
-                    </excludes>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </reporting>
-
-    <profiles>
-        <profile>
-            <id>development</id>
-
-            <activation>
-                <property>
-                    <name>build.type</name>
-                    <value>dev</value>
-                </property>
-            </activation>
-        </profile>
-        <profile>
-            <id>openlr</id>
-
-            <activation>
-                <property>
-                    <name>build.type</name>
-                    <value>prod</value>
-                </property>
-            </activation>
-        </profile>
-    </profiles>
 </project>
