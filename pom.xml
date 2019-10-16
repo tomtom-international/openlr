@@ -124,6 +124,12 @@
                 <artifactId>sqlite-jdbc</artifactId>
                 <version>3.28.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>3.9.2</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -158,6 +164,12 @@
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.github.os72</groupId>
+                    <artifactId>protoc-jar-maven-plugin</artifactId>
+                    <version>3.8.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
