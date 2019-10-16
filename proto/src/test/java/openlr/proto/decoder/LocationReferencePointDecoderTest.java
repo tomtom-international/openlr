@@ -7,8 +7,7 @@ import openlr.proto.OpenLRProtoStatusCode;
 import openlr.proto.schema.*;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.*;
 
 public class LocationReferencePointDecoderTest {
     LocationReferencePointDecoder locationReferencePointDecoder = new LocationReferencePointDecoder();
@@ -152,6 +151,7 @@ public class LocationReferencePointDecoderTest {
 
         try {
             locationReferencePointDecoder.decode(locationReferencePoint, 1, false);
+            fail();
         }
         catch (OpenLRProtoException e) {
             assertEquals(e.getErrorCode(), OpenLRProtoStatusCode.INVALID_LOCATION_REFERENCE);
