@@ -13,11 +13,11 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 
 public class XmlToSimpleMockDatabaseTest {
-    private SimpleMockedMapDatabase smd;
-
     @Test
 
     public void testXmlToObject() throws JAXBException, FileNotFoundException {
+
+        SimpleMockedMapDatabase smd;
 
         URL testDb = XmlToSimpleMockDatabaseTest.class.getClassLoader().getResource("openlr/map/mockdb/SampleSimpleMockDatabase.xml");
 
