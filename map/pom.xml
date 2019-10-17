@@ -105,7 +105,9 @@
                     <schemaIncludes>
                         <include>SimpleMockDatabase.xsd</include>
                     </schemaIncludes>
+                    <generateDirectory>target/generated-sources</generateDirectory>
                 </configuration>
+
         </plugin>
     </plugins>
 </build>
