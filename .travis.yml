@@ -14,6 +14,7 @@ script:
   - mvn verify
 
 after_success:
+  - mvn clean install
   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
 
 cache:
