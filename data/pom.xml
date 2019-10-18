@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.openlr</groupId>
+        <groupId>com.tomtom.openlr</groupId>
         <artifactId>openlr</artifactId>
         <version>1.4.3</version>
     </parent>
@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.openlr</groupId>
+            <groupId>com.tomtom.openlr</groupId>
             <artifactId>map</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -49,7 +49,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.openlr</groupId>
+            <groupId>com.tomtom.openlr</groupId>
             <artifactId>map</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
