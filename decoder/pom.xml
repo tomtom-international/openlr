@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>openlr</groupId>
+        <groupId>org.openlr</groupId>
         <artifactId>openlr</artifactId>
-        <version>1.4.3-SNAPSHOT</version>
+        <version>1.4.3</version>
     </parent>
 
     <artifactId>decoder</artifactId>
@@ -19,13 +19,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>map</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <version>${project.version}</version>
             <artifactId>data</artifactId>
         </dependency>
@@ -46,7 +46,7 @@
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>map</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
@@ -54,7 +54,7 @@
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>data</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
@@ -62,7 +62,7 @@
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>maploader-tt-sqlite</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>

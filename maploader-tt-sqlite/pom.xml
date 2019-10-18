@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>openlr</groupId>
+        <groupId>org.openlr</groupId>
         <artifactId>openlr</artifactId>
-        <version>1.4.3-SNAPSHOT</version>
+        <version>1.4.3</version>
     </parent>
 
     <artifactId>maploader-tt-sqlite</artifactId>
@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>map</artifactId>
             <version>${project.version}</version>
         </dependency>
