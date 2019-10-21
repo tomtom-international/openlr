@@ -11,14 +11,14 @@
 To build all the modules go to the project folder:
 
 ```maven
-mvn clean install -Dgpg.skip=true
+mvn clean install
 ```
 
 To build modules individually go to module folder:
 
 
 ```maven
-mvn clean install -Dgpg.skip=true
+mvn clean install
 ```
 
 ## Usage
