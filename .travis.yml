@@ -7,11 +7,11 @@ jdk:
 
 install:
   - export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
-  - mvn install -DskipTests -Dgpg.skip=true
+  - mvn install -DskipTests
 
 script:
   - export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
-  - mvn verify -Dgpg.skip=true
+  - mvn verify
 
 after_success:
   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
