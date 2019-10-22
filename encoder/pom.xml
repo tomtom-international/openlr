@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>openlr</groupId>
+        <groupId>org.openlr</groupId>
         <artifactId>openlr</artifactId>
-        <version>1.4.3-SNAPSHOT</version>
+        <version>1.4.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>encoder</artifactId>
@@ -19,13 +19,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>map</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>data</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -51,7 +51,7 @@
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>map</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
@@ -59,7 +59,7 @@
         </dependency>
 
         <dependency>
-            <groupId>openlr</groupId>
+            <groupId>org.openlr</groupId>
             <artifactId>data</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
