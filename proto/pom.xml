@@ -7,10 +7,10 @@
     <parent>
         <groupId>org.openlr</groupId>
         <artifactId>openlr</artifactId>
-        <version>1.4.3</version>
+        <version>1.4.4-SNAPSHOT</version>
     </parent>
 
-    <groupId>openlr</groupId>
+    <groupId>org.openlr</groupId>
     <artifactId>proto</artifactId>
     <packaging>jar</packaging>
 

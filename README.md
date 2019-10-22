@@ -1,7 +1,7 @@
 # OpenLR
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7d866929be7c43cdae32dac4be3eaa6f)](https://www.codacy.com/app/rijnb/openlr?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomtom-international/openlr&amp;utm_campaign=Badge_Grade)
-[![Build Status](https://img.shields.io/travis/tomtom-international/openlr.svg?branch=master)](https://travis-ci.org/tomtom-international/openlr.svg?branch=master)
+[![Build Status](https://img.shields.io/travis/tomtom-international/openlr.svg?branch=master)](https://travis-ci.org/tomtom-international/openlr?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/tomtom-international/openlr/badge.svg?branch=master)](https://coveralls.io/github/tomtom-international/openlr?branch=master)
 [![License](http://img.shields.io/badge/license-APACHE2-blue.svg)]()
 [![Release](https://img.shields.io/github/release/tomtom-international/openlr.svg?maxAge=3600)](https://github.com/tomtom-international/openlr/releases)
@@ -11,14 +11,14 @@
 To build all the modules go to the project folder:
 
 ```maven
-mvn clean install -Dgpg.skip=true
+mvn clean install
 ```
 
 To build modules individually go to module folder:
 
 
 ```maven
-mvn clean install -Dgpg.skip=true
+mvn clean install
 ```
 
 ## Usage
