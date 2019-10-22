@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,16 +24,14 @@ public class SimpleMockedDatabaseAdaptor implements MapDatabase {
     Map<Long, SimpleMockedLine> lines = new TreeMap<>();
     SimpleMockedMapDatabase simpleMockedMapDatabase;
 
-    private SimpleMockedDatabaseAdaptor(String xmlMap) {
+    private SimpleMockedDatabaseAdaptor(InputStream xmlMap) {
 
         try {
-            File file = new File(xmlMap);
-
             JAXBContext jaxbContext = JAXBContext.newInstance(SimpleMockedMapDatabase.class);
 
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-            simpleMockedMapDatabase = (SimpleMockedMapDatabase) unmarshaller.unmarshal(file);
+            simpleMockedMapDatabase = (SimpleMockedMapDatabase) unmarshaller.unmarshal(xmlMap);
             run();
         } catch (JAXBException e) {
             throw new SimpleMockedException(e.getMessage());
@@ -61,7 +60,7 @@ public class SimpleMockedDatabaseAdaptor implements MapDatabase {
         );
     }
 
-    public static SimpleMockedDatabaseAdaptor from(String xmlMap) {
+    public static SimpleMockedDatabaseAdaptor from(InputStream xmlMap) {
         return new SimpleMockedDatabaseAdaptor(xmlMap);
     }
 

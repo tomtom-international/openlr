@@ -77,5 +77,11 @@
             <artifactId>jmock-legacy</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
