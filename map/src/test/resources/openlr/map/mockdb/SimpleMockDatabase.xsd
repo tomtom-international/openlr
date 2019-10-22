@@ -39,6 +39,9 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+
+                <xs:element type="xs:unsignedLong" name="Restrictions" minOccurs="0" maxOccurs="unbounded"/>
+
                 <xs:element name="ShapePoint" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
