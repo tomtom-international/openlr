@@ -8,7 +8,7 @@
     <Node>
         <id>2</id>
         <longitude>13.45364</longitude>
-        <latitude>52.504133</latitude>
+        <latitude>52.50413</latitude>
     </Node>
     <Node>
         <id>3</id>
@@ -22,6 +22,11 @@
     </Node>
     <Node>
         <id>5</id>
+        <longitude>13.45505</longitude>
+        <latitude>52.502817</latitude>
+    </Node>
+    <Node>
+        <id>6</id>
         <longitude>13.45314</longitude>
         <latitude>52.50326</latitude>
     </Node>
@@ -43,8 +48,8 @@
         <frc>5</frc>
         <fow>5</fow>
         <ShapePoint>
-            <longitude>13.45300</longitude>
-            <latitude>52.50431</latitude>
+            <longitude>13.454300</longitude>
+            <latitude>52.503895</latitude>
         </ShapePoint>
     </Line>
     <Line>
