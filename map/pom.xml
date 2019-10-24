@@ -76,8 +76,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.vividsolutions</groupId>
+            <groupId>org.locationtech.jts</groupId>
             <artifactId>jts</artifactId>
+            <type>pom</type>
             <scope>test</scope>
         </dependency>
 
