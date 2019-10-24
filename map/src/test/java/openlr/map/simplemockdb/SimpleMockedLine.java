@@ -172,7 +172,7 @@ public class SimpleMockedLine implements Line {
     }
 
     /**
-     * @deprecated
+     * @deprecated use {@link #getShapeCoordinates()}
      */
     @Deprecated
     public java.awt.geom.Path2D.Double getShape() throws UnsupportedOperationException{
