@@ -26,8 +26,18 @@ public class SimpleMockedLine implements Line {
 
     private openlr.map.simplemockdb.schema.Line xmlLine;
     private static GeometryFactory factory = JTSFactoryFinder.getGeometryFactory();
-    private static MathTransform wgs84ToCartesian = null;
-    private static MathTransform cartesianToWgs843d = null;
+    private static MathTransform wgs84ToCartesian;
+    private static MathTransform cartesianToWgs843d;
+
+    static {
+        try {
+            wgs84ToCartesian = CRS.findMathTransform(DefaultGeographicCRS.WGS84, DefaultGeocentricCRS.CARTESIAN);
+            cartesianToWgs843d = CRS.findMathTransform(DefaultGeocentricCRS.CARTESIAN, DefaultGeographicCRS.WGS84_3D);
+        } catch (FactoryException e) {
+            throw new SimpleMockedException(e.getMessage());
+        }
+    }
+
     private Node startNode;
     private Node endNode;
     private List<LineSegment> lineSegments;
@@ -44,14 +54,8 @@ public class SimpleMockedLine implements Line {
     public static Coordinate toCartesian(double lon, double lat) {
         final Coordinate to = new Coordinate();
         try {
-            if (wgs84ToCartesian == null) {
-                wgs84ToCartesian = CRS.findMathTransform(DefaultGeographicCRS.WGS84, DefaultGeocentricCRS.CARTESIAN);
-            }
             JTS.transform(new Coordinate(lon, lat, 0), to, wgs84ToCartesian);
             return to;
-        } catch (FactoryException e) {
-            throw new SimpleMockedException(e.getMessage());
-
         } catch (TransformException e) {
             throw new SimpleMockedException(e.getMessage());
 
@@ -62,15 +66,8 @@ public class SimpleMockedLine implements Line {
     public static GeoCoordinates ToWGS84(Coordinate crd) {
         try {
             final Coordinate to = new Coordinate();
-            if (cartesianToWgs843d == null) {
-                cartesianToWgs843d = CRS.findMathTransform(DefaultGeocentricCRS.CARTESIAN, DefaultGeographicCRS.WGS84_3D);
-            }
             JTS.transform(crd, to, cartesianToWgs843d);
             return new GeoCoordinatesImpl(to.x, to.y);
-        } catch (FactoryException e) {
-
-            throw new SimpleMockedException(e.getMessage());
-
         } catch (TransformException e) {
             throw new SimpleMockedException(e.getMessage());
 
@@ -99,14 +96,14 @@ public class SimpleMockedLine implements Line {
     }
 
 
-    public static SimpleMockedLine from( openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
+    public static SimpleMockedLine from(openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
         SimpleMockedLine simpleMockedLine = new SimpleMockedLine(xmlLine, startNode, endNode);
         simpleMockedLine.generateShape();
         return simpleMockedLine;
     }
 
 
-    private SimpleMockedLine( openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
+    private SimpleMockedLine(openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
         this.xmlLine = xmlLine;
         this.startNode = startNode;
         this.endNode = endNode;
@@ -175,7 +172,7 @@ public class SimpleMockedLine implements Line {
      * @deprecated use {@link #getShapeCoordinates()}
      */
     @Deprecated
-    public java.awt.geom.Path2D.Double getShape() throws UnsupportedOperationException{
+    public java.awt.geom.Path2D.Double getShape() throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
