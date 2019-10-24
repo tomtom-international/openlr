@@ -1,4 +1,5 @@
 package openlr.map.simplemockdb;
+
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.LineString;
@@ -12,47 +13,49 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
 import java.io.InputStream;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
-public class SimpleMockedDatabaseAdaptor implements MapDatabase {
-    Map<Long, SimpleMockedNode> nodes = new TreeMap<>();
-    Map<Long, SimpleMockedLine> lines = new TreeMap<>();
-    SimpleMockedMapDatabase simpleMockedMapDatabase;
+public class OpenLRMapDatabaseAdaptor implements MapDatabase {
+    private Map<Long, SimpleMockedNode> nodes = new HashMap<>();
+    private Map<Long, SimpleMockedLine> lines = new HashMap<>();
+    private SimpleMockedMapDatabase simpleMockedMapDatabase;
 
-    private SimpleMockedDatabaseAdaptor(InputStream xmlMap) {
+    private OpenLRMapDatabaseAdaptor(SimpleMockedMapDatabase simpleMockedMapDatabase) {
+        this.simpleMockedMapDatabase = simpleMockedMapDatabase;
+    }
 
+    private static SimpleMockedMapDatabase parseXmlToSimpleMockedDatabase(InputStream xmlMap) throws SimpleMockedException {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(SimpleMockedMapDatabase.class);
 
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-            simpleMockedMapDatabase = (SimpleMockedMapDatabase) unmarshaller.unmarshal(xmlMap);
-            run();
+            return (SimpleMockedMapDatabase) unmarshaller.unmarshal(xmlMap);
         } catch (JAXBException e) {
             throw new SimpleMockedException(e.getMessage());
         }
-
     }
 
-    public void run() throws SimpleMockedException {
-        simpleMockedMapDatabase.getNode().stream().forEach(node -> {
+
+    private void createNodes() {
+        this.simpleMockedMapDatabase.getNode().stream().forEach(node -> {
             nodes.put(node.getId().longValue(), SimpleMockedNode.from(node));
         });
+    }
 
+    private void createLines() {
         simpleMockedMapDatabase.getLine().forEach(
                 line -> {
                     Node startNode = this.nodes.get(line.getStart().longValue());
                     Node endNode = this.nodes.get(line.getEnd().longValue());
-                    SimpleMockedLine simpleMockedLine = new SimpleMockedLine(line, startNode, endNode);
+                    SimpleMockedLine simpleMockedLine = SimpleMockedLine.from(line, startNode, endNode);
                     this.lines.put(simpleMockedLine.getID(), simpleMockedLine);
                 }
         );
+    }
 
+    private void connectLines() {
         this.nodes.forEach(
                 (id, node) -> {
                     node.setConnections(lines.values());
@@ -60,8 +63,13 @@ public class SimpleMockedDatabaseAdaptor implements MapDatabase {
         );
     }
 
-    public static SimpleMockedDatabaseAdaptor from(InputStream xmlMap) {
-        return new SimpleMockedDatabaseAdaptor(xmlMap);
+    public static OpenLRMapDatabaseAdaptor from(InputStream xmlMap) {
+        SimpleMockedMapDatabase simpleMockedMapDatabase = parseXmlToSimpleMockedDatabase(xmlMap);
+        OpenLRMapDatabaseAdaptor map = new OpenLRMapDatabaseAdaptor(simpleMockedMapDatabase);
+        map.createNodes();
+        map.createLines();
+        map.connectLines();
+        return map;
     }
 
     public boolean hasTurnRestrictions() {
@@ -98,7 +106,7 @@ public class SimpleMockedDatabaseAdaptor implements MapDatabase {
 
     public boolean hasTurnRestrictionOnPath(List<? extends Line> path) {
         boolean hasNoRestriction = true;
-        for (int index = 0; index < path.size() - 1 && !hasNoRestriction; ++index) {
+        for (int index = 0; index < path.size() - 1 && hasNoRestriction; ++index) {
             long current = path.get(index).getID();
             long next = path.get(index + 1).getID();
             hasNoRestriction = lines.get(current).getRestrictions().contains(next);

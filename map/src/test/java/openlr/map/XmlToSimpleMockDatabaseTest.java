@@ -1,20 +1,24 @@
 package openlr.map;
 
 import generated.SimpleMockedMapDatabase;
+import openlr.map.simplemockdb.OpenLRMapDatabaseAdaptor;
+import openlr.map.utils.GeometryUtils;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 
 public class XmlToSimpleMockDatabaseTest {
     @Test
-
     public void testXmlToObject() throws JAXBException, FileNotFoundException {
 
         SimpleMockedMapDatabase smd;
@@ -35,5 +39,17 @@ public class XmlToSimpleMockDatabaseTest {
         assertEquals(smd.getLine().stream().filter(line -> line.getId().longValue() == 1).count(), 1);
         assertEquals(smd.getLine().stream().filter(line -> line.getId().longValue() == 1).findFirst().get().getShapePoint().size(), 1);
     }
+
+    @Test
+    public  void  testXmlToSimpleMockedDatabaseAdaptor() throws InvalidMapDataException{
+        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("simplemockedmaps/SimpleMockedTestMap.xml");
+        OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
+        Line testLine = map.getLine(1);
+        GeoCoordinates pointOnLine = new GeoCoordinatesImpl(13.45300,52.50431);
+        int length = testLine.measureAlongLine(pointOnLine.getLongitudeDeg(),pointOnLine.getLatitudeDeg());
+        GeoCoordinates geoCoordinates = testLine.getGeoCoordinateAlongLine(length);
+        assertTrue(GeometryUtils.distance(pointOnLine,geoCoordinates) < 2);
+    }
+
 
 }
