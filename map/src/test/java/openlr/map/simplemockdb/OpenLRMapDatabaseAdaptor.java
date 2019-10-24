@@ -15,14 +15,15 @@ import javax.xml.bind.Unmarshaller;
 import java.awt.geom.Rectangle2D;
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class OpenLRMapDatabaseAdaptor implements MapDatabase {
-    private Map<Long, SimpleMockedNode> nodes = new HashMap<>();
-    private Map<Long, SimpleMockedLine> lines = new HashMap<>();
-    private SimpleMockedMapDatabase simpleMockedMapDatabase;
+    private List<SimpleMockedNode> nodes;
+    private List<SimpleMockedLine> lines;
 
-    private OpenLRMapDatabaseAdaptor(SimpleMockedMapDatabase simpleMockedMapDatabase) {
-        this.simpleMockedMapDatabase = simpleMockedMapDatabase;
+    private OpenLRMapDatabaseAdaptor(List<SimpleMockedNode> nodes, List<SimpleMockedLine> lines) {
+        this.nodes = nodes;
+        this.lines = lines;
     }
 
     private static SimpleMockedMapDatabase parseXmlToSimpleMockedDatabase(InputStream xmlMap) throws SimpleMockedException {
@@ -38,58 +39,54 @@ public class OpenLRMapDatabaseAdaptor implements MapDatabase {
     }
 
 
-    private void createNodes() {
-        this.simpleMockedMapDatabase.getNode().stream().forEach(node -> {
-            nodes.put(node.getId().longValue(), SimpleMockedNode.from(node));
-        });
+    private static List<SimpleMockedNode> createNodes(SimpleMockedMapDatabase simpleMockedMapDatabase) {
+        return simpleMockedMapDatabase.getNode().stream().map(node -> SimpleMockedNode.from(node)).collect(Collectors.toList());
     }
 
-    private void createLines() {
-        simpleMockedMapDatabase.getLine().forEach(
+    private static List<SimpleMockedLine> createLines(SimpleMockedMapDatabase simpleMockedMapDatabase, List<SimpleMockedNode> nodes) {
+        return simpleMockedMapDatabase.getLine().stream().map(
                 line -> {
-                    Node startNode = this.nodes.get(line.getStart().longValue());
-                    Node endNode = this.nodes.get(line.getEnd().longValue());
-                    SimpleMockedLine simpleMockedLine = SimpleMockedLine.from(line, startNode, endNode);
-                    this.lines.put(simpleMockedLine.getID(), simpleMockedLine);
+                    Node startNode = nodes.stream().filter(node -> node.getID() == line.getStart().longValue()).findFirst().orElseThrow(() -> new SimpleMockedException("Start Node " + line.getStart().longValue() +
+                            " of line " + line.getId().longValue() + " does not exist"));
+                    Node endNode = nodes.stream().filter(node -> node.getID() == line.getEnd().longValue()).findFirst().orElseThrow(() -> new SimpleMockedException("End Node " + line.getEnd().longValue() +
+                            " of line " + line.getId().longValue() + " does not exist"));
+                    return SimpleMockedLine.from(line, startNode, endNode);
                 }
-        );
+        ).collect(Collectors.toList());
     }
 
-    private void connectLines() {
-        this.nodes.forEach(
-                (id, node) -> {
-                    node.setConnections(lines.values());
-                }
+    private static void connectLines(List<SimpleMockedNode> nodes, List<SimpleMockedLine> lines) {
+        nodes.stream().forEach(
+                node -> node.setConnections(lines)
         );
     }
 
     public static OpenLRMapDatabaseAdaptor from(InputStream xmlMap) {
         SimpleMockedMapDatabase simpleMockedMapDatabase = parseXmlToSimpleMockedDatabase(xmlMap);
-        OpenLRMapDatabaseAdaptor map = new OpenLRMapDatabaseAdaptor(simpleMockedMapDatabase);
-        map.createNodes();
-        map.createLines();
-        map.connectLines();
-        return map;
+        List<SimpleMockedNode> nodes = createNodes(simpleMockedMapDatabase);
+        List<SimpleMockedLine> lines = createLines(simpleMockedMapDatabase, nodes);
+        connectLines(nodes, lines);
+        return new OpenLRMapDatabaseAdaptor(nodes, lines);
     }
 
     public boolean hasTurnRestrictions() {
-        return (lines.values().stream().filter(line -> {
+        return (lines.stream().filter(line -> {
             return !line.getRestrictions().isEmpty();
         }).count() != 0);
     }
 
     public Line getLine(long id) {
-        return lines.get(id);
+        return lines.stream().filter(line -> line.getID() == id).findFirst().orElseThrow(() -> new SimpleMockedException("Line " + id + " does not exist"));
     }
 
     public Node getNode(long id) {
-        return nodes.get(id);
+        return nodes.stream().filter(node -> node.getID() == id).findFirst().orElseThrow(() -> new SimpleMockedException("Node " + id + "does not exist"));
     }
 
     public Iterator<Node> findNodesCloseByCoordinate(double longitude, double latitude, int distance) {
         Envelope envelope = new Envelope(new Coordinate(longitude, latitude));
         envelope.expandBy(distance);
-        return nodes.values().stream().filter(node -> {
+        return nodes.stream().filter(node -> {
             GeoCoordinates crd = node.getGeoCoordinates();
             return envelope.contains(new Coordinate(crd.getLongitudeDeg(), crd.getLatitudeDeg()));
         }).map(x -> ((Node) x)).iterator();
@@ -98,7 +95,7 @@ public class OpenLRMapDatabaseAdaptor implements MapDatabase {
     public Iterator<Line> findLinesCloseByCoordinate(double longitude, double latitude, int distance) {
         Envelope envelope = new Envelope(new Coordinate(longitude, latitude));
         envelope.expandBy(distance);
-        return lines.values().stream().filter(line -> {
+        return lines.stream().filter(line -> {
             LineString lineString = line.getLineString();
             return envelope.intersects(lineString.getEnvelopeInternal());
         }).map(x -> ((Line) x)).iterator();
@@ -109,18 +106,19 @@ public class OpenLRMapDatabaseAdaptor implements MapDatabase {
         for (int index = 0; index < path.size() - 1 && hasNoRestriction; ++index) {
             long current = path.get(index).getID();
             long next = path.get(index + 1).getID();
-            hasNoRestriction = lines.get(current).getRestrictions().contains(next);
+            SimpleMockedLine line = lines.stream().filter(jaxLine -> jaxLine.getID() == current).findFirst().orElseThrow(() -> new SimpleMockedException("Line " + current + " does not exist"));
+            hasNoRestriction = line.getRestrictions().contains(next);
         }
         return !hasNoRestriction;
     }
 
     public Iterator<Node> getAllNodes() {
-        return nodes.values().stream()
+        return nodes.stream()
                 .map(x -> ((Node) x)).iterator();
     }
 
     public Iterator<Line> getAllLines() {
-        return lines.values().stream().map(x -> ((Line) x)).iterator();
+        return lines.stream().map(x -> ((Line) x)).iterator();
     }
 
     public Rectangle2D.Double getMapBoundingBox() {
