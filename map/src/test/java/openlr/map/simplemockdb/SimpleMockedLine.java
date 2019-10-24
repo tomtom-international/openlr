@@ -175,8 +175,8 @@ public class SimpleMockedLine implements Line {
      * @deprecated
      */
     @Deprecated
-    public java.awt.geom.Path2D.Double getShape() {
-        return null;
+    public java.awt.geom.Path2D.Double getShape() throws UnsupportedOperationException{
+        throw new UnsupportedOperationException();
     }
 
     public Iterator<Line> getNextLines() {
