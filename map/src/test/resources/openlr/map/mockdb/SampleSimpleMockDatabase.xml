@@ -24,10 +24,10 @@
         <end>2</end>
         <frc>0</frc>
         <fow>1</fow>
-        <ShapePoint>
+        <IntermediatePoint>
             <longitude>13.47645</longitude>
             <latitude>52.504998</latitude>
-        </ShapePoint>
+        </IntermediatePoint>
     </Line>
 
     <Line>
@@ -36,10 +36,10 @@
         <end>3</end>
         <frc>0</frc>
         <fow>1</fow>
-        <ShapePoint>
+        <IntermediatePoint>
             <longitude>13.47689</longitude>
             <latitude>52.505390</latitude>
-        </ShapePoint>
+        </IntermediatePoint>
     </Line>
 
 </SimpleMockedMapDatabase>

@@ -3,7 +3,7 @@ package openlr.map.simplemockdb;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.LineString;
-import generated.SimpleMockedMapDatabase;
+import openlr.map.simplemockdb.schema.SimpleMockedMapDatabase;
 import openlr.map.GeoCoordinates;
 import openlr.map.Line;
 import openlr.map.MapDatabase;

@@ -17,7 +17,6 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
 
-
 import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class SimpleMockedLine implements Line {
 
-    private generated.Line xmlLine;
+    private openlr.map.simplemockdb.schema.Line xmlLine;
     private static GeometryFactory factory = JTSFactoryFinder.getGeometryFactory();
     private static MathTransform wgs84ToCartesian = null;
     private static MathTransform cartesianToWgs843d = null;
@@ -82,11 +81,11 @@ public class SimpleMockedLine implements Line {
     }
 
     public void generateShape() {
-        int numberOfShapePoints = xmlLine.getShapePoint().size() + 2;
+        int numberOfShapePoints = xmlLine.getIntermediatePoint().size() + 2;
         Coordinate[] shapePoints = new Coordinate[numberOfShapePoints];
         shapePoints[0] = toCartesian(this.startNode.getLongitudeDeg(), this.startNode.getLatitudeDeg());
-        for (int index = 0; index < xmlLine.getShapePoint().size(); ++index) {
-            generated.Line.ShapePoint shapePoint = xmlLine.getShapePoint().get(index);
+        for (int index = 0; index < xmlLine.getIntermediatePoint().size(); ++index) {
+            openlr.map.simplemockdb.schema.Line.IntermediatePoint shapePoint = xmlLine.getIntermediatePoint().get(index);
             shapePoints[index + 1] = toCartesian(shapePoint.getLongitude(), shapePoint.getLatitude());
         }
         shapePoints[numberOfShapePoints - 1] = toCartesian(this.endNode.getLongitudeDeg(), this.endNode.getLatitudeDeg());
@@ -100,14 +99,14 @@ public class SimpleMockedLine implements Line {
     }
 
 
-    public static SimpleMockedLine from(generated.Line xmlLine, Node startNode, Node endNode) {
+    public static SimpleMockedLine from( openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
         SimpleMockedLine simpleMockedLine = new SimpleMockedLine(xmlLine, startNode, endNode);
         simpleMockedLine.generateShape();
         return simpleMockedLine;
     }
 
 
-    private SimpleMockedLine(generated.Line xmlLine, Node startNode, Node endNode) {
+    private SimpleMockedLine( openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
         this.xmlLine = xmlLine;
         this.startNode = startNode;
         this.endNode = endNode;
@@ -226,6 +225,6 @@ public class SimpleMockedLine implements Line {
     }
 
     public Map<Locale, List<String>> getNames() {
-        return null;
+        return new TreeMap<>();
     }
 }

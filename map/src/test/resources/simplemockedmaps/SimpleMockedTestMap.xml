@@ -36,10 +36,10 @@
         <end>2</end>
         <frc>5</frc>
         <fow>5</fow>
-        <ShapePoint>
+        <IntermediatePoint>
             <longitude>13.45300</longitude>
             <latitude>52.50431</latitude>
-        </ShapePoint>
+        </IntermediatePoint>
     </Line>
     <Line>
         <id>2</id>
@@ -47,10 +47,10 @@
         <end>3</end>
         <frc>5</frc>
         <fow>5</fow>
-        <ShapePoint>
+        <IntermediatePoint>
             <longitude>13.454300</longitude>
             <latitude>52.503895</latitude>
-        </ShapePoint>
+        </IntermediatePoint>
     </Line>
     <Line>
         <id>3</id>
@@ -58,10 +58,10 @@
         <end>6</end>
         <frc>5</frc>
         <fow>5</fow>
-        <ShapePoint>
+        <IntermediatePoint>
             <longitude>13.45335</longitude>
             <latitude>52.503660</latitude>
-        </ShapePoint>
+        </IntermediatePoint>
     </Line>
     <Line>
         <id>4</id>
@@ -69,10 +69,10 @@
         <end>4</end>
         <frc>5</frc>
         <fow>5</fow>
-        <ShapePoint>
+        <IntermediatePoint>
             <longitude>13.45385</longitude>
             <latitude>52.50307</latitude>
-        </ShapePoint>
+        </IntermediatePoint>
     </Line>
     <Line>
         <id>5</id>
@@ -80,10 +80,10 @@
         <end>4</end>
         <frc>5</frc>
         <fow>5</fow>
-        <ShapePoint>
+        <IntermediatePoint>
             <longitude>13.454771</longitude>
             <latitude>52.50325</latitude>
-        </ShapePoint>
+        </IntermediatePoint>
     </Line>
     <Line>
         <id>6</id>

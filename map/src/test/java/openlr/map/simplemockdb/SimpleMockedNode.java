@@ -15,13 +15,13 @@ import java.util.HashSet;
 
 
 public class SimpleMockedNode implements Node {
-    private generated.Node xmlNode;
+    private  openlr.map.simplemockdb.schema.Node xmlNode;
     private List<Line> outgoingLines;
     private List<Line> incomingLines;
     private List<Line> connectedLines;
     private GeoCoordinates coordinate;
 
-    private SimpleMockedNode(final generated.Node xmlNode) {
+    private SimpleMockedNode(final  openlr.map.simplemockdb.schema.Node xmlNode) {
         try {
             this.xmlNode = xmlNode;
             this.outgoingLines = new ArrayList<>();
@@ -33,7 +33,7 @@ public class SimpleMockedNode implements Node {
         }
     }
 
-    public static SimpleMockedNode from(final generated.Node xmlNode) {
+    public static SimpleMockedNode from(final  openlr.map.simplemockdb.schema.Node xmlNode) {
         return new SimpleMockedNode(xmlNode);
     }
 

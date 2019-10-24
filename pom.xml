@@ -179,6 +179,17 @@
                 <version>2.2.10</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-shapefile</artifactId>
+                <version>15.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-epsg-hsql</artifactId>
+                <version>15.2</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -255,6 +266,9 @@
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
+                    <configuration>
+                        <repoToken>J6jJV8d__GrKhn4_QuRlGQ</repoToken>
+                    </configuration>
                 </plugin>
 
                 <plugin>

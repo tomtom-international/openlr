@@ -42,7 +42,7 @@
 
                 <xs:element type="xs:unsignedLong" name="Restrictions" minOccurs="0" maxOccurs="unbounded"/>
 
-                <xs:element name="ShapePoint" minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="IntermediatePoint" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="longitude" type="xs:double" minOccurs="1" maxOccurs="1"/>

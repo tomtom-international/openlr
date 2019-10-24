@@ -1,6 +1,5 @@
 package openlr.map;
 
-import generated.SimpleMockedMapDatabase;
 import openlr.map.simplemockdb.OpenLRMapDatabaseAdaptor;
 import openlr.map.utils.GeometryUtils;
 import org.testng.annotations.Test;
@@ -16,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import  openlr.map.simplemockdb.schema.SimpleMockedMapDatabase;
 
 public class XmlToSimpleMockDatabaseTest {
     @Test
@@ -37,7 +37,7 @@ public class XmlToSimpleMockDatabaseTest {
         assertEquals(smd.getNode().size(), 3);
         assertEquals(smd.getNode().stream().filter(node -> node.getId().longValue() == 1).count(), 1);
         assertEquals(smd.getLine().stream().filter(line -> line.getId().longValue() == 1).count(), 1);
-        assertEquals(smd.getLine().stream().filter(line -> line.getId().longValue() == 1).findFirst().get().getShapePoint().size(), 1);
+        assertEquals(smd.getLine().stream().filter(line -> line.getId().longValue() == 1).findFirst().get().getIntermediatePoint().size(), 1);
     }
 
     @Test

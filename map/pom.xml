@@ -84,15 +84,13 @@
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-shapefile</artifactId>
-            <version>15.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-epsg-hsql</artifactId>
-            <version>15.2</version>
+            <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -108,11 +106,12 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <packageName>openlr.map.simplemockdb.schema</packageName>
                     <sources>
                         <source>src/test/resources/openlr/map/mockdb/SimpleMockDatabase.xsd</source>
                     </sources>
                     <clearOutputDir>false</clearOutputDir>
-                    <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+                    <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
                 </configuration>
             </plugin>
 
