@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 
 public class SimpleMockedLine implements Line {
 
-    private openlr.map.simplemockdb.schema.Line xmlLine;
     private static GeometryFactory factory = JTSFactoryFinder.getGeometryFactory();
     private static MathTransform wgs84ToCartesian;
     private static MathTransform cartesianToWgs843d;
@@ -40,6 +39,11 @@ public class SimpleMockedLine implements Line {
 
     private Node startNode;
     private Node endNode;
+    private FunctionalRoadClass frc;
+    private FormOfWay fow;
+    private long id;
+    private int hashCode;
+    private List<Long> restrictions;
     private List<LineSegment> lineSegments;
 
     public final LineString getLineString() {
@@ -77,37 +81,42 @@ public class SimpleMockedLine implements Line {
         }
     }
 
-    public void generateShape() {
+    private static  List<LineSegment> generateShape(openlr.map.simplemockdb.schema.Line xmlLine,Node startNode,Node endNode) {
+        List<LineSegment> lineSegments = new ArrayList<>();
         int numberOfShapePoints = xmlLine.getIntermediatePoint().size() + 2;
         Coordinate[] shapePoints = new Coordinate[numberOfShapePoints];
-        shapePoints[0] = toCartesian(this.startNode.getLongitudeDeg(), this.startNode.getLatitudeDeg());
+        shapePoints[0] = toCartesian(startNode.getLongitudeDeg(), startNode.getLatitudeDeg());
         for (int index = 0; index < xmlLine.getIntermediatePoint().size(); ++index) {
             openlr.map.simplemockdb.schema.Line.IntermediatePoint shapePoint = xmlLine.getIntermediatePoint().get(index);
             shapePoints[index + 1] = toCartesian(shapePoint.getLongitude(), shapePoint.getLatitude());
         }
-        shapePoints[numberOfShapePoints - 1] = toCartesian(this.endNode.getLongitudeDeg(), this.endNode.getLatitudeDeg());
+        shapePoints[numberOfShapePoints - 1] = toCartesian(endNode.getLongitudeDeg(), endNode.getLatitudeDeg());
         for (int index = 1; index < shapePoints.length; ++index) {
             Coordinate end = shapePoints[index];
             Coordinate start = shapePoints[index - 1];
             LineSegment segment = new LineSegment(start, end);
             lineSegments.add(segment);
         }
-
+       return lineSegments;
     }
 
 
     public static SimpleMockedLine from(openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
-        SimpleMockedLine simpleMockedLine = new SimpleMockedLine(xmlLine, startNode, endNode);
-        simpleMockedLine.generateShape();
+        List<LineSegment> lineSegments = generateShape(xmlLine, startNode, endNode);
+        SimpleMockedLine simpleMockedLine = new SimpleMockedLine(xmlLine, startNode, endNode, lineSegments);
         return simpleMockedLine;
     }
 
 
-    private SimpleMockedLine(openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
-        this.xmlLine = xmlLine;
+    private SimpleMockedLine(openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode,List<LineSegment> segments) {
         this.startNode = startNode;
         this.endNode = endNode;
-        this.lineSegments = new ArrayList<>();
+        this.lineSegments = segments;
+        this.id = xmlLine.getId().longValue();
+        this.restrictions = xmlLine.getRestrictions().stream().map(line -> line.longValue()).collect(Collectors.toList());
+        this.frc = FunctionalRoadClass.getFRCs().get(xmlLine.getFrc());
+        this.fow = FormOfWay.getFOWs().get(xmlLine.getFow());
+        this.hashCode = xmlLine.hashCode();
     }
 
     public Node getStartNode() {
@@ -115,7 +124,7 @@ public class SimpleMockedLine implements Line {
     }
 
     public List<Long> getRestrictions() {
-        return xmlLine.getRestrictions().stream().map(line -> line.longValue()).collect(Collectors.toList());
+        return this.restrictions;
     }
 
     public Node getEndNode() {
@@ -124,11 +133,11 @@ public class SimpleMockedLine implements Line {
 
     public FormOfWay getFOW() {
 
-        return FormOfWay.getFOWs().get(xmlLine.getFow());
+        return fow;
     }
 
     public FunctionalRoadClass getFRC() {
-        return FunctionalRoadClass.getFRCs().get(xmlLine.getFrc());
+        return frc;
     }
 
     /**
@@ -161,7 +170,7 @@ public class SimpleMockedLine implements Line {
     }
 
     public long getID() {
-        return xmlLine.getId().longValue();
+        return this.id;
     }
 
     public Iterator<Line> getPrevLines() {
@@ -188,7 +197,7 @@ public class SimpleMockedLine implements Line {
     }
 
     public int hashCode() {
-        return this.xmlLine.hashCode();
+        return this.hashCode;
     }
 
     public int distanceToPoint(double var1, double var3) {

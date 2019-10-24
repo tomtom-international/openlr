@@ -15,7 +15,7 @@ import java.util.HashSet;
 
 
 public class SimpleMockedNode implements Node {
-    private  openlr.map.simplemockdb.schema.Node xmlNode;
+    private long id;
     private List<Line> outgoingLines;
     private List<Line> incomingLines;
     private List<Line> connectedLines;
@@ -23,7 +23,7 @@ public class SimpleMockedNode implements Node {
 
     private SimpleMockedNode(final  openlr.map.simplemockdb.schema.Node xmlNode) {
         try {
-            this.xmlNode = xmlNode;
+            this.id = xmlNode.getId().longValue();
             this.outgoingLines = new ArrayList<>();
             this.incomingLines = new ArrayList<>();
             this.connectedLines = new ArrayList<>();
@@ -51,11 +51,11 @@ public class SimpleMockedNode implements Node {
 
     public void setConnections(final Collection<SimpleMockedLine> lines) {
         for (Line line : lines) {
-            if (line.getStartNode().getID() == xmlNode.getId().longValue()) {
+            if (line.getStartNode().getID() == id) {
                 outgoingLines.add(line);
             }
 
-            if (line.getEndNode().getID() == xmlNode.getId().longValue()) {
+            if (line.getEndNode().getID() ==id) {
                 incomingLines.add(line);
             }
         }
@@ -93,6 +93,6 @@ public class SimpleMockedNode implements Node {
     }
 
     public long getID() {
-        return xmlNode.getId().longValue();
+        return id;
     }
 }
