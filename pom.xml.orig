@@ -169,17 +169,11 @@
             </dependency>
 
             <dependency>
+<<<<<<< HEAD
                 <groupId>com.mapbox.mapboxsdk</groupId>
                 <artifactId>mapbox-java-geojson</artifactId>
                 <version>2.2.10</version>
             </dependency>
-            
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java</artifactId>
-                <version>3.9.2</version>
-            </dependency>
-
 
             <dependency>
                 <groupId>org.geotools</groupId>
@@ -200,6 +194,12 @@
                 <scope>test</scope>
             </dependency>
 
+=======
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>3.9.2</version>
+            </dependency>
+>>>>>>> 6cdb5e4e888c41eec329070de9fa92a5ea8effb6
         </dependencies>
     </dependencyManagement>
 
@@ -290,11 +290,19 @@
                 </plugin>
 
                 <plugin>
+<<<<<<< HEAD
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.7</version>
+                </plugin>
+
+
+=======
                     <groupId>com.github.os72</groupId>
                     <artifactId>protoc-jar-maven-plugin</artifactId>
                     <version>3.8.0</version>
                 </plugin>
-
+>>>>>>> 6cdb5e4e888c41eec329070de9fa92a5ea8effb6
             </plugins>
         </pluginManagement>
 

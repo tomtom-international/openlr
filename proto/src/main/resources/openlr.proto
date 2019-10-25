@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "openlr.proto.schema";
+
+enum FRC {
+    FRC_0 = 0;
+    FRC_1 = 1;
+    FRC_2 = 2;
+    FRC_3 = 3;
+    FRC_4 = 4;
+    FRC_5 = 5;
+    FRC_6 = 6;
+    FRC_7 = 7;
+}
+
+enum FOW {
+    FOW_UNDEFINED = 0;
+    FOW_MOTORWAY = 1;
+    FOW_MULTIPLE_CARRIAGEWAY = 2;
+    FOW_SINGLE_CARRIAGEWAY = 3;
+    FOW_ROUNDABOUT = 4;
+    FOW_TRAFFICSQUARE = 5;
+    FOW_SLIPROAD = 6;
+    FOW_OTHER = 7;
+}
+
+enum SideOfRoad {
+    SIDE_OF_ROAD_ON_ROAD_OR_UNKNOWN = 0;
+    SIDE_OF_ROAD_RIGHT = 1;
+    SIDE_OF_ROAD_LEFT = 2;
+    SIDE_OF_ROAD_BOTH = 3;
+}
+
+enum Orientation {
+    ORIENTATION_NO_ORIENTATION_OR_UNKNOWN = 0;
+    ORIENTATION_WITH_LINE_DIRECTION = 1;
+    ORIENTATION_AGAINST_LINE_DIRECTION = 2;
+    ORIENTATION_BOTH = 3;
+}
+
+message Coordinates {
+    double longitude = 1;
+    double latitude = 2;
+}
+
+message LineAttributes {
+    int32 bearing = 2;
+    FRC frc = 3;
+    FOW fow = 4;
+}
+
+message PathAttributes {
+    int32 distanceToNext = 1;
+    FRC lowestFrcAlongPath = 2;
+}
+
+message LocationReferencePoint {
+    Coordinates coordinates = 1;
+    LineAttributes lineAttributes = 2;
+    PathAttributes pathAttributes = 3;
+}
+
+message LineLocationReference {
+    repeated LocationReferencePoint locationReferencePoints = 1;
+    int32 positiveOffset = 2;
+    int32 negativeOffset = 3;
+}
+
+message GeoCoordinatesLocationReference {
+    Coordinates coordinates = 1;
+}
+
+message PointAlongLineLocationReference {
+    LocationReferencePoint first = 1;
+    LocationReferencePoint last = 2;
+    int32 positiveOffset = 3;
+    SideOfRoad sideOfRoad = 4;
+    Orientation orientation = 5;
+}
+
+message LocationReferenceData {
+    oneof locationReference {
+        LineLocationReference lineLocationReference = 1;
+        GeoCoordinatesLocationReference geoCoordinatesLocationReference = 2;
+        PointAlongLineLocationReference pointAlongLineLocationReference = 3;
+    }
+}
