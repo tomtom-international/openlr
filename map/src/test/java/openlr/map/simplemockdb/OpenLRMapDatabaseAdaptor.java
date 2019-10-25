@@ -3,11 +3,8 @@ package openlr.map.simplemockdb;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.LineString;
+import openlr.map.*;
 import openlr.map.simplemockdb.schema.SimpleMockedMapDatabase;
-import openlr.map.GeoCoordinates;
-import openlr.map.Line;
-import openlr.map.MapDatabase;
-import openlr.map.Node;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -39,8 +36,15 @@ public class OpenLRMapDatabaseAdaptor implements MapDatabase {
     }
 
 
-    private static List<SimpleMockedNode> createNodes(SimpleMockedMapDatabase simpleMockedMapDatabase) {
-        return simpleMockedMapDatabase.getNode().stream().map(node -> SimpleMockedNode.from(node)).collect(Collectors.toList());
+    private static List<SimpleMockedNode> createNodes(SimpleMockedMapDatabase simpleMockedMapDatabase) throws SimpleMockedException {
+        return simpleMockedMapDatabase.getNode().stream().map(node -> {
+                    try {
+                        return SimpleMockedNode.from(node.getId().longValue(), new GeoCoordinatesImpl(node.getLongitude(), node.getLatitude()));
+                    } catch (InvalidMapDataException e) {
+                        throw new SimpleMockedException(e.getMessage());
+                    }
+                }
+        ).collect(Collectors.toList());
     }
 
     private static List<SimpleMockedLine> createLines(SimpleMockedMapDatabase simpleMockedMapDatabase, List<SimpleMockedNode> nodes) {
@@ -50,7 +54,13 @@ public class OpenLRMapDatabaseAdaptor implements MapDatabase {
                             " of line " + line.getId().longValue() + " does not exist"));
                     Node endNode = nodes.stream().filter(node -> node.getID() == line.getEnd().longValue()).findFirst().orElseThrow(() -> new SimpleMockedException("End Node " + line.getEnd().longValue() +
                             " of line " + line.getId().longValue() + " does not exist"));
-                    return SimpleMockedLine.from(line, startNode, endNode);
+                    long id = line.getId().longValue();
+                    List<Long> restrictions = line.getRestrictions().stream().map(restrictionTo -> restrictionTo.longValue()).collect(Collectors.toList());
+                    FunctionalRoadClass frc = FunctionalRoadClass.getFRCs().get(line.getFrc());
+                    FormOfWay fow = FormOfWay.getFOWs().get(line.getFow());
+                    int hashCode = line.hashCode();
+                    List<Coordinate> intermediatePoints = line.getIntermediatePoint().stream().map(point -> SimpleMockedLine.toCartesian(point.getLongitude(), point.getLatitude())).collect(Collectors.toList());
+                    return SimpleMockedLine.from(id, restrictions, frc, fow, hashCode, startNode, endNode, intermediatePoints);
                 }
         ).collect(Collectors.toList());
     }

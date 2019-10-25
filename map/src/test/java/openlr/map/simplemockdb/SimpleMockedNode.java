@@ -21,20 +21,16 @@ public class SimpleMockedNode implements Node {
     private List<Line> connectedLines;
     private GeoCoordinates coordinate;
 
-    private SimpleMockedNode(final  openlr.map.simplemockdb.schema.Node xmlNode) {
-        try {
-            this.id = xmlNode.getId().longValue();
-            this.outgoingLines = new ArrayList<>();
-            this.incomingLines = new ArrayList<>();
-            this.connectedLines = new ArrayList<>();
-            this.coordinate = new GeoCoordinatesImpl(xmlNode.getLongitude(), xmlNode.getLatitude());
-        } catch (InvalidMapDataException e) {
-            throw new SimpleMockedException(e.getMessage());
-        }
+    private SimpleMockedNode(long id, GeoCoordinates crd) {
+        this.id = id;
+        this.outgoingLines = new ArrayList<>();
+        this.incomingLines = new ArrayList<>();
+        this.connectedLines = new ArrayList<>();
+        this.coordinate = crd;
     }
 
-    public static SimpleMockedNode from(final  openlr.map.simplemockdb.schema.Node xmlNode) {
-        return new SimpleMockedNode(xmlNode);
+    public static SimpleMockedNode from(long id, GeoCoordinates crd) {
+        return new SimpleMockedNode(id, crd);
     }
 
     public double getLatitudeDeg() {
@@ -55,7 +51,7 @@ public class SimpleMockedNode implements Node {
                 outgoingLines.add(line);
             }
 
-            if (line.getEndNode().getID() ==id) {
+            if (line.getEndNode().getID() == id) {
                 incomingLines.add(line);
             }
         }

@@ -86,14 +86,13 @@ public class SimpleMockedLine implements Line {
         }
     }
 
-    private static  List<LineSegment> generateShape(openlr.map.simplemockdb.schema.Line xmlLine,Node startNode,Node endNode) {
+    private static List<LineSegment> generateShape(List<Coordinate> intermediatePoints, Node startNode, Node endNode) {
         List<LineSegment> lineSegments = new ArrayList<>();
-        int numberOfShapePoints = xmlLine.getIntermediatePoint().size() + 2;
+        int numberOfShapePoints = intermediatePoints.size() + 2;
         Coordinate[] shapePoints = new Coordinate[numberOfShapePoints];
         shapePoints[0] = toCartesian(startNode.getLongitudeDeg(), startNode.getLatitudeDeg());
-        for (int index = 0; index < xmlLine.getIntermediatePoint().size(); ++index) {
-            IntermediatePoint shapePoint = xmlLine.getIntermediatePoint().get(index);
-            shapePoints[index + 1] = toCartesian(shapePoint.getLongitude(), shapePoint.getLatitude());
+        for (int index = 0; index < intermediatePoints.size(); ++index) {
+            shapePoints[index + 1] = intermediatePoints.get(index);
         }
         shapePoints[numberOfShapePoints - 1] = toCartesian(endNode.getLongitudeDeg(), endNode.getLatitudeDeg());
         for (int index = 1; index < shapePoints.length; ++index) {
@@ -102,26 +101,26 @@ public class SimpleMockedLine implements Line {
             LineSegment segment = new LineSegment(start, end);
             lineSegments.add(segment);
         }
-       return lineSegments;
+        return lineSegments;
     }
 
 
-    public static SimpleMockedLine from(openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode) {
-        List<LineSegment> lineSegments = generateShape(xmlLine, startNode, endNode);
-        SimpleMockedLine simpleMockedLine = new SimpleMockedLine(xmlLine, startNode, endNode, lineSegments);
+    public static SimpleMockedLine from(long id, List<Long> restrictions, FunctionalRoadClass frc, FormOfWay fow, int hashcode, Node startNode, Node endNode, List<Coordinate> intermediatePoints) {
+        List<LineSegment> lineSegments = generateShape(intermediatePoints, startNode, endNode);
+        SimpleMockedLine simpleMockedLine = new SimpleMockedLine(id, restrictions, frc, fow, hashcode, startNode, endNode, lineSegments);
         return simpleMockedLine;
     }
 
 
-    private SimpleMockedLine(openlr.map.simplemockdb.schema.Line xmlLine, Node startNode, Node endNode,List<LineSegment> segments) {
+    private SimpleMockedLine(long id, List<Long> restrictions, FunctionalRoadClass frc, FormOfWay fow, int hashcode, Node startNode, Node endNode, List<LineSegment> segments) {
         this.startNode = startNode;
         this.endNode = endNode;
         this.lineSegments = segments;
-        this.id = xmlLine.getId().longValue();
-        this.restrictions = xmlLine.getRestrictions().stream().map(line -> line.longValue()).collect(Collectors.toList());
-        this.frc = FunctionalRoadClass.getFRCs().get(xmlLine.getFrc());
-        this.fow = FormOfWay.getFOWs().get(xmlLine.getFow());
-        this.hashCode = xmlLine.hashCode();
+        this.id = id;
+        this.restrictions = restrictions;
+        this.frc = frc;
+        this.fow = fow;
+        this.hashCode = hashcode;
     }
 
     public Node getStartNode() {
