@@ -3,8 +3,6 @@ package openlr.map.simplemockdb;
 import openlr.map.Node;
 import openlr.map.Line;
 import openlr.map.GeoCoordinates;
-import openlr.map.GeoCoordinatesImpl;
-import openlr.map.InvalidMapDataException;
 
 import java.util.Iterator;
 import java.util.List;

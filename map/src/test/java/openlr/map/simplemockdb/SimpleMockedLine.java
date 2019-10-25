@@ -20,7 +20,6 @@ import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
-import openlr.map.simplemockdb.schema.Line.IntermediatePoint;
 
 import java.awt.geom.Point2D;
 import java.util.*;

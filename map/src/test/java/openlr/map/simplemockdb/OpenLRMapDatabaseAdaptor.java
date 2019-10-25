@@ -3,7 +3,15 @@ package openlr.map.simplemockdb;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.LineString;
-import openlr.map.*;
+import openlr.map.MapDatabase;
+import openlr.map.Line;
+import openlr.map.Node;
+import openlr.map.GeoCoordinatesImpl;
+import openlr.map.FormOfWay;
+import openlr.map.FunctionalRoadClass;
+import openlr.map.GeoCoordinates;
+import openlr.map.InvalidMapDataException;
+
 import openlr.map.simplemockdb.schema.SimpleMockedMapDatabase;
 
 import javax.xml.bind.JAXBContext;
