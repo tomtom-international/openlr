@@ -18,17 +18,19 @@ public class SimpleMockedNode implements Node {
     private List<Line> incomingLines;
     private List<Line> connectedLines;
     private GeoCoordinates coordinate;
+    private int hashcode;
 
-    private SimpleMockedNode(long id, GeoCoordinates crd) {
+    private SimpleMockedNode(long id, GeoCoordinates crd, int hashcode) {
         this.id = id;
         this.outgoingLines = new ArrayList<>();
         this.incomingLines = new ArrayList<>();
         this.connectedLines = new ArrayList<>();
         this.coordinate = crd;
+        this.hashcode = hashcode;
     }
 
-    public static SimpleMockedNode from(long id, GeoCoordinates crd) {
-        return new SimpleMockedNode(id, crd);
+    public static SimpleMockedNode from(long id, GeoCoordinates crd, int hashcode) {
+        return new SimpleMockedNode(id, crd, hashcode);
     }
 
     public double getLatitudeDeg() {
@@ -75,6 +77,7 @@ public class SimpleMockedNode implements Node {
         return incomingLines.iterator();
     }
 
+    @Override
     public boolean equals(final Object other) {
         if (other instanceof SimpleMockedNode) {
             return this.getID() == ((SimpleMockedNode) other).getID();
@@ -82,8 +85,9 @@ public class SimpleMockedNode implements Node {
         return false;
     }
 
+    @Override
     public int hashCode() {
-        return this.hashCode();
+        return this.hashcode;
     }
 
     public long getID() {

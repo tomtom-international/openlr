@@ -47,7 +47,7 @@ public class OpenLRMapDatabaseAdaptor implements MapDatabase {
     private static List<SimpleMockedNode> createNodes(SimpleMockedMapDatabase simpleMockedMapDatabase) throws SimpleMockedException {
         return simpleMockedMapDatabase.getNode().stream().map(node -> {
                     try {
-                        return SimpleMockedNode.from(node.getId().longValue(), new GeoCoordinatesImpl(node.getLongitude(), node.getLatitude()));
+                        return SimpleMockedNode.from(node.getId().longValue(), new GeoCoordinatesImpl(node.getLongitude(), node.getLatitude()),node.hashCode());
                     } catch (InvalidMapDataException e) {
                         throw new SimpleMockedException(e.getMessage());
                     }

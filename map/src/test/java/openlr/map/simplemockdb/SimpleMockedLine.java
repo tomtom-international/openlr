@@ -189,19 +189,21 @@ public class SimpleMockedLine implements Line {
         return this.endNode.getOutgoingLines();
     }
 
-    public boolean equals(Object var1) {
-        if (var1 instanceof SimpleMockedLine) {
-            return this.getID() == ((SimpleMockedLine) var1).getID();
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof SimpleMockedLine) {
+            return this.getID() == ((SimpleMockedLine) other).getID();
         }
         return false;
     }
 
+    @Override
     public int hashCode() {
         return this.hashCode;
     }
 
-    public int distanceToPoint(double var1, double var3) {
-        Geometry geometry = factory.createPoint(toCartesian(var1, var3));
+    public int distanceToPoint(double lon, double lat) {
+        Geometry geometry = factory.createPoint(toCartesian(lon, lat));
         return (int) Math.round(getLineString().distance(geometry));
     }
 
