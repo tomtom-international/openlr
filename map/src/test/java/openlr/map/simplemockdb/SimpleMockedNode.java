@@ -77,9 +77,9 @@ public class SimpleMockedNode implements Node {
         return incomingLines.iterator();
     }
 
-    public boolean equals(final Object var1) {
-        if (var1 instanceof SimpleMockedNode) {
-            return this.getID() == ((SimpleMockedNode) var1).getID();
+    public boolean equals(final Object other) {
+        if (other instanceof SimpleMockedNode) {
+            return this.getID() == ((SimpleMockedNode) other).getID();
         }
         return false;
     }

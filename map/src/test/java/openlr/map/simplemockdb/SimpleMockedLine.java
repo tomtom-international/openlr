@@ -52,19 +52,17 @@ public class SimpleMockedLine implements Line {
     private List<LineSegment> lineSegments;
 
     public final LineString getLineString() {
-        Coordinate[] crds = new Coordinate[getShapeCoordinates().size()];
-        crds = (Coordinate[]) getShapeCoordinates().stream().map(shapePoint -> {
-            return toCartesian(shapePoint.getLongitudeDeg(), shapePoint.getLatitudeDeg());
-        }).collect(Collectors.toList()).toArray(crds);
+        Coordinate[] crds = getShapeCoordinates().stream()
+                .map(shapePoint -> toCartesian(shapePoint.getLongitudeDeg(), shapePoint.getLatitudeDeg()))
+                .collect(Collectors.toList())
+                .toArray(new Coordinate[getShapeCoordinates().size()]);
         return factory.createLineString(crds);
     }
 
 
     public static Coordinate toCartesian(double lon, double lat) {
-        final Coordinate to = new Coordinate();
         try {
-            JTS.transform(new Coordinate(lon, lat, 0), to, wgs84ToCartesian);
-            return to;
+            return JTS.transform(new Coordinate(lon, lat, 0), null, wgs84ToCartesian);
         } catch (TransformException e) {
             throw new SimpleMockedException(e.getMessage());
 
@@ -74,9 +72,8 @@ public class SimpleMockedLine implements Line {
 
     public static GeoCoordinates toWGS84(Coordinate crd) {
         try {
-            final Coordinate to = new Coordinate();
-            JTS.transform(crd, to, cartesianToWgs843d);
-            return new GeoCoordinatesImpl(to.x, to.y);
+            Coordinate wgs84crd = JTS.transform(crd, null, cartesianToWgs843d);
+            return new GeoCoordinatesImpl(wgs84crd.x, wgs84crd.y);
         } catch (TransformException e) {
             throw new SimpleMockedException(e.getMessage());
 

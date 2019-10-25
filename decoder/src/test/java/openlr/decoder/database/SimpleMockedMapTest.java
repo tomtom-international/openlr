@@ -8,6 +8,7 @@ import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.decoder.OpenLRDecoder;
 import openlr.decoder.OpenLRDecoderParameter;
 import openlr.location.Location;
+import openlr.map.Line;
 import openlr.map.simplemockdb.OpenLRMapDatabaseAdaptor;
 import openlr.properties.OpenLRPropertiesReader;
 import openlr.rawLocRef.RawLocationReference;
@@ -21,6 +22,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,13 +45,7 @@ public class SimpleMockedMapTest {
         Location location = decoder.decodeRaw(params, rawLocationReference);
         assertNotNull(location);
         assertEquals(location.getLocationLines().size(), 4);
-        List<Long> expectedLines = new ArrayList<Long>();
-        expectedLines.add(new Long(1));
-        expectedLines.add(new Long(2));
-        expectedLines.add(new Long(5));
-        expectedLines.add(new Long(6));
-        assertEquals(location.getLocationLines().stream().map(line -> {
-            return line.getID();
-        }).collect(Collectors.toList()), expectedLines);
+        List<Long> expectedLines = Arrays.asList(1L,2L,5L,6L);
+        assertEquals(location.getLocationLines().stream().map(Line::getID).collect(Collectors.toList()), expectedLines);
     }
 }
