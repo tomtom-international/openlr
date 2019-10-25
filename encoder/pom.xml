@@ -77,5 +77,16 @@
             <artifactId>jmock-legacy</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-shapefile</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

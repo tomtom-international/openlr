@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="SimpleMockedMapDatabase">
+    <xs:element name="TestMapStub">
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Node" minOccurs="1" maxOccurs="unbounded"/>
@@ -39,7 +39,10 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="ShapePoint" minOccurs="0" maxOccurs="unbounded">
+
+                <xs:element type="xs:unsignedLong" name="Restrictions" minOccurs="0" maxOccurs="unbounded"/>
+
+                <xs:element name="IntermediatePoint" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="longitude" type="xs:double" minOccurs="1" maxOccurs="1"/>

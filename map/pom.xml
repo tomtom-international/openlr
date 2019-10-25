@@ -18,7 +18,6 @@
     </description>
 
     <dependencies>
-
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
@@ -75,21 +74,21 @@
             <artifactId>jmock-legacy</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-shapefile</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
@@ -101,13 +100,25 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <packageName>openlr.map.teststubs.schema</packageName>
                     <sources>
-                        <source>src/test/resources/openlr/map/mockdb/SimpleMockDatabase.xsd</source>
+                        <source>src/test/resources/openlr/map/stub/TestMapStub.xsd</source>
                     </sources>
                     <clearOutputDir>false</clearOutputDir>
-                    <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+                    <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
                 </configuration>
-        </plugin>
-    </plugins>
-</build>
-        </project>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -306,7 +306,6 @@ public class RouteSearch {
      *
      * @param actualElement the current element
      * @param data the data
-     * @param lfrc the lfrc
      */
     private void extractNextLines(final PQElem actualElement,
                                   final RouteSearchData data) {

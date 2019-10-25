@@ -6,5 +6,4 @@ target/
 bin/
 *.iml
 *.class
-generated/
 JAXB/

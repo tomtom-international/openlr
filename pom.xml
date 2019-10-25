@@ -57,6 +57,19 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <repositories>
+        <repository>
+            <id>osgeo</id>
+            <name>Open Source Geospatial Foundation Repository</name>
+            <url>http://download.osgeo.org/webdav/geotools/</url>
+        </repository>
+        <repository>
+            <id>opengeo</id>
+            <name>OpenGeo Maven Repository</name>
+            <url>http://repo.opengeo.org</url>
+        </repository>
+    </repositories>
+
     <modules>
         <module>binary</module>
         <module>data</module>
@@ -156,9 +169,27 @@
             </dependency>
 
             <dependency>
+                <groupId>com.mapbox.mapboxsdk</groupId>
+                <artifactId>mapbox-java-geojson</artifactId>
+                <version>2.2.10</version>
+            </dependency>
+            
+            <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
                 <version>3.9.2</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-shapefile</artifactId>
+                <version>15.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-epsg-hsql</artifactId>
+                <version>15.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -166,13 +197,6 @@
     <build>
         <pluginManagement>
             <plugins>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>jaxb2-maven-plugin</artifactId>
-                    <version>2.5.0</version>
-                </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -183,6 +207,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.1.2</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
                 </plugin>
 
                 <plugin>
@@ -223,6 +253,12 @@
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>jaxb2-maven-plugin</artifactId>
+                    <version>2.5.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>cobertura-maven-plugin</artifactId>
                     <version>2.7</version>
                 </plugin>
@@ -231,6 +267,11 @@
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
+                    <configuration>
+                        <sourceDirectories>
+                            <sourceDirectory>${project.basedir}/map/target/generated-sources/jaxb/</sourceDirectory>
+                        </sourceDirectories>
+                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -244,6 +285,7 @@
                     <artifactId>protoc-jar-maven-plugin</artifactId>
                     <version>3.8.0</version>
                 </plugin>
+
             </plugins>
         </pluginManagement>
 
