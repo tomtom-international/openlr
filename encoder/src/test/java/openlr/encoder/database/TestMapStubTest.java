@@ -7,7 +7,7 @@ import openlr.encoder.OpenLREncoderParameter;
 import openlr.location.Location;
 import openlr.location.LocationFactory;
 import openlr.map.Line;
-import openlr.map.simplemockdb.OpenLRMapDatabaseAdaptor;
+import openlr.map.teststubs.OpenLRMapDatabaseAdaptor;
 import openlr.properties.OpenLRPropertiesReader;
 import org.apache.commons.configuration.Configuration;
 
@@ -20,12 +20,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleMockedMapTest {
+public class TestMapStubTest {
     @Test
     public void encoding() throws OpenLRProcessingException {
-        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("simplemockedmaps/SimpleMockedTestMap.xml");
+        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml");
         OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
-        Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(SimpleMockedMapTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
+        Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
         OpenLREncoderParameter params = new OpenLREncoderParameter.Builder().with(map).with(encoderConfig).buildParameter();
         List<Line> lines = new ArrayList<>();
         lines.add(map.getLine(1));

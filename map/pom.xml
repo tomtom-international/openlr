@@ -107,9 +107,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <packageName>openlr.map.simplemockdb.schema</packageName>
+                    <packageName>openlr.map.teststubs.schema</packageName>
                     <sources>
-                        <source>src/test/resources/openlr/map/mockdb/SimpleMockDatabase.xsd</source>
+                        <source>src/test/resources/openlr/map/stub/TestMapStub.xsd</source>
                     </sources>
                     <clearOutputDir>false</clearOutputDir>
                     <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>

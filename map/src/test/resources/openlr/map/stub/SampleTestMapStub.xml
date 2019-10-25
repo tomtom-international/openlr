@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<SimpleMockedMapDatabase>
+<TestMapStub>
     <Node>
         <id>1</id>
         <longitude>13.476134</longitude>
@@ -42,4 +42,4 @@
         </IntermediatePoint>
     </Line>
 
-</SimpleMockedMapDatabase>
+</TestMapStub>

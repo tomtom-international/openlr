@@ -9,7 +9,7 @@ import openlr.decoder.OpenLRDecoder;
 import openlr.decoder.OpenLRDecoderParameter;
 import openlr.location.Location;
 import openlr.map.Line;
-import openlr.map.simplemockdb.OpenLRMapDatabaseAdaptor;
+import openlr.map.teststubs.OpenLRMapDatabaseAdaptor;
 import openlr.properties.OpenLRPropertiesReader;
 import openlr.rawLocRef.RawLocationReference;
 import org.apache.commons.configuration.Configuration;
@@ -26,7 +26,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SimpleMockedMapTest {
+public class TestMapStubTest {
 
     @Test
     public void decoding() throws OpenLRProcessingException, PhysicalFormatException {
@@ -36,9 +36,9 @@ public class SimpleMockedMapTest {
         LocationReferenceBinaryImpl locationReferenceBinary = new LocationReferenceBinaryImpl("ProtoTypeTesting", byteArray);
         RawLocationReference rawLocationReference = binaryDecoder.decodeData(locationReferenceBinary);
 
-        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("simplemockedmaps/SimpleMockedTestMap.xml");
+        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml");
         OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
-        Configuration decoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(SimpleMockedMapTest.class.getClassLoader().getResource("OpenLR-Decoder-Properties.xml").getFile()));
+        Configuration decoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Decoder-Properties.xml").getFile()));
         OpenLRDecoderParameter params = new OpenLRDecoderParameter.Builder().with(map).with(decoderConfig).buildParameter();
         OpenLRDecoder decoder = new openlr.decoder.OpenLRDecoder();
         Location location = decoder.decodeRaw(params, rawLocationReference);

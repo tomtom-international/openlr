@@ -1,6 +1,6 @@
 package openlr.map;
 
-import openlr.map.simplemockdb.OpenLRMapDatabaseAdaptor;
+import openlr.map.teststubs.OpenLRMapDatabaseAdaptor;
 import openlr.map.utils.GeometryUtils;
 import org.testng.annotations.Test;
 
@@ -15,23 +15,23 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
-import  openlr.map.simplemockdb.schema.SimpleMockedMapDatabase;
+import  openlr.map.teststubs.schema.TestMapStub;
 
-public class XmlToSimpleMockDatabaseTest {
+public class XmlToTestMapStubTest {
     @Test
-    public void testXmlToObject() throws JAXBException, FileNotFoundException {
+    public void testXmlToObject() throws JAXBException {
 
-        SimpleMockedMapDatabase smd;
+        TestMapStub smd;
 
-        URL testDb = XmlToSimpleMockDatabaseTest.class.getClassLoader().getResource("openlr/map/mockdb/SampleSimpleMockDatabase.xml");
+        URL testDb = XmlToTestMapStubTest.class.getClassLoader().getResource("openlr/map/stub/SampleTestMapStub.xml");
 
         File file = new File(testDb.getFile());
 
-        JAXBContext jaxbContext = JAXBContext.newInstance(SimpleMockedMapDatabase.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(TestMapStub.class);
 
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-        smd = (SimpleMockedMapDatabase) unmarshaller.unmarshal(file);
+        smd = (TestMapStub) unmarshaller.unmarshal(file);
 
         assertEquals(smd.getLine().size(), 2);
         assertEquals(smd.getNode().size(), 3);
@@ -42,7 +42,7 @@ public class XmlToSimpleMockDatabaseTest {
 
     @Test
     public  void  testXmlToSimpleMockedDatabaseAdaptor() throws InvalidMapDataException{
-        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("simplemockedmaps/SimpleMockedTestMap.xml");
+        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml");
         OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
         Line testLine = map.getLine(1);
         GeoCoordinates pointOnLine = new GeoCoordinatesImpl(13.45300,52.50431);

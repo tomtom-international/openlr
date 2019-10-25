@@ -1,4 +1,4 @@
-package openlr.map.simplemockdb;
+package openlr.map.teststubs;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineSegment;
@@ -26,7 +26,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class SimpleMockedLine implements Line {
+public class LineStub implements Line {
 
     private static GeometryFactory factory = JTSFactoryFinder.getGeometryFactory();
     private static MathTransform wgs84ToCartesian;
@@ -37,7 +37,7 @@ public class SimpleMockedLine implements Line {
             wgs84ToCartesian = CRS.findMathTransform(DefaultGeographicCRS.WGS84, DefaultGeocentricCRS.CARTESIAN);
             cartesianToWgs843d = CRS.findMathTransform(DefaultGeocentricCRS.CARTESIAN, DefaultGeographicCRS.WGS84_3D);
         } catch (FactoryException e) {
-            throw new SimpleMockedException(e.getMessage());
+            throw new MapStubException(e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class SimpleMockedLine implements Line {
         try {
             return JTS.transform(new Coordinate(lon, lat, 0), null, wgs84ToCartesian);
         } catch (TransformException e) {
-            throw new SimpleMockedException(e.getMessage());
+            throw new MapStubException(e.getMessage());
 
         }
     }
@@ -74,10 +74,10 @@ public class SimpleMockedLine implements Line {
             Coordinate wgs84crd = JTS.transform(crd, null, cartesianToWgs843d);
             return new GeoCoordinatesImpl(wgs84crd.x, wgs84crd.y);
         } catch (TransformException e) {
-            throw new SimpleMockedException(e.getMessage());
+            throw new MapStubException(e.getMessage());
 
         } catch (InvalidMapDataException e) {
-            throw new SimpleMockedException(e.getMessage());
+            throw new MapStubException(e.getMessage());
 
         }
     }
@@ -101,14 +101,14 @@ public class SimpleMockedLine implements Line {
     }
 
 
-    public static SimpleMockedLine from(long id, List<Long> restrictions, FunctionalRoadClass frc, FormOfWay fow, int hashcode, Node startNode, Node endNode, List<Coordinate> intermediatePoints) {
+    public static LineStub from(long id, List<Long> restrictions, FunctionalRoadClass frc, FormOfWay fow, int hashcode, Node startNode, Node endNode, List<Coordinate> intermediatePoints) {
         List<LineSegment> lineSegments = generateShape(intermediatePoints, startNode, endNode);
-        SimpleMockedLine simpleMockedLine = new SimpleMockedLine(id, restrictions, frc, fow, hashcode, startNode, endNode, lineSegments);
+        LineStub simpleMockedLine = new LineStub(id, restrictions, frc, fow, hashcode, startNode, endNode, lineSegments);
         return simpleMockedLine;
     }
 
 
-    private SimpleMockedLine(long id, List<Long> restrictions, FunctionalRoadClass frc, FormOfWay fow, int hashcode, Node startNode, Node endNode, List<LineSegment> segments) {
+    private LineStub(long id, List<Long> restrictions, FunctionalRoadClass frc, FormOfWay fow, int hashcode, Node startNode, Node endNode, List<LineSegment> segments) {
         this.startNode = startNode;
         this.endNode = endNode;
         this.lineSegments = segments;
@@ -148,7 +148,7 @@ public class SimpleMockedLine implements Line {
         return null;
     }
 
-    public GeoCoordinates getGeoCoordinateAlongLine(int distance) throws SimpleMockedException {
+    public GeoCoordinates getGeoCoordinateAlongLine(int distance) throws MapStubException {
 
         int lengthCovered = 0;
         for (LineSegment segment : lineSegments) {
@@ -162,7 +162,7 @@ public class SimpleMockedLine implements Line {
             }
             lengthCovered += segment.getLength();
         }
-        throw new SimpleMockedException("length is greater than the line length");
+        throw new MapStubException("length is greater than the line length");
     }
 
     public int getLineLength() {
@@ -191,8 +191,8 @@ public class SimpleMockedLine implements Line {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof SimpleMockedLine) {
-            return this.getID() == ((SimpleMockedLine) other).getID();
+        if (other instanceof LineStub) {
+            return this.getID() == ((LineStub) other).getID();
         }
         return false;
     }
@@ -217,7 +217,7 @@ public class SimpleMockedLine implements Line {
             }
             segmentLength += segment.getLength();
         }
-        throw new SimpleMockedException("point is not on the line");
+        throw new MapStubException("point is not on the line");
     }
 
     public List<GeoCoordinates> getShapeCoordinates() {

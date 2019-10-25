@@ -1,4 +1,4 @@
-package openlr.map.simplemockdb;
+package openlr.map.teststubs;
 
 import openlr.map.Node;
 import openlr.map.Line;
@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 
-public class SimpleMockedNode implements Node {
+public class NodeStub implements Node {
     private long id;
     private List<Line> outgoingLines;
     private List<Line> incomingLines;
@@ -20,7 +20,7 @@ public class SimpleMockedNode implements Node {
     private GeoCoordinates coordinate;
     private int hashcode;
 
-    private SimpleMockedNode(long id, GeoCoordinates crd, int hashcode) {
+    private NodeStub(long id, GeoCoordinates crd, int hashcode) {
         this.id = id;
         this.outgoingLines = new ArrayList<>();
         this.incomingLines = new ArrayList<>();
@@ -29,8 +29,8 @@ public class SimpleMockedNode implements Node {
         this.hashcode = hashcode;
     }
 
-    public static SimpleMockedNode from(long id, GeoCoordinates crd, int hashcode) {
-        return new SimpleMockedNode(id, crd, hashcode);
+    public static NodeStub from(long id, GeoCoordinates crd, int hashcode) {
+        return new NodeStub(id, crd, hashcode);
     }
 
     public double getLatitudeDeg() {
@@ -45,7 +45,7 @@ public class SimpleMockedNode implements Node {
         return coordinate;
     }
 
-    public void setConnections(final Collection<SimpleMockedLine> lines) {
+    public void setConnections(final Collection<LineStub> lines) {
         for (Line line : lines) {
             if (line.getStartNode().getID() == id) {
                 outgoingLines.add(line);
@@ -79,8 +79,8 @@ public class SimpleMockedNode implements Node {
 
     @Override
     public boolean equals(final Object other) {
-        if (other instanceof SimpleMockedNode) {
-            return this.getID() == ((SimpleMockedNode) other).getID();
+        if (other instanceof NodeStub) {
+            return this.getID() == ((NodeStub) other).getID();
         }
         return false;
     }
