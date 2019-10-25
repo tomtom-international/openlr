@@ -55,18 +55,19 @@ public class OpenLRMapDatabaseAdaptor implements MapDatabase {
         ).collect(Collectors.toList());
     }
 
-    private static void connectLines(List<SimpleMockedNode> nodes, List<SimpleMockedLine> lines) {
+    private static List<SimpleMockedNode> connectNodes(List<SimpleMockedNode> nodes, List<SimpleMockedLine> lines) {
         nodes.stream().forEach(
                 node -> node.setConnections(lines)
         );
+        return nodes;
     }
 
     public static OpenLRMapDatabaseAdaptor from(InputStream xmlMap) {
         SimpleMockedMapDatabase simpleMockedMapDatabase = parseXmlToSimpleMockedDatabase(xmlMap);
         List<SimpleMockedNode> nodes = createNodes(simpleMockedMapDatabase);
         List<SimpleMockedLine> lines = createLines(simpleMockedMapDatabase, nodes);
-        connectLines(nodes, lines);
-        return new OpenLRMapDatabaseAdaptor(nodes, lines);
+        List<SimpleMockedNode> connectedNodes = connectNodes(nodes, lines);
+        return new OpenLRMapDatabaseAdaptor(connectedNodes, lines);
     }
 
     public boolean hasTurnRestrictions() {

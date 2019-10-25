@@ -166,7 +166,7 @@
                 <artifactId>sqlite-jdbc</artifactId>
                 <version>3.28.0</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.mapbox.mapboxsdk</groupId>
                 <artifactId>mapbox-java-geojson</artifactId>
@@ -269,7 +269,9 @@
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
                     <configuration>
-                        <repoToken>J6jJV8d__GrKhn4_QuRlGQ</repoToken>
+                        <sourceDirectories>
+                            <sourceDirectory>${project.basedir}/map/target/generated-sources/jaxb/</sourceDirectory>
+                        </sourceDirectories>
                     </configuration>
                 </plugin>
 
@@ -278,6 +280,14 @@
                     <artifactId>nexus-staging-maven-plugin</artifactId>
                     <version>1.6.8</version>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.7</version>
+                </plugin>
+
+
             </plugins>
         </pluginManagement>
 

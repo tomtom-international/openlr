@@ -115,7 +115,6 @@
                     <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
