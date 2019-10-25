@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SimpleMockedMapTest {
     @Test
-    void encoding() throws OpenLRProcessingException {
+    public void encoding() throws OpenLRProcessingException {
         InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("simplemockedmaps/SimpleMockedTestMap.xml");
         OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
         Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(SimpleMockedMapTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));

@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class SimpleMockedMapTest {
 
     @Test
-    void decoding() throws OpenLRProcessingException, PhysicalFormatException {
+    public void decoding() throws OpenLRProcessingException, PhysicalFormatException {
         String openlr = "CwmQ9SVWJS2qBAD9/14tCQ==";
         OpenLRBinaryDecoder binaryDecoder = new OpenLRBinaryDecoder();
         ByteArray byteArray = new ByteArray(Base64.getDecoder().decode(openlr));

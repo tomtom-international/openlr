@@ -1,6 +1,10 @@
 package openlr.map.simplemockdb;
 
-import com.vividsolutions.jts.geom.*;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LineSegment;
+import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
 import openlr.map.Line;
 import openlr.map.Node;
 import openlr.map.GeoCoordinates;
@@ -16,6 +20,7 @@ import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
+import openlr.map.simplemockdb.schema.Line.IntermediatePoint;
 
 import java.awt.geom.Point2D;
 import java.util.*;
@@ -67,7 +72,7 @@ public class SimpleMockedLine implements Line {
     }
 
 
-    public static GeoCoordinates ToWGS84(Coordinate crd) {
+    public static GeoCoordinates toWGS84(Coordinate crd) {
         try {
             final Coordinate to = new Coordinate();
             JTS.transform(crd, to, cartesianToWgs843d);
@@ -87,7 +92,7 @@ public class SimpleMockedLine implements Line {
         Coordinate[] shapePoints = new Coordinate[numberOfShapePoints];
         shapePoints[0] = toCartesian(startNode.getLongitudeDeg(), startNode.getLatitudeDeg());
         for (int index = 0; index < xmlLine.getIntermediatePoint().size(); ++index) {
-            openlr.map.simplemockdb.schema.Line.IntermediatePoint shapePoint = xmlLine.getIntermediatePoint().get(index);
+            IntermediatePoint shapePoint = xmlLine.getIntermediatePoint().get(index);
             shapePoints[index + 1] = toCartesian(shapePoint.getLongitude(), shapePoint.getLatitude());
         }
         shapePoints[numberOfShapePoints - 1] = toCartesian(endNode.getLongitudeDeg(), endNode.getLatitudeDeg());
@@ -158,7 +163,7 @@ public class SimpleMockedLine implements Line {
                 point = segment.project(point);
                 double z = segment.p0.z + 1 * (segment.p1.z - segment.p0.z);
                 point.setOrdinate(2, z);
-                return ToWGS84(point);
+                return toWGS84(point);
             }
             lengthCovered += segment.getLength();
         }
@@ -221,10 +226,10 @@ public class SimpleMockedLine implements Line {
     public List<GeoCoordinates> getShapeCoordinates() {
         List<GeoCoordinates> shape = new ArrayList<>();
         for (int index = 0; index < lineSegments.size(); ++index) {
-            shape.add(ToWGS84(lineSegments.get(index).p0));
+            shape.add(toWGS84(lineSegments.get(index).p0));
 
             if (index == lineSegments.size() - 1) {
-                shape.add(ToWGS84(lineSegments.get(index).p1));
+                shape.add(toWGS84(lineSegments.get(index).p1));
             }
         }
         return shape;
