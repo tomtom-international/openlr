@@ -37,6 +37,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -61,6 +72,7 @@ import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
 import org.apache.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -87,16 +99,19 @@ public class IntermediateHandler {
     /** The position of the last element on location in the location */
     private int lastElemPos;
 
+    private SecondShortestRouteChecker secondShortestRouteChecker;
+
     /**
      * Instantiates a new intermediate handler.
      *
      * @param loc
      *            the loc
      */
-    IntermediateHandler(final List<? extends Line> loc) {
+    IntermediateHandler(final List<? extends Line> loc, SecondShortestRouteChecker checker) {
         location = loc;
         lastElemOnLocation = null;
         lastElemPos = -1;
+        this.secondShortestRouteChecker = checker;
     }
 
     /**
@@ -122,6 +137,8 @@ public class IntermediateHandler {
         //
         // The following cases are documented in <bla> version //TODO
         //
+
+
         if (lastElemOnLocation == null) { //CASE 0
             // the first line is found, nothing strange happens here
             lastElemOnLocation = actualElement;
@@ -130,15 +147,27 @@ public class IntermediateHandler {
                 LOG.debug("first line in sub route found: "
                         + actualElement.getLine().getID());
             }
-        } else if (isNextElementInLocation(actualElement)) { //CASE 1
-            // the new line is a direct successor of the last element found
-            // so the new line is now the last element found, we can
-            // continue calculating the route
-            lastElemPos++;
-            lastElemOnLocation = actualElement;
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("next line in sub route found: "
-                        + actualElement.getLine().getID());
+        } else if (isNextElementInLocation(actualElement)) {
+
+            if (this.secondShortestRouteChecker.from(actualElement, lastElemPos+1)) {
+                List<Line> route = PathUtils.constructPath(actualElement
+                        .getPrevious());
+                result = new RouteSearchResult(
+                        RouteSearchReturnCode.INTERMEDIATE_FOUND, route,
+                        actualElement.getLine(), location
+                        .indexOf(actualElement.getLine()));
+            }
+            else {
+                //CASE 1
+                // the new line is a direct successor of the last element found
+                // so the new line is now the last element found, we can
+                // continue calculating the route
+                lastElemPos++;
+                lastElemOnLocation = actualElement;
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("next line in sub route found: "
+                            + actualElement.getLine().getID());
+                }
             }
         } else {
             // a new intermediate needs to be added

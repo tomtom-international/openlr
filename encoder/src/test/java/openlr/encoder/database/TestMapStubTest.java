@@ -26,6 +26,7 @@ public class TestMapStubTest {
         InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml");
         OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
         Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
+        encoderConfig.setProperty("AlternatePathTolerance",20);
         OpenLREncoderParameter params = new OpenLREncoderParameter.Builder().with(map).with(encoderConfig).buildParameter();
         List<Line> lines = new ArrayList<>();
         lines.add(map.getLine(1));
@@ -35,11 +36,14 @@ public class TestMapStubTest {
         Location loc1 = LocationFactory.createLineLocation("ProtoTypeTesting", lines);
         OpenLREncoder encoder = new openlr.encoder.OpenLREncoder();
         LocationReferenceHolder locationReferenceHolder = encoder.encodeLocation(params, loc1);
-        assertEquals(locationReferenceHolder.getLRPs().size(), 2);
-        assertEquals(locationReferenceHolder.getLRPs().get(0).getDistanceToNext(), 286);
+        assertEquals(locationReferenceHolder.getLRPs().size(), 3);
+        assertEquals(locationReferenceHolder.getLRPs().get(0).getDistanceToNext(), 80);
+        assertEquals(locationReferenceHolder.getLRPs().get(1).getDistanceToNext(), 206);
         assertEquals(locationReferenceHolder.getLRPs().get(0).getLongitudeDeg(), 13.45252);
         assertEquals(locationReferenceHolder.getLRPs().get(0).getLatitudeDeg(), 52.50444);
-        assertEquals(locationReferenceHolder.getLRPs().get(1).getLongitudeDeg(), 13.45505);
-        assertEquals(locationReferenceHolder.getLRPs().get(1).getLatitudeDeg(), 52.502817);
+        assertEquals(locationReferenceHolder.getLRPs().get(1).getLongitudeDeg(), 13.45364);
+        assertEquals(locationReferenceHolder.getLRPs().get(1).getLatitudeDeg(), 52.50413);
+        assertEquals(locationReferenceHolder.getLRPs().get(2).getLongitudeDeg(), 13.45505);
+        assertEquals(locationReferenceHolder.getLRPs().get(2).getLatitudeDeg(), 52.502817);
     }
 }

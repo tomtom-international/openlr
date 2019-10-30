@@ -54,12 +54,14 @@ package openlr.encoder.properties;
 
 import openlr.OpenLRProcessingException;
 import openlr.PhysicalEncoder;
+import openlr.encoder.OpenLREncoderProcessingException;
 import openlr.properties.OpenLRPropertyAccess;
 import org.apache.commons.configuration.Configuration;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The Class OpenLREncoderProperties.
@@ -80,6 +82,8 @@ public class OpenLREncoderProperties {
 
     /** The comp time4 cache. */
     private final int compTime4Cache;
+
+    private Integer alternatePathRelativeTolerance;
 
     /**
      * Instantiates a new open lr encoder properties.
@@ -113,6 +117,8 @@ public class OpenLREncoderProperties {
 
         compTime4Cache = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLREncoderProperty.COMP_TIME_4_CACHE);
+
+        alternatePathRelativeTolerance = OpenLRPropertyAccess.getIntegerPropertyValue(config,OpenLREncoderProperty.ALTERNATE_PATH_RELATIVE_TOLERANCE);
     }
 
     /**
@@ -162,6 +168,20 @@ public class OpenLREncoderProperties {
      */
     public final int getCompTime4Cache() {
         return compTime4Cache;
+    }
+
+
+    public final boolean IsAlternatePathCheckerConfigAvailable(){
+        return (alternatePathRelativeTolerance>=0);
+    }
+
+    public final Double getAlternatePathRelativeTolerance() throws OpenLREncoderProcessingException{
+        if(IsAlternatePathCheckerConfigAvailable()) {
+            return ((double)alternatePathRelativeTolerance)/100;
+        } else {
+            throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.INVALID_PARAMETER,
+                    "Alternate path tolerance is not set");
+        }
     }
 
 }

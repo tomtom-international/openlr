@@ -81,7 +81,10 @@ public enum OpenLREncoderProperty implements OpenLRProperty {
     PHYSICAL_FORMAT_VERSION("PhysicalFormatVersion", PropertyType.INTEGER_BY_ID, -1),
 
     /** The COM p_ tim e_4_ cache. */
-    COMP_TIME_4_CACHE("CompTime4Cache", PropertyType.INTEGER, 0);
+    COMP_TIME_4_CACHE("CompTime4Cache", PropertyType.INTEGER, 0),
+
+    ALTERNATE_PATH_RELATIVE_TOLERANCE("AlternatePathTolerance",PropertyType.INTEGER,-1);
+
 
     /** The key. */
     private final String key;

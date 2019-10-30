@@ -65,10 +65,7 @@ import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * The Class RouteSearch defines a modified A* route search which checks
@@ -109,6 +106,7 @@ public class RouteSearch {
     /** the y coordinate for the calculation of the heuristic value */
     private double destY = 0;
     private int lengthBetweenStartAndEndLineAlongLocation = 0;
+    private SecondShortestRouteChecker secondShortestRouteChecker;
 
     /**
      * Instantiates a new route search.
@@ -118,7 +116,7 @@ public class RouteSearch {
      * @throws OpenLREncoderProcessingException
      *             the open lr encoder runtime exception
      */
-    public RouteSearch(final List<? extends Line> loc)
+    public RouteSearch(final List<? extends Line> loc, Double alternatePathTolerance)
             throws OpenLREncoderProcessingException {
         location = loc;
         if (location == null || location.isEmpty()) {
@@ -132,9 +130,10 @@ public class RouteSearch {
         }
         startLoopIndex = checkLoopAtStart();
         endLoopIndex = checkLoopAtEnd();
+        this.secondShortestRouteChecker = SecondShortestRouteChecker.On(loc,alternatePathTolerance);
     }
 
-    /**
+    /**ß
      * Check loop at start.
      *
      * @return the int
@@ -206,7 +205,7 @@ public class RouteSearch {
         } else {
             //we have to start a search
             // global data structures
-            IntermediateHandler iHandler = new IntermediateHandler(location);
+            IntermediateHandler iHandler = new IntermediateHandler(location,secondShortestRouteChecker);
             RouteSearchData data = new RouteSearchData();
 
             // for the use of the heuristic

@@ -87,7 +87,7 @@ public class RouteSearchTest {
         List<? extends Line> theRoute = loc.getLocationLines();
         RouteSearchResult result = null;
         try {
-            RouteSearch rs = new RouteSearch(theRoute);
+            RouteSearch rs = new RouteSearch(theRoute,null);
             result = rs.calculateRoute();
         } catch (OpenLREncoderProcessingException e1) {
             fail("Unexpected exception", e1);
@@ -101,7 +101,7 @@ public class RouteSearchTest {
         List<? extends Line> rest = theRoute.subList(td.getIntermediatePos(),
                 theRoute.size());
         try {
-            RouteSearch rs = new RouteSearch(rest);
+            RouteSearch rs = new RouteSearch(rest,null);
             result = rs.calculateRoute();
 
             CommonObjectTestUtils.testToString(rs);
@@ -121,7 +121,7 @@ public class RouteSearchTest {
         try {
             TestData td = TestData.getInstance();
             MapDatabase mdb = td.getMapDatabase();
-            RouteSearch rs = new RouteSearch(Arrays.asList(mdb.getLine(1), mdb.getLine(3), mdb.getLine(5), mdb.getLine(8)));
+            RouteSearch rs = new RouteSearch(Arrays.asList(mdb.getLine(1), mdb.getLine(3), mdb.getLine(5), mdb.getLine(8)),null);
             RouteSearchResult result = rs.calculateRoute();
             assertEquals(1, result.getIntermediatePos());
         } catch (Exception e) {
