@@ -71,8 +71,6 @@ import openlr.map.utils.NodeCheck;
 import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
 import org.apache.log4j.Logger;
-
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -149,7 +147,7 @@ public class IntermediateHandler {
             }
         } else if (isNextElementInLocation(actualElement)) {
 
-            if (this.secondShortestRouteChecker.from(actualElement, lastElemPos+1)) {
+            if (this.secondShortestRouteChecker.exclude(actualElement, lastElemPos+1)) {
                 List<Line> route = PathUtils.constructPath(actualElement
                         .getPrevious());
                 result = new RouteSearchResult(

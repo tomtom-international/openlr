@@ -8,15 +8,14 @@ import openlr.map.utils.PQElem;
 
 import java.util.*;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SecondShortestRouteChecker {
 
-    GeoCoordinates source;
-    GeoCoordinates destination;
-    List<? extends Line> location;
-    InternalConfigurations internalConfigurations;
+    private GeoCoordinates source;
+    private GeoCoordinates destination;
+    private List<? extends Line> location;
+    private InternalConfigurations internalConfigurations;
 
 
     private SecondShortestRouteChecker(GeoCoordinates source, GeoCoordinates destination, List<? extends Line> location,InternalConfigurations internalConfigurations)
@@ -28,12 +27,12 @@ public class SecondShortestRouteChecker {
     }
 
     private static class InternalConfigurations{
-        BiFunction<Integer,Integer,Boolean> lengthFilter = (Integer length,Integer expectedLength) -> {return false;};
-        boolean relativeToleranceSpecified = false;
+        public BiFunction<Integer,Integer,Boolean> lengthFilter = (Integer length,Integer expectedLength) -> {return false;};
+        public boolean relativeToleranceSpecified = false;
     }
 
 
-    public static SecondShortestRouteChecker On(List<? extends Line> location, Double relativeTolerance) throws OpenLREncoderProcessingException{
+    public static SecondShortestRouteChecker on(List<? extends Line> location, Double relativeTolerance) throws OpenLREncoderProcessingException{
         if(location.isEmpty())
         {
            throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.NO_ROUTE_FOUND_ERROR);
@@ -47,11 +46,11 @@ public class SecondShortestRouteChecker {
 
         if(relativeTolerance != null){
             int maxLengthAllowed = locationLength + (int)(locationLength * relativeTolerance);
-            internalConfigurations.lengthFilter = (Integer length,Integer expectedLength) -> {
-                if(expectedLength != null){
-                    return (length < (expectedLength + (int)(expectedLength * relativeTolerance)));
+            internalConfigurations.lengthFilter = (Integer lengthAlongSecondShortestRoute,Integer lengthAlongLocation) -> {
+                if(lengthAlongLocation != null){
+                    return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int)(lengthAlongLocation * relativeTolerance)));
                 }else {
-                    return (length < maxLengthAllowed);
+                    return (lengthAlongSecondShortestRoute < maxLengthAllowed);
                 }
             };
 
@@ -62,7 +61,7 @@ public class SecondShortestRouteChecker {
     }
 
 
-    public boolean from(PQElem elem, int index) {
+    public boolean exclude(PQElem elem, int index) {
         if(!internalConfigurations.relativeToleranceSpecified)
         {
             return false;
@@ -113,28 +112,28 @@ public class SecondShortestRouteChecker {
            return data;
     }
 
-    private int LengthOfSecondShortestRoute(PQElem elem, int index){
+    private int lengthOfSecondShortestRoute(PQElem to, int index){
         Long deviationStart = location.get(index-1).getID();
         int secondShortestRouteLength =0;
-        while (elem.getPrevious() != null && elem.getPrevious().getLine().getID() != deviationStart){
-            secondShortestRouteLength += elem.getPrevious().getLine().getLineLength();
-            elem = elem.getPrevious();
+        while (to.getPrevious() != null && to.getPrevious().getLine().getID() != deviationStart){
+            secondShortestRouteLength += to.getPrevious().getLine().getLineLength();
+            to = to.getPrevious();
         }
         return secondShortestRouteLength;
     }
 
-    private boolean exploreNetwork(Set<Long> closedSet, RouteSearchData data,int index){
+    private boolean exploreNetwork(Set<Long> closedSet, RouteSearchData routeSearchData,int index){
         List<Long> possibleDestinations = location.stream().map(Line::getID).collect(Collectors.toList()).subList(index+1,location.size());
-        while (!data.isOpenEmpty())
+        while (!routeSearchData.isOpenEmpty())
         {
-            PQElem parent = data.pollElement();
+            PQElem parent = routeSearchData.pollElement();
             if(possibleDestinations.contains(parent.getLine().getID())){
                 int subLocationLength = location.subList(index,location.indexOf(parent.getLine())).stream().mapToInt(Line::getLineLength).sum();
-                int secondShortestRouteLength = LengthOfSecondShortestRoute(parent,index);
+                int secondShortestRouteLength = lengthOfSecondShortestRoute(parent,index);
                 return internalConfigurations.lengthFilter.apply(secondShortestRouteLength,subLocationLength);
             } else {
                 List<Line> children = getAcceptableSuccessors(parent, closedSet);
-                data = updateRouteSearchData(data, children,parent);
+                routeSearchData = updateRouteSearchData(routeSearchData, children,parent);
             }
         }
         return false;

@@ -143,7 +143,7 @@ public abstract class AbstractEncoder {
         // concatenation of these shortest-path(s)
         while (!remainingLocation.isEmpty()) {
 
-            Double alternatePathRelativeTolerance = properties.IsAlternatePathCheckerConfigAvailable()? properties.getAlternatePathRelativeTolerance() :
+            Double alternatePathRelativeTolerance = properties.isAlternatePathCheckerConfigAvailable()? properties.getAlternatePathRelativeTolerance() :
                     null;
             RouteSearch rs = new RouteSearch(remainingLocation, alternatePathRelativeTolerance);
             // do route search between current start and end of location

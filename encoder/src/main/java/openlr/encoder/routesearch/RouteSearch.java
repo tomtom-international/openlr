@@ -130,7 +130,7 @@ public class RouteSearch {
         }
         startLoopIndex = checkLoopAtStart();
         endLoopIndex = checkLoopAtEnd();
-        this.secondShortestRouteChecker = SecondShortestRouteChecker.On(loc,alternatePathTolerance);
+        this.secondShortestRouteChecker = SecondShortestRouteChecker.on(loc,alternatePathTolerance);
     }
 
     /**ß

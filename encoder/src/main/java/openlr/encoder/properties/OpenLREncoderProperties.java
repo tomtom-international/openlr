@@ -61,7 +61,6 @@ import org.apache.commons.configuration.Configuration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * The Class OpenLREncoderProperties.
@@ -171,12 +170,12 @@ public class OpenLREncoderProperties {
     }
 
 
-    public final boolean IsAlternatePathCheckerConfigAvailable(){
+    public final boolean isAlternatePathCheckerConfigAvailable(){
         return (alternatePathRelativeTolerance>=0);
     }
 
     public final Double getAlternatePathRelativeTolerance() throws OpenLREncoderProcessingException{
-        if(IsAlternatePathCheckerConfigAvailable()) {
+        if(isAlternatePathCheckerConfigAvailable()) {
             return ((double)alternatePathRelativeTolerance)/100;
         } else {
             throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.INVALID_PARAMETER,
