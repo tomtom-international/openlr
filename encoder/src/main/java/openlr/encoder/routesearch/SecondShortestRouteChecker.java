@@ -124,6 +124,9 @@ public class SecondShortestRouteChecker {
 
     private boolean exploreNetwork(Set<Long> closedSet, RouteSearchData routeSearchData,int index){
         List<Long> possibleDestinations = location.stream().map(Line::getID).collect(Collectors.toList()).subList(index+1,location.size());
+
+
+
         while (!routeSearchData.isOpenEmpty())
         {
             PQElem parent = routeSearchData.pollElement();
@@ -134,6 +137,7 @@ public class SecondShortestRouteChecker {
             } else {
                 List<Line> children = getAcceptableSuccessors(parent, closedSet);
                 routeSearchData = updateRouteSearchData(routeSearchData, children,parent);
+                closedSet.add(parent.getLine().getID());
             }
         }
         return false;
