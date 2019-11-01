@@ -90,7 +90,7 @@ public class SecondShortestRouteChecker {
     }
 
 
-    private RouteSearchData updateRouteSearchData(RouteSearchData data,List<Line> children,PQElem parent){
+    private void updateRouteSearchData(RouteSearchData data,List<Line> children,PQElem parent){
            for(Line child : children){
 
                int distanceCoveredByChild = parent.getSecondVal() + child.getLineLength();
@@ -109,12 +109,12 @@ public class SecondShortestRouteChecker {
 
                }
            }
-           return data;
     }
 
-    private int lengthOfSecondShortestRoute(PQElem to, int index){
+    private int lengthOfSecondShortestRoute(final PQElem destination, final int index){
         Long deviationStart = location.get(index-1).getID();
         int secondShortestRouteLength =0;
+        PQElem to =destination;
         while (to.getPrevious() != null && to.getPrevious().getLine().getID() != deviationStart){
             secondShortestRouteLength += to.getPrevious().getLine().getLineLength();
             to = to.getPrevious();
@@ -131,12 +131,13 @@ public class SecondShortestRouteChecker {
         {
             PQElem parent = routeSearchData.pollElement();
             if(possibleDestinations.contains(parent.getLine().getID())){
-                int subLocationLength = location.subList(index,location.indexOf(parent.getLine())).stream().mapToInt(Line::getLineLength).sum();
+                int destinationIndexOnLocation = location.subList(index,location.size()).indexOf(parent.getLine());
+                int subLocationLength = location.subList(index,destinationIndexOnLocation+index).stream().mapToInt(Line::getLineLength).sum();
                 int secondShortestRouteLength = lengthOfSecondShortestRoute(parent,index);
                 return internalConfigurations.lengthFilter.apply(secondShortestRouteLength,subLocationLength);
             } else {
                 List<Line> children = getAcceptableSuccessors(parent, closedSet);
-                routeSearchData = updateRouteSearchData(routeSearchData, children,parent);
+                updateRouteSearchData(routeSearchData, children,parent);
                 closedSet.add(parent.getLine().getID());
             }
         }
