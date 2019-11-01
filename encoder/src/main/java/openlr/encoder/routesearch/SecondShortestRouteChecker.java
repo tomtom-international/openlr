@@ -11,16 +11,13 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class SecondShortestRouteChecker {
-
-    private GeoCoordinates source;
     private GeoCoordinates destination;
     private List<? extends Line> location;
     private InternalConfigurations internalConfigurations;
 
 
-    private SecondShortestRouteChecker(GeoCoordinates source, GeoCoordinates destination, List<? extends Line> location,InternalConfigurations internalConfigurations)
+    private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location,InternalConfigurations internalConfigurations)
     {
-        this.source = source;
         this.destination = destination;
         this.location = location;
         this.internalConfigurations = internalConfigurations;
@@ -37,9 +34,7 @@ public class SecondShortestRouteChecker {
         {
            throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.NO_ROUTE_FOUND_ERROR);
         }
-        GeoCoordinates start = location.get(0).getStartNode().getGeoCoordinates();
-        GeoCoordinates end = location.get(location.size()-1).getStartNode().getGeoCoordinates();
-
+        GeoCoordinates destinationStart = location.get(location.size()-1).getStartNode().getGeoCoordinates();
         int locationLength = location.stream().mapToInt(Line::getLineLength).sum();
 
         InternalConfigurations internalConfigurations = new InternalConfigurations();
@@ -57,7 +52,7 @@ public class SecondShortestRouteChecker {
             internalConfigurations.relativeToleranceSpecified = true;
         }
 
-        return new SecondShortestRouteChecker(start, end, location, internalConfigurations);
+        return new SecondShortestRouteChecker(destinationStart, location, internalConfigurations);
     }
 
 
@@ -83,7 +78,7 @@ public class SecondShortestRouteChecker {
         return lines.stream()
                 .filter(line -> !closedSet.contains(line.getID()))
                 .filter(line -> {
-                    int newDist = current.getSecondVal() + line.getLineLength();
+                    int newDist = current.getSecondVal() + line.getLineLength() + (int) GeometryUtils.distance(line.getEndNode().getGeoCoordinates(),destination);
                     return internalConfigurations.lengthFilter.apply(newDist,null);
                 })
                 .collect(Collectors.toList());
