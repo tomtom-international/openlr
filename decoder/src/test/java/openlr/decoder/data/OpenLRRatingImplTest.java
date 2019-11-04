@@ -314,7 +314,7 @@ public class OpenLRRatingImplTest {
     }
 
     /**
-     * Rating test of artificial node when applying no artificial node factor
+     * Rating test of artificial node when applying an artificial node factor
      */
     @Test
     public final void testRatingArtificialNodeArtificialNodeFactor() {
