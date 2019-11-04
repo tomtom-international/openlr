@@ -58,9 +58,15 @@ import openlr.decoder.properties.OpenLRDecoderProperties;
 import openlr.map.FormOfWay;
 import openlr.map.FunctionalRoadClass;
 import openlr.map.Line;
+import openlr.map.Node;
 import openlr.map.utils.GeometryUtils;
 import openlr.map.utils.GeometryUtils.BearingDirection;
 import org.apache.log4j.Logger;
+
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * The Class OpenLRRatingImpl implements the rating function for OpenLR.
@@ -114,7 +120,13 @@ public class OpenLRRatingImpl implements OpenLRRating {
         } else {
             dir = BearingDirection.IN_DIRECTION;
         }
+
         int nodeRating = calculateDistanceRating(properties, distance);
+
+        if (shouldApplyArtificialNodeFactor(line, dir, projectionAlongLine)) {
+            nodeRating = (int) (properties.getArtificialNodeFactor() * nodeRating);
+        }
+
         int bearingRating = calculateBearingRating(properties, p.getBearing(),
                 dir, line, projectionAlongLine);
         if (bearingRating < 0) {
@@ -136,6 +148,51 @@ public class OpenLRRatingImpl implements OpenLRRating {
                     + ", fow: " + fowRating + ")");
         }
         return rating;
+    }
+
+    /**
+     * Determine whether to apply the artificial node factor to the node score
+     *
+     * @param line the line under consideration
+     * @param dir the direction along the line
+     * @param projectionAlongLine the projected distance along the line
+     * @return true if the artificial node factor is to be applied
+     */
+    private boolean shouldApplyArtificialNodeFactor(Line line, BearingDirection dir, int projectionAlongLine) {
+        // Only apply the artificial node factor when the LRP matches a node and not a line directly
+        if (projectionAlongLine > 0) {
+            return false;
+        }
+
+        // Find the node to check
+        Node node = dir == BearingDirection.IN_DIRECTION ? line.getStartNode() : line.getEndNode();
+
+        // Check if the node is artificial
+        return isArtificialNode(node);
+    }
+
+    /**
+     * Check if a node is an artificial node.  Artificial nodes are nodes which are directly connected to only 2 other nodes.
+     *
+     * @param node the node to check
+     * @return true if the node is artificial
+     */
+    private boolean isArtificialNode(Node node) {
+        return getConnectedNodeCount(node) == 2;
+    }
+
+    /**
+     * Get the number of nodes that are directly connected to a node via its connected lines
+     *
+     * @param node the node
+     * @return the number of connected nodes
+     */
+    private int getConnectedNodeCount(Node node) {
+        return (int) StreamSupport.stream(Spliterators.spliteratorUnknownSize(node.getConnectedLines(), Spliterator.ORDERED), false)
+                .flatMap(l -> Stream.of(l.getStartNode(), l.getEndNode()))
+                .filter(n -> !node.equals(n))
+                .distinct()
+                .count();
     }
 
     /**

@@ -60,6 +60,7 @@ import openlr.map.FunctionalRoadClass;
 import openlr.map.Line;
 import openlr.map.MapDatabase;
 import openlr.properties.OpenLRPropertiesReader;
+import org.apache.commons.configuration.BaseConfiguration;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.testng.annotations.BeforeTest;
@@ -93,11 +94,26 @@ public class OpenLRRatingImplTest {
     /** The expected result of rating test #3. */
     private static final int EXPECTED_RESULT_RATING_3 = 644;
 
+    /** The artificial node factor to apply for tests */
+    private static final float ARTIFICIAL_NODE_FACTOR = 0.8f;
+
+    /** The expected result of rating test with real node with no artificial node factor. */
+    private static final int EXPECTED_RESULT_RATING_REAL_NODE_NO_ARTIFICIAL_NODE_FACTOR = 933;
+    /** The expected result of rating test with real node with an artificial node factor. */
+    private static final int EXPECTED_RESULT_RATING_REAL_NODE_ARTIFICIAL_NODE_FACTOR = 933;
+    /** The expected result of rating test with artificial node with no artificial node factor. */
+    private static final int EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_NO_ARTIFICIAL_NODE_FACTOR = 783;
+    /** The expected result of rating test with artificial node with an artificial node factor. */
+    private static final int EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_ARTIFICIAL_NODE_FACTOR = 729;
+
     /** The distance value of rating test #1. */
     private static final int DISTANCE_RATING_1 = 14;
     /** The distance value of rating test #2. */
     private static final int DISTANCE_RATING_2 = 3;
 
+
+    /** The ID of line 4 of the test map. */
+    private static final int TEST_LINE_4 = 4;
     /** The ID of line 10 of the test map. */
     private static final int TEST_LINE_10 = 10;
     /** The ID of line 26 of the test map. */
@@ -113,6 +129,8 @@ public class OpenLRRatingImplTest {
     private LocationReferencePoint point1;
     /** The mocked {@link LocRefPoint} #2. */
     private LocationReferencePoint point2;
+    /** The line object 4 of the test map. */
+    private Line line4;
     /** The line object 10 of the test map. */
     private Line line10;
     /** The line object 26 of the test map. */
@@ -126,6 +144,7 @@ public class OpenLRRatingImplTest {
         TestData td = TestData.getInstance();
         MapDatabase mdb = td.getMapDatabase();
 
+        line4 = mdb.getLine(TEST_LINE_4);
         line10 = mdb.getLine(TEST_LINE_10);
         line26 = mdb.getLine(TEST_LINE_26);
 
@@ -230,6 +249,84 @@ public class OpenLRRatingImplTest {
             int rating = RATING_FUNCTION.getRating(getProperties(),
                     DISTANCE_RATING_2, point2, line26, PROJECTION_LINE_26);
             assertEquals(EXPECTED_RESULT_RATING_3, rating);
+
+        } catch (OpenLRProcessingException e) {
+            fail("Unexpected exception!", e);
+        }
+    }
+
+    /**
+     * Rating test of real node when applying no artificial node factor
+     */
+    @Test
+    public final void testRatingRealNodeNoArtificialNodeFactor() {
+
+        try {
+            BaseConfiguration configuration = new BaseConfiguration();
+            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
+
+            int rating = RATING_FUNCTION.getRating(properties,
+                    DISTANCE_RATING_1, point1, line10, 0);
+            assertEquals(rating, EXPECTED_RESULT_RATING_REAL_NODE_NO_ARTIFICIAL_NODE_FACTOR);
+
+        } catch (OpenLRProcessingException e) {
+            fail("Unexpected exception!", e);
+        }
+    }
+
+    /**
+     * Rating test of real node when applying an artificial node factor
+     */
+    @Test
+    public final void testRatingRealNodeArtificialNodeFactor() {
+
+        try {
+            BaseConfiguration configuration = new BaseConfiguration();
+            configuration.setProperty("ArtificialNodeFactor", ARTIFICIAL_NODE_FACTOR);
+            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
+
+            int rating = RATING_FUNCTION.getRating(properties,
+                    DISTANCE_RATING_1, point1, line10, 0);
+            assertEquals(rating, EXPECTED_RESULT_RATING_REAL_NODE_ARTIFICIAL_NODE_FACTOR);
+
+        } catch (OpenLRProcessingException e) {
+            fail("Unexpected exception!", e);
+        }
+    }
+
+    /**
+     * Rating test of artificial node when applying no artificial node factor
+     */
+    @Test
+    public final void testRatingArtificialNodeNoArtificialNodeFactor() {
+
+        try {
+            BaseConfiguration configuration = new BaseConfiguration();
+            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
+
+            int rating = RATING_FUNCTION.getRating(properties,
+                    DISTANCE_RATING_1, point1, line4, 0);
+            assertEquals(rating, EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_NO_ARTIFICIAL_NODE_FACTOR);
+
+        } catch (OpenLRProcessingException e) {
+            fail("Unexpected exception!", e);
+        }
+    }
+
+    /**
+     * Rating test of artificial node when applying no artificial node factor
+     */
+    @Test
+    public final void testRatingArtificialNodeArtificialNodeFactor() {
+
+        try {
+            BaseConfiguration configuration = new BaseConfiguration();
+            configuration.setProperty("ArtificialNodeFactor", ARTIFICIAL_NODE_FACTOR);
+            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
+
+            int rating = RATING_FUNCTION.getRating(properties,
+                    DISTANCE_RATING_1, point1, line4, 0);
+            assertEquals(rating, EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_ARTIFICIAL_NODE_FACTOR);
 
         } catch (OpenLRProcessingException e) {
             fail("Unexpected exception!", e);

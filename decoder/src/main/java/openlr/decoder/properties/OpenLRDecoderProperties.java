@@ -115,6 +115,9 @@ public class OpenLRDecoderProperties {
     /** The calc affected lines. */
     private final boolean calcAffectedLines;
 
+    /** The artificial node factor. */
+    private final float artificialNodeFactor;
+
     /** The lines directly factor. */
     private final float linesDirectlyFactor;
 
@@ -139,6 +142,8 @@ public class OpenLRDecoderProperties {
                 OpenLRDecoderProperty.NODE_FACTOR);
         lineFactor = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.LINE_FACTOR);
+        artificialNodeFactor = OpenLRPropertyAccess.getFloatPropertyValue(config,
+                OpenLRDecoderProperty.ARTIFICIAL_NODE_FACTOR);
         frcVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.FRC_VARIANCE);
         minimumAcceptedRating = OpenLRPropertyAccess.getIntegerPropertyValue(
@@ -229,6 +234,15 @@ public class OpenLRDecoderProperties {
      */
     public final int getLineFactor() {
         return lineFactor;
+    }
+
+    /**
+     * Get the artificial node factor
+     *
+     * @return the artificial node factor
+     */
+    public final double getArtificialNodeFactor() {
+        return artificialNodeFactor;
     }
 
     /**

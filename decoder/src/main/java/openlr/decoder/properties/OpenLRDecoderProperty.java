@@ -84,6 +84,9 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
     /** The LIN e_ factor. */
     LINE_FACTOR("LineFactor", PropertyType.INTEGER, 3),
 
+    /** Artificial node factor */
+    ARTIFICIAL_NODE_FACTOR("ArtificialNodeFactor", PropertyType.FLOAT, 1.0f),
+
     /** The FR c_ vairance. */
     FRC_VARIANCE("FRC_Variance", PropertyType.INTEGER, 2),
 
