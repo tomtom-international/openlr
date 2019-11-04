@@ -237,7 +237,11 @@ public class OpenLRDecoderProperties {
     }
 
     /**
-     * Get the artificial node factor
+     * Get the artificial node factor. This is a value between 0 and 1 and is the scaling value to apply
+     * to the node rating during decoding if the node is an artificial node. An artificial node is a node that is not a junction.
+     *
+     * By default the artificial node factor is 1, meaning that artificial nodes are not penalised. To apply a penalty to
+     * artificial nodes, reduce the artificial node factor to a value under 0.
      *
      * @return the artificial node factor
      */
