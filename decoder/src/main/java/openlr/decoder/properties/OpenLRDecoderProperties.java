@@ -115,8 +115,8 @@ public class OpenLRDecoderProperties {
     /** The calc affected lines. */
     private final boolean calcAffectedLines;
 
-    /** The artificial node factor. */
-    private final float artificialNodeFactor;
+    /** The non junction node factor. */
+    private final float nonJunctionNodeFactor;
 
     /** The lines directly factor. */
     private final float linesDirectlyFactor;
@@ -142,8 +142,8 @@ public class OpenLRDecoderProperties {
                 OpenLRDecoderProperty.NODE_FACTOR);
         lineFactor = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.LINE_FACTOR);
-        artificialNodeFactor = OpenLRPropertyAccess.getFloatPropertyValue(config,
-                OpenLRDecoderProperty.ARTIFICIAL_NODE_FACTOR);
+        nonJunctionNodeFactor = OpenLRPropertyAccess.getFloatPropertyValue(config,
+                OpenLRDecoderProperty.NON_JUNCTION_NODE_FACTOR);
         frcVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.FRC_VARIANCE);
         minimumAcceptedRating = OpenLRPropertyAccess.getIntegerPropertyValue(
@@ -237,16 +237,16 @@ public class OpenLRDecoderProperties {
     }
 
     /**
-     * Get the artificial node factor. This is a value between 0 and 1 and is the scaling value to apply
-     * to the node rating during decoding if the node is an artificial node. An artificial node is a node that is not a junction.
+     * Get the non-junction node factor. This is a value between 0 and 1 and is the scaling value to apply
+     * during decoding to the score of nodes that are not junctions.
      *
-     * By default the artificial node factor is 1, meaning that artificial nodes are not penalised. To apply a penalty to
-     * artificial nodes, reduce the artificial node factor to a value under 0.
+     * By default the non-junction node factor is 1, meaning that non-junction nodes are not penalised.
+     * To apply a penalty to non-junction nodes, reduce the non-junction node factor to a value under 1.
      *
-     * @return the artificial node factor
+     * @return the non-junction node factor
      */
-    public final double getArtificialNodeFactor() {
-        return artificialNodeFactor;
+    public final float getNonJunctionNodeFactor() {
+        return nonJunctionNodeFactor;
     }
 
     /**

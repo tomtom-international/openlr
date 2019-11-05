@@ -123,8 +123,8 @@ public class OpenLRRatingImpl implements OpenLRRating {
 
         int nodeRating = calculateDistanceRating(properties, distance);
 
-        if (shouldApplyArtificialNodeFactor(line, dir, projectionAlongLine)) {
-            nodeRating = (int) (properties.getArtificialNodeFactor() * nodeRating);
+        if (shouldApplyNonJunctionNodeFactor(line, dir, projectionAlongLine)) {
+            nodeRating = (int) (properties.getNonJunctionNodeFactor() * nodeRating);
         }
 
         int bearingRating = calculateBearingRating(properties, p.getBearing(),
@@ -151,15 +151,15 @@ public class OpenLRRatingImpl implements OpenLRRating {
     }
 
     /**
-     * Determine whether to apply the artificial node factor to the node score
+     * Determine whether to apply the non-junction node factor to the node score
      *
      * @param line the line under consideration
      * @param dir the direction along the line
      * @param projectionAlongLine the projected distance along the line
-     * @return true if the artificial node factor is to be applied
+     * @return true if the non-junction node factor is to be applied
      */
-    private boolean shouldApplyArtificialNodeFactor(Line line, BearingDirection dir, int projectionAlongLine) {
-        // Only apply the artificial node factor when the LRP matches a node and not a line directly
+    private boolean shouldApplyNonJunctionNodeFactor(Line line, BearingDirection dir, int projectionAlongLine) {
+        // Only apply the non-junction node factor when the LRP matches a node and not a line directly
         if (projectionAlongLine > 0) {
             return false;
         }
@@ -167,18 +167,18 @@ public class OpenLRRatingImpl implements OpenLRRating {
         // Find the node to check
         Node node = dir == BearingDirection.IN_DIRECTION ? line.getStartNode() : line.getEndNode();
 
-        // Check if the node is artificial
-        return isArtificialNode(node);
+        // Check if the node is not a junction
+        return !isJunction(node);
     }
 
     /**
-     * Check if a node is an artificial node.  Artificial nodes are nodes which are directly connected to only 2 other nodes.
+     * Check if a node is a junction. Junction nodes are nodes which are directly connected to more than 2 nodes.
      *
      * @param node the node to check
-     * @return true if the node is artificial
+     * @return true if the node is a junction
      */
-    private boolean isArtificialNode(Node node) {
-        return getConnectedNodeCount(node) == 2;
+    private boolean isJunction(Node node) {
+        return getConnectedNodeCount(node) > 2;
     }
 
     /**

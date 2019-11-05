@@ -94,17 +94,17 @@ public class OpenLRRatingImplTest {
     /** The expected result of rating test #3. */
     private static final int EXPECTED_RESULT_RATING_3 = 644;
 
-    /** The artificial node factor to apply for tests */
-    private static final float ARTIFICIAL_NODE_FACTOR = 0.8f;
+    /** The non-junction node factor to apply for tests */
+    private static final float NON_JUNCTION_NODE_FACTOR = 0.8f;
 
-    /** The expected result of rating test with real node with no artificial node factor. */
-    private static final int EXPECTED_RESULT_RATING_REAL_NODE_NO_ARTIFICIAL_NODE_FACTOR = 933;
-    /** The expected result of rating test with real node with an artificial node factor. */
-    private static final int EXPECTED_RESULT_RATING_REAL_NODE_ARTIFICIAL_NODE_FACTOR = 933;
-    /** The expected result of rating test with artificial node with no artificial node factor. */
-    private static final int EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_NO_ARTIFICIAL_NODE_FACTOR = 783;
-    /** The expected result of rating test with artificial node with an artificial node factor. */
-    private static final int EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_ARTIFICIAL_NODE_FACTOR = 729;
+    /** The expected result of rating test with junction node with no non-junction node factor. */
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 933;
+    /** The expected result of rating test with junction node with a non-junction node factor. */
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 933;
+    /** The expected result of rating test with non-junction node with no non-junction node factor. */
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 783;
+    /** The expected result of rating test with non-junction node with a non-junction node factor. */
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 729;
 
     /** The distance value of rating test #1. */
     private static final int DISTANCE_RATING_1 = 14;
@@ -256,10 +256,10 @@ public class OpenLRRatingImplTest {
     }
 
     /**
-     * Rating test of real node when applying no artificial node factor
+     * Rating test of junction node when applying no non-junction node factor
      */
     @Test
-    public final void testRatingRealNodeNoArtificialNodeFactor() {
+    public final void testRatingJunctionNodeNoNonJunctionNodeFactor() {
 
         try {
             BaseConfiguration configuration = new BaseConfiguration();
@@ -267,7 +267,7 @@ public class OpenLRRatingImplTest {
 
             int rating = RATING_FUNCTION.getRating(properties,
                     DISTANCE_RATING_1, point1, line10, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_REAL_NODE_NO_ARTIFICIAL_NODE_FACTOR);
+            assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
 
         } catch (OpenLRProcessingException e) {
             fail("Unexpected exception!", e);
@@ -275,19 +275,19 @@ public class OpenLRRatingImplTest {
     }
 
     /**
-     * Rating test of real node when applying an artificial node factor
+     * Rating test of junction node when applying a non-junction node factor
      */
     @Test
-    public final void testRatingRealNodeArtificialNodeFactor() {
+    public final void testRatingJunctionNodeNonJunctionNodeFactor() {
 
         try {
             BaseConfiguration configuration = new BaseConfiguration();
-            configuration.setProperty("ArtificialNodeFactor", ARTIFICIAL_NODE_FACTOR);
+            configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
             OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
             int rating = RATING_FUNCTION.getRating(properties,
                     DISTANCE_RATING_1, point1, line10, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_REAL_NODE_ARTIFICIAL_NODE_FACTOR);
+            assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
 
         } catch (OpenLRProcessingException e) {
             fail("Unexpected exception!", e);
@@ -295,10 +295,10 @@ public class OpenLRRatingImplTest {
     }
 
     /**
-     * Rating test of artificial node when applying no artificial node factor
+     * Rating test of non-junction node when applying no non-junction node factor
      */
     @Test
-    public final void testRatingArtificialNodeNoArtificialNodeFactor() {
+    public final void testRatingNonJunctionNodeNoNonJunctionNodeFactor() {
 
         try {
             BaseConfiguration configuration = new BaseConfiguration();
@@ -306,7 +306,7 @@ public class OpenLRRatingImplTest {
 
             int rating = RATING_FUNCTION.getRating(properties,
                     DISTANCE_RATING_1, point1, line4, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_NO_ARTIFICIAL_NODE_FACTOR);
+            assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
 
         } catch (OpenLRProcessingException e) {
             fail("Unexpected exception!", e);
@@ -314,19 +314,19 @@ public class OpenLRRatingImplTest {
     }
 
     /**
-     * Rating test of artificial node when applying an artificial node factor
+     * Rating test of non-junction node when applying a non-junction node factor
      */
     @Test
-    public final void testRatingArtificialNodeArtificialNodeFactor() {
+    public final void testRatingNonJunctionNodeNonJunctionNodeFactor() {
 
         try {
             BaseConfiguration configuration = new BaseConfiguration();
-            configuration.setProperty("ArtificialNodeFactor", ARTIFICIAL_NODE_FACTOR);
+            configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
             OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
             int rating = RATING_FUNCTION.getRating(properties,
                     DISTANCE_RATING_1, point1, line4, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_ARTIFICIAL_NODE_ARTIFICIAL_NODE_FACTOR);
+            assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
 
         } catch (OpenLRProcessingException e) {
             fail("Unexpected exception!", e);
