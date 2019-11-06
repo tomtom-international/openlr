@@ -1,4 +1,4 @@
-package openlr.encoder.lrpHandler;
+package openlr.encoder.lrphandler;
 
 import openlr.OpenLRProcessingException;
 import openlr.encoder.data.LocRefPoint;
