@@ -1,4 +1,4 @@
-package openlr.encoder.LrpHandler;
+package openlr.encoder.lrpHandler;
 
 import openlr.OpenLRProcessingException;
 import openlr.encoder.data.LocRefPoint;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlternatePathLrpHandler implements LrpHandler {
-    OpenLREncoderProperties properties;
-    Double alternatePathLowerThreshold;
+    private OpenLREncoderProperties properties;
+    private Double alternatePathLowerThreshold;
 
     private AlternatePathLrpHandler(Double alternatePathLowerThreshold, OpenLREncoderProperties properties) {
         this.alternatePathLowerThreshold = alternatePathLowerThreshold;
@@ -28,7 +28,7 @@ public class AlternatePathLrpHandler implements LrpHandler {
         List<Integer> intermediates = new ArrayList<>();
         SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(route, alternatePathLowerThreshold);
         for (int index = 1; index < route.size(); ++index) {
-            if (checker.exclude(index) == true) {
+            if (checker.exclude(index)) {
                 intermediates.add(index);
             }
         }

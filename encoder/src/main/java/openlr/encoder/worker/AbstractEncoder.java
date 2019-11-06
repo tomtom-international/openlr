@@ -53,7 +53,7 @@
 package openlr.encoder.worker;
 
 import openlr.OpenLRProcessingException;
-import openlr.encoder.LrpHandler.AlternatePathLrpHandler;
+import openlr.encoder.lrpHandler.AlternatePathLrpHandler;
 import openlr.encoder.OpenLREncoderProcessingException;
 import openlr.encoder.OpenLREncoderProcessingException.EncoderProcessingError;
 import openlr.encoder.data.ExpansionHelper;

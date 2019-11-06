@@ -1,4 +1,4 @@
-package openlr.encoder.LrpHandler;
+package openlr.encoder.lrpHandler;
 
 import openlr.OpenLRProcessingException;
 import openlr.PhysicalEncoder;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class AlternatePathLrpHandlerTest {
     private OpenLRMapDatabaseAdaptor map;
