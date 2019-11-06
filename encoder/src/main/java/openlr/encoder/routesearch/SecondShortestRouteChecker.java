@@ -13,63 +13,59 @@ import java.util.stream.Collectors;
 public class SecondShortestRouteChecker {
     private GeoCoordinates destination;
     private List<? extends Line> location;
-    private InternalConfigurations internalConfigurations;
+    public BiFunction<Integer, Integer, Boolean> lengthFilter;
 
 
-    private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location,InternalConfigurations internalConfigurations)
-    {
+    private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location, BiFunction<Integer, Integer, Boolean> lengthFilter) {
         this.destination = destination;
         this.location = location;
-        this.internalConfigurations = internalConfigurations;
-    }
-
-    private static class InternalConfigurations{
-        public BiFunction<Integer,Integer,Boolean> lengthFilter = (Integer length,Integer expectedLength) -> {return false;};
-        public boolean relativeToleranceSpecified = false;
+        this.lengthFilter = lengthFilter;
     }
 
 
-    public static SecondShortestRouteChecker on(List<? extends Line> location, Double relativeTolerance) throws OpenLREncoderProcessingException{
-        if(location.isEmpty())
-        {
-           throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.NO_ROUTE_FOUND_ERROR);
+    public static SecondShortestRouteChecker on(List<? extends Line> location, double relativeTolerance) throws OpenLREncoderProcessingException {
+        if (location.isEmpty()) {
+            throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.NO_ROUTE_FOUND_ERROR);
         }
-        GeoCoordinates destinationStart = location.get(location.size()-1).getStartNode().getGeoCoordinates();
+        GeoCoordinates destinationStart = location.get(location.size() - 1).getStartNode().getGeoCoordinates();
         int locationLength = location.stream().mapToInt(Line::getLineLength).sum();
 
-        InternalConfigurations internalConfigurations = new InternalConfigurations();
+        int maxLengthAllowed = locationLength + (int) (locationLength * relativeTolerance);
+        BiFunction<Integer, Integer, Boolean> lengthFilter = (Integer lengthAlongSecondShortestRoute, Integer lengthAlongLocation) -> {
+            if (lengthAlongLocation != null) {
+                return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeTolerance)));
+            } else {
+                return (lengthAlongSecondShortestRoute < maxLengthAllowed);
+            }
+        };
 
-        if(relativeTolerance != null){
-            int maxLengthAllowed = locationLength + (int)(locationLength * relativeTolerance);
-            internalConfigurations.lengthFilter = (Integer lengthAlongSecondShortestRoute,Integer lengthAlongLocation) -> {
-                if(lengthAlongLocation != null){
-                    return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int)(lengthAlongLocation * relativeTolerance)));
-                }else {
-                    return (lengthAlongSecondShortestRoute < maxLengthAllowed);
-                }
-            };
-
-            internalConfigurations.relativeToleranceSpecified = true;
-        }
-
-        return new SecondShortestRouteChecker(destinationStart, location, internalConfigurations);
+        return new SecondShortestRouteChecker(destinationStart, location, lengthFilter);
     }
 
 
-    public boolean exclude(PQElem elem, int index) {
-        if(!internalConfigurations.relativeToleranceSpecified)
-        {
+    private int lengthAlongLocation(int lastLineIndex) {
+        int routeLength = 0;
+        for (int index = 0; index <= lastLineIndex; ++index) {
+            routeLength += location.get(index).getLineLength();
+        }
+        return routeLength;
+    }
+
+    public boolean exclude(int index) {
+        if (index > 0 && index < location.size() - 1) {
+            Set<Long> closedSet = new HashSet<>();
+            closedSet.add(location.get(index).getID());
+            RouteSearchData data = new RouteSearchData();
+            Line parentLine = location.get(index - 1);
+            int lengthCoveredByParentLine = lengthAlongLocation(index - 1);
+            int heuristics = lengthCoveredByParentLine + (int) GeometryUtils.distance(parentLine.getEndNode().getGeoCoordinates(),
+                    destination);
+            PQElem parent = new PQElem(parentLine, heuristics, lengthCoveredByParentLine, null);
+            data.addToOpen(parent);
+            return exploreNetwork(closedSet, data, index);
+        } else {
             return false;
         }
-        Set<Long> closedSet = new HashSet<>();
-        closedSet.add(elem.getLine().getID());
-        RouteSearchData data = new RouteSearchData();
-        PQElem parent = elem.getPrevious();
-        if(parent == null || index == location.size() - 1 || index ==0){
-           return false;
-        }
-        data.addToOpen(parent);
-        return exploreNetwork(closedSet,data,index);
     }
 
     private List<Line> getAcceptableSuccessors(PQElem current, Set<Long> closedSet) {
@@ -78,61 +74,58 @@ public class SecondShortestRouteChecker {
         return lines.stream()
                 .filter(line -> !closedSet.contains(line.getID()))
                 .filter(line -> {
-                    int newDist = current.getSecondVal() + line.getLineLength() + (int) GeometryUtils.distance(line.getEndNode().getGeoCoordinates(),destination);
-                    return internalConfigurations.lengthFilter.apply(newDist,null);
+                    int newDist = current.getSecondVal() + line.getLineLength() + (int) GeometryUtils.distance(line.getEndNode().getGeoCoordinates(), destination);
+                    return lengthFilter.apply(newDist, null);
                 })
                 .collect(Collectors.toList());
     }
 
 
-    private void updateRouteSearchData(RouteSearchData data,List<Line> children,PQElem parent){
-           for(Line child : children){
+    private void updateRouteSearchData(RouteSearchData data, List<Line> children, PQElem parent) {
+        for (Line child : children) {
 
-               int distanceCoveredByChild = parent.getSecondVal() + child.getLineLength();
-               int heuristics = distanceCoveredByChild + (int) GeometryUtils.distance(child.getEndNode().getGeoCoordinates(),
-                       destination);
+            int distanceCoveredByChild = parent.getSecondVal() + child.getLineLength();
+            int heuristics = distanceCoveredByChild + (int) GeometryUtils.distance(child.getEndNode().getGeoCoordinates(),
+                    destination);
 
-               if(data.hasLengthValue(child)) {
+            if (data.hasLengthValue(child)) {
 
-                   if(data.getLengthValue(child) < distanceCoveredByChild)
-                   {
-                       PQElem newElem = new PQElem(child, heuristics, distanceCoveredByChild, parent);
-                       data.updateInOpen(newElem);
-                   }
-               } else {
-                   data.addToOpen(new PQElem(child,heuristics,distanceCoveredByChild,parent));
+                if (data.getLengthValue(child) < distanceCoveredByChild) {
+                    PQElem newElem = new PQElem(child, heuristics, distanceCoveredByChild, parent);
+                    data.updateInOpen(newElem);
+                }
+            } else {
+                data.addToOpen(new PQElem(child, heuristics, distanceCoveredByChild, parent));
 
-               }
-           }
+            }
+        }
     }
 
-    private int lengthOfSecondShortestRoute(final PQElem destination, final int index){
-        Long deviationStart = location.get(index-1).getID();
-        int secondShortestRouteLength =0;
-        PQElem to =destination;
-        while (to.getPrevious() != null && to.getPrevious().getLine().getID() != deviationStart){
+    private int lengthOfSecondShortestRoute(final PQElem destination, final int index) {
+        Long deviationStart = location.get(index - 1).getID();
+        int secondShortestRouteLength = 0;
+        PQElem to = destination;
+        while (to.getPrevious() != null && to.getPrevious().getLine().getID() != deviationStart) {
             secondShortestRouteLength += to.getPrevious().getLine().getLineLength();
             to = to.getPrevious();
         }
         return secondShortestRouteLength;
     }
 
-    private boolean exploreNetwork(Set<Long> closedSet, RouteSearchData routeSearchData,int index){
-        List<Long> possibleDestinations = location.stream().map(Line::getID).collect(Collectors.toList()).subList(index+1,location.size());
+    private boolean exploreNetwork(Set<Long> closedSet, RouteSearchData routeSearchData, int index) {
+        List<Long> possibleDestinations = location.stream().map(Line::getID).collect(Collectors.toList()).subList(index + 1, location.size());
 
 
-
-        while (!routeSearchData.isOpenEmpty())
-        {
+        while (!routeSearchData.isOpenEmpty()) {
             PQElem parent = routeSearchData.pollElement();
-            if(possibleDestinations.contains(parent.getLine().getID())){
-                int destinationIndexOnLocation = location.subList(index,location.size()).indexOf(parent.getLine());
-                int subLocationLength = location.subList(index,destinationIndexOnLocation+index).stream().mapToInt(Line::getLineLength).sum();
-                int secondShortestRouteLength = lengthOfSecondShortestRoute(parent,index);
-                return internalConfigurations.lengthFilter.apply(secondShortestRouteLength,subLocationLength);
+            if (possibleDestinations.contains(parent.getLine().getID())) {
+                int destinationIndexOnLocation = location.subList(index, location.size()).indexOf(parent.getLine());
+                int subLocationLength = location.subList(index, destinationIndexOnLocation + index).stream().mapToInt(Line::getLineLength).sum();
+                int secondShortestRouteLength = lengthOfSecondShortestRoute(parent, index);
+                return lengthFilter.apply(secondShortestRouteLength, subLocationLength);
             } else {
                 List<Line> children = getAcceptableSuccessors(parent, closedSet);
-                updateRouteSearchData(routeSearchData, children,parent);
+                updateRouteSearchData(routeSearchData, children, parent);
                 closedSet.add(parent.getLine().getID());
             }
         }

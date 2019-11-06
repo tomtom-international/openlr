@@ -83,7 +83,7 @@ public enum OpenLREncoderProperty implements OpenLRProperty {
     /** The COM p_ tim e_4_ cache. */
     COMP_TIME_4_CACHE("CompTime4Cache", PropertyType.INTEGER, 0),
 
-    ALTERNATE_PATH_RELATIVE_TOLERANCE("AlternatePathTolerance",PropertyType.INTEGER,-1);
+    ALTERNATE_PATH_RELATIVE_LOWER_THRESHOLD("AlternatePathRelativeLowerThreshold",PropertyType.INTEGER,-1);
 
 
     /** The key. */

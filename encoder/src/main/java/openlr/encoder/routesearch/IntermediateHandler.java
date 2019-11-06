@@ -97,7 +97,6 @@ public class IntermediateHandler {
     /** The position of the last element on location in the location */
     private int lastElemPos;
 
-    private SecondShortestRouteChecker secondShortestRouteChecker;
 
     /**
      * Instantiates a new intermediate handler.
@@ -105,11 +104,10 @@ public class IntermediateHandler {
      * @param loc
      *            the loc
      */
-    IntermediateHandler(final List<? extends Line> loc, SecondShortestRouteChecker checker) {
+    IntermediateHandler(final List<? extends Line> loc) {
         location = loc;
         lastElemOnLocation = null;
         lastElemPos = -1;
-        this.secondShortestRouteChecker = checker;
     }
 
     /**
@@ -135,8 +133,6 @@ public class IntermediateHandler {
         //
         // The following cases are documented in <bla> version //TODO
         //
-
-
         if (lastElemOnLocation == null) { //CASE 0
             // the first line is found, nothing strange happens here
             lastElemOnLocation = actualElement;
@@ -145,18 +141,7 @@ public class IntermediateHandler {
                 LOG.debug("first line in sub route found: "
                         + actualElement.getLine().getID());
             }
-        } else if (isNextElementInLocation(actualElement)) {
-
-            if (this.secondShortestRouteChecker.exclude(actualElement, lastElemPos+1)) {
-                List<Line> route = PathUtils.constructPath(actualElement
-                        .getPrevious());
-                result = new RouteSearchResult(
-                        RouteSearchReturnCode.INTERMEDIATE_FOUND, route,
-                        actualElement.getLine(), location
-                        .indexOf(actualElement.getLine()));
-            }
-            else {
-                //CASE 1
+        } else if (isNextElementInLocation(actualElement)) {//CASE 1
                 // the new line is a direct successor of the last element found
                 // so the new line is now the last element found, we can
                 // continue calculating the route
@@ -166,8 +151,7 @@ public class IntermediateHandler {
                     LOG.debug("next line in sub route found: "
                             + actualElement.getLine().getID());
                 }
-            }
-        } else {
+            } else {
             // a new intermediate needs to be added
             // find start of deviation along the current path
             // at least the start line should be found

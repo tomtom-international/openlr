@@ -3,8 +3,6 @@ package openlr.encoder.routesearch;
 import openlr.encoder.OpenLREncoderProcessingException;
 import openlr.map.Line;
 import openlr.map.teststubs.OpenLRMapDatabaseAdaptor;
-import openlr.map.utils.GeometryUtils;
-import openlr.map.utils.PQElem;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -34,19 +32,7 @@ public class SecondShortestRouteCheckerTest {
     {
         List<Line> location = Arrays.asList(map.getLine(1L),map.getLine(2L),map.getLine(5L),map.getLine(6L));
         SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(location,.20);
-        PQElem elem = new PQElem(location.get(0),0,location.get(0).getLineLength(),null);
-        assertFalse(checker.exclude(elem,0));
-
-
-        int actualDistance = location.get(0).getLineLength() + location.get(1).getLineLength();
-        int heuristicDistance = actualDistance + (int)GeometryUtils.distance(location.get(1).getEndNode().getGeoCoordinates(),
-                map.getLine(6L).getStartNode().getGeoCoordinates());
-
-        PQElem second = new PQElem(location.get(1),heuristicDistance,actualDistance,elem);
-        assertTrue(checker.exclude(second,1));
+        assertFalse(checker.exclude(0));
+        assertTrue(checker.exclude(1));
     }
-
-
-
-
 }

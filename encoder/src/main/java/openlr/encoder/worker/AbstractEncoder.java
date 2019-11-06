@@ -53,6 +53,7 @@
 package openlr.encoder.worker;
 
 import openlr.OpenLRProcessingException;
+import openlr.encoder.LrpHandler.AlternatePathLrpHandler;
 import openlr.encoder.OpenLREncoderProcessingException;
 import openlr.encoder.OpenLREncoderProcessingException.EncoderProcessingError;
 import openlr.encoder.data.ExpansionHelper;
@@ -139,13 +140,13 @@ public abstract class AbstractEncoder {
 
         int maxLength = properties.getMaximumDistanceLRP();
 
+        AlternatePathLrpHandler alternatePathHandler = AlternatePathLrpHandler.with(properties);
+
         // find shortest-path(s) until the whole location is covered by a
         // concatenation of these shortest-path(s)
         while (!remainingLocation.isEmpty()) {
 
-            Double alternatePathRelativeTolerance = properties.isAlternatePathCheckerConfigAvailable()? properties.getAlternatePathRelativeTolerance() :
-                    null;
-            RouteSearch rs = new RouteSearch(remainingLocation, alternatePathRelativeTolerance);
+            RouteSearch rs = new RouteSearch(remainingLocation);
             // do route search between current start and end of location
             RouteSearchResult rsResult = rs.calculateRoute();
             RouteSearchResult.RouteSearchReturnCode searchResult = rsResult
@@ -209,7 +210,9 @@ public abstract class AbstractEncoder {
                 checkedList.add(lrp);
             }
         }
+
         checkedList.add(locRefPoints.get(locRefPoints.size() - 1));
+        checkedList = alternatePathHandler.process(checkedList);
         int lrpCount = 1;
         for (int i = 0; i < checkedList.size() - 1; i++) {
             LocRefPoint lrp = checkedList.get(i);

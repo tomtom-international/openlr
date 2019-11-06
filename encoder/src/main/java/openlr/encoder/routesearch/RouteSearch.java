@@ -106,7 +106,6 @@ public class RouteSearch {
     /** the y coordinate for the calculation of the heuristic value */
     private double destY = 0;
     private int lengthBetweenStartAndEndLineAlongLocation = 0;
-    private SecondShortestRouteChecker secondShortestRouteChecker;
 
     /**
      * Instantiates a new route search.
@@ -116,7 +115,7 @@ public class RouteSearch {
      * @throws OpenLREncoderProcessingException
      *             the open lr encoder runtime exception
      */
-    public RouteSearch(final List<? extends Line> loc, Double alternatePathTolerance)
+    public RouteSearch(final List<? extends Line> loc)
             throws OpenLREncoderProcessingException {
         location = loc;
         if (location == null || location.isEmpty()) {
@@ -130,7 +129,6 @@ public class RouteSearch {
         }
         startLoopIndex = checkLoopAtStart();
         endLoopIndex = checkLoopAtEnd();
-        this.secondShortestRouteChecker = SecondShortestRouteChecker.on(loc,alternatePathTolerance);
     }
 
     /**ß
@@ -205,7 +203,7 @@ public class RouteSearch {
         } else {
             //we have to start a search
             // global data structures
-            IntermediateHandler iHandler = new IntermediateHandler(location,secondShortestRouteChecker);
+            IntermediateHandler iHandler = new IntermediateHandler(location);
             RouteSearchData data = new RouteSearchData();
 
             // for the use of the heuristic
