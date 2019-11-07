@@ -174,7 +174,7 @@ public class OpenLREncoderProperties {
     }
 
 
-    public final boolean insertLrpForAlternatePath(){
+    public final boolean insertLrpAtAlternatePath(){
         return insertLrpAtAlternatePath;
     }
 

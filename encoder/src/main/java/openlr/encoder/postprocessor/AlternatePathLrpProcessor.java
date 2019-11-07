@@ -53,7 +53,7 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
 
     public List<LocRefPoint> process(List<LocRefPoint> lrps) throws OpenLRProcessingException {
 
-        if (properties.insertLrpForAlternatePath()) {
+        if (properties.insertLrpAtAlternatePath()) {
             List<LocRefPoint> checkedList = new ArrayList<>();
             for (int index = 0; index < lrps.size() - 1; ++index) {
                 LocRefPoint lrp = lrps.get(index);
