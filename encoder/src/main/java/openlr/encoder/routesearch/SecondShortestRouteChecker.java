@@ -51,7 +51,7 @@ public class SecondShortestRouteChecker {
         return routeLength;
     }
 
-    public boolean exclude(int index) {
+    public boolean hasValidDeviationBefore(int index) {
         if (index > 0 && index < location.size() - 1) {
             Set<Long> closedSet = new HashSet<>();
             closedSet.add(location.get(index).getID());

@@ -1,4 +1,4 @@
-package openlr.encoder.lrphandler;
+package openlr.encoder.postprocessor;
 
 import openlr.OpenLRProcessingException;
 import openlr.PhysicalEncoder;
@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class AlternatePathLrpHandlerTest {
+public class AlternatePathLrpProcessorTest {
     private OpenLRMapDatabaseAdaptor map;
 
     @BeforeTest
@@ -34,7 +34,7 @@ public class AlternatePathLrpHandlerTest {
         Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
         encoderConfig.setProperty("AlternatePathRelativeLowerThreshold",20);
         OpenLREncoderProperties properties = new OpenLREncoderProperties(encoderConfig, new ArrayList< PhysicalEncoder >());
-        AlternatePathLrpHandler alternatePathLrpHandler = AlternatePathLrpHandler.with(properties);
+        AlternatePathLrpProcessor alternatePathLrpHandler = AlternatePathLrpProcessor.with(properties);
         LocRefPoint firstPoint = new LocRefPoint(Arrays.asList(map.getLine(1L),map.getLine(2L),map.getLine(5L)),properties);
         LocRefPoint lastPoint = new LocRefPoint(map.getLine(6L),properties);
         List<LocRefPoint> lrps = Arrays.asList(firstPoint,lastPoint);

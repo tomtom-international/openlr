@@ -1,4 +1,4 @@
-package openlr.encoder.lrphandler;
+package openlr.encoder.postprocessor;
 
 import openlr.OpenLRProcessingException;
 import openlr.encoder.data.LocRefPoint;
@@ -9,26 +9,26 @@ import openlr.map.Line;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlternatePathLrpHandler implements LrpHandler {
+public class AlternatePathLrpProcessor implements LrpProcessor {
     private OpenLREncoderProperties properties;
     private Double alternatePathLowerThreshold;
 
-    private AlternatePathLrpHandler(Double alternatePathLowerThreshold, OpenLREncoderProperties properties) {
+    private AlternatePathLrpProcessor(Double alternatePathLowerThreshold, OpenLREncoderProperties properties) {
         this.alternatePathLowerThreshold = alternatePathLowerThreshold;
         this.properties = properties;
     }
 
-    public static AlternatePathLrpHandler with(OpenLREncoderProperties properties) throws OpenLRProcessingException {
+    public static AlternatePathLrpProcessor with(OpenLREncoderProperties properties) throws OpenLRProcessingException {
         Double alternatePathRelativeTolerance = properties.isAlternatePathCheckerConfigAvailable() ? properties.getAlternatePathRelativeLowerThreshold() :
                 null;
-        return new AlternatePathLrpHandler(alternatePathRelativeTolerance, properties);
+        return new AlternatePathLrpProcessor(alternatePathRelativeTolerance, properties);
     }
 
     private List<Integer> determineNewIntermediatePoints(List<Line> route) throws OpenLRProcessingException {
         List<Integer> intermediates = new ArrayList<>();
         SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(route, alternatePathLowerThreshold);
         for (int index = 1; index < route.size(); ++index) {
-            if (checker.exclude(index)) {
+            if (checker.hasValidDeviationBefore(index)) {
                 intermediates.add(index);
             }
         }

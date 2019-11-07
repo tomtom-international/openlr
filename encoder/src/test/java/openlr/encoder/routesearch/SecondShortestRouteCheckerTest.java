@@ -32,7 +32,7 @@ public class SecondShortestRouteCheckerTest {
     {
         List<Line> location = Arrays.asList(map.getLine(1L),map.getLine(2L),map.getLine(5L),map.getLine(6L));
         SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(location,.20);
-        assertFalse(checker.exclude(0));
-        assertTrue(checker.exclude(1));
+        assertFalse(checker.hasValidDeviationBefore(0));
+        assertTrue(checker.hasValidDeviationBefore(1));
     }
 }
