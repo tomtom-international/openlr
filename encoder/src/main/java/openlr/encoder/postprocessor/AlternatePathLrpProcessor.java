@@ -11,22 +11,21 @@ import java.util.List;
 
 public class AlternatePathLrpProcessor implements LrpProcessor {
     private OpenLREncoderProperties properties;
-    private Double alternatePathLowerThreshold;
+    private float alternatePathRelativeThreshold;
 
-    private AlternatePathLrpProcessor(Double alternatePathLowerThreshold, OpenLREncoderProperties properties) {
-        this.alternatePathLowerThreshold = alternatePathLowerThreshold;
+    private AlternatePathLrpProcessor(float alternatePathRelativeThreshold, OpenLREncoderProperties properties) {
+        this.alternatePathRelativeThreshold = alternatePathRelativeThreshold;
         this.properties = properties;
     }
 
     public static AlternatePathLrpProcessor with(OpenLREncoderProperties properties) throws OpenLRProcessingException {
-        Double alternatePathRelativeTolerance = properties.isAlternatePathCheckerConfigAvailable() ? properties.getAlternatePathRelativeLowerThreshold() :
-                null;
-        return new AlternatePathLrpProcessor(alternatePathRelativeTolerance, properties);
+        float  alternatePathRelativeThreshold = properties.getAlternatePathRelativeThreshold();
+        return new AlternatePathLrpProcessor(alternatePathRelativeThreshold, properties);
     }
 
     private List<Integer> determineNewIntermediatePoints(List<Line> route) throws OpenLRProcessingException {
         List<Integer> intermediates = new ArrayList<>();
-        SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(route, alternatePathLowerThreshold);
+        SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(route, alternatePathRelativeThreshold);
         for (int index = 1; index < route.size(); ++index) {
             if (checker.hasValidDeviationBefore(index)) {
                 intermediates.add(index);
@@ -54,7 +53,7 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
 
     public List<LocRefPoint> process(List<LocRefPoint> lrps) throws OpenLRProcessingException {
 
-        if (properties.isAlternatePathCheckerConfigAvailable()) {
+        if (properties.insertLrpForAlternatePath()) {
             List<LocRefPoint> checkedList = new ArrayList<>();
             for (int index = 0; index < lrps.size() - 1; ++index) {
                 LocRefPoint lrp = lrps.get(index);

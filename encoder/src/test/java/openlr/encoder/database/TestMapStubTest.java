@@ -26,7 +26,8 @@ public class TestMapStubTest {
         InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml");
         OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
         Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
-        encoderConfig.setProperty("AlternatePathRelativeLowerThreshold",20);
+        encoderConfig.setProperty("LrpAlternativePath",true);
+        encoderConfig.setProperty("AlternatePathRelativeThreshold",.20);
         OpenLREncoderParameter params = new OpenLREncoderParameter.Builder().with(map).with(encoderConfig).buildParameter();
         List<Line> lines = new ArrayList<>();
         lines.add(map.getLine(1));

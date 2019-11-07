@@ -82,7 +82,9 @@ public class OpenLREncoderProperties {
     /** The comp time4 cache. */
     private final int compTime4Cache;
 
-    private Integer alternatePathRelativeLowerThreshold;
+    private Boolean insertLrpAtAlternatePath;
+
+    private float alternatePathRelativeThreshold;
 
     /**
      * Instantiates a new open lr encoder properties.
@@ -117,7 +119,9 @@ public class OpenLREncoderProperties {
         compTime4Cache = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLREncoderProperty.COMP_TIME_4_CACHE);
 
-        alternatePathRelativeLowerThreshold = OpenLRPropertyAccess.getIntegerPropertyValue(config,OpenLREncoderProperty.ALTERNATE_PATH_RELATIVE_LOWER_THRESHOLD);
+        insertLrpAtAlternatePath = OpenLRPropertyAccess.getBooleanPropertyValue(config,OpenLREncoderProperty.LRP_ALTERNATIVE_PATH);
+
+        alternatePathRelativeThreshold = OpenLRPropertyAccess.getFloatPropertyValue(config,OpenLREncoderProperty.ALTERNATIVE_PATH_RELATIVE_THRESHOLD);
     }
 
     /**
@@ -170,17 +174,12 @@ public class OpenLREncoderProperties {
     }
 
 
-    public final boolean isAlternatePathCheckerConfigAvailable(){
-        return (alternatePathRelativeLowerThreshold >=0);
+    public final boolean insertLrpForAlternatePath(){
+        return insertLrpAtAlternatePath;
     }
 
-    public final Double getAlternatePathRelativeLowerThreshold() throws OpenLREncoderProcessingException{
-        if(isAlternatePathCheckerConfigAvailable()) {
-            return ((double) alternatePathRelativeLowerThreshold)/100;
-        } else {
-            throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.INVALID_PARAMETER,
-                    "Alternate path relative lower threshold is not set");
-        }
+    public final float getAlternatePathRelativeThreshold(){
+            return alternatePathRelativeThreshold;
     }
 
 }

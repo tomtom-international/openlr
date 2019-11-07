@@ -140,7 +140,7 @@ public abstract class AbstractEncoder {
 
         int maxLength = properties.getMaximumDistanceLRP();
 
-        AlternatePathLrpProcessor alternatePathHandler = AlternatePathLrpProcessor.with(properties);
+        AlternatePathLrpProcessor alternatePathProcessor = AlternatePathLrpProcessor.with(properties);
 
         // find shortest-path(s) until the whole location is covered by a
         // concatenation of these shortest-path(s)
@@ -212,7 +212,7 @@ public abstract class AbstractEncoder {
         }
 
         checkedList.add(locRefPoints.get(locRefPoints.size() - 1));
-        checkedList = alternatePathHandler.process(checkedList);
+        checkedList = alternatePathProcessor.process(checkedList);
         int lrpCount = 1;
         for (int i = 0; i < checkedList.size() - 1; i++) {
             LocRefPoint lrp = checkedList.get(i);
