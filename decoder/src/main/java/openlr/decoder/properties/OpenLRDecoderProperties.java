@@ -115,6 +115,9 @@ public class OpenLRDecoderProperties {
     /** The calc affected lines. */
     private final boolean calcAffectedLines;
 
+    /** The non junction node factor. */
+    private final float nonJunctionNodeFactor;
+
     /** The lines directly factor. */
     private final float linesDirectlyFactor;
 
@@ -139,6 +142,8 @@ public class OpenLRDecoderProperties {
                 OpenLRDecoderProperty.NODE_FACTOR);
         lineFactor = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.LINE_FACTOR);
+        nonJunctionNodeFactor = OpenLRPropertyAccess.getFloatPropertyValue(config,
+                OpenLRDecoderProperty.NON_JUNCTION_NODE_FACTOR);
         frcVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.FRC_VARIANCE);
         minimumAcceptedRating = OpenLRPropertyAccess.getIntegerPropertyValue(
@@ -229,6 +234,19 @@ public class OpenLRDecoderProperties {
      */
     public final int getLineFactor() {
         return lineFactor;
+    }
+
+    /**
+     * Get the non-junction node factor. This is a value between 0 and 1 and is the scaling value to apply
+     * during decoding to the score of nodes that are not junctions.
+     *
+     * By default the non-junction node factor is 1, meaning that non-junction nodes are not penalised.
+     * To apply a penalty to non-junction nodes, reduce the non-junction node factor to a value under 1.
+     *
+     * @return the non-junction node factor
+     */
+    public final float getNonJunctionNodeFactor() {
+        return nonJunctionNodeFactor;
     }
 
     /**
