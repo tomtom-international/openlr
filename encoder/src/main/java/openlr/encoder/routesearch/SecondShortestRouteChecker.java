@@ -10,6 +10,9 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
+/**
+ * <h1>Verifying the existence of Fully or partially joined second shortest route with length less than relative threshold</h1>
+ */
 public class SecondShortestRouteChecker {
     private GeoCoordinates destination;
     private List<? extends Line> location;
@@ -25,26 +28,42 @@ public class SecondShortestRouteChecker {
     }
 
 
-    public static SecondShortestRouteChecker on(List<? extends Line> location, double relativeTolerance) throws OpenLREncoderProcessingException {
+    /**
+     *
+     * @param location route
+     * @param relativeThreshold threshold relative to the route length
+     * @return Instance of SecondShortestRouteChecker for the location with threshold
+     * @throws OpenLREncoderProcessingException
+     */
+    public static SecondShortestRouteChecker on(List<? extends Line> location, double relativeThreshold) throws OpenLREncoderProcessingException {
         if (location.isEmpty()) {
             throw new OpenLREncoderProcessingException(OpenLREncoderProcessingException.EncoderProcessingError.NO_ROUTE_FOUND_ERROR);
         }
         GeoCoordinates destinationStart = location.get(location.size() - 1).getStartNode().getGeoCoordinates();
         int locationLength = location.stream().mapToInt(Line::getLineLength).sum();
 
-        int maxLengthAllowed = locationLength + (int) (locationLength * relativeTolerance);
+        int maxLengthAllowed = locationLength + (int) (locationLength * relativeThreshold);
 
         BiFunction<Integer, Integer, Boolean> verifyThreshold = (Integer lengthAlongSecondShortestRoute, Integer lengthAlongLocation) -> {
-            return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeTolerance)));
+            return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeThreshold)));
         };
 
         return new SecondShortestRouteChecker(destinationStart, location, maxLengthAllowed, verifyThreshold);
     }
 
+    /**
+     * @param length heuristic length
+     * @return true  if the heuristic is less than the maximum  length
+     *         false if the heuristic is greater than the maximum  length
+     */
     private boolean networkLengthFilter(Integer length) {
         return (length < maxLengthAllowed);
     }
 
+    /**
+     * @param lastLineIndex index of the road segment in the route
+     * @return length along the location from start till the road segment at the lastLineIndex
+     */
     private int lengthAlongLocation(int lastLineIndex) {
         int routeLength = 0;
         for (int index = 0; index <= lastLineIndex; ++index) {
@@ -53,6 +72,12 @@ public class SecondShortestRouteChecker {
         return routeLength;
     }
 
+    /**
+     *
+     * @param index index of the road segment in the location between the two location reference points
+     * @return true if an alternate path of length under the the relative threshold exist
+     *         false if no alternate path of length under the the relative threshold exist
+     */
     public boolean hasValidDeviationBefore(int index) {
         if (index > 0 && index < location.size() - 1) {
             Set<Long> closedSet = new HashSet<>();
@@ -70,6 +95,13 @@ public class SecondShortestRouteChecker {
         }
     }
 
+
+    /**
+     *
+     * @param current parent road segment
+     * @param closedSet Set of road segments to skip
+     * @return list of successor road segments
+     */
     private List<Line> getAcceptableSuccessors(PQElem current, Set<Long> closedSet) {
         List<Line> lines = new ArrayList<>();
         current.getLine().getNextLines().forEachRemaining(lines::add);
@@ -82,7 +114,12 @@ public class SecondShortestRouteChecker {
                 .collect(Collectors.toList());
     }
 
-
+    /**
+     *
+     * @param data priority queue list
+     * @param children list of successor road segment
+     * @param parent parent road segment
+     */
     private void updateRouteSearchData(RouteSearchData data, List<Line> children, PQElem parent) {
         for (Line child : children) {
 
@@ -103,6 +140,12 @@ public class SecondShortestRouteChecker {
         }
     }
 
+    /**
+     * length of the alternate path
+     * @param destination road segment where the alternate path join back to the actual location
+     * @param index index of the road segment where alternate path starts
+     * @return length of the alternate bathe between start and route segments of alternate path.
+     */
     private int lengthOfSecondShortestRoute(final PQElem destination, final int index) {
         Long deviationStart = location.get(index - 1).getID();
         int secondShortestRouteLength = 0;
@@ -114,10 +157,16 @@ public class SecondShortestRouteChecker {
         return secondShortestRouteLength;
     }
 
+    /**
+     *
+     * @param closedSet set of road segments which
+     * @param routeSearchData priority queue
+     * @param index index of the road segment along the location where the
+     * @return true: if an alternate path with length less than the threshold exist
+     *         false: if no alternate path with length less than the threshold exist
+     */
     private boolean exploreNetworkForSecondShortestRouteUnderThreshold(Set<Long> closedSet, RouteSearchData routeSearchData, int index) {
         List<Long> possibleDestinations = location.stream().map(Line::getID).collect(Collectors.toList()).subList(index + 1, location.size());
-
-
         while (!routeSearchData.isOpenEmpty()) {
             PQElem parent = routeSearchData.pollElement();
             if (possibleDestinations.contains(parent.getLine().getID())) {
