@@ -211,126 +211,84 @@ public class OpenLRRatingImplTest {
      * Rating test #1.
      */
     @Test
-    public final void testRating1() {
-
-        try {
-            int rating = RATING_FUNCTION.getRating(getProperties(),
-                    DISTANCE_RATING_1, point1, line10, 0);
-            assertEquals(EXPECTED_RESULT_RATING_1, rating);
-
-        } catch (OpenLRProcessingException e) {
-            fail("Unexpected exception!", e);
-        }
+    public final void testRating1() throws OpenLRProcessingException {
+        int rating = RATING_FUNCTION.getRating(getProperties(),
+                DISTANCE_RATING_1, point1, line10, 0);
+        assertEquals(EXPECTED_RESULT_RATING_1, rating);
     }
 
     /**
      * Rating test #2.
      */
     @Test
-    public final void testRating2() {
-
-        try {
-            int rating = RATING_FUNCTION.getRating(getProperties(),
-                    DISTANCE_RATING_2, point2, line10, 0);
-            assertEquals(EXPECTED_RESULT_RATING_2, rating);
-
-        } catch (OpenLRProcessingException e) {
-            fail("Unexpected exception!", e);
-        }
+    public final void testRating2() throws OpenLRProcessingException {
+        int rating = RATING_FUNCTION.getRating(getProperties(),
+                DISTANCE_RATING_2, point2, line10, 0);
+        assertEquals(EXPECTED_RESULT_RATING_2, rating);
     }
 
     /**
      * Rating test #3.
      */
     @Test
-    public final void testRating3() {
-
-        try {
-            int rating = RATING_FUNCTION.getRating(getProperties(),
-                    DISTANCE_RATING_2, point2, line26, PROJECTION_LINE_26);
-            assertEquals(EXPECTED_RESULT_RATING_3, rating);
-
-        } catch (OpenLRProcessingException e) {
-            fail("Unexpected exception!", e);
-        }
+    public final void testRating3() throws OpenLRProcessingException {
+        int rating = RATING_FUNCTION.getRating(getProperties(),
+                DISTANCE_RATING_2, point2, line26, PROJECTION_LINE_26);
+        assertEquals(EXPECTED_RESULT_RATING_3, rating);
     }
 
     /**
      * Rating test of junction node when applying no non-junction node factor
      */
     @Test
-    public final void testRatingJunctionNodeNoNonJunctionNodeFactor() {
+    public final void testRatingJunctionNodeNoNonJunctionNodeFactor() throws OpenLRProcessingException {
+        BaseConfiguration configuration = new BaseConfiguration();
+        OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
-        try {
-            BaseConfiguration configuration = new BaseConfiguration();
-            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
-
-            int rating = RATING_FUNCTION.getRating(properties,
-                    DISTANCE_RATING_1, point1, line10, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
-
-        } catch (OpenLRProcessingException e) {
-            fail("Unexpected exception!", e);
-        }
+        int rating = RATING_FUNCTION.getRating(properties,
+                DISTANCE_RATING_1, point1, line10, 0);
+        assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
     }
 
     /**
      * Rating test of junction node when applying a non-junction node factor
      */
     @Test
-    public final void testRatingJunctionNodeNonJunctionNodeFactor() {
+    public final void testRatingJunctionNodeNonJunctionNodeFactor() throws OpenLRProcessingException {
+        BaseConfiguration configuration = new BaseConfiguration();
+        configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
+        OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
-        try {
-            BaseConfiguration configuration = new BaseConfiguration();
-            configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
-            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
-
-            int rating = RATING_FUNCTION.getRating(properties,
-                    DISTANCE_RATING_1, point1, line10, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
-
-        } catch (OpenLRProcessingException e) {
-            fail("Unexpected exception!", e);
-        }
+        int rating = RATING_FUNCTION.getRating(properties,
+                DISTANCE_RATING_1, point1, line10, 0);
+        assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
     }
 
     /**
      * Rating test of non-junction node when applying no non-junction node factor
      */
     @Test
-    public final void testRatingNonJunctionNodeNoNonJunctionNodeFactor() {
+    public final void testRatingNonJunctionNodeNoNonJunctionNodeFactor() throws OpenLRProcessingException {
+        BaseConfiguration configuration = new BaseConfiguration();
+        OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
-        try {
-            BaseConfiguration configuration = new BaseConfiguration();
-            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
-
-            int rating = RATING_FUNCTION.getRating(properties,
-                    DISTANCE_RATING_1, point1, line4, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
-
-        } catch (OpenLRProcessingException e) {
-            fail("Unexpected exception!", e);
-        }
+        int rating = RATING_FUNCTION.getRating(properties,
+                DISTANCE_RATING_1, point1, line4, 0);
+        assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
     }
 
     /**
      * Rating test of non-junction node when applying a non-junction node factor
      */
     @Test
-    public final void testRatingNonJunctionNodeNonJunctionNodeFactor() {
+    public final void testRatingNonJunctionNodeNonJunctionNodeFactor() throws OpenLRProcessingException {
+        BaseConfiguration configuration = new BaseConfiguration();
+        configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
+        OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
-        try {
-            BaseConfiguration configuration = new BaseConfiguration();
-            configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
-            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
-
-            int rating = RATING_FUNCTION.getRating(properties,
-                    DISTANCE_RATING_1, point1, line4, 0);
-            assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
-
-        } catch (OpenLRProcessingException e) {
-            fail("Unexpected exception!", e);
-        }
+        int rating = RATING_FUNCTION.getRating(properties,
+                DISTANCE_RATING_1, point1, line4, 0);
+        assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
     }
 
     /**
