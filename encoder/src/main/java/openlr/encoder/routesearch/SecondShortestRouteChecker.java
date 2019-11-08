@@ -13,13 +13,15 @@ import java.util.stream.Collectors;
 public class SecondShortestRouteChecker {
     private GeoCoordinates destination;
     private List<? extends Line> location;
-    public BiFunction<Integer, Integer, Boolean> lengthFilter;
+    public int maxLengthAllowed;
+    BiFunction<Integer, Integer, Boolean> verifyThreshold;
 
 
-    private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location, BiFunction<Integer, Integer, Boolean> lengthFilter) {
+    private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location, int maxLengthAllowed, BiFunction<Integer, Integer, Boolean> verifyThreshold) {
         this.destination = destination;
         this.location = location;
-        this.lengthFilter = lengthFilter;
+        this.maxLengthAllowed = maxLengthAllowed;
+        this.verifyThreshold = verifyThreshold;
     }
 
 
@@ -31,17 +33,17 @@ public class SecondShortestRouteChecker {
         int locationLength = location.stream().mapToInt(Line::getLineLength).sum();
 
         int maxLengthAllowed = locationLength + (int) (locationLength * relativeTolerance);
-        BiFunction<Integer, Integer, Boolean> lengthFilter = (Integer lengthAlongSecondShortestRoute, Integer lengthAlongLocation) -> {
-            if (lengthAlongLocation != null) {
-                return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeTolerance)));
-            } else {
-                return (lengthAlongSecondShortestRoute < maxLengthAllowed);
-            }
+
+        BiFunction<Integer, Integer, Boolean> verifyThreshold = (Integer lengthAlongSecondShortestRoute, Integer lengthAlongLocation) -> {
+            return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeTolerance)));
         };
 
-        return new SecondShortestRouteChecker(destinationStart, location, lengthFilter);
+        return new SecondShortestRouteChecker(destinationStart, location, maxLengthAllowed, verifyThreshold);
     }
 
+    private boolean networkLengthFilter(Integer length) {
+        return (length < maxLengthAllowed);
+    }
 
     private int lengthAlongLocation(int lastLineIndex) {
         int routeLength = 0;
@@ -62,7 +64,7 @@ public class SecondShortestRouteChecker {
                     destination);
             PQElem parent = new PQElem(parentLine, heuristics, lengthCoveredByParentLine, null);
             data.addToOpen(parent);
-            return exploreNetwork(closedSet, data, index);
+            return exploreNetworkForSecondShortestRouteUnderThreshold(closedSet, data, index);
         } else {
             return false;
         }
@@ -75,7 +77,7 @@ public class SecondShortestRouteChecker {
                 .filter(line -> !closedSet.contains(line.getID()))
                 .filter(line -> {
                     int newDist = current.getSecondVal() + line.getLineLength() + (int) GeometryUtils.distance(line.getEndNode().getGeoCoordinates(), destination);
-                    return lengthFilter.apply(newDist, null);
+                    return networkLengthFilter(newDist);
                 })
                 .collect(Collectors.toList());
     }
@@ -112,7 +114,7 @@ public class SecondShortestRouteChecker {
         return secondShortestRouteLength;
     }
 
-    private boolean exploreNetwork(Set<Long> closedSet, RouteSearchData routeSearchData, int index) {
+    private boolean exploreNetworkForSecondShortestRouteUnderThreshold(Set<Long> closedSet, RouteSearchData routeSearchData, int index) {
         List<Long> possibleDestinations = location.stream().map(Line::getID).collect(Collectors.toList()).subList(index + 1, location.size());
 
 
@@ -122,7 +124,7 @@ public class SecondShortestRouteChecker {
                 int destinationIndexOnLocation = location.subList(index, location.size()).indexOf(parent.getLine());
                 int subLocationLength = location.subList(index, destinationIndexOnLocation + index).stream().mapToInt(Line::getLineLength).sum();
                 int secondShortestRouteLength = lengthOfSecondShortestRoute(parent, index);
-                return lengthFilter.apply(secondShortestRouteLength, subLocationLength);
+                return verifyThreshold.apply(secondShortestRouteLength, subLocationLength);
             } else {
                 List<Line> children = getAcceptableSuccessors(parent, closedSet);
                 updateRouteSearchData(routeSearchData, children, parent);
