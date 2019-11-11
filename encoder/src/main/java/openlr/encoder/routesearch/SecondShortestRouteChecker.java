@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class SecondShortestRouteChecker {
     private GeoCoordinates destination;
     private List<? extends Line> location;
-    public int maxLengthAllowed;
-    BiFunction<Integer, Integer, Boolean> verifyThreshold;
+    private int maxLengthAllowed;
+    private BiFunction<Integer, Integer, Boolean> verifyThreshold;
 
 
     private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location, int maxLengthAllowed, BiFunction<Integer, Integer, Boolean> verifyThreshold) {

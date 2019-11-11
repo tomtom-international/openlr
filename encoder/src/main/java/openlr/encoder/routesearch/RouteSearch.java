@@ -131,7 +131,7 @@ public class RouteSearch {
         endLoopIndex = checkLoopAtEnd();
     }
 
-    /**ß
+    /**
      * Check loop at start.
      *
      * @return the int

@@ -54,7 +54,6 @@ package openlr.encoder.properties;
 
 import openlr.OpenLRProcessingException;
 import openlr.PhysicalEncoder;
-import openlr.encoder.OpenLREncoderProcessingException;
 import openlr.properties.OpenLRPropertyAccess;
 import org.apache.commons.configuration.Configuration;
 
