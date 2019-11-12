@@ -22,24 +22,23 @@ public class AlternatePathLrpProcessorTest {
     private OpenLRMapDatabaseAdaptor map;
 
     @BeforeTest
-    public void loadMapStub(){
+    public void loadMapStub() {
         InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml");
         this.map = OpenLRMapDatabaseAdaptor.from(mapFile);
     }
 
     @Test
-    public void verifyAlternatePathHandlerProcess() throws OpenLRProcessingException
-    {
+    public void verifyAlternatePathHandlerProcess() throws OpenLRProcessingException {
         Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
-        encoderConfig.setProperty("LrpAlternativePath",true);
-        encoderConfig.setProperty("AlternatePathRelativeThreshold",.20);
+        encoderConfig.setProperty("LrpAlternativePath", true);
+        encoderConfig.setProperty("AlternatePathRelativeThreshold", .20);
         OpenLREncoderProperties properties = new OpenLREncoderProperties(encoderConfig, new ArrayList<>());
         AlternatePathLrpProcessor alternatePathLrpHandler = AlternatePathLrpProcessor.with(properties);
-        LocRefPoint firstPoint = new LocRefPoint(Arrays.asList(map.getLine(1L),map.getLine(2L),map.getLine(5L)),properties);
-        LocRefPoint lastPoint = new LocRefPoint(map.getLine(6L),properties);
-        List<LocRefPoint> lrps = Arrays.asList(firstPoint,lastPoint);
-        assertEquals(lrps.size(),2);
+        LocRefPoint firstPoint = new LocRefPoint(Arrays.asList(map.getLine(1L), map.getLine(2L), map.getLine(5L)), properties);
+        LocRefPoint lastPoint = new LocRefPoint(map.getLine(6L), properties);
+        List<LocRefPoint> lrps = Arrays.asList(firstPoint, lastPoint);
+        assertEquals(lrps.size(), 2);
         lrps = alternatePathLrpHandler.process(lrps);
-        assertEquals(lrps.size(),3);
+        assertEquals(lrps.size(), 3);
     }
 }
