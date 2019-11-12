@@ -97,7 +97,7 @@ public class SecondShortestRouteChecker {
                 destination);
         PQElem parent = new PQElem(parentLine, heuristics, lengthCoveredByParentLine, null);
         data.addToOpen(parent);
-        return IsSecondShortestRouteUnderThreshold(closedSet, data, index);
+        return isSecondShortestRouteUnderThreshold(closedSet, data, index);
     }
 
     /**
@@ -162,7 +162,7 @@ public class SecondShortestRouteChecker {
      * @return true: if an alternate path with length less than the threshold exist
      * false: if no alternate path with length less than the threshold exist
      */
-    private boolean IsSecondShortestRouteUnderThreshold(Set<Long> closedSet, RouteSearchData routeSearchData, int index) {
+    private boolean isSecondShortestRouteUnderThreshold(Set<Long> closedSet, RouteSearchData routeSearchData, int index) {
         List<Long> possibleDestinations = location.stream().map(Line::getID).collect(Collectors.toList()).subList(index + 1, location.size());
         while (!routeSearchData.isOpenEmpty()) {
             PQElem parent = routeSearchData.pollElement();
