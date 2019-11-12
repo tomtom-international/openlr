@@ -50,7 +50,7 @@ public class SecondShortestRouteChecker {
      * @return true: if the length of the second shortest route is not greater than route along location by relative threshold percentage
      * false: if the length of the second shortest route is greater than route along location by relative threshold percentage
      */
-    private boolean verifyThreshold(int lengthAlongSecondShortestRoute, int lengthAlongLocation) {
+    private boolean isUnderThreshold(int lengthAlongSecondShortestRoute, int lengthAlongLocation) {
         return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeThreshold)));
     }
 
@@ -81,11 +81,7 @@ public class SecondShortestRouteChecker {
      * false if no alternate path of length under the the relative threshold exist
      */
     public boolean hasValidDeviationBefore(int index) {
-        if (index <= 0) {
-            return false;
-        }
-
-        if (index >= location.size() - 1) {
+        if (index <= 0 || index >= location.size() - 1) {
             return false;
         }
         Set<Long> closedSet = new HashSet<>();
@@ -170,7 +166,7 @@ public class SecondShortestRouteChecker {
                 int destinationIndexOnLocation = location.subList(index, location.size()).indexOf(parent.getLine());
                 int subLocationLength = location.subList(index, destinationIndexOnLocation + index).stream().mapToInt(Line::getLineLength).sum();
                 int secondShortestRouteLength = calculateLengthOfSecondShortestRoute(parent, index);
-                return verifyThreshold(secondShortestRouteLength, subLocationLength);
+                return isUnderThreshold(secondShortestRouteLength, subLocationLength);
             } else {
                 List<Line> children = calculateAcceptableSuccessors(parent, closedSet);
                 updateRouteSearchData(routeSearchData, children, parent);
