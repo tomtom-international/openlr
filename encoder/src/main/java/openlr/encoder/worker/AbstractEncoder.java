@@ -145,7 +145,6 @@ public abstract class AbstractEncoder {
         // find shortest-path(s) until the whole location is covered by a
         // concatenation of these shortest-path(s)
         while (!remainingLocation.isEmpty()) {
-
             RouteSearch rs = new RouteSearch(remainingLocation);
             // do route search between current start and end of location
             RouteSearchResult rsResult = rs.calculateRoute();
