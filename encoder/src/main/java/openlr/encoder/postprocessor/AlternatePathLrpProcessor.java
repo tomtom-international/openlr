@@ -15,14 +15,12 @@ import java.util.List;
  */
 public class AlternatePathLrpProcessor implements LrpProcessor {
     private OpenLREncoderProperties properties;
-    private float alternatePathRelativeThreshold;
 
     private AlternatePathLrpProcessor(float alternatePathRelativeThreshold, OpenLREncoderProperties properties) {
-        this.alternatePathRelativeThreshold = alternatePathRelativeThreshold;
         this.properties = properties;
     }
 
-    public static AlternatePathLrpProcessor with(OpenLREncoderProperties properties) throws OpenLRProcessingException {
+    public static AlternatePathLrpProcessor with(OpenLREncoderProperties properties){
         float alternatePathRelativeThreshold = properties.getAlternatePathRelativeThreshold();
         return new AlternatePathLrpProcessor(alternatePathRelativeThreshold, properties);
     }
@@ -35,7 +33,7 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
      */
     private List<Integer> determineNewIntermediatePoints(List<Line> route) throws OpenLRProcessingException {
         List<Integer> intermediates = new ArrayList<>();
-        SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(route, alternatePathRelativeThreshold);
+        SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(route, properties.getAlternatePathRelativeThreshold());
         for (int index = 1; index < route.size(); ++index) {
             if (checker.hasValidDeviationBefore(index)) {
                 intermediates.add(index);
@@ -51,19 +49,19 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
      * @throws OpenLRProcessingException
      */
     private List<LocRefPoint> createNewLRPs(List<Line> route, List<Integer> lrpPositions) throws OpenLRProcessingException {
-        List<LocRefPoint> checkedList = new ArrayList<>();
+        List<LocRefPoint> revisedLrpList = new ArrayList<>();
         LocRefPoint firstPoint = new LocRefPoint(route.subList(0, lrpPositions.get(0)), properties);
-        checkedList.add(firstPoint);
+        revisedLrpList.add(firstPoint);
         for (int index = 0; index < lrpPositions.size() - 1; ++index) {
             int from = lrpPositions.get(index);
             int to = lrpPositions.get(index + 1);
             LocRefPoint intermediatePoint = new LocRefPoint(route.subList(from, to), properties);
-            checkedList.add(intermediatePoint);
+            revisedLrpList.add(intermediatePoint);
         }
         int from = lrpPositions.get(lrpPositions.size() - 1);
         LocRefPoint lastPoint = new LocRefPoint(route.subList(from, route.size()), properties);
-        checkedList.add(lastPoint);
-        return checkedList;
+        revisedLrpList.add(lastPoint);
+        return revisedLrpList;
     }
 
 
@@ -77,7 +75,7 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
     public List<LocRefPoint> process(List<LocRefPoint> lrps) throws OpenLRProcessingException {
 
         if (properties.insertLrpAtAlternatePath()) {
-            List<LocRefPoint> checkedList = new ArrayList<>();
+            List<LocRefPoint> revisedLrpList = new ArrayList<>();
             for (int index = 0; index < lrps.size() - 1; ++index) {
                 LocRefPoint lrp = lrps.get(index);
                 Line firstLineOfNextLrp = lrps.get(index + 1).getLine();
@@ -89,13 +87,13 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
                 connectedRoute.add(firstLineOfNextLrp);
                 List<Integer> intermediateLrpPositions = determineNewIntermediatePoints(connectedRoute);
                 if (intermediateLrpPositions.isEmpty()) {
-                    checkedList.add(lrp);
+                    revisedLrpList.add(lrp);
                 } else {
-                    checkedList.addAll(createNewLRPs(lrp.getRoute(), intermediateLrpPositions));
+                    revisedLrpList.addAll(createNewLRPs(lrp.getRoute(), intermediateLrpPositions));
                 }
             }
-            checkedList.add(lrps.get(lrps.size() - 1));
-            return checkedList;
+            revisedLrpList.add(lrps.get(lrps.size() - 1));
+            return revisedLrpList;
         } else {
             return lrps;
         }

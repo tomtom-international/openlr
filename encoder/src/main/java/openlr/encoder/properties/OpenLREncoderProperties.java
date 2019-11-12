@@ -81,7 +81,7 @@ public class OpenLREncoderProperties {
     /** The comp time4 cache. */
     private final int compTime4Cache;
 
-    private Boolean insertLrpAtAlternatePath;
+    private boolean insertLrpAtAlternatePath;
 
     private float alternatePathRelativeThreshold;
 

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface LrpProcessor {
     /**
-     * This method add intermediate points between the adjacent location reference points
+     * This method adds intermediate points between the adjacent location reference points
      * @param lrps linked list of estimated location reference points
-     * @return linked list of revised lrp point linked list with intermediate points
+     * @return revised linked list of location reference point with the new intermediate points
      * @throws OpenLRProcessingException
      */
     List<LocRefPoint> process(List<LocRefPoint> lrps) throws OpenLRProcessingException;

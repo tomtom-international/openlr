@@ -17,14 +17,14 @@ public class SecondShortestRouteChecker {
     private GeoCoordinates destination;
     private List<? extends Line> location;
     private int maxLengthAllowed;
-    private BiFunction<Integer, Integer, Boolean> verifyThreshold;
+    private double relativeThreshold;
 
 
-    private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location, int maxLengthAllowed, BiFunction<Integer, Integer, Boolean> verifyThreshold) {
+    private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location, int maxLengthAllowed, double relativeThreshold) {
         this.destination = destination;
         this.location = location;
         this.maxLengthAllowed = maxLengthAllowed;
-        this.verifyThreshold = verifyThreshold;
+        this.relativeThreshold = relativeThreshold;
     }
 
 
@@ -44,12 +44,20 @@ public class SecondShortestRouteChecker {
 
         int maxLengthAllowed = locationLength + (int) (locationLength * relativeThreshold);
 
-        BiFunction<Integer, Integer, Boolean> verifyThreshold = (Integer lengthAlongSecondShortestRoute, Integer lengthAlongLocation) -> {
-            return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeThreshold)));
-        };
-
-        return new SecondShortestRouteChecker(destinationStart, location, maxLengthAllowed, verifyThreshold);
+        return new SecondShortestRouteChecker(destinationStart, location, maxLengthAllowed, relativeThreshold);
     }
+
+    /**
+     *
+     * @param lengthAlongSecondShortestRoute length of the second shortest route
+     * @param lengthAlongLocation length of the route along location to which the second shortest route gives alternative to
+     * @return true: if the length of the second shortest route is not greater than route along location by relative threshold percentage
+     *         false: if the length of the second shortest route is greater than route along location by relative threshold percentage
+     */
+    boolean VerifyThreshold(int lengthAlongSecondShortestRoute, int lengthAlongLocation){
+        return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeThreshold)));
+    }
+
 
     /**
      * @param length heuristic length
@@ -159,9 +167,9 @@ public class SecondShortestRouteChecker {
 
     /**
      *
-     * @param closedSet set of road segments which
+     * @param closedSet set of road segments which need not be explored
      * @param routeSearchData priority queue
-     * @param index index of the road segment along the location where the
+     * @param index index of the road segment along the location where the second shortest route deviates from shortest route.
      * @return true: if an alternate path with length less than the threshold exist
      *         false: if no alternate path with length less than the threshold exist
      */
@@ -173,7 +181,7 @@ public class SecondShortestRouteChecker {
                 int destinationIndexOnLocation = location.subList(index, location.size()).indexOf(parent.getLine());
                 int subLocationLength = location.subList(index, destinationIndexOnLocation + index).stream().mapToInt(Line::getLineLength).sum();
                 int secondShortestRouteLength = lengthOfSecondShortestRoute(parent, index);
-                return verifyThreshold.apply(secondShortestRouteLength, subLocationLength);
+                return VerifyThreshold(secondShortestRouteLength, subLocationLength);
             } else {
                 List<Line> children = getAcceptableSuccessors(parent, closedSet);
                 updateRouteSearchData(routeSearchData, children, parent);

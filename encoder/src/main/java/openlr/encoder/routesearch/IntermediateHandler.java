@@ -97,7 +97,6 @@ public class IntermediateHandler {
     /** The position of the last element on location in the location */
     private int lastElemPos;
 
-
     /**
      * Instantiates a new intermediate handler.
      *
@@ -118,13 +117,10 @@ public class IntermediateHandler {
      * not there is a deviation and a new intermediate needs to be reported. The
      * method will return true if a new intermediate was found, otherwise false.
      *
-     * @param actualElement
-     *            the actual element
-     * @param data
-     *            the data
+     * @param actualElement the actual element
+     * @param data          the data
      * @return true, if a new intermediate was found, otherwise false
-     * @throws OpenLREncoderProcessingException
-     *             the open lr encoder runtime exception
+     * @throws OpenLREncoderProcessingException the open lr encoder runtime exception
      */
     public final RouteSearchResult checkIntermediate(
             final PQElem actualElement, final RouteSearchData data)
@@ -142,16 +138,16 @@ public class IntermediateHandler {
                         + actualElement.getLine().getID());
             }
         } else if (isNextElementInLocation(actualElement)) {//CASE 1
-                // the new line is a direct successor of the last element found
-                // so the new line is now the last element found, we can
-                // continue calculating the route
-                lastElemPos++;
-                lastElemOnLocation = actualElement;
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("next line in sub route found: "
-                            + actualElement.getLine().getID());
-                }
-            } else {
+            // the new line is a direct successor of the last element found
+            // so the new line is now the last element found, we can
+            // continue calculating the route
+            lastElemPos++;
+            lastElemOnLocation = actualElement;
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("next line in sub route found: "
+                        + actualElement.getLine().getID());
+            }
+        } else {
             // a new intermediate needs to be added
             // find start of deviation along the current path
             // at least the start line should be found
