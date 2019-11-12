@@ -7,7 +7,6 @@ import openlr.map.utils.GeometryUtils;
 import openlr.map.utils.PQElem;
 
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 /**

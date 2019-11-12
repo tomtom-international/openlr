@@ -16,13 +16,12 @@ import java.util.List;
 public class AlternatePathLrpProcessor implements LrpProcessor {
     private OpenLREncoderProperties properties;
 
-    private AlternatePathLrpProcessor(float alternatePathRelativeThreshold, OpenLREncoderProperties properties) {
+    private AlternatePathLrpProcessor(OpenLREncoderProperties properties) {
         this.properties = properties;
     }
 
     public static AlternatePathLrpProcessor with(OpenLREncoderProperties properties){
-        float alternatePathRelativeThreshold = properties.getAlternatePathRelativeThreshold();
-        return new AlternatePathLrpProcessor(alternatePathRelativeThreshold, properties);
+        return new AlternatePathLrpProcessor(properties);
     }
 
     /**
