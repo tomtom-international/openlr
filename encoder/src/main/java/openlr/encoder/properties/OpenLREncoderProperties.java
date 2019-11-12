@@ -81,8 +81,10 @@ public class OpenLREncoderProperties {
     /** The comp time4 cache. */
     private final int compTime4Cache;
 
+    /** Flag to indicate whether a new lrp should be inserted in case of and alternate route **/
     private boolean insertLrpAtAlternatePath;
 
+    /** relative threshold value below which the lrp needs to be inserted **/
     private float alternatePathRelativeThreshold;
 
     /**

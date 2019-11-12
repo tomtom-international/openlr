@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * @since 1.4.4
  * <h1>Verifying the existence of Fully or partially joined second shortest route with length less than relative threshold</h1>
  */
 public class SecondShortestRouteChecker {
@@ -18,14 +19,12 @@ public class SecondShortestRouteChecker {
     private int maxLengthAllowed;
     private double relativeThreshold;
 
-
     private SecondShortestRouteChecker(GeoCoordinates destination, List<? extends Line> location, int maxLengthAllowed, double relativeThreshold) {
         this.destination = destination;
         this.location = location;
         this.maxLengthAllowed = maxLengthAllowed;
         this.relativeThreshold = relativeThreshold;
     }
-
 
     /**
      *
@@ -53,10 +52,9 @@ public class SecondShortestRouteChecker {
      * @return true: if the length of the second shortest route is not greater than route along location by relative threshold percentage
      *         false: if the length of the second shortest route is greater than route along location by relative threshold percentage
      */
-    boolean verifyThreshold(int lengthAlongSecondShortestRoute, int lengthAlongLocation){
+    private boolean verifyThreshold(int lengthAlongSecondShortestRoute, int lengthAlongLocation){
         return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeThreshold)));
     }
-
 
     /**
      * @param length heuristic length
@@ -101,7 +99,6 @@ public class SecondShortestRouteChecker {
             return false;
         }
     }
-
 
     /**
      *

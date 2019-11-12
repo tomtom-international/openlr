@@ -97,6 +97,7 @@ public enum OpenLREncoderProperty implements OpenLRProperty {
     /** Insert points if there is an alternate path*/
     LRP_ALTERNATIVE_PATH("LrpAlternativePath", PropertyType.BOOLEAN, false),
 
+    /** Relative threshold for alternate routes **/
     ALTERNATIVE_PATH_RELATIVE_THRESHOLD("AlternatePathRelativeThreshold", PropertyType.FLOAT, 0.1f);
 
 

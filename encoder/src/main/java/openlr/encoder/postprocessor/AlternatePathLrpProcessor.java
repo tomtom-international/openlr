@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @since 1.4.4
  * <h1>Processor to insert intermediate points along the shortest route between adjacent location reference points
  * where there are alternate paths with length under the threshold exist</h1>
  */
@@ -72,31 +73,26 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
      * @throws OpenLRProcessingException
      */
     public List<LocRefPoint> process(List<LocRefPoint> lrps) throws OpenLRProcessingException {
-
-        if (properties.insertLrpAtAlternatePath()) {
-            List<LocRefPoint> revisedLrpList = new ArrayList<>();
-            for (int index = 0; index < lrps.size() - 1; ++index) {
-                LocRefPoint lrp = lrps.get(index);
-                Line firstLineOfNextLrp = lrps.get(index + 1).getLine();
-                List<Line> oldRoute = lrp.getRoute();
-                List<Line> connectedRoute = new ArrayList<>();
-                for (Line line : oldRoute) {
-                    connectedRoute.add(line);
-                }
-                connectedRoute.add(firstLineOfNextLrp);
-                List<Integer> intermediateLrpPositions = determineNewIntermediatePoints(connectedRoute);
-                if (intermediateLrpPositions.isEmpty()) {
-                    revisedLrpList.add(lrp);
-                } else {
-                    // The source lrp needs to be replaced by a new lrp because the route which it represents
-                    // is now only till first intermediate point.
-                    revisedLrpList.addAll(createNewLRPs(lrp.getRoute(), intermediateLrpPositions));
-                }
-            }
-            revisedLrpList.add(lrps.get(lrps.size() - 1));
-            return revisedLrpList;
-        } else {
+        if (!properties.insertLrpAtAlternatePath()) {
             return lrps;
         }
+        List<LocRefPoint> revisedLrpList = new ArrayList<>();
+        for (int index = 0; index < lrps.size() - 1; ++index) {
+            LocRefPoint lrp = lrps.get(index);
+            Line firstLineOfNextLrp = lrps.get(index + 1).getLine();
+            List<Line> oldRoute = lrp.getRoute();
+            List<Line> connectedRoute = new ArrayList<>(oldRoute);
+            connectedRoute.add(firstLineOfNextLrp);
+            List<Integer> intermediateLrpPositions = determineNewIntermediatePoints(connectedRoute);
+            if (intermediateLrpPositions.isEmpty()) {
+                revisedLrpList.add(lrp);
+            } else {
+                // The source lrp needs to be replaced by a new lrp because the route which it represents
+                // is now only till first intermediate point.
+                revisedLrpList.addAll(createNewLRPs(lrp.getRoute(), intermediateLrpPositions));
+            }
+        }
+        revisedLrpList.add(lrps.get(lrps.size() - 1));
+        return revisedLrpList;
     }
 }
