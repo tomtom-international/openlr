@@ -89,6 +89,8 @@ public class AlternatePathLrpProcessor implements LrpProcessor {
                 if (intermediateLrpPositions.isEmpty()) {
                     revisedLrpList.add(lrp);
                 } else {
+                    // The source lrp needs to be replaced by a new lrp because the route which it represents
+                    // is now only till first intermediate point.
                     revisedLrpList.addAll(createNewLRPs(lrp.getRoute(), intermediateLrpPositions));
                 }
             }
