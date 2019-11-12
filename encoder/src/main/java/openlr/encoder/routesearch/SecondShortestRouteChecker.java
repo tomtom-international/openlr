@@ -53,7 +53,7 @@ public class SecondShortestRouteChecker {
      * @return true: if the length of the second shortest route is not greater than route along location by relative threshold percentage
      *         false: if the length of the second shortest route is greater than route along location by relative threshold percentage
      */
-    boolean VerifyThreshold(int lengthAlongSecondShortestRoute, int lengthAlongLocation){
+    boolean verifyThreshold(int lengthAlongSecondShortestRoute, int lengthAlongLocation){
         return (lengthAlongSecondShortestRoute < (lengthAlongLocation + (int) (lengthAlongLocation * relativeThreshold)));
     }
 
@@ -180,7 +180,7 @@ public class SecondShortestRouteChecker {
                 int destinationIndexOnLocation = location.subList(index, location.size()).indexOf(parent.getLine());
                 int subLocationLength = location.subList(index, destinationIndexOnLocation + index).stream().mapToInt(Line::getLineLength).sum();
                 int secondShortestRouteLength = lengthOfSecondShortestRoute(parent, index);
-                return VerifyThreshold(secondShortestRouteLength, subLocationLength);
+                return verifyThreshold(secondShortestRouteLength, subLocationLength);
             } else {
                 List<Line> children = getAcceptableSuccessors(parent, closedSet);
                 updateRouteSearchData(routeSearchData, children, parent);
