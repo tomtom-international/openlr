@@ -510,6 +510,23 @@ class DatabaseMockery {
                     will(returnIterator(tempCollOut));
                 }
             });
+
+            context.checking(new Expectations() {
+                {
+                    allowing(line).getGeoCoordinateAlongLine(0);
+                    will(returnValue(line.getStartNode().getGeoCoordinates()));
+                }
+            });
+
+            context.checking(new Expectations() {
+                {
+                    allowing(line).getGeoCoordinateAlongLine(line.getLineLength());
+                    will(returnValue(line.getEndNode().getGeoCoordinates()));
+                }
+            });
+
+
+
         }
     }
 

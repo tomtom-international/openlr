@@ -280,6 +280,15 @@
                     <Latitude>49.60838</Latitude>
                 </Output>
             </GetPointAlongLine>
+
+            <GetPointAlongLine line="2">
+                <Input>130</Input>
+                <Output>
+                    <Longitude>6.127442</Longitude>
+                    <Latitude>49.607498</Latitude>
+                </Output>
+            </GetPointAlongLine>
+
             <GetPointAlongLine line="14">
                 <Input>20</Input>
                 <Output>
@@ -509,6 +518,25 @@
                     <Latitude>49.60355</Latitude>
                 </Output>
             </GetPointAlongLine>
+
+            <GetPointAlongLine line="25">
+                <Input>25</Input>
+                <Output>
+                    <Longitude>6.128338</Longitude>
+                    <Latitude>49.603826</Latitude>
+                </Output>
+            </GetPointAlongLine>
+
+            <GetPointAlongLine line="7">
+                <Input>79</Input>
+                <Output>
+                    <Longitude>6.128797</Longitude>
+                    <Latitude>49.605383</Latitude>
+                </Output>
+            </GetPointAlongLine>
+
+
+
             <!--			 end for OpenLRRatingImplTest 	-->
         </GetPointAlongLineCalls>
         <DistanceToPointCalls>

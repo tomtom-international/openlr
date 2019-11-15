@@ -425,9 +425,11 @@ public abstract class AbstractDecoder {
             return CandidateLine.INVALID;
         }
 
+
+        int projectionAlongLine = p.isLastLRP() ? line.getLineLength() : 0;
         // rate the line
         int rating = RATING_FUNCTION.getRating(properties, nwd.getDistance(),
-                p, line, 0);
+                p, line, projectionAlongLine);
 
         // check if the rating value fulfills the minimum criteria
         if (rating < properties.getMinimumAcceptedRating()) {

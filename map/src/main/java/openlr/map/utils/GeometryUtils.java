@@ -315,51 +315,32 @@ public final class GeometryUtils {
      */
     public static double calculateLineBearing(final Line line,
                                               final BearingDirection dir, final int pointDistance,
-                                              final int projectionAlongLine) {
+                                              final int projectionAlongLine) throws RuntimeException{
         if (line == null) {
             return -1.0;
         }
         GeoCoordinates p1 = null;
         GeoCoordinates p2 = null;
 
-        if (dir == BearingDirection.IN_DIRECTION) {
-            if (projectionAlongLine > 0) {
-                p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
-                if (line.getLineLength() < projectionAlongLine + pointDistance) {
-                    p2 = line.getEndNode().getGeoCoordinates();
-                } else {
-                    p2 = line
-                            .getGeoCoordinateAlongLine(projectionAlongLine
-                                    + pointDistance);
-                }
-            } else {
-                p1 = line.getStartNode().getGeoCoordinates();
-                if (line.getLineLength() < pointDistance) {
-                    p2 = line.getEndNode().getGeoCoordinates();
-                } else {
-                    p2 = line.getGeoCoordinateAlongLine(pointDistance);
-                }
-            }
-        } else {
-            if (projectionAlongLine > 0) {
-                p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
-                if (projectionAlongLine < pointDistance) {
-                    p2 = line.getStartNode().getGeoCoordinates();
-                } else {
-                    p2 = line
-                            .getGeoCoordinateAlongLine(projectionAlongLine
-                                    - pointDistance);
-                }
-            } else {
-                p1 = line.getEndNode().getGeoCoordinates();
-                if (line.getLineLength() < pointDistance) {
-                    p2 = line.getStartNode().getGeoCoordinates();
-                } else {
-                    p2 = line.getGeoCoordinateAlongLine(line
-                            .getLineLength() - pointDistance);
-                }
-            }
+        if(projectionAlongLine < 0 || projectionAlongLine > line.getLineLength()){
+            throw new RuntimeException("Bearing calculation failed: invalid projection data");
         }
+
+        BearingDestinationRouting bearingDestinationRouting = BearingDestinationRouting.withConfig(line, pointDistance, projectionAlongLine);
+
+        if (dir == BearingDirection.IN_DIRECTION) {
+            p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
+            p2 = bearingDestinationRouting.calculateBearingDestinationInDirection();
+        } else {
+            p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
+            p2 =  bearingDestinationRouting.calculateBearingDestinationAgainstDirection();
+
+        }
+
+        if(p2 == null) {
+            throw new RuntimeException("Bearing calculation failed: failed to calculate bearing destination");
+        }
+
         return bearing(p1, p2);
     }
 
