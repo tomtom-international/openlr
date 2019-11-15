@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<TestMapStub>
+    <Node>
+        <id>1</id>
+        <longitude>13.476134</longitude>
+        <latitude>52.50507</latitude>
+    </Node>
+
+    <Node>
+        <id>2</id>
+        <longitude>13.47671</longitude>
+        <latitude>52.504942</latitude>
+    </Node>
+
+    <Node>
+        <id>3</id>
+        <longitude>13.477137</longitude>
+        <latitude>52.505390</latitude>
+    </Node>
+
+    <Line>
+        <id>1</id>
+        <start>1</start>
+        <end>2</end>
+        <frc>0</frc>
+        <fow>1</fow>
+        <IntermediatePoint>
+            <longitude>13.47645</longitude>
+            <latitude>52.504998</latitude>
+        </IntermediatePoint>
+    </Line>
+
+    <Line>
+        <id>2</id>
+        <start>2</start>
+        <end>3</end>
+        <frc>0</frc>
+        <fow>1</fow>
+        <IntermediatePoint>
+            <longitude>13.47689</longitude>
+            <latitude>52.505390</latitude>
+        </IntermediatePoint>
+    </Line>
+
+</TestMapStub>

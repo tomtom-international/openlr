@@ -81,6 +81,12 @@ public class OpenLREncoderProperties {
     /** The comp time4 cache. */
     private final int compTime4Cache;
 
+    /** Flag to indicate whether a new lrp should be inserted in case of and alternate route **/
+    private boolean insertLrpAtAlternatePath;
+
+    /** relative threshold value below which the lrp needs to be inserted **/
+    private float alternatePathRelativeThreshold;
+
     /**
      * Instantiates a new open lr encoder properties.
      *
@@ -113,6 +119,10 @@ public class OpenLREncoderProperties {
 
         compTime4Cache = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLREncoderProperty.COMP_TIME_4_CACHE);
+
+        insertLrpAtAlternatePath = OpenLRPropertyAccess.getBooleanPropertyValue(config,OpenLREncoderProperty.LRP_ALTERNATIVE_PATH);
+
+        alternatePathRelativeThreshold = OpenLRPropertyAccess.getFloatPropertyValue(config,OpenLREncoderProperty.ALTERNATIVE_PATH_RELATIVE_THRESHOLD);
     }
 
     /**
@@ -162,6 +172,15 @@ public class OpenLREncoderProperties {
      */
     public final int getCompTime4Cache() {
         return compTime4Cache;
+    }
+
+
+    public final boolean insertLrpAtAlternatePath(){
+        return insertLrpAtAlternatePath;
+    }
+
+    public final float getAlternatePathRelativeThreshold(){
+            return alternatePathRelativeThreshold;
     }
 
 }

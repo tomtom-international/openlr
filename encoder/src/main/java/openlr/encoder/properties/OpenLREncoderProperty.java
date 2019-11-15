@@ -37,6 +37,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -81,7 +92,14 @@ public enum OpenLREncoderProperty implements OpenLRProperty {
     PHYSICAL_FORMAT_VERSION("PhysicalFormatVersion", PropertyType.INTEGER_BY_ID, -1),
 
     /** The COM p_ tim e_4_ cache. */
-    COMP_TIME_4_CACHE("CompTime4Cache", PropertyType.INTEGER, 0);
+    COMP_TIME_4_CACHE("CompTime4Cache", PropertyType.INTEGER, 0),
+
+    /** Insert points if there is an alternate path*/
+    LRP_ALTERNATIVE_PATH("LrpAlternativePath", PropertyType.BOOLEAN, false),
+
+    /** Relative threshold for alternate routes **/
+    ALTERNATIVE_PATH_RELATIVE_THRESHOLD("AlternatePathRelativeThreshold", PropertyType.FLOAT, 0.1f);
+
 
     /** The key. */
     private final String key;

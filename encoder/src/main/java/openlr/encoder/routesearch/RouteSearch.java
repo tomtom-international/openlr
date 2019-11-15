@@ -65,10 +65,7 @@ import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * The Class RouteSearch defines a modified A* route search which checks
@@ -306,7 +303,6 @@ public class RouteSearch {
      *
      * @param actualElement the current element
      * @param data the data
-     * @param lfrc the lfrc
      */
     private void extractNextLines(final PQElem actualElement,
                                   final RouteSearchData data) {

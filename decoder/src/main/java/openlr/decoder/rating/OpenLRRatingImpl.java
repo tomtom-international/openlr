@@ -58,9 +58,15 @@ import openlr.decoder.properties.OpenLRDecoderProperties;
 import openlr.map.FormOfWay;
 import openlr.map.FunctionalRoadClass;
 import openlr.map.Line;
+import openlr.map.Node;
 import openlr.map.utils.GeometryUtils;
 import openlr.map.utils.GeometryUtils.BearingDirection;
 import org.apache.log4j.Logger;
+
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * The Class OpenLRRatingImpl implements the rating function for OpenLR.
@@ -114,7 +120,13 @@ public class OpenLRRatingImpl implements OpenLRRating {
         } else {
             dir = BearingDirection.IN_DIRECTION;
         }
+
         int nodeRating = calculateDistanceRating(properties, distance);
+
+        if (shouldApplyNonJunctionNodeFactor(line, dir, projectionAlongLine)) {
+            nodeRating = (int) (properties.getNonJunctionNodeFactor() * nodeRating);
+        }
+
         int bearingRating = calculateBearingRating(properties, p.getBearing(),
                 dir, line, projectionAlongLine);
         if (bearingRating < 0) {
@@ -136,6 +148,51 @@ public class OpenLRRatingImpl implements OpenLRRating {
                     + ", fow: " + fowRating + ")");
         }
         return rating;
+    }
+
+    /**
+     * Determine whether to apply the non-junction node factor to the node score
+     *
+     * @param line the line under consideration
+     * @param dir the direction along the line
+     * @param projectionAlongLine the projected distance along the line
+     * @return true if the non-junction node factor is to be applied
+     */
+    private boolean shouldApplyNonJunctionNodeFactor(Line line, BearingDirection dir, int projectionAlongLine) {
+        // Only apply the non-junction node factor when the LRP matches a node and not a line directly
+        if (projectionAlongLine > 0) {
+            return false;
+        }
+
+        // Find the node to check
+        Node node = dir == BearingDirection.IN_DIRECTION ? line.getStartNode() : line.getEndNode();
+
+        // Check if the node is not a junction
+        return !isJunction(node);
+    }
+
+    /**
+     * Check if a node is a junction. Junction nodes are nodes which are directly connected to more than 2 nodes.
+     *
+     * @param node the node to check
+     * @return true if the node is a junction
+     */
+    private boolean isJunction(Node node) {
+        return getConnectedNodeCount(node) > 2;
+    }
+
+    /**
+     * Get the number of nodes that are directly connected to a node via its connected lines
+     *
+     * @param node the node
+     * @return the number of connected nodes
+     */
+    private int getConnectedNodeCount(Node node) {
+        return (int) StreamSupport.stream(Spliterators.spliteratorUnknownSize(node.getConnectedLines(), Spliterator.ORDERED), false)
+                .flatMap(l -> Stream.of(l.getStartNode(), l.getEndNode()))
+                .filter(n -> !node.equals(n))
+                .distinct()
+                .count();
     }
 
     /**

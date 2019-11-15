@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="TestMapStub">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Node" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element ref="Line" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Node">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:unsignedLong" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="longitude" type="xs:double" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="latitude" type="xs:double" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Line">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:unsignedLong" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="start" type="xs:unsignedLong" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="end" type="xs:unsignedLong" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="frc" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:minInclusive value="0"/>
+                            <xs:maxInclusive value="7"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="fow" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:minInclusive value="0"/>
+                            <xs:maxInclusive value="7"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+
+                <xs:element type="xs:unsignedLong" name="Restrictions" minOccurs="0" maxOccurs="unbounded"/>
+
+                <xs:element name="IntermediatePoint" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="longitude" type="xs:double" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="latitude" type="xs:double" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

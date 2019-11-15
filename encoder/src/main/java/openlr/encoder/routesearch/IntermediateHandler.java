@@ -37,6 +37,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -60,7 +71,6 @@ import openlr.map.utils.NodeCheck;
 import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
 import org.apache.log4j.Logger;
-
 import java.util.List;
 
 /**
@@ -107,13 +117,10 @@ public class IntermediateHandler {
      * not there is a deviation and a new intermediate needs to be reported. The
      * method will return true if a new intermediate was found, otherwise false.
      *
-     * @param actualElement
-     *            the actual element
-     * @param data
-     *            the data
+     * @param actualElement the actual element
+     * @param data          the data
      * @return true, if a new intermediate was found, otherwise false
-     * @throws OpenLREncoderProcessingException
-     *             the open lr encoder runtime exception
+     * @throws OpenLREncoderProcessingException the open lr encoder runtime exception
      */
     public final RouteSearchResult checkIntermediate(
             final PQElem actualElement, final RouteSearchData data)
@@ -130,7 +137,7 @@ public class IntermediateHandler {
                 LOG.debug("first line in sub route found: "
                         + actualElement.getLine().getID());
             }
-        } else if (isNextElementInLocation(actualElement)) { //CASE 1
+        } else if (isNextElementInLocation(actualElement)) {//CASE 1
             // the new line is a direct successor of the last element found
             // so the new line is now the last element found, we can
             // continue calculating the route
