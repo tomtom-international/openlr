@@ -16,8 +16,8 @@ public class BearingDestinationRouting {
     private int projectionAlongLine;
 
     /**
-     * @param lrpLine line on the location on which LRP is placed
-     * @param bearingDistance maximum distance to the bearing destination from LRP
+     * @param lrpLine             line on the location on which LRP is placed
+     * @param bearingDistance     maximum distance to the bearing destination from LRP
      * @param projectionAlongLine distance from the start node of the point on line to which the LRP is projected on
      */
     private BearingDestinationRouting(Line lrpLine, int bearingDistance, int projectionAlongLine) {
@@ -27,8 +27,8 @@ public class BearingDestinationRouting {
     }
 
     /**
-     * @param lrpLine line on the location on which LRP is placed
-     * @param bearingDistance maximum distance to the bearing destination from LRP
+     * @param lrpLine             line on the location on which LRP is placed
+     * @param bearingDistance     maximum distance to the bearing destination from LRP
      * @param projectionAlongLine distance from the start node of the point on line to which the LRP is projected on
      * @return BearingDestinationRouting
      */
@@ -38,9 +38,10 @@ public class BearingDestinationRouting {
 
     /**
      * Verify the relevant end (Start/End node) of the line is not an intersection
+     *
      * @param connectedLine lines connected to relevant end
      * @return true: if there is only one line connected to the node
-     *         false: if there are more line connected to the node
+     * false: if there are more line connected to the node
      */
     boolean isNotIntersection(Iterator<Line> connectedLine) {
         int counter = 0;
@@ -53,10 +54,11 @@ public class BearingDestinationRouting {
 
     /**
      * Lines connected to the relevant end of the line
-     * @param line parent line
+     *
+     * @param line                parent line
      * @param inLocationDirection is bearing direction is same as the overall location direction
      * @return if 'inLocationDirection == true' outgoing lines of the end node
-     *         else if 'inLocationDirection == false' incoming lines of the start node
+     * else if 'inLocationDirection == false' incoming lines of the start node
      */
     private Iterator<Line> calculateNextLineInRoute(Line line, boolean inLocationDirection) {
         if (inLocationDirection) {
@@ -67,8 +69,8 @@ public class BearingDestinationRouting {
     }
 
     /**
-     * @param line line on which bearing destination exist
-     * @param offset distance from the relevant end, based on the location direction, of the line to the bearing destination
+     * @param line                line on which bearing destination exist
+     * @param offset              distance from the relevant end, based on the location direction, of the line to the bearing destination
      * @param inLocationDirection is bearing direction is same as the overall location direction
      * @return bearing destination coordinates
      */
@@ -82,10 +84,9 @@ public class BearingDestinationRouting {
     }
 
     /**
-     *
-     * @param lrpLine line on which lrp is placed
+     * @param lrpLine                line on which lrp is placed
      * @param lengthCoveredOnLrpLine distance along the line from the point on the line to which the LRP is projected to the relevant end based on bearing direction
-     * @param inLocationDirection is bearing direction is same as the overall location direction
+     * @param inLocationDirection    is bearing direction is same as the overall location direction
      * @return Coordinates of the bearing destination
      */
     private GeoCoordinates getBearingDestination(Line lrpLine, int lengthCoveredOnLrpLine, boolean inLocationDirection) {
@@ -109,14 +110,21 @@ public class BearingDestinationRouting {
      * @return bearing destination for all but last location reference points
      */
     public GeoCoordinates calculateBearingDestinationInDirection() {
-        return getBearingDestination(lrpLine, lrpLine.getLineLength() - projectionAlongLine, true);
+        GeoCoordinates bearingDestination = getBearingDestination(lrpLine, lrpLine.getLineLength() - projectionAlongLine, true);
+        if (bearingDestination == null) {
+            bearingDestination = lrpLine.getEndNode().getGeoCoordinates();
+        }
+        return bearingDestination;
     }
 
     /**
-     *
      * @return bearing destination for last location reference point
      */
     public GeoCoordinates calculateBearingDestinationAgainstDirection() {
-        return getBearingDestination(lrpLine, projectionAlongLine, false);
+        GeoCoordinates bearingDestination = getBearingDestination(lrpLine, projectionAlongLine, false);
+        if (bearingDestination == null) {
+            bearingDestination = lrpLine.getStartNode().getGeoCoordinates();
+        }
+        return bearingDestination;
     }
 }

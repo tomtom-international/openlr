@@ -315,14 +315,14 @@ public final class GeometryUtils {
      */
     public static double calculateLineBearing(final Line line,
                                               final BearingDirection dir, final int pointDistance,
-                                              final int projectionAlongLine) throws RuntimeException{
+                                              final int projectionAlongLine) {
         if (line == null) {
             return -1.0;
         }
         GeoCoordinates p1 = null;
         GeoCoordinates p2 = null;
 
-        if(projectionAlongLine < 0 || projectionAlongLine > line.getLineLength()){
+        if (projectionAlongLine < 0 || projectionAlongLine > line.getLineLength()) {
             throw new RuntimeException("Bearing calculation failed: invalid projection data");
         }
 
@@ -333,12 +333,8 @@ public final class GeometryUtils {
             p2 = bearingDestinationRouting.calculateBearingDestinationInDirection();
         } else {
             p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
-            p2 =  bearingDestinationRouting.calculateBearingDestinationAgainstDirection();
+            p2 = bearingDestinationRouting.calculateBearingDestinationAgainstDirection();
 
-        }
-
-        if(p2 == null) {
-            throw new RuntimeException("Bearing calculation failed: failed to calculate bearing destination");
         }
 
         return bearing(p1, p2);
