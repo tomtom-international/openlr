@@ -43,7 +43,7 @@ public class BearingDestinationRouting {
      * @return true: if there is only one line connected to the node
      * false: if there are more line connected to the node
      */
-    boolean isNotIntersection(Iterator<Line> connectedLine) {
+    private boolean isNotIntersection(Iterator<Line> connectedLine) {
         int counter = 0;
         while (connectedLine.hasNext()) {
             connectedLine.next();
@@ -56,7 +56,7 @@ public class BearingDestinationRouting {
      * Lines connected to the relevant end of the line
      *
      * @param line                parent line
-     * @param inLocationDirection is bearing direction is same as the overall location direction
+     * @param inLocationDirection true: if bearing direction is same as the overall location direction
      * @return if 'inLocationDirection == true' outgoing lines of the end node
      * else if 'inLocationDirection == false' incoming lines of the start node
      */
@@ -71,7 +71,7 @@ public class BearingDestinationRouting {
     /**
      * @param line                line on which bearing destination exist
      * @param offset              distance from the relevant end, based on the location direction, of the line to the bearing destination
-     * @param inLocationDirection is bearing direction is same as the overall location direction
+     * @param inLocationDirection true: if bearing direction is same as the overall location direction
      * @return bearing destination coordinates
      */
     private GeoCoordinates calculateBearingDestinationOnLine(Line line, int offset, boolean inLocationDirection) {
@@ -86,7 +86,7 @@ public class BearingDestinationRouting {
     /**
      * @param lrpLine                line on which lrp is placed
      * @param lengthCoveredOnLrpLine distance along the line from the point on the line to which the LRP is projected to the relevant end based on bearing direction
-     * @param inLocationDirection    is bearing direction is same as the overall location direction
+     * @param inLocationDirection    true: if bearing direction is same as the overall location direction
      * @return Coordinates of the bearing destination
      */
     private GeoCoordinates getBearingDestination(Line lrpLine, int lengthCoveredOnLrpLine, boolean inLocationDirection) {
