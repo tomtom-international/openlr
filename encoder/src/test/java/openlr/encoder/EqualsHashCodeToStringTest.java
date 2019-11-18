@@ -185,6 +185,21 @@ public class EqualsHashCodeToStringTest {
                 will(returnValue(mockedNode));
             }
         });
+
+        mockery.checking(new Expectations() {
+            {
+                allowing(mockedLine).getGeoCoordinateAlongLine(0);
+                will(returnValue(mockedNode.getGeoCoordinates()));
+            }
+        });
+
+        mockery.checking(new Expectations() {
+            {
+                allowing(mockedLine).getNextLines();
+                will(returnValue(new ArrayList<>().iterator()));
+            }
+        });
+
         mockery.checking(new Expectations() {
             {
                 allowing(mockedLine).getLineLength();

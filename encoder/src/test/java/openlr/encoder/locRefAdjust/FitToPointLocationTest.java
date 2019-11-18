@@ -410,6 +410,22 @@ public class FitToPointLocationTest {
                 will(returnValue(length));
             }
         });
+
+        mockery.checking(new Expectations() {
+            {
+                allowing(line).getGeoCoordinateAlongLine(0);
+                will(returnValue(line.getStartNode().getGeoCoordinates()));
+            }
+        });
+
+        mockery.checking(new Expectations() {
+            {
+                allowing(line).getGeoCoordinateAlongLine(line.getLineLength());
+                will(returnValue(line.getEndNode().getGeoCoordinates()));
+            }
+        });
+
+
         return line;
     }
 

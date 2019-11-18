@@ -323,7 +323,8 @@ public class LocRefPoint implements LocationReferencePoint {
         } else {
             dir = GeometryUtils.BearingDirection.AGAINST_DIRECTION;
         }
-        int projection = 0;
+        int projection = (dir == GeometryUtils.BearingDirection.IN_DIRECTION) ? 0 : line.getLineLength();
+
         if (isPointOnLine) {
             projection = line.measureAlongLine(longitude, latitude);
         }
