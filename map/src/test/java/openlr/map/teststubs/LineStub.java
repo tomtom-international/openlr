@@ -150,11 +150,9 @@ public class LineStub implements Line {
 
     public GeoCoordinates getGeoCoordinateAlongLine(int distance) throws MapStubException {
 
-        if(distance ==0){
+        if (distance == 0) {
             return getStartNode().getGeoCoordinates();
-        }
-
-        else if(distance == getLineLength()){
+        } else if (distance == getLineLength()) {
             return getEndNode().getGeoCoordinates();
         }
 
