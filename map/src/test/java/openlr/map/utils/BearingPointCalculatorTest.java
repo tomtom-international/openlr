@@ -11,7 +11,12 @@ import static org.testng.Assert.assertEquals;
 public class BearingPointCalculatorTest {
     private static MapDatabase mapDatabase = OpenLRMapDatabaseAdaptor.from(OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml"));
     private static int bearingDistance = 25;
+
+    private static MapDatabase multiWalkMapDatabase = OpenLRMapDatabaseAdaptor.from(OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/BearingRouteMapStub.xml"));
+    private static int bearingDistanceForMultiWalkTest = 500;
+
     private static final BearingPointCalculator bearingPointCalculator = new BearingPointCalculator();
+
 
     @Test
     public void testBearingDestinationAlongLocationDirection() {
@@ -57,6 +62,20 @@ public class BearingPointCalculatorTest {
     public void testBearingDestinationAtLrpLineAgainstDirection() {
         Line lrpLine = mapDatabase.getLine(6L); //34
         assertEquals(bearingPointCalculator.calculateBearingDestinationAgainstDirection(lrpLine, bearingDistance, lrpLine.getLineLength()), lrpLine.getGeoCoordinateAlongLine(lrpLine.getLineLength() - bearingDistance));
+    }
+
+    @Test
+    public void testBearingRouteAlongMultipleRoadSegments() {
+        Line lrpLine = multiWalkMapDatabase.getLine(1L);
+        Line bearingDestination = multiWalkMapDatabase.getLine(6L);
+        assertEquals(bearingPointCalculator.calculateBearingDestinationInDirection(lrpLine, 500, 0), bearingDestination.getEndNode().getGeoCoordinates());
+    }
+
+    @Test
+    public void testBearingRouteAlongMultipleRoadSegmentsInReverseDirection() {
+        Line lrpLine = multiWalkMapDatabase.getLine(6L);
+        Line bearingDestination = multiWalkMapDatabase.getLine(1L);
+        assertEquals(bearingPointCalculator.calculateBearingDestinationAgainstDirection(lrpLine, 500, lrpLine.getLineLength()), bearingDestination.getStartNode().getGeoCoordinates());
     }
 
 

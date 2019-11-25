@@ -315,23 +315,24 @@ public class LocRefPoint implements LocationReferencePoint {
      * @throws OpenLRProcessingException
      *             the open lr processing exception
      */
-    private double calculateBearing(final OpenLREncoderProperties properties)
-            throws OpenLRProcessingException {
-        GeometryUtils.BearingDirection dir = null;
-        if (!isLast) {
-            dir = GeometryUtils.BearingDirection.IN_DIRECTION;
-        } else {
+    private double calculateBearing(final OpenLREncoderProperties properties) {
+        GeometryUtils.BearingDirection dir;
+        if (isLast) {
             dir = GeometryUtils.BearingDirection.AGAINST_DIRECTION;
+        } else {
+            dir = GeometryUtils.BearingDirection.IN_DIRECTION;
         }
-        int projection = (dir == GeometryUtils.BearingDirection.IN_DIRECTION) ? 0 : line.getLineLength();
-
+        int projection;
         if (isPointOnLine) {
             projection = line.measureAlongLine(longitude, latitude);
+        } else if (isLast) {
+            projection = line.getLineLength();
+        } else {
+            projection = 0;
         }
-        double b = GeometryUtils.calculateLineBearing(line, dir,
-                properties.getBearingDistance(), projection);
-        return b;
+        return GeometryUtils.calculateLineBearing(line, dir, properties.getBearingDistance(), projection);
     }
+
 
     /**
      * {@inheritDoc}

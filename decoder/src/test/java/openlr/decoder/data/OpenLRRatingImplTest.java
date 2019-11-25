@@ -222,7 +222,7 @@ public class OpenLRRatingImplTest {
      */
     @Test
     public final void testRating2() throws OpenLRProcessingException {
-        int projectionAlongLine = point2.isLastLRP()?line10.getLineLength():0;
+        int projectionAlongLine = point2.isLastLRP() ? line10.getLineLength() : 0;
         int rating = RATING_FUNCTION.getRating(getProperties(),
                 DISTANCE_RATING_2, point2, line10, projectionAlongLine);
         assertEquals(EXPECTED_RESULT_RATING_2, rating);

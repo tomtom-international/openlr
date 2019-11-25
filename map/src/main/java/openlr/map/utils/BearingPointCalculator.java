@@ -16,18 +16,6 @@ import java.util.stream.StreamSupport;
  */
 public class BearingPointCalculator {
     /**
-     * Verify the relevant end (Start/End node) of the line is not an intersection
-     *
-     * @param connectedLines lines connected to relevant end
-     * @return true: if there is only one line connected to the node
-     * false: if there are more line connected to the node
-     */
-    private boolean isNotIntersection(int connectedLines) {
-        return (connectedLines == 1);
-    }
-
-
-    /**
      * Lines connected to the relevant end of the line
      *
      * @param line                parent line
@@ -74,9 +62,10 @@ public class BearingPointCalculator {
 
         if (bearingDistance >= lengthCovered) {
             List<Line> successors = calculateNextLinesInRoute(currentLine, inLocationDirection);
-            while (bearingDistance >= lengthCovered && isNotIntersection(successors.size())) {
+            while (bearingDistance >= lengthCovered && successors.size() == 1) {
                 currentLine = successors.get(0);
                 lengthCovered += currentLine.getLineLength();
+                successors = calculateNextLinesInRoute(currentLine, inLocationDirection);
             }
         }
 

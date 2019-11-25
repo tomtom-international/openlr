@@ -334,7 +334,7 @@ public final class GeometryUtils {
         }
 
         GeoCoordinates p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
-        GeoCoordinates p2 = null;
+        GeoCoordinates p2;
         if (dir == BearingDirection.IN_DIRECTION) {
             p2 = bearingPointCalculator.calculateBearingDestinationInDirection(line, pointDistance, projectionAlongLine);
         } else {
