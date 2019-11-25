@@ -13,7 +13,6 @@ public class BearingPointCalculatorTest {
     private static int bearingDistance = 25;
 
     private static MapDatabase multiWalkMapDatabase = OpenLRMapDatabaseAdaptor.from(OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/BearingRouteMapStub.xml"));
-    private static int bearingDistanceForMultiWalkTest = 500;
 
     private static final BearingPointCalculator bearingPointCalculator = new BearingPointCalculator();
 
