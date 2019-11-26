@@ -59,8 +59,7 @@ import org.jmock.Mockery;
 import org.testng.annotations.Test;
 
 import java.awt.geom.Point2D;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.testng.Assert.*;
 
@@ -149,19 +148,20 @@ public class GeometryUtilsTest {
     @Test
     public final void testCalculateLineBearing() {
 
+
         Map<Lines, Line> lines = mockBearingTestLines();
 
         assertEquals(GeometryUtils.calculateLineBearing(lines.get(Lines.L1),
                 BearingDirection.IN_DIRECTION, BEARING_DISTANCE, 0),
                 BEARING_L1_IN_DIRECTION);
         assertEquals(GeometryUtils.calculateLineBearing(lines.get(Lines.L2),
-                BearingDirection.AGAINST_DIRECTION, BEARING_DISTANCE, 0),
+                BearingDirection.AGAINST_DIRECTION, BEARING_DISTANCE, Lines.L2.lenght),
                 BEARING_L2_AGAINST_DIRECTION);
         assertEquals(GeometryUtils.calculateLineBearing(lines.get(Lines.L3),
                 BearingDirection.IN_DIRECTION, BEARING_DISTANCE, 0),
                 BEARING_L3_IN_DIRECTION);
         assertEquals(GeometryUtils.calculateLineBearing(lines.get(Lines.L4),
-                BearingDirection.AGAINST_DIRECTION, BEARING_DISTANCE, 0),
+                BearingDirection.AGAINST_DIRECTION, BEARING_DISTANCE, Lines.L4.lenght),
                 BEARING_L4_AGAINST_DIRECTION);
         assertEquals(GeometryUtils.calculateLineBearing(null, null,
                 BEARING_DISTANCE, 0), EXPECTED_BEARING_ERROR);
@@ -239,6 +239,11 @@ public class GeometryUtilsTest {
             }
 
             {
+                allowing(l1).getGeoCoordinateAlongLine(0);
+                will(returnValue(nodes.get(Nodes.N1START).getGeoCoordinates()));
+            }
+
+            {
                 allowing(l1).getStartNode();
                 will(returnValue(nodes.get(Nodes.N1START)));
             }
@@ -263,6 +268,26 @@ public class GeometryUtilsTest {
             {
                 allowing(l2).getLineLength();
                 will(returnValue(Lines.L2.lenght));
+            }
+
+            {
+                allowing(l2).getGeoCoordinateAlongLine(Lines.L2.lenght);
+                will(returnValue(nodes.get(Nodes.N2END).getGeoCoordinates()));
+            }
+
+            {
+                allowing(l2).getGeoCoordinateAlongLine(0);
+                will(returnValue(nodes.get(Nodes.N2START).getGeoCoordinates()));
+            }
+
+            {
+                allowing(l2).getStartNode();
+                will(returnValue(nodes.get(Nodes.N2START)));
+            }
+
+            {
+                allowing(l2).getPrevLines();
+                will(returnValue((new ArrayList<Line>()).iterator()));
             }
 
             {
@@ -299,6 +324,16 @@ public class GeometryUtilsTest {
             }
 
             {
+                allowing(l3).getGeoCoordinateAlongLine(0);
+                will(returnValue(nodes.get(Nodes.N3START).getGeoCoordinates()));
+            }
+
+            {
+                allowing(l3).getNextLines();
+                will(returnValue((new ArrayList<Line>()).iterator()));
+            }
+
+            {
                 allowing(l3).getEndNode();
                 will(returnValue(nodes.get(Nodes.N3END)));
             }
@@ -320,6 +355,21 @@ public class GeometryUtilsTest {
             }
 
             {
+                allowing(l4).getGeoCoordinateAlongLine(0);
+                will(returnValue(nodes.get(Nodes.N4START).getGeoCoordinates()));
+            }
+
+            {
+                allowing(l4).getGeoCoordinateAlongLine(Lines.L4.lenght);
+                will(returnValue(nodes.get(Nodes.N4END).getGeoCoordinates()));
+            }
+
+            {
+                allowing(l4).getPrevLines();
+                will(returnValue((new ArrayList<Line>()).iterator()));
+            }
+
+            {
                 allowing(l4).getEndNode();
                 will(returnValue(nodes.get(Nodes.N4END)));
             }
@@ -333,6 +383,21 @@ public class GeometryUtilsTest {
             {
                 allowing(verticalLine).getLineLength();
                 will(returnValue(Lines.VERTICAL_LINE.lenght));
+            }
+
+            {
+                allowing(verticalLine).getGeoCoordinateAlongLine(0);
+                will(returnValue(nodes.get(Nodes.VERTICAL_LINE_START).getGeoCoordinates()));
+            }
+
+            {
+                allowing(verticalLine).getNextLines();
+                will(returnValue((new ArrayList<Line>()).iterator()));
+            }
+
+            {
+                allowing(verticalLine).getPrevLines();
+                will(returnValue((new ArrayList<Line>()).iterator()));
             }
 
             {
@@ -422,6 +487,8 @@ public class GeometryUtilsTest {
 
         /** The start node of line 1. */
         N1START(49.60851, 6.12683),
+        /** The start node of line 2. */
+        N2START(49.60361, 6.12775),
         /** The end node of line 2. */
         N2END(49.60305, 6.12817),
         /** The start node of line 3. */

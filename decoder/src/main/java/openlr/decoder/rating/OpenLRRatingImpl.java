@@ -160,7 +160,7 @@ public class OpenLRRatingImpl implements OpenLRRating {
      */
     private boolean shouldApplyNonJunctionNodeFactor(Line line, BearingDirection dir, int projectionAlongLine) {
         // Only apply the non-junction node factor when the LRP matches a node and not a line directly
-        if (projectionAlongLine > 0) {
+        if (projectionAlongLine > 0 && projectionAlongLine < line.getLineLength()) {
             return false;
         }
 

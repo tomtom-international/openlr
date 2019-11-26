@@ -37,6 +37,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -115,6 +126,8 @@ public final class GeometryUtils {
     private static final double INVERSE_FLATTENING = 298.257223563;
     /** The Constant OBLATENESS. */
     private static final double OBLATENESS = 1. / INVERSE_FLATTENING;
+
+    private static final BearingPointCalculator bearingPointCalculator = new BearingPointCalculator();
 
     /**
      * Utility class shall not be instantiated.
@@ -316,50 +329,19 @@ public final class GeometryUtils {
     public static double calculateLineBearing(final Line line,
                                               final BearingDirection dir, final int pointDistance,
                                               final int projectionAlongLine) {
-        if (line == null) {
+        if (line == null || projectionAlongLine < 0 || projectionAlongLine > line.getLineLength()) {
             return -1.0;
         }
-        GeoCoordinates p1 = null;
-        GeoCoordinates p2 = null;
 
+        GeoCoordinates p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
+        GeoCoordinates p2;
         if (dir == BearingDirection.IN_DIRECTION) {
-            if (projectionAlongLine > 0) {
-                p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
-                if (line.getLineLength() < projectionAlongLine + pointDistance) {
-                    p2 = line.getEndNode().getGeoCoordinates();
-                } else {
-                    p2 = line
-                            .getGeoCoordinateAlongLine(projectionAlongLine
-                                    + pointDistance);
-                }
-            } else {
-                p1 = line.getStartNode().getGeoCoordinates();
-                if (line.getLineLength() < pointDistance) {
-                    p2 = line.getEndNode().getGeoCoordinates();
-                } else {
-                    p2 = line.getGeoCoordinateAlongLine(pointDistance);
-                }
-            }
+            p2 = bearingPointCalculator.calculateBearingDestinationInDirection(line, pointDistance, projectionAlongLine);
         } else {
-            if (projectionAlongLine > 0) {
-                p1 = line.getGeoCoordinateAlongLine(projectionAlongLine);
-                if (projectionAlongLine < pointDistance) {
-                    p2 = line.getStartNode().getGeoCoordinates();
-                } else {
-                    p2 = line
-                            .getGeoCoordinateAlongLine(projectionAlongLine
-                                    - pointDistance);
-                }
-            } else {
-                p1 = line.getEndNode().getGeoCoordinates();
-                if (line.getLineLength() < pointDistance) {
-                    p2 = line.getStartNode().getGeoCoordinates();
-                } else {
-                    p2 = line.getGeoCoordinateAlongLine(line
-                            .getLineLength() - pointDistance);
-                }
-            }
+            p2 = bearingPointCalculator.calculateBearingDestinationAgainstDirection(line, pointDistance, projectionAlongLine);
+
         }
+
         return bearing(p1, p2);
     }
 

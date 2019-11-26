@@ -150,6 +150,12 @@ public class LineStub implements Line {
 
     public GeoCoordinates getGeoCoordinateAlongLine(int distance) throws MapStubException {
 
+        if (distance == 0) {
+            return getStartNode().getGeoCoordinates();
+        } else if (distance == getLineLength()) {
+            return getEndNode().getGeoCoordinates();
+        }
+
         int lengthCovered = 0;
         for (LineSegment segment : lineSegments) {
             if (lengthCovered <= distance && lengthCovered + segment.getLength() >= distance) {
