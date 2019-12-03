@@ -52,9 +52,11 @@
  */
 package openlr.decoder.properties;
 
+import openlr.map.FunctionalRoadClass;
 import openlr.properties.OpenLRProperty;
 import openlr.properties.PropertyType;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -87,8 +89,20 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
     /** Non junction node factor */
     NON_JUNCTION_NODE_FACTOR("NonJunctionNodeFactor", PropertyType.FLOAT, 1.0f),
 
-    /** The FR c_ vairance. */
-    FRC_VARIANCE("FRC_Variance", PropertyType.INTEGER, 2),
+    /** The FRC variance */
+    FRC_VARIANCE("FRC_Variance", PropertyType.INTEGER_BY_MAP,
+        new HashMap<String, Integer>() {
+        {
+            put("FRC_0", 2);
+            put("FRC_1", 2);
+            put("FRC_2", 2);
+            put("FRC_3", 2);
+            put("FRC_4", 2);
+            put("FRC_5", 2);
+            put("FRC_6", 2);
+            put("FRC_7", 2);
+        }
+    }),
 
     /** The MI n_ ac c_ rating. */
     MIN_ACC_RATING("MinimumAcceptedRating", PropertyType.INTEGER, 800),

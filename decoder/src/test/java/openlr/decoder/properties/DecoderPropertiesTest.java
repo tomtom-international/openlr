@@ -52,6 +52,7 @@ package openlr.decoder.properties;
 
 import openlr.OpenLRProcessingException;
 import openlr.decoder.rating.OpenLRRating.RatingCategory;
+import openlr.map.FunctionalRoadClass;
 import openlr.properties.OpenLRPropertiesReader;
 import openlr.properties.OpenLRPropertyAccess;
 import org.apache.commons.configuration.Configuration;
@@ -82,7 +83,9 @@ public class DecoderPropertiesTest {
     /** The expected value for property 'node factor'. */
     private static final int NODE_FACTOR = 2;
     /** The expected value for property 'FRC variance'. */
-    private static final int FRC_VARIANCE = 2;
+    private static final int FRC_VARIANCE_TIGHT = 1;
+    private static final int FRC_VARIANCE_STANDARD = 2;
+    private static final int FRC_VARIANCE_LOOSE = 3;
     /** The expected value for property 'minimum accepted rating'. */
     private static final int MIN_ACCEPTED_RATING = 800;
     /** The expected value for property 'maximum node distance'. */
@@ -152,8 +155,24 @@ public class DecoderPropertiesTest {
                     OpenLRDecoderProperty.MAX_NODE_DIST), MAX_NODE_DISTANCE);
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValue(prop,
                     OpenLRDecoderProperty.MIN_ACC_RATING), MIN_ACCEPTED_RATING);
-            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValue(prop,
-                    OpenLRDecoderProperty.FRC_VARIANCE), FRC_VARIANCE);
+
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_0.name()), FRC_VARIANCE_TIGHT);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_1.name()), FRC_VARIANCE_TIGHT);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_2.name()), FRC_VARIANCE_STANDARD);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_3.name()), FRC_VARIANCE_STANDARD);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_4.name()), FRC_VARIANCE_LOOSE);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_5.name()), FRC_VARIANCE_LOOSE);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_6.name()), FRC_VARIANCE_LOOSE);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(prop,
+                    OpenLRDecoderProperty.FRC_VARIANCE, FunctionalRoadClass.FRC_7.name()), FRC_VARIANCE_LOOSE);
+
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValue(prop,
                     OpenLRDecoderProperty.NODE_FACTOR), NODE_FACTOR);
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValue(prop,

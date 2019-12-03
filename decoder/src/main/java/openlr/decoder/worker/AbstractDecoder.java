@@ -240,7 +240,7 @@ public abstract class AbstractDecoder {
 
             if (lrp.getLfrc() != null
                     && frc.getID() > lrp.getLfrc().getID()
-                    + properties.getFrcVariance()) {
+                    + properties.getFrcVariance(lrp.getFRC())) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("line " + line.getID() + " ignored [low frc ("
                             + frc.getID() + ")]");
@@ -418,7 +418,7 @@ public abstract class AbstractDecoder {
         FunctionalRoadClass frc = line.getFRC();
         if (!p.isLastLRP()
                 && frc.getID() > p.getLfrc().getID()
-                + properties.getFrcVariance()) {
+                + properties.getFrcVariance(p.getLfrc())) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("line " + line.getID() + " ignored [low frc (" + frc.getID() + ")]");
             }
@@ -508,7 +508,7 @@ public abstract class AbstractDecoder {
                             + lrp.getDistanceToNext() + "m");
                 }
                 // determine the minimum frc for the path to be calculated
-                int lfrc = lrp.getLfrc().getID() + properties.getFrcVariance();
+                int lfrc = lrp.getLfrc().getID() + properties.getFrcVariance(lrp.getLfrc());
                 CandidateLine previousEndCandidate = null;
                 if (lrpPrev != null) {
                     previousEndCandidate = resolvedRoutes
@@ -823,7 +823,7 @@ public abstract class AbstractDecoder {
                 ppreviousCandidate, newCandidate, properties);
         RouteSearch.RouteSearchResult resultRedo = rsearchInner.calculateRoute(
                 newStart, newCandidate.getLine(), maxdistanceInner, lrpPrev
-                        .getLfrc().getID() + properties.getFrcVariance(),
+                        .getLfrc().getID() + properties.getFrcVariance(lrpPrev.getLfrc()),
                 lrp.isLastLRP());
         if (resultRedo == RouteSearch.RouteSearchResult.ROUTE_FOUND
                 && DecoderUtils.getMinDistanceNP(lrpPrev, properties) <= rsearchInner
