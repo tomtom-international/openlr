@@ -265,7 +265,7 @@ public class OpenLRDecoderProperties {
      *
      * @return the frcVariance
      */
-    public final Integer getFrcVariance(FunctionalRoadClass frc) {
+    public final int getFrcVariance(FunctionalRoadClass frc) {
         return frcVariance.get(frc);
     }
 
