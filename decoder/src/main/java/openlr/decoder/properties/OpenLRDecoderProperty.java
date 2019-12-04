@@ -52,11 +52,9 @@
  */
 package openlr.decoder.properties;
 
-import openlr.map.FunctionalRoadClass;
 import openlr.properties.OpenLRProperty;
 import openlr.properties.PropertyType;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
