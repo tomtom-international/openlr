@@ -4,58 +4,58 @@ on digital maps using modules in this package.
 
 #2. SetUp
 We'll need to add the following dependencies to our pom.xml
-```
+```xml
 <dependency>
  <groupId>org.openlr</groupId>
  <artifactId>encoder</artifactId>
  <version>${openlr.version}</version>
 </dependency>
 ```
-```
+```xml
 <dependency>
  <groupId>org.openlr</groupId>
  <artifactId>decoder</artifactId>
  <version>${openlr.version}</version>
 </dependency>
 ```
-```
+```xml
 <dependency>
  <groupId>org.openlr</groupId>
  <artifactId>map</artifactId>
  <version>${openlr.version}</version>
 </dependency>
 ```
-```
+```xml
 <dependency>
  <groupId>org.openlr</groupId>
  <artifactId>data</artifactId>
  <version>${openlr.version}</version>
 </dependency>
 ```
-```			
+```xml
 <dependency>
  <groupId>org.openlr</groupId>
  <artifactId>binary</artifactId>
  <version>${openlr.version}</version>
 </dependency>
 ```
-```
+```xml
 <dependency>
  <groupId>org.openlr</groupId>
  <artifactId>xml</artifactId>
  <version>${openlr.version}</version>
 </dependency>
+```
 
+```xml
 <dependency>
  <groupId>org.openlr</groupId>
  <artifactId>proto</artifactId>
  <version>${openlr.version}</version>
 </dependency>
-
 ```
 
 #3. Map Implementation
-
 
 **Implement the following interfaces against the map you want to use**
 
@@ -115,11 +115,11 @@ LocationReferenceHolder locationReferenceHolder = encoder.encodeLocation(params,
 String locationReferenceBinary = ((ByteArray) physicalEncoder.encodeData(locationReferenceHolder.getRawLocationReferenceData()).getLocationReferenceData()).getBase64Data();
 ```
 
-
 #6. Decoder
 
 <p>The code snippet given below shows how to decode an OpenLR binary location reference on to a map.</p>
 <p>you can find the default encoder properties file in /Users/babub/scratch/TomTom_GitRepo/openlr/decoder/src/main/resources/OpenLR-Decoder-Properties.xml</p>
+
 ***In the example given below we are decoding OpenLR location reference binary string ***
 
 ```java
@@ -133,13 +133,3 @@ OpenLRDecoderParameter params = new OpenLRDecoderParameter.Builder().with(map).w
 OpenLRDecoder decoder = new openlr.decoder.OpenLRDecoder();
 Location location = decoder.decodeRaw(params, rawLocationReference);
 ```
-
-
-
- 
-
-
-
-         
-         
- 
