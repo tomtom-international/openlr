@@ -151,10 +151,11 @@ public class OpenLRDecoderProperties {
         frcVariance = new HashMap<>();
 
         for (FunctionalRoadClass frc : FunctionalRoadClass.values()) {
-            frcVariance.put(frc, OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+            int variance = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
                     config,
                     OpenLRDecoderProperty.FRC_VARIANCE,
-                    frc.name()));
+                    frc.name());
+            frcVariance.put(frc, variance);
         }
 
         minimumAcceptedRating = OpenLRPropertyAccess.getIntegerPropertyValue(
