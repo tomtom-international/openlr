@@ -97,7 +97,7 @@ The following three formats are available in this package:</p>
 <p>you can find the default encoder properties file in openlr/encoder/src/main/resources/OpenLR-Encoder-Properties.xml
 </p>
 
-***In the example given below we are encoding a line location with connected lines (1,2,3,4) ***
+***In the example given below we are encoding a line location with connected lines (1,2,3,4)***
 
 ```java
 List<Line>  testLocation = Arrays.asList(mapDatabaseAdapter.getLine(1),
@@ -120,7 +120,7 @@ String locationReferenceBinary = ((ByteArray) physicalEncoder.encodeData(locatio
 <p>The code snippet given below shows how to decode an OpenLR binary location reference on to a map.</p>
 <p>you can find the default encoder properties file in /Users/babub/scratch/TomTom_GitRepo/openlr/decoder/src/main/resources/OpenLR-Decoder-Properties.xml</p>
 
-***In the example given below we are decoding OpenLR location reference binary string ***
+***In the example given below we are decoding OpenLR location reference binary string***
 
 ```java
 String openlr = "CwmQ9SVWJS2qBAD9/14tCQ==";
