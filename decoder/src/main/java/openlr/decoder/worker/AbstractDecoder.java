@@ -240,7 +240,7 @@ public abstract class AbstractDecoder {
 
             if (lrp.getLfrc() != null
                     && frc.getID() > lrp.getLfrc().getID()
-                    + properties.getFrcVariance(lrp.getFRC())) {
+                    + properties.getFrcVariance(lrp.getLfrc())) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("line " + line.getID() + " ignored [low frc ("
                             + frc.getID() + ")]");
