@@ -4,6 +4,8 @@ on digital maps using modules in this package.
 
 #2. SetUp
 We'll need to add the following dependencies to our pom.xml
+<p>Note: Replace ${openlr.version} with the version of the library you wish to use.</p>
+
 ```xml
 <dependency>
  <groupId>org.openlr</groupId>
