@@ -100,36 +100,56 @@ The following three formats are available in this package:</p>
 ***In the example given below we are encoding a line location with connected lines (1,2,3,4)***
 
 ```java
+//Build the line location
 List<Line>  testLocation = Arrays.asList(mapDatabaseAdapter.getLine(1),
                                          mapDatabaseAdapter.getLine(2),
                                          mapDatabaseAdapter.getLine(3),
                                          mapDatabaseAdapter.getLine(4));
-Location location = LocationFactory.createLineLocation("Test location", testLocation,0,0);
+Location location = LocationFactory.createLineLocation("Test location", testLocation, 0, 0);
+
+//Initialize the physical format encoder
 PhysicalEncoder physicalEncoder = new OpenLRBinaryEncoder();
+
+//Build the encoder configurations
 Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File("OpenLR-Encoder-Properties.xml"));
 OpenLREncoderParameter params = new OpenLREncoderParameter.Builder().with(map).with(encoderConfig)
                 .with(Arrays.asList(physicalEncoder))
                 .buildParameter();
+
+//Initialize the onpenlr encoder
 OpenLREncoder encoder = new openlr.encoder.OpenLREncoder();
+
+//Encode the line location in openlr format
 LocationReferenceHolder locationReferenceHolder = encoder.encodeLocation(params, location);
+
+//Generate the binary for the openlr location referencing container
 String locationReferenceBinary = ((ByteArray) physicalEncoder.encodeData(locationReferenceHolder.getRawLocationReferenceData()).getLocationReferenceData()).getBase64Data();
 ```
 
 #6. Decoder
 
 <p>The code snippet given below shows how to decode an OpenLR binary location reference on to a map.</p>
-<p>you can find the default encoder properties file in /Users/babub/scratch/TomTom_GitRepo/openlr/decoder/src/main/resources/OpenLR-Decoder-Properties.xml</p>
+<p>you can find the default encoder properties file in openlr/decoder/src/main/resources/OpenLR-Decoder-Properties.xml</p>
 
 ***In the example given below we are decoding OpenLR location reference binary string***
 
 ```java
+//base64 openlr binary string  to decode 
 String openlr = "CwmQ9SVWJS2qBAD9/14tCQ==";
+
+//Initialize the binary decoder and decode the binary string
 OpenLRBinaryDecoder binaryDecoder = new OpenLRBinaryDecoder();
 ByteArray byteArray = new ByteArray(Base64.getDecoder().decode(openlr));
 LocationReferenceBinaryImpl locationReferenceBinary = new LocationReferenceBinaryImpl("Test location", byteArray);
 RawLocationReference rawLocationReference = binaryDecoder.decodeData(locationReferenceBinary);
+
+//Build the decoder configuration
 Configuration decoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Decoder-Properties.xml").getFile()));
 OpenLRDecoderParameter params = new OpenLRDecoderParameter.Builder().with(map).with(decoderConfig).buildParameter();
+
+//Initialize the decoder
 OpenLRDecoder decoder = new openlr.decoder.OpenLRDecoder();
+
+//decode the location
 Location location = decoder.decodeRaw(params, rawLocationReference);
 ```
