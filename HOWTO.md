@@ -1,8 +1,8 @@
-# Overview
+## Overview
 In this document, we're going to focus on how to encode and decode OpenLR locations 
 on digital maps using modules in this package.
 
-# SetUp
+## SetUp
 We'll need to add the following dependencies to our pom.xml
 <p>Note: Replace ${openlr.version} with the version of the library you wish to use.</p>
 
@@ -57,7 +57,7 @@ We'll need to add the following dependencies to our pom.xml
 </dependency>
 ```
 
-# Map Implementation
+## Map Implementation
 
 **Implement the following interfaces against the map you want to use**
 
@@ -67,7 +67,7 @@ We'll need to add the following dependencies to our pom.xml
 <li>openlr.map.MapDatabase</li>
 </ul> 
 
-# Load Map
+## Load Map
 
 <p> We are using the sqlite database for the remaining part of the document </p>
 
@@ -78,7 +78,7 @@ OpenLRMapLoader loader = new SQLiteMapLoader();
 MapDatabase map = loader.load(Arrays.asList(param));
 ```
 
-# Physical Format
+## Physical Format
 
 <p>Choose the physical format of the OpenLR location reference container<br>
 The following three formats are available in this package:</p>
@@ -90,7 +90,7 @@ The following three formats are available in this package:</p>
 
 <p>We are choosing binary format for the remaining part of the document</p>
 
-# Encoder
+## Encoder
 
 <p>The code snippet given below shows how to encode a line location on the map in OpenLR binary format.</p>
 
@@ -126,7 +126,7 @@ LocationReferenceHolder locationReferenceHolder = encoder.encodeLocation(params,
 String locationReferenceBinary = ((ByteArray) physicalEncoder.encodeData(locationReferenceHolder.getRawLocationReferenceData()).getLocationReferenceData()).getBase64Data();
 ```
 
-# Decoder
+## Decoder
 
 <p>The code snippet given below shows how to decode an OpenLR binary location reference on to a map.</p>
 <p>you can find the default encoder properties file in openlr/decoder/src/main/resources/OpenLR-Decoder-Properties.xml</p>
