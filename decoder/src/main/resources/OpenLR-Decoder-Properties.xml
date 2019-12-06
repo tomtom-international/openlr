@@ -62,7 +62,7 @@
         <Good>12</Good>
         <Average>18</Average>
     </Bearing_Intervals>
-    <FRC_Variance>2</FRC_Variance>
+    <FRC_Variance></FRC_Variance>
     <MinimumAcceptedRating>700</MinimumAcceptedRating>
     <MaxNumberRetries>3</MaxNumberRetries>
     <SameLineDegradation>0.10</SameLineDegradation>

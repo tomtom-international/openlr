@@ -54,10 +54,13 @@ package openlr.decoder.properties;
 
 import openlr.OpenLRProcessingException;
 import openlr.decoder.rating.OpenLRRating.RatingCategory;
+import openlr.map.FunctionalRoadClass;
 import openlr.properties.OpenLRPropertyAccess;
 import org.apache.commons.configuration.Configuration;
 
 import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Class OpenLRDecoderProperties.
@@ -77,7 +80,7 @@ public class OpenLRDecoderProperties {
     private final int lineFactor;
 
     /** The frc variance. */
-    private final int frcVariance;
+    private final Map<FunctionalRoadClass, Integer> frcVariance;
 
     /** The minimum accepted rating. */
     private final int minimumAcceptedRating;
@@ -144,8 +147,17 @@ public class OpenLRDecoderProperties {
                 OpenLRDecoderProperty.LINE_FACTOR);
         nonJunctionNodeFactor = OpenLRPropertyAccess.getFloatPropertyValue(config,
                 OpenLRDecoderProperty.NON_JUNCTION_NODE_FACTOR);
-        frcVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
-                OpenLRDecoderProperty.FRC_VARIANCE);
+
+        frcVariance = new HashMap<>();
+
+        for (FunctionalRoadClass frc : FunctionalRoadClass.values()) {
+            int variance = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    config,
+                    OpenLRDecoderProperty.FRC_VARIANCE,
+                    frc.name());
+            frcVariance.put(frc, variance);
+        }
+
         minimumAcceptedRating = OpenLRPropertyAccess.getIntegerPropertyValue(
                 config, OpenLRDecoderProperty.MIN_ACC_RATING);
         maxNumberRetries = OpenLRPropertyAccess.getIntegerPropertyValue(config,
@@ -254,8 +266,8 @@ public class OpenLRDecoderProperties {
      *
      * @return the frcVariance
      */
-    public final int getFrcVariance() {
-        return frcVariance;
+    public final int getFrcVariance(FunctionalRoadClass frc) {
+        return frcVariance.get(frc);
     }
 
     /**
