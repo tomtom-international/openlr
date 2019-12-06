@@ -65,8 +65,6 @@ We'll need to add the following dependencies to our pom.xml
 <li>openlr.map.Line</li>
 <li>openlr.map.Node</li>
 <li>openlr.map.MapDatabase</li>
-<li>openlr.map.loader.MapLoadParameter</li>
-<li>openlr.map.loader.OpenLRMapLoader</li>
 </ul> 
 
 #4 Load Map
