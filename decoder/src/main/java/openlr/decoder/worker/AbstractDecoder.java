@@ -227,7 +227,8 @@ public abstract class AbstractDecoder {
     private List<CandidateLine> findCandidateLinesDirectly(
             final OpenLRRating openLRRating,
             final OpenLRDecoderProperties properties,
-            final LocationReferencePoint lrp, final MapDatabase mdb,
+            final LocationReferencePoint lrp,
+            final MapDatabase mdb,
             final List<CandidateLine> alreadyFound)
             throws OpenLRProcessingException {
         if (LOG.isDebugEnabled()) {
@@ -383,6 +384,25 @@ public abstract class AbstractDecoder {
         return resultSet;
     }
 
+    private boolean hasValidDirection(final Line line, final boolean isLastLrp, final Node candidateNode){
+        // check the line direction
+        // only outgoing lines are accepted for the LRPs, except the last LRP
+        // where only incoming lines are accepted
+        Node refNode;
+        if (isLastLrp) {
+            refNode = line.getEndNode();
+        } else {
+            refNode = line.getStartNode();
+        }
+        return refNode.equals(candidateNode);
+    }
+
+    private boolean hasValidFrc(final Line line, final boolean isLastLrp, final FunctionalRoadClass  lowestFrc,final int frcVariance){
+        // check the functional road class value
+        FunctionalRoadClass frc = line.getFRC();
+        return (isLastLrp || frc.getID() <= lowestFrc.getID() + frcVariance);
+    }
+
     /**
      * Investigates and rates a line. The rating value indicates how good the
      * lines matches the LRP attributes. If the line does not match at all (due
@@ -409,51 +429,26 @@ public abstract class AbstractDecoder {
             throw new java.lang.IllegalArgumentException();
         }
 
-        // check the line direction
-        // only outgoing lines are accepted for the LRPs, except the last LRP
-        // where only incoming lines are accepted
-        Node refNode = null;
-        if (p.isLastLRP()) {
-            refNode = line.getEndNode();
-        } else {
-            refNode = line.getStartNode();
-        }
-        if (!refNode.equals(nwd.getNode())) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("line " + line.getID() + " ignored [wrong direction]");
+        if(hasValidDirection(line,p.isLastLRP(), nwd.getNode())
+                && hasValidFrc(line,p.isLastLRP(),p.getLfrc(),properties.getFrcVariance())) {
+            int projectionAlongLine = p.isLastLRP() ? line.getLineLength() : 0;
+            // rate the line
+            int rating = openLRRating.getRating(nwd.getDistance(),
+                    p, line, projectionAlongLine);
+
+            // check if the rating value fulfills the minimum criteria
+            if (rating >= properties.getMinimumAcceptedRating()) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("line " + line.getID() + " with rating: "+ rating + " accepted ");
+                }
+                return new CandidateLine(line, rating);
             }
-            return CandidateLine.INVALID;
         }
 
-        // check the functional road class value
-        FunctionalRoadClass frc = line.getFRC();
-        if (!p.isLastLRP()
-                && frc.getID() > p.getLfrc().getID()
-                + properties.getFrcVariance()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("line " + line.getID() + " ignored [low frc (" + frc.getID() + ")]");
-            }
-            return CandidateLine.INVALID;
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("line " + line.getID() + " ignored");
         }
-
-
-        int projectionAlongLine = p.isLastLRP() ? line.getLineLength() : 0;
-        // rate the line
-        int rating = openLRRating.getRating(nwd.getDistance(),
-                p, line, projectionAlongLine);
-
-        // check if the rating value fulfills the minimum criteria
-        if (rating < properties.getMinimumAcceptedRating()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("line " + line.getID() + " ignored [low rating ("
-                        + rating + ")]");
-            }
-            return CandidateLine.INVALID;
-        }
-
-        // ok, the line passed the test!
-        CandidateLine cLine = new CandidateLine(line, rating);
-        return cLine;
+        return CandidateLine.INVALID;
     }
 
     /**
