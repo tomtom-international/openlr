@@ -48,6 +48,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -384,7 +395,7 @@ public abstract class AbstractDecoder {
         return resultSet;
     }
 
-    private boolean hasValidDirection(final Line line, final boolean isLastLrp, final Node candidateNode){
+    private boolean hasValidDirection(final Line line, final boolean isLastLrp, final Node candidateNode) {
         // check the line direction
         // only outgoing lines are accepted for the LRPs, except the last LRP
         // where only incoming lines are accepted
@@ -397,7 +408,7 @@ public abstract class AbstractDecoder {
         return refNode.equals(candidateNode);
     }
 
-    private boolean hasValidFrc(final Line line, final boolean isLastLrp, final FunctionalRoadClass  lowestFrc,final int frcVariance){
+    private boolean hasValidFrc(final Line line, final boolean isLastLrp, final FunctionalRoadClass lowestFrc, final int frcVariance) {
         // check the functional road class value
         FunctionalRoadClass frc = line.getFRC();
         return (isLastLrp || frc.getID() <= lowestFrc.getID() + frcVariance);
@@ -429,8 +440,8 @@ public abstract class AbstractDecoder {
             throw new java.lang.IllegalArgumentException();
         }
 
-        if(hasValidDirection(line,p.isLastLRP(), nwd.getNode())
-                && hasValidFrc(line,p.isLastLRP(),p.getLfrc(),properties.getFrcVariance())) {
+        if (hasValidDirection(line, p.isLastLRP(), nwd.getNode())
+                && hasValidFrc(line, p.isLastLRP(), p.getLfrc(), properties.getFrcVariance())) {
             int projectionAlongLine = p.isLastLRP() ? line.getLineLength() : 0;
             // rate the line
             int rating = openLRRating.getRating(nwd.getDistance(),
@@ -439,7 +450,7 @@ public abstract class AbstractDecoder {
             // check if the rating value fulfills the minimum criteria
             if (rating >= properties.getMinimumAcceptedRating()) {
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("line " + line.getID() + " with rating: "+ rating + " accepted ");
+                    LOG.debug("line " + line.getID() + " with rating: " + rating + " accepted ");
                 }
                 return new CandidateLine(line, rating);
             }
