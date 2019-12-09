@@ -18,7 +18,7 @@ import java.io.InputStream;
 public class BearingRatingTest {
 
     private BearingCritic bearingCritic;
-    Line line;
+    private Line line;
 
     @BeforeTest
     public void initiate() throws OpenLRProcessingException {

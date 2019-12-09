@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class LinearRatingTest {
 
-    RatingFunction ratingFunction;
+    private RatingFunction ratingFunction;
 
     @BeforeTest
     public void initialize() {
