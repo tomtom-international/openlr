@@ -221,19 +221,13 @@ public abstract class AbstractDecoder {
      * distance between that projection point and the coordinate shall be small
      * (according to the encoder properties). All lines will be rated and
      * proposed as candidate lines for the LRP.
-     *
-     * @param properties
-     *            the OpenLR encoder properties
-     * @param lrp
-     *            the location reference point (having no candidate lines so
-     *            far)
-     * @param mdb
-     *            the map database
-     * @param alreadyFound
-     *            the already found
-     * @return the list
+     * @param openLRRating the rating function for candidate line
+     * @param properties the OpenLR encoder properties
+     * @param lrp the location reference point (having no candidate lines so far)
+     * @param mdb the map database
+     * @param alreadyFound the already found
+     * @return the list of candidate lines and its score
      * @throws OpenLRProcessingException
-     *             the open lr processing exception
      */
     private List<CandidateLine> findCandidateLinesDirectly(
             final OpenLRRating openLRRating,
@@ -419,19 +413,15 @@ public abstract class AbstractDecoder {
      * lines matches the LRP attributes. If the line does not match at all (due
      * to invalid direction or a worse rating value) the method will return
      * null.
-     *
-     * @param properties
-     *            the OpenLR properties
-     * @param line
-     *            the line being investigated
-     * @param p
-     *            the location reference point
-     * @param nwd
-     *            the candidate node
-     * @return the rated candidate line or null, if the line is not valid
+     * @param openLRRating the Rating function for candidate lines
+     * @param properties the OpenLR properties
+     * @param line the line being investigated
+     * @param p the location reference point
+     * @param nwd the candidate node
+     * @return Investigated line along with its score
      * @throws OpenLRProcessingException
-     *             the open lr processing exception
      */
+
     private CandidateLine investigateLine(final OpenLRRating openLRRating,
                                           final OpenLRDecoderProperties properties, final Line line,
                                           final LocationReferencePoint p, final NodeWithDistance nwd)
