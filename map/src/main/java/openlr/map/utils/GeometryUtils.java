@@ -48,6 +48,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -103,6 +114,9 @@ public final class GeometryUtils {
 
     /** The Constant QUARTER_CIRCLE. */
     public static final double QUARTER_CIRCLE = 90;
+
+    /** The Constant FULL_CIRCLE. */
+    public static final double FULL_CIRCLE = 360;
 
     /** The Constant QUARTER_CIRCLE. */
     public static final double THREE_QUARTER_CIRCLE = 270;
@@ -701,6 +715,21 @@ public final class GeometryUtils {
         }
         return new GeoCoordinatesImpl(lon2, lat2);
     }
+
+    /**
+     * Degree of interval between two angles
+     * @param firstBearing angle of line to the north
+     * @param secondBearing angle of line to the north
+     * @return Absolute rounded interval value
+     */
+    public static double bearingDifference(double firstBearing, double secondBearing) {
+        double diff = Math.round(Math.abs(firstBearing - secondBearing));
+        if (diff > HALF_CIRCLE) {
+            diff = FULL_CIRCLE - diff;
+        }
+        return diff;
+    }
+
 
     /**
      * The Enum BearingDirection defines the direction off a line being used for
