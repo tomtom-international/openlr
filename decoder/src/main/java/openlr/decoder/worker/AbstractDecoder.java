@@ -37,6 +37,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -93,9 +104,6 @@ public abstract class AbstractDecoder {
 
     /** logger. */
     private static final Logger LOG = Logger.getLogger(AbstractDecoder.class);
-
-    /** The rating function being used. */
-    private static final OpenLRRating RATING_FUNCTION = new OpenLRRatingImpl();
 
     /**
      * This method decodes a location reference which has already been
@@ -217,6 +225,7 @@ public abstract class AbstractDecoder {
      *             the open lr processing exception
      */
     private List<CandidateLine> findCandidateLinesDirectly(
+            final OpenLRRating openLRRating,
             final OpenLRDecoderProperties properties,
             final LocationReferencePoint lrp, final MapDatabase mdb,
             final List<CandidateLine> alreadyFound)
@@ -249,7 +258,7 @@ public abstract class AbstractDecoder {
             }
             int lengthAlongDseg = line.measureAlongLine(lrp.getLongitudeDeg(),
                     lrp.getLatitudeDeg());
-            int rating = RATING_FUNCTION.getRating(properties, dist, lrp, line,
+            int rating = openLRRating.getRating(dist, lrp, line,
                     lengthAlongDseg);
             if (!alreadyFound.isEmpty()) {
                 float factor = properties.getLinesDirectlyFactor();
@@ -323,6 +332,8 @@ public abstract class AbstractDecoder {
                         + " bearing=" + p.getBearing() + "°");
             }
             List<CandidateLine> candidatesAtNodes = new ArrayList<CandidateLine>();
+            OpenLRRating openLRRating = OpenLRRatingImpl.with(properties);
+
             // iterate over all nodes close by the LRP position
             for (NodeWithDistance nwd : candidateNodes.getCandidateNodes(p)) {
                 // get all possible lines
@@ -332,7 +343,7 @@ public abstract class AbstractDecoder {
                 while (linesIterator.hasNext()) {
                     Line line = linesIterator.next();
                     // check the current line
-                    CandidateLine candidateLine = investigateline(properties,
+                    CandidateLine candidateLine = investigateLine(openLRRating, properties,
                             line, p, nwd);
                     if (candidateLine.isValid()) {
                         // if the line is valid and rated add it as candidate
@@ -344,7 +355,7 @@ public abstract class AbstractDecoder {
 
             // also look for candidate lines directly (not starting from /
             // ending at a node)
-            List<CandidateLine> candidatesDirectly = findCandidateLinesDirectly(
+            List<CandidateLine> candidatesDirectly = findCandidateLinesDirectly(openLRRating,
                     properties, p, mdb, candidatesAtNodes);
 
             // merge the candidates
@@ -390,9 +401,9 @@ public abstract class AbstractDecoder {
      * @throws OpenLRProcessingException
      *             the open lr processing exception
      */
-    private CandidateLine investigateline(
-            final OpenLRDecoderProperties properties, final Line line,
-            final LocationReferencePoint p, final NodeWithDistance nwd)
+    private CandidateLine investigateLine(final OpenLRRating openLRRating,
+                                          final OpenLRDecoderProperties properties, final Line line,
+                                          final LocationReferencePoint p, final NodeWithDistance nwd)
             throws OpenLRProcessingException {
         if (line == null || p == null || nwd == null) {
             throw new java.lang.IllegalArgumentException();
@@ -428,7 +439,7 @@ public abstract class AbstractDecoder {
 
         int projectionAlongLine = p.isLastLRP() ? line.getLineLength() : 0;
         // rate the line
-        int rating = RATING_FUNCTION.getRating(properties, nwd.getDistance(),
+        int rating = openLRRating.getRating(nwd.getDistance(),
                 p, line, projectionAlongLine);
 
         // check if the rating value fulfills the minimum criteria

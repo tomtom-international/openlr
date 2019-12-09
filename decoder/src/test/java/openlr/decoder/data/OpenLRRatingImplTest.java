@@ -34,6 +34,28 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 
 /**
@@ -54,6 +76,7 @@ import openlr.LocationReferencePoint;
 import openlr.OpenLRProcessingException;
 import openlr.decoder.TestData;
 import openlr.decoder.properties.OpenLRDecoderProperties;
+import openlr.decoder.rating.OpenLRRating;
 import openlr.decoder.rating.OpenLRRatingImpl;
 import openlr.map.FormOfWay;
 import openlr.map.FunctionalRoadClass;
@@ -88,23 +111,23 @@ public class OpenLRRatingImplTest {
     private static final double BEARING_LRP_2 = 256.67;
 
     /** The expected result of rating test #1. */
-    private static final int EXPECTED_RESULT_RATING_1 = 847;
+    private static final int EXPECTED_RESULT_RATING_1 = 916;
     /** The expected result of rating test #2. */
     private static final int EXPECTED_RESULT_RATING_2 = 494;
     /** The expected result of rating test #3. */
-    private static final int EXPECTED_RESULT_RATING_3 = 644;
+    private static final int EXPECTED_RESULT_RATING_3 = 755;
 
     /** The non-junction node factor to apply for tests */
     private static final float NON_JUNCTION_NODE_FACTOR = 0.8f;
 
     /** The expected result of rating test with junction node with no non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 933;
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 1002;
     /** The expected result of rating test with junction node with a non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 933;
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 1002;
     /** The expected result of rating test with non-junction node with no non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 783;
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 852;
     /** The expected result of rating test with non-junction node with a non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 729;
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 798;
 
     /** The distance value of rating test #1. */
     private static final int DISTANCE_RATING_1 = 14;
@@ -120,14 +143,11 @@ public class OpenLRRatingImplTest {
     private static final int TEST_LINE_26 = 26;
 
     /** The rating function being used. */
-    private static final OpenLRRatingImpl RATING_FUNCTION = new OpenLRRatingImpl();
+    private OpenLRRating ratingFunction;
 
-    /** A reference to the test OpenLR properties. */
-    private OpenLRDecoderProperties properties;
-
-    /** The mocked {@link LocRefPoint} #1. */
+    /** The mocked {@link LocationReferencePoint} #1. */
     private LocationReferencePoint point1;
-    /** The mocked {@link LocRefPoint} #2. */
+    /** The mocked {@link LocationReferencePoint} #2. */
     private LocationReferencePoint point2;
     /** The line object 4 of the test map. */
     private Line line4;
@@ -143,6 +163,8 @@ public class OpenLRRatingImplTest {
     public final void setUp() {
         TestData td = TestData.getInstance();
         MapDatabase mdb = td.getMapDatabase();
+
+        ratingFunction = getRatingFunction();
 
         line4 = mdb.getLine(TEST_LINE_4);
         line10 = mdb.getLine(TEST_LINE_10);
@@ -212,7 +234,8 @@ public class OpenLRRatingImplTest {
      */
     @Test
     public final void testRating1() throws OpenLRProcessingException {
-        int rating = RATING_FUNCTION.getRating(getProperties(),
+
+        int rating = ratingFunction.getRating(
                 DISTANCE_RATING_1, point1, line10, 0);
         assertEquals(EXPECTED_RESULT_RATING_1, rating);
     }
@@ -223,7 +246,7 @@ public class OpenLRRatingImplTest {
     @Test
     public final void testRating2() throws OpenLRProcessingException {
         int projectionAlongLine = point2.isLastLRP() ? line10.getLineLength() : 0;
-        int rating = RATING_FUNCTION.getRating(getProperties(),
+        int rating = ratingFunction.getRating(
                 DISTANCE_RATING_2, point2, line10, projectionAlongLine);
         assertEquals(EXPECTED_RESULT_RATING_2, rating);
     }
@@ -233,7 +256,7 @@ public class OpenLRRatingImplTest {
      */
     @Test
     public final void testRating3() throws OpenLRProcessingException {
-        int rating = RATING_FUNCTION.getRating(getProperties(),
+        int rating = ratingFunction.getRating(
                 DISTANCE_RATING_2, point2, line26, PROJECTION_LINE_26);
         assertEquals(EXPECTED_RESULT_RATING_3, rating);
     }
@@ -245,8 +268,7 @@ public class OpenLRRatingImplTest {
     public final void testRatingJunctionNodeNoNonJunctionNodeFactor() throws OpenLRProcessingException {
         BaseConfiguration configuration = new BaseConfiguration();
         OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
-
-        int rating = RATING_FUNCTION.getRating(properties,
+        int rating = OpenLRRatingImpl.with(properties).getRating(
                 DISTANCE_RATING_1, point1, line10, 0);
         assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
     }
@@ -259,8 +281,7 @@ public class OpenLRRatingImplTest {
         BaseConfiguration configuration = new BaseConfiguration();
         configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
         OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
-
-        int rating = RATING_FUNCTION.getRating(properties,
+        int rating = OpenLRRatingImpl.with(properties).getRating(
                 DISTANCE_RATING_1, point1, line10, 0);
         assertEquals(rating, EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
     }
@@ -273,7 +294,7 @@ public class OpenLRRatingImplTest {
         BaseConfiguration configuration = new BaseConfiguration();
         OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
-        int rating = RATING_FUNCTION.getRating(properties,
+        int rating = OpenLRRatingImpl.with(properties).getRating(
                 DISTANCE_RATING_1, point1, line4, 0);
         assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR);
     }
@@ -287,7 +308,7 @@ public class OpenLRRatingImplTest {
         configuration.setProperty("NonJunctionNodeFactor", NON_JUNCTION_NODE_FACTOR);
         OpenLRDecoderProperties properties = new OpenLRDecoderProperties(configuration);
 
-        int rating = RATING_FUNCTION.getRating(properties,
+        int rating = OpenLRRatingImpl.with(properties).getRating(
                 DISTANCE_RATING_1, point1, line4, 0);
         assertEquals(rating, EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR);
     }
@@ -297,21 +318,20 @@ public class OpenLRRatingImplTest {
      *
      * @return the properties
      */
-    private OpenLRDecoderProperties getProperties() {
-
-        if (properties == null) {
+    private OpenLRRating getRatingFunction() {
+        OpenLRRating openLRRating = null;
+        try {
             File validProperties = new File(
                     "src/test/resources/OpenLR-Decoder-Properties.xml");
-            try {
-                properties = new OpenLRDecoderProperties(OpenLRPropertiesReader
-                        .loadPropertiesFromStream(new FileInputStream(validProperties), true));
-            } catch (OpenLRProcessingException e) {
-                fail("failed to load valid properties file", e);
-            } catch (FileNotFoundException e) {
-                fail("cannot find properties file", e);
-            }
+            OpenLRDecoderProperties properties = new OpenLRDecoderProperties(OpenLRPropertiesReader
+                    .loadPropertiesFromStream(new FileInputStream(validProperties), true));
+            openLRRating = OpenLRRatingImpl.with(properties);
+        } catch (OpenLRProcessingException e) {
+            fail("failed to load valid properties file", e);
+        } catch (FileNotFoundException e) {
+            fail("cannot find properties file", e);
         }
-        return properties;
+        return openLRRating;
     }
 
 }

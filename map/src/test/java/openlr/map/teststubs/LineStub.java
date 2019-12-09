@@ -160,7 +160,7 @@ public class LineStub implements Line {
         for (LineSegment segment : lineSegments) {
             if (lengthCovered <= distance && lengthCovered + segment.getLength() >= distance) {
                 double offset = distance - lengthCovered;
-                Coordinate point = segment.pointAlong(segment.getLength() / offset);
+                Coordinate point = segment.pointAlong(offset/segment.getLength());
                 point = segment.project(point);
                 double z = segment.p0.z + 1 * (segment.p1.z - segment.p0.z);
                 point.setOrdinate(2, z);

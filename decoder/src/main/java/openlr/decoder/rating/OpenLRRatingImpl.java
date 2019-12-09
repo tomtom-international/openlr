@@ -37,6 +37,39 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -55,12 +88,11 @@ package openlr.decoder.rating;
 import openlr.LocationReferencePoint;
 import openlr.OpenLRProcessingException;
 import openlr.decoder.properties.OpenLRDecoderProperties;
+import openlr.decoder.rating.critics.BearingCritic;
 import openlr.map.FormOfWay;
 import openlr.map.FunctionalRoadClass;
 import openlr.map.Line;
 import openlr.map.Node;
-import openlr.map.utils.GeometryUtils;
-import openlr.map.utils.GeometryUtils.BearingDirection;
 import org.apache.log4j.Logger;
 
 import java.util.Spliterator;
@@ -96,39 +128,37 @@ import java.util.stream.StreamSupport;
  */
 public class OpenLRRatingImpl implements OpenLRRating {
 
-    /** Number of degrees for a half circle */
-    private static final int HALF_CIRCLE = 180;
-
-    /** Number of degrees for a full circle */
-    private static final int FULL_CIRCLE = 360;
-
     /** logger */
     private static final Logger LOG = Logger.getLogger(OpenLRRatingImpl.class);
 
     /** The Constant fowRatingTable. */
     private static final FormOfWayRatingTable FOW_RATING_TABLE = new FormOfWayRatingTable();
 
+    private final OpenLRDecoderProperties properties;
+    private final BearingCritic bearingCritic;
+
+    private OpenLRRatingImpl(OpenLRDecoderProperties properties, BearingCritic bearingCritic) {
+        this.properties = properties;
+        this.bearingCritic = bearingCritic;
+    }
+
+    public static OpenLRRatingImpl with(OpenLRDecoderProperties properties) {
+        BearingCritic bearingCritic = BearingCritic.with(properties);
+        return new OpenLRRatingImpl(properties, bearingCritic);
+    }
+
     /** {@inheritDoc} */
     @Override
-    public final int getRating(final OpenLRDecoderProperties properties,
-                               final int distance, final LocationReferencePoint p,
+    public final int getRating(final int distance, final LocationReferencePoint p,
                                final Line line, final int projectionAlongLine)
             throws OpenLRProcessingException {
-        BearingDirection dir = null;
-        if (p.isLastLRP()) {
-            dir = BearingDirection.AGAINST_DIRECTION;
-        } else {
-            dir = BearingDirection.IN_DIRECTION;
-        }
-
         int nodeRating = calculateDistanceRating(properties, distance);
 
-        if (shouldApplyNonJunctionNodeFactor(line, dir, projectionAlongLine)) {
+        if (shouldApplyNonJunctionNodeFactor(line, p.isLastLRP(), projectionAlongLine)) {
             nodeRating = (int) (properties.getNonJunctionNodeFactor() * nodeRating);
         }
 
-        int bearingRating = calculateBearingRating(properties, p.getBearing(),
-                dir, line, projectionAlongLine);
+        int bearingRating = bearingCritic.rate(line, p.isLastLRP(), p.getBearing(), projectionAlongLine);
         if (bearingRating < 0) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("bearing of a candidate line is out of range ["
@@ -154,18 +184,18 @@ public class OpenLRRatingImpl implements OpenLRRating {
      * Determine whether to apply the non-junction node factor to the node score
      *
      * @param line the line under consideration
-     * @param dir the direction along the line
+     * @param isLastLrp true if the search is for lrp
      * @param projectionAlongLine the projected distance along the line
      * @return true if the non-junction node factor is to be applied
      */
-    private boolean shouldApplyNonJunctionNodeFactor(Line line, BearingDirection dir, int projectionAlongLine) {
+    private boolean shouldApplyNonJunctionNodeFactor(Line line, boolean isLastLrp, int projectionAlongLine) {
         // Only apply the non-junction node factor when the LRP matches a node and not a line directly
         if (projectionAlongLine > 0 && projectionAlongLine < line.getLineLength()) {
             return false;
         }
 
         // Find the node to check
-        Node node = dir == BearingDirection.IN_DIRECTION ? line.getStartNode() : line.getEndNode();
+        Node node = isLastLrp ? line.getEndNode() : line.getStartNode();
 
         // Check if the node is not a junction
         return !isJunction(node);
@@ -280,62 +310,4 @@ public class OpenLRRatingImpl implements OpenLRRating {
         RatingCategory category = FOW_RATING_TABLE.getRating(fow, line.getFOW());
         return properties.getFowRating(category);
     }
-
-    /**
-     * Calculates the bearing value based on the bearing values of the line and
-     * the lrp attribute. <br>
-     * <br>
-     * The method calculates the difference of the bearing values and looks up
-     * the rating category for this difference value. The defined value based on
-     * this category is used for the rating value. The rating categories and its
-     * rating values are defined in the OpenLR properties.
-     *
-     * Candidate lines with a bearing difference greater than the defined value
-     * will be rejected.
-     *
-     * @param properties
-     *            the OpenLR properties
-     * @param bearing
-     *            the bearing value of the LRP
-     * @param dir
-     *            the bearing direction (in direction or against direction)
-     * @param line
-     *            the line to be rated
-     * @param projectionAlongLine
-     *            the distance between the projection point and the start of the
-     *            line
-     * @return the bearing value
-     * @throws OpenLRProcessingException
-     *             the open lr processing exception
-     */
-    private int calculateBearingRating(
-            final OpenLRDecoderProperties properties, final double bearing,
-            final BearingDirection dir, final Line line,
-            final int projectionAlongLine) throws OpenLRProcessingException {
-        double lineBearing = GeometryUtils.calculateLineBearing(line, dir,
-                properties.getBearingDistance(), projectionAlongLine);
-
-        int diff = (int) Math.round(Math.abs(bearing - lineBearing));
-        if (diff > HALF_CIRCLE) {
-            diff = FULL_CIRCLE - diff;
-        }
-        if (diff > properties.getMaxBearingDiff()) {
-            return -1;
-        }
-
-        RatingCategory bestCat;
-        if (diff <= properties.getBearingIntervals(RatingCategory.EXCELLENT)) {
-            bestCat = RatingCategory.EXCELLENT;
-        } else if (diff <= properties.getBearingIntervals(RatingCategory.GOOD)) {
-            bestCat = RatingCategory.GOOD;
-        } else if (diff <= properties
-                .getBearingIntervals(RatingCategory.AVERAGE)) {
-            bestCat = RatingCategory.AVERAGE;
-        } else {
-            bestCat = RatingCategory.POOR;
-        }
-
-        return properties.getBearingRating(bestCat);
-    }
-
 }

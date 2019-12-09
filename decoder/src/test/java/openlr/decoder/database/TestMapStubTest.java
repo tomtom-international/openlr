@@ -30,7 +30,7 @@ public class TestMapStubTest {
 
     @Test
     public void decoding() throws OpenLRProcessingException, PhysicalFormatException {
-        String openlr = "CwmQ9SVWJS2qBAD9/14tCQ==";
+        String openlr = "CwmQ9SVWJS2qAQBw/+EtqwMAjf99LRk=";
         OpenLRBinaryDecoder binaryDecoder = new OpenLRBinaryDecoder();
         ByteArray byteArray = new ByteArray(Base64.getDecoder().decode(openlr));
         LocationReferenceBinaryImpl locationReferenceBinary = new LocationReferenceBinaryImpl("ProtoTypeTesting", byteArray);

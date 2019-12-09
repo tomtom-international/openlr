@@ -37,6 +37,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -105,9 +116,6 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
     /** The DN p_ variance. */
     DNP_VARIANCE("DNPVariance", PropertyType.INTEGER, 118),
 
-    /** The MA x_ bea r_ diff. */
-    MAX_BEAR_DIFF("maxBearingDiff", PropertyType.INTEGER, 90),
-
     /** The FR c_ rating. */
     @SuppressWarnings("serial")
     FRC_RATING("FRC_Rating", PropertyType.INTEGER_BY_MAP,
@@ -148,21 +156,15 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
     BEAR_RATING("Bearing_Rating", PropertyType.INTEGER_BY_MAP,
             new HashMap<String, Integer>() {
                 {
-                    put("Excellent", 100);
-                    put("Good", 50);
-                    put("Average", 25);
-                    put("Poor", 0);
-                }
-            }),
+                    /**
+                     * Maximum score bearing rating can contribute to the overall candidate line rating
+                     */
+                    put("MaxScore", 100);
 
-    /** The BEA r_ intervals. */
-    @SuppressWarnings("serial")
-    BEAR_INTERVALS("Bearing_Intervals", PropertyType.INTEGER_BY_MAP,
-            new HashMap<String, Integer>() {
-                {
-                    put("Excellent", 6);
-                    put("Good", 12);
-                    put("Average", 18);
+                    /**
+                     * Maximum difference between the bearing encoded in the lrp and the line bearing
+                     */
+                    put("MaxBearingDiff", 45);
                 }
             }),
 
