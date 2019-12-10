@@ -30,7 +30,7 @@ public class TestMapStubTest {
 
     @Test
     public void decoding() throws OpenLRProcessingException, PhysicalFormatException {
-        String openlr = "CwmQ9SVWJS2qBAD9/14tCQ==";
+        String openlr = "CwmQ9SVWJS2qAQBw/+EtqwMAjf99LRk=";
         OpenLRBinaryDecoder binaryDecoder = new OpenLRBinaryDecoder();
         ByteArray byteArray = new ByteArray(Base64.getDecoder().decode(openlr));
         LocationReferenceBinaryImpl locationReferenceBinary = new LocationReferenceBinaryImpl("ProtoTypeTesting", byteArray);
@@ -44,7 +44,7 @@ public class TestMapStubTest {
         Location location = decoder.decodeRaw(params, rawLocationReference);
         assertNotNull(location);
         assertEquals(location.getLocationLines().size(), 4);
-        List<Long> expectedLines = Arrays.asList(1L,2L,5L,6L);
+        List<Long> expectedLines = Arrays.asList(1L, 2L, 5L, 6L);
         assertEquals(location.getLocationLines().stream().map(Line::getID).collect(Collectors.toList()), expectedLines);
     }
 }

@@ -27,28 +27,6 @@
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
  * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- */
-/**
- *  Copyright (C) 2009-2019 TomTom International B.V.
- *
- *   TomTom (Legal Department)
- *   Email: legal@tomtom.com
- *
- *   TomTom (Technical contact)
- *   Email: openlr@tomtom.com
- *
- *   Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- *   the Netherlands
  */
 package openlr.decoder.properties;
 
@@ -89,18 +67,18 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
 
     /** The FRC variance */
     FRC_VARIANCE("FRC_Variance", PropertyType.INTEGER_BY_MAP,
-        new HashMap<String, Integer>() {
-        {
-            put("FRC_0", 2);
-            put("FRC_1", 2);
-            put("FRC_2", 2);
-            put("FRC_3", 2);
-            put("FRC_4", 2);
-            put("FRC_5", 2);
-            put("FRC_6", 2);
-            put("FRC_7", 2);
-        }
-    }),
+            new HashMap<String, Integer>() {
+                {
+                    put("FRC_0", 2);
+                    put("FRC_1", 2);
+                    put("FRC_2", 2);
+                    put("FRC_3", 2);
+                    put("FRC_4", 2);
+                    put("FRC_5", 2);
+                    put("FRC_6", 2);
+                    put("FRC_7", 2);
+                }
+            }),
 
     /** The MI n_ ac c_ rating. */
     MIN_ACC_RATING("MinimumAcceptedRating", PropertyType.INTEGER, 800),
@@ -116,9 +94,6 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
 
     /** The DN p_ variance. */
     DNP_VARIANCE("DNPVariance", PropertyType.INTEGER, 118),
-
-    /** The MA x_ bea r_ diff. */
-    MAX_BEAR_DIFF("maxBearingDiff", PropertyType.INTEGER, 90),
 
     /** The FR c_ rating. */
     @SuppressWarnings("serial")
@@ -160,21 +135,15 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
     BEAR_RATING("Bearing_Rating", PropertyType.INTEGER_BY_MAP,
             new HashMap<String, Integer>() {
                 {
-                    put("Excellent", 100);
-                    put("Good", 50);
-                    put("Average", 25);
-                    put("Poor", 0);
-                }
-            }),
+                    /**
+                     * Maximum score bearing rating can contribute to the overall candidate line rating
+                     */
+                    put("MaxScore", 100);
 
-    /** The BEA r_ intervals. */
-    @SuppressWarnings("serial")
-    BEAR_INTERVALS("Bearing_Intervals", PropertyType.INTEGER_BY_MAP,
-            new HashMap<String, Integer>() {
-                {
-                    put("Excellent", 6);
-                    put("Good", 12);
-                    put("Average", 18);
+                    /**
+                     * Maximum difference between the bearing encoded in the lrp and the line bearing
+                     */
+                    put("MaxBearingDiff", 45);
                 }
             }),
 
