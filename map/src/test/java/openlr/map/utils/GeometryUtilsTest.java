@@ -464,6 +464,8 @@ public class GeometryUtilsTest {
         assertEquals(GeometryUtils.bearingDifference(15, 20), 5);
         assertEquals(GeometryUtils.bearingDifference(20, 15), 5);
         assertEquals(GeometryUtils.bearingDifference(90, 180), 90);
+        assertEquals(GeometryUtils.bearingDifference(345, 10), 25);
+        assertEquals(GeometryUtils.bearingDifference(150, 220), 70);
     }
 
     /**
