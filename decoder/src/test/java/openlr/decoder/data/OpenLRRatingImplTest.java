@@ -24,40 +24,6 @@
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
  * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- */
-
-/**
- *  Copyright (C) 2009-2019 TomTom International B.V.
- *
- *   TomTom (Legal Department)
- *   Email: legal@tomtom.com
- *
- *   TomTom (Technical contact)
- *   Email: openlr@tomtom.com
- *
- *   Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- *   the Netherlands
  */
 package openlr.decoder.data;
 

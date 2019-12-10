@@ -342,7 +342,6 @@ public class OpenLRRatingImpl implements OpenLRRating {
         if (difference > properties.getMaxBearingDiff()) {
             return 0;
         }
-
         return (int) ((1.0 - difference / properties.getMaxBearingDiff()) * properties.getMaxBearingScore());
     }
 

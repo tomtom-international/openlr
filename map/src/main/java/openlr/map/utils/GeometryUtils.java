@@ -27,50 +27,6 @@
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
  * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- */
-/**
- *  Copyright (C) 2009-2019 TomTom International B.V.
- *
- *   TomTom (Legal Department)
- *   Email: legal@tomtom.com
- *
- *   TomTom (Technical contact)
- *   Email: openlr@tomtom.com
- *
- *   Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- *   the Netherlands
  */
 package openlr.map.utils;
 
@@ -717,10 +673,10 @@ public final class GeometryUtils {
     }
 
     /**
-     * Degree of interval between two angles
-     * @param firstBearing angle of line to the north
-     * @param secondBearing angle of line to the north
-     * @return Absolute rounded interval value
+     * The absolute difference between the 2 angles
+     * @param firstBearing the angle of a line relative to due north
+     * @param secondBearing the angle of a line relative to due north
+     * @return the absolute difference between the 2 angles
      */
     public static double bearingDifference(double firstBearing, double secondBearing) {
         double diff = Math.round(Math.abs(firstBearing - secondBearing));
