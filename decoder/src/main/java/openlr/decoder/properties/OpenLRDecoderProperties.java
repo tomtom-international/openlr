@@ -65,9 +65,6 @@ public class OpenLRDecoderProperties {
     /** The max number retries. */
     private final int maxNumberRetries;
 
-    /** The same line degradation. */
-    private final float sameLineDegradation;
-
     /** The connected route increase. */
     private final float connectedRouteIncrease;
 
@@ -136,8 +133,10 @@ public class OpenLRDecoderProperties {
                 config, OpenLRDecoderProperty.MIN_ACC_RATING);
         maxNumberRetries = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.MAX_NR_RETRIES);
+        /*
         sameLineDegradation = OpenLRPropertyAccess.getFloatPropertyValue(
                 config, OpenLRDecoderProperty.SAME_LINE_DEGRAD);
+         */
         connectedRouteIncrease = OpenLRPropertyAccess.getFloatPropertyValue(
                 config, OpenLRDecoderProperty.CONNECT_ROUTE_INC);
         dnpVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
@@ -255,9 +254,11 @@ public class OpenLRDecoderProperties {
      *
      * @return the sameLineDegradation
      */
+    /*
     public final float getSameLineDegradation() {
         return sameLineDegradation;
     }
+     */
 
     /**
      * Gets the connected route increase.
