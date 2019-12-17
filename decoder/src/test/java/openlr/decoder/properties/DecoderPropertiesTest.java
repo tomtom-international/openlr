@@ -154,11 +154,6 @@ public class DecoderPropertiesTest {
                     OpenLRDecoderProperty.NODE_FACTOR), NODE_FACTOR);
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValue(prop,
                     OpenLRDecoderProperty.LINE_FACTOR), LINE_FACTOR);
-            /*
-            assertEquals(OpenLRPropertyAccess.getFloatPropertyValue(prop,
-                    OpenLRDecoderProperty.SAME_LINE_DEGRAD),
-                    SAME_LINE_DEGRADIATION);
-             */
 
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
                     prop, OpenLRDecoderProperty.BEAR_RATING,
