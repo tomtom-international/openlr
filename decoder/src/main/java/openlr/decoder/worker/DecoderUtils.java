@@ -137,7 +137,6 @@ public final class DecoderUtils {
             }
             for (int j = 0; j < p2List.size(); ++j) {
                 int p2Score = p2List.get(j).getRating();
-                // check same line
                 CandidateLinePair candidate = new CandidateLinePair(i, j,
                         p1Score * p2Score);
                 pairs.add(candidate);
