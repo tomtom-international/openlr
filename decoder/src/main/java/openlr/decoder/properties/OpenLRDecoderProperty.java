@@ -86,9 +86,6 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
     /** The MA x_ n r_ retries. */
     MAX_NR_RETRIES("MaxNumberRetries", PropertyType.INTEGER, 3),
 
-    /** The SAM e_ lin e_ degrad. */
-    SAME_LINE_DEGRAD("SameLineDegradation", PropertyType.FLOAT, 0.10f),
-
     /** The CONNEC t_ rout e_ inc. */
     CONNECT_ROUTE_INC("ConnectedRouteIncrease", PropertyType.FLOAT, 0.10f),
 
