@@ -17,7 +17,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
 
 public class PolygonDecoderTest {
-    PolygonDecoder polygonDecoder = new PolygonDecoder();
+    private PolygonDecoder polygonDecoder = new PolygonDecoder();
 
     @Test
     public void testValidLocationReference() throws PhysicalFormatException {

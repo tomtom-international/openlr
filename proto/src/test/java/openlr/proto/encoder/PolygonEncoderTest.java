@@ -19,7 +19,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 public class PolygonEncoderTest {
-    PolygonEncoder polygonEncoder = new PolygonEncoder();
+    private PolygonEncoder polygonEncoder = new PolygonEncoder();
 
     @Test
     public void testEncodePolygon() throws OpenLRProtoException {

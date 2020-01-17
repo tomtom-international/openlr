@@ -3,6 +3,11 @@ package openlr.proto.encoder;
 import openlr.LocationType;
 
 public class LocationTypeEncoderRegistry {
+    private final LineEncoder lineEncoder;
+    private final GeoCoordinatesEncoder geoCoordinatesEncoder;
+    private final PointAlongLineEncoder pointAlongLineEncoder;
+    private final PolygonEncoder polygonEncoder;
+
     public static LocationTypeEncoderRegistry create() {
         LocationReferencePointEncoder locationReferencePointEncoder = new LocationReferencePointEncoder();
         LineEncoder lineEncoder = new LineEncoder(locationReferencePointEncoder);
@@ -12,11 +17,6 @@ public class LocationTypeEncoderRegistry {
 
         return new LocationTypeEncoderRegistry(lineEncoder, geoCoordinatesEncoder, pointAlongLineEncoder, polygonEncoder);
     }
-
-    private final LineEncoder lineEncoder;
-    private final GeoCoordinatesEncoder geoCoordinatesEncoder;
-    private final PointAlongLineEncoder pointAlongLineEncoder;
-    private final PolygonEncoder polygonEncoder;
 
     LocationTypeEncoderRegistry(LineEncoder lineEncoder, GeoCoordinatesEncoder geoCoordinatesEncoder, PointAlongLineEncoder pointAlongLineEncoder, PolygonEncoder polygonEncoder) {
         this.lineEncoder = lineEncoder;

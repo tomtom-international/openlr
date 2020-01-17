@@ -3,6 +3,11 @@ package openlr.proto.decoder;
 import openlr.LocationType;
 
 public class LocationTypeDecoderRegistry {
+    private final LineDecoder lineDecoder;
+    private final GeoCoordinatesDecoder geoCoordinatesDecoder;
+    private final PointAlongLineDecoder pointAlongLineDecoder;
+    private final PolygonDecoder polygonDecoder;
+
     public static LocationTypeDecoderRegistry create() {
         LocationReferencePointDecoder locationReferencePointDecoder = new LocationReferencePointDecoder();
         LineDecoder lineDecoder = new LineDecoder(locationReferencePointDecoder);
@@ -16,11 +21,6 @@ public class LocationTypeDecoderRegistry {
                 pointAlongLineDecoder,
                 polygonDecoder);
     }
-
-    private final LineDecoder lineDecoder;
-    private final GeoCoordinatesDecoder geoCoordinatesDecoder;
-    private final PointAlongLineDecoder pointAlongLineDecoder;
-    private final PolygonDecoder polygonDecoder;
 
     LocationTypeDecoderRegistry(LineDecoder lineDecoder, GeoCoordinatesDecoder geoCoordinatesDecoder, PointAlongLineDecoder pointAlongLineDecoder, PolygonDecoder polygonDecoder) {
         this.lineDecoder = lineDecoder;
