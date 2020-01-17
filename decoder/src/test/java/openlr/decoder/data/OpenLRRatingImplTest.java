@@ -24,29 +24,6 @@
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
  * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- */
-
-/**
- *  Copyright (C) 2009-2019 TomTom International B.V.
- *
- *   TomTom (Legal Department)
- *   Email: legal@tomtom.com
- *
- *   TomTom (Technical contact)
- *   Email: openlr@tomtom.com
- *
- *   Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- *   the Netherlands
  */
 package openlr.decoder.data;
 
@@ -88,23 +65,23 @@ public class OpenLRRatingImplTest {
     private static final double BEARING_LRP_2 = 256.67;
 
     /** The expected result of rating test #1. */
-    private static final int EXPECTED_RESULT_RATING_1 = 847;
+    private static final int EXPECTED_RESULT_RATING_1 = 916;
     /** The expected result of rating test #2. */
     private static final int EXPECTED_RESULT_RATING_2 = 494;
     /** The expected result of rating test #3. */
-    private static final int EXPECTED_RESULT_RATING_3 = 644;
+    private static final int EXPECTED_RESULT_RATING_3 = 755;
 
     /** The non-junction node factor to apply for tests */
     private static final float NON_JUNCTION_NODE_FACTOR = 0.8f;
 
     /** The expected result of rating test with junction node with no non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 933;
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 1002;
     /** The expected result of rating test with junction node with a non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 933;
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 1002;
     /** The expected result of rating test with non-junction node with no non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 783;
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 852;
     /** The expected result of rating test with non-junction node with a non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 729;
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 798;
 
     /** The distance value of rating test #1. */
     private static final int DISTANCE_RATING_1 = 14;

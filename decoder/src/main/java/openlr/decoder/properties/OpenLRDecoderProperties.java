@@ -26,29 +26,6 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
- * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- */
-/**
- *  Copyright (C) 2009-2019 TomTom International B.V.
- *
- *   TomTom (Legal Department)
- *   Email: legal@tomtom.com
- *
- *   TomTom (Technical contact)
- *   Email: openlr@tomtom.com
- *
- *   Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- *   the Netherlands
  */
 package openlr.decoder.properties;
 
@@ -88,9 +65,6 @@ public class OpenLRDecoderProperties {
     /** The max number retries. */
     private final int maxNumberRetries;
 
-    /** The same line degradation. */
-    private final float sameLineDegradation;
-
     /** The connected route increase. */
     private final float connectedRouteIncrease;
 
@@ -100,6 +74,9 @@ public class OpenLRDecoderProperties {
     /** The max bearing diff. */
     private final int maxBearingDiff;
 
+    /** The maximum score bearing rating can contribute to the overall rating. */
+    private final int maxBearingScore;
+
     /** The frc rating. */
     private final EnumMap<RatingCategory, Integer> frcRating;
 
@@ -108,12 +85,6 @@ public class OpenLRDecoderProperties {
 
     /** The fow rating. */
     private final EnumMap<RatingCategory, Integer> fowRating;
-
-    /** The bearing intervals. */
-    private final EnumMap<RatingCategory, Integer> bearingIntervals;
-
-    /** The bearing intervals. */
-    private final EnumMap<RatingCategory, Integer> bearingRating;
 
     /** The calc affected lines. */
     private final boolean calcAffectedLines;
@@ -162,22 +133,16 @@ public class OpenLRDecoderProperties {
                 config, OpenLRDecoderProperty.MIN_ACC_RATING);
         maxNumberRetries = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.MAX_NR_RETRIES);
-        sameLineDegradation = OpenLRPropertyAccess.getFloatPropertyValue(
-                config, OpenLRDecoderProperty.SAME_LINE_DEGRAD);
         connectedRouteIncrease = OpenLRPropertyAccess.getFloatPropertyValue(
                 config, OpenLRDecoderProperty.CONNECT_ROUTE_INC);
         dnpVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.DNP_VARIANCE);
-        maxBearingDiff = OpenLRPropertyAccess.getIntegerPropertyValue(config,
-                OpenLRDecoderProperty.MAX_BEAR_DIFF);
+        maxBearingDiff = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config, OpenLRDecoderProperty.BEAR_RATING, "MaxBearingDiff");
+        maxBearingScore = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config, OpenLRDecoderProperty.BEAR_RATING, "MaxScore");
 
         frcRating = new EnumMap<RatingCategory, Integer>(RatingCategory.class);
         fowRating = new EnumMap<RatingCategory, Integer>(RatingCategory.class);
-        bearingRating = new EnumMap<RatingCategory, Integer>(
-                RatingCategory.class);
         frcIntervals = new EnumMap<RatingCategory, Integer>(
-                RatingCategory.class);
-        bearingIntervals = new EnumMap<RatingCategory, Integer>(
                 RatingCategory.class);
         for (RatingCategory cat : RatingCategory.values()) {
             fowRating.put(cat, OpenLRPropertyAccess
@@ -188,18 +153,10 @@ public class OpenLRDecoderProperties {
                     .getIntegerPropertyValueFromMap(config,
                             OpenLRDecoderProperty.FRC_RATING,
                             cat.getIdentifier()));
-            bearingRating.put(cat, OpenLRPropertyAccess
-                    .getIntegerPropertyValueFromMap(config,
-                            OpenLRDecoderProperty.BEAR_RATING,
-                            cat.getIdentifier()));
             if (cat != RatingCategory.POOR) {
                 frcIntervals.put(cat, OpenLRPropertyAccess
                         .getIntegerPropertyValueFromMap(config,
                                 OpenLRDecoderProperty.FRC_INTERVALS,
-                                cat.getIdentifier()));
-                bearingIntervals.put(cat, OpenLRPropertyAccess
-                        .getIntegerPropertyValueFromMap(config,
-                                OpenLRDecoderProperty.BEAR_INTERVALS,
                                 cat.getIdentifier()));
             }
         }
@@ -289,15 +246,6 @@ public class OpenLRDecoderProperties {
     }
 
     /**
-     * Gets the same line degradation.
-     *
-     * @return the sameLineDegradation
-     */
-    public final float getSameLineDegradation() {
-        return sameLineDegradation;
-    }
-
-    /**
      * Gets the connected route increase.
      *
      * @return the connectedRouteIncrease
@@ -322,6 +270,15 @@ public class OpenLRDecoderProperties {
      */
     public final int getMaxBearingDiff() {
         return maxBearingDiff;
+    }
+
+    /**
+     * Gets the max bearing score.
+     *
+     * @return the maxBearingDiff
+     */
+    public final int getMaxBearingScore() {
+        return maxBearingScore;
     }
 
     /**
@@ -357,27 +314,6 @@ public class OpenLRDecoderProperties {
         return fowRating.get(cat);
     }
 
-    /**
-     * Gets the bearing rating.
-     *
-     * @param cat
-     *            the cat
-     * @return the bearingRating
-     */
-    public final int getBearingRating(final RatingCategory cat) {
-        return bearingRating.get(cat);
-    }
-
-    /**
-     * Gets the bearing intervals.
-     *
-     * @param interval
-     *            the interval
-     * @return the bearingIntervals
-     */
-    public final int getBearingIntervals(final RatingCategory interval) {
-        return bearingIntervals.get(interval);
-    }
 
     /**
      * Checks if is calc affected lines.

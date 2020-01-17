@@ -24,29 +24,6 @@
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
  * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- */
-
-/**
- *  Copyright (C) 2009-2019 TomTom International B.V.
- *
- *   TomTom (Legal Department)
- *   Email: legal@tomtom.com
- *
- *   TomTom (Technical contact)
- *   Email: openlr@tomtom.com
- *
- *   Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- *   the Netherlands
  */
 package openlr.map.utils;
 
@@ -478,6 +455,17 @@ public class GeometryUtilsTest {
                 - VERY_SMALL));
         assertFalse(GeometryUtils.checkCoordinateBounds(Double.MAX_VALUE,
                 Double.MIN_VALUE));
+    }
+
+    @Test
+    public void bearingDifferenceTest() {
+        assertEquals(GeometryUtils.bearingDifference(0, 355), 5);
+        assertEquals(GeometryUtils.bearingDifference(0, 5), 5);
+        assertEquals(GeometryUtils.bearingDifference(15, 20), 5);
+        assertEquals(GeometryUtils.bearingDifference(20, 15), 5);
+        assertEquals(GeometryUtils.bearingDifference(90, 180), 90);
+        assertEquals(GeometryUtils.bearingDifference(345, 10), 25);
+        assertEquals(GeometryUtils.bearingDifference(150, 220), 70);
     }
 
     /**

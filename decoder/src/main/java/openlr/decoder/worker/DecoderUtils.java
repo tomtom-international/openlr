@@ -121,9 +121,7 @@ public final class DecoderUtils {
             final OpenLRDecoderProperties properties, final LocationType locType)
             throws OpenLRProcessingException {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("resolve candidates order with SameLineDegradation: "
-                    + properties.getSameLineDegradation()
-                    + " and ConnectedRouteIncrease: "
+            LOG.debug("resolve candidates order with ConnectedRouteIncrease: "
                     + properties.getConnectedRouteIncrease()
                     + " and MaxNrRetries: " + properties.getMaxNumberRetries());
         }
@@ -139,11 +137,6 @@ public final class DecoderUtils {
             }
             for (int j = 0; j < p2List.size(); ++j) {
                 int p2Score = p2List.get(j).getRating();
-                // check same line
-                if (!p2.isLastLRP() && locType == LocationType.LINE_LOCATION
-                        && p2List.get(j).hasSameLine(p1List.get(i))) {
-                    p2Score -= (properties.getSameLineDegradation() * p2Score);
-                }
                 CandidateLinePair candidate = new CandidateLinePair(i, j,
                         p1Score * p2Score);
                 pairs.add(candidate);

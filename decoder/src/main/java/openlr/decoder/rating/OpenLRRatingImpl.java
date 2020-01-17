@@ -27,28 +27,6 @@
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
  * <p>
- * Copyright (C) 2009-2019 TomTom International B.V.
- * <p>
- * TomTom (Legal Department)
- * Email: legal@tomtom.com
- * <p>
- * TomTom (Technical contact)
- * Email: openlr@tomtom.com
- * <p>
- * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- * the Netherlands
- */
-/**
- *  Copyright (C) 2009-2019 TomTom International B.V.
- *
- *   TomTom (Legal Department)
- *   Email: legal@tomtom.com
- *
- *   TomTom (Technical contact)
- *   Email: openlr@tomtom.com
- *
- *   Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
- *   the Netherlands
  */
 package openlr.decoder.rating;
 
@@ -315,27 +293,12 @@ public class OpenLRRatingImpl implements OpenLRRating {
         double lineBearing = GeometryUtils.calculateLineBearing(line, dir,
                 properties.getBearingDistance(), projectionAlongLine);
 
-        int diff = (int) Math.round(Math.abs(bearing - lineBearing));
-        if (diff > HALF_CIRCLE) {
-            diff = FULL_CIRCLE - diff;
-        }
-        if (diff > properties.getMaxBearingDiff()) {
-            return -1;
-        }
+        double difference = GeometryUtils.bearingDifference(lineBearing, bearing);
 
-        RatingCategory bestCat;
-        if (diff <= properties.getBearingIntervals(RatingCategory.EXCELLENT)) {
-            bestCat = RatingCategory.EXCELLENT;
-        } else if (diff <= properties.getBearingIntervals(RatingCategory.GOOD)) {
-            bestCat = RatingCategory.GOOD;
-        } else if (diff <= properties
-                .getBearingIntervals(RatingCategory.AVERAGE)) {
-            bestCat = RatingCategory.AVERAGE;
-        } else {
-            bestCat = RatingCategory.POOR;
+        if (difference > properties.getMaxBearingDiff()) {
+            return 0;
         }
-
-        return properties.getBearingRating(bestCat);
+        return (int) ((1.0 - difference / properties.getMaxBearingDiff()) * properties.getMaxBearingScore());
     }
 
 }
