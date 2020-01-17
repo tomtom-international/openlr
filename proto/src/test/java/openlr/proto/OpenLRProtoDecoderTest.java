@@ -161,6 +161,43 @@ public class OpenLRProtoDecoderTest {
     }
 
     @Test
+    public void testPolygonLocationReference() throws PhysicalFormatException {
+        Coordinates first = Coordinates.newBuilder()
+                .setLongitude(-122.915)
+                .setLatitude(39.045)
+                .build();
+
+        Coordinates second = Coordinates.newBuilder()
+                .setLongitude(-122.914)
+                .setLatitude(39.046)
+                .build();
+
+        Coordinates third = Coordinates.newBuilder()
+                .setLongitude(-122.913)
+                .setLatitude(39.047)
+                .build();
+
+        PolygonLocationReference polygonLocationReference = PolygonLocationReference.newBuilder()
+                .addCoordinates(first)
+                .addCoordinates(second)
+                .addCoordinates(third)
+                .build();
+
+        LocationReferenceData locationReferenceData = LocationReferenceData.newBuilder()
+                .setPolygonLocationReference(polygonLocationReference)
+                .build();
+
+        LocationReference locationReference = new LocationReferenceProtoImpl("1", LocationType.POLYGON, locationReferenceData);
+
+        RawLocationReference rawLocationReference = decoder.decodeData(locationReference);
+
+        assertNotNull(rawLocationReference);
+        assertEquals(rawLocationReference.getID(), "1");
+        assertEquals(rawLocationReference.getLocationType(), LocationType.POLYGON);
+        assertTrue(rawLocationReference.isValid());
+    }
+
+    @Test
     public void testUnsupportedLocationType() {
         LocationReferenceData locationReferenceData = LocationReferenceData.newBuilder()
                 .build();

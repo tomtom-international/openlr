@@ -17,6 +17,7 @@ import openlr.rawLocRef.RawCircleLocRef;
 import openlr.rawLocRef.RawGeoCoordLocRef;
 import openlr.rawLocRef.RawLineLocRef;
 import openlr.rawLocRef.RawPointAlongLocRef;
+import openlr.rawLocRef.RawPolygonLocRef;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -129,6 +130,24 @@ public class OpenLRProtoEncoderTest {
         assertEquals(locationReference.getDataIdentifier(), "proto");
         assertEquals(locationReference.getDataClass(), LocationReferenceData.class);
         assertNotNull(locationReference.getLocationReferenceData());
+    }
+
+    @Test
+    public void testPolygonLocationReference() {
+        List<GeoCoordinates> geoCoordinates = new ArrayList<>();
+        geoCoordinates.add(new GeoCoordinatesProtoImpl(-122.915, 39.045));
+        geoCoordinates.add(new GeoCoordinatesProtoImpl(-122.914, 39.046));
+        geoCoordinates.add(new GeoCoordinatesProtoImpl(-122.913, 39.047));
+
+        RawPolygonLocRef rawLocationReference = new RawPolygonLocRef("1", geoCoordinates);
+
+        LocationReference locationReference = openLREncoder.encodeData(rawLocationReference);
+
+        assertNotNull(locationReference);
+        assertEquals(locationReference.getID(), "1");
+        assertEquals(locationReference.getLocationType(), LocationType.POLYGON);
+        assertEquals(locationReference.getDataIdentifier(), "proto");
+        assertEquals(locationReference.getDataClass(), LocationReferenceData.class);
     }
 
     @Test
