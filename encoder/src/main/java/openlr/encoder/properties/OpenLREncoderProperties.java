@@ -87,6 +87,9 @@ public class OpenLREncoderProperties {
     /** relative threshold value below which the lrp needs to be inserted **/
     private float alternatePathRelativeThreshold;
 
+    /** flag to insert lrp to add lrp to avoid off ramp **/
+    private boolean insertLrpToAvoidOffRamp;
+
     /**
      * Instantiates a new open lr encoder properties.
      *
@@ -123,6 +126,18 @@ public class OpenLREncoderProperties {
         insertLrpAtAlternatePath = OpenLRPropertyAccess.getBooleanPropertyValue(config,OpenLREncoderProperty.LRP_ALTERNATIVE_PATH);
 
         alternatePathRelativeThreshold = OpenLRPropertyAccess.getFloatPropertyValue(config,OpenLREncoderProperty.ALTERNATIVE_PATH_RELATIVE_THRESHOLD);
+
+        insertLrpToAvoidOffRamp = OpenLRPropertyAccess.getBooleanPropertyValue(config,OpenLREncoderProperty.INSERT_EXTRA_LRP_TO_AVOID_OFF_RAMP);
+    }
+
+
+    /** Check whether it is allowed to insert additional points
+     *
+     * @return insertLrpToAvoidOffRamp
+     * **/
+
+    public boolean insertLrpToAvoidOffRamp() {
+        return insertLrpToAvoidOffRamp;
     }
 
     /**

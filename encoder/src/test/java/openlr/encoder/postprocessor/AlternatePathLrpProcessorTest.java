@@ -34,7 +34,7 @@ public class AlternatePathLrpProcessorTest {
         encoderConfig.setProperty("AlternatePathRelativeThreshold", .20);
         OpenLREncoderProperties properties = new OpenLREncoderProperties(encoderConfig, new ArrayList<>());
         AlternatePathLrpProcessor alternatePathLrpHandler = AlternatePathLrpProcessor.with(properties);
-        LocRefPoint firstPoint = new LocRefPoint(Arrays.asList(map.getLine(1L), map.getLine(2L), map.getLine(5L)), properties);
+        LocRefPoint firstPoint = new LocRefPoint(Arrays.asList(map.getLine(1L), map.getLine(2L), map.getLine(5L),map.getLine(6L)), properties);
         LocRefPoint lastPoint = new LocRefPoint(map.getLine(6L), properties);
         List<LocRefPoint> lrps = Arrays.asList(firstPoint, lastPoint);
         assertEquals(lrps.size(), 2);

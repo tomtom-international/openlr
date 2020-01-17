@@ -59,6 +59,8 @@ import openlr.encoder.OpenLREncoderProcessingException.EncoderProcessingError;
 import openlr.encoder.data.ExpansionHelper;
 import openlr.encoder.data.LocRefData;
 import openlr.encoder.data.LocRefPoint;
+import openlr.encoder.postprocessor.LrpProcessor;
+import openlr.encoder.postprocessor.OfframpProcessor;
 import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.encoder.routesearch.RouteSearch;
 import openlr.encoder.routesearch.RouteSearchResult;
@@ -72,9 +74,7 @@ import openlr.map.utils.NodeCheck;
 import openlr.rawLocRef.RawLocationReference;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class holds the main OpenLR encoder method and all relevant methods
@@ -140,7 +140,10 @@ public abstract class AbstractEncoder {
 
         int maxLength = properties.getMaximumDistanceLRP();
 
-        AlternatePathLrpProcessor alternatePathProcessor = AlternatePathLrpProcessor.with(properties);
+
+        Map<Integer, LrpProcessor> postProcessors = new TreeMap<>();
+        postProcessors.put(1,AlternatePathLrpProcessor.with(properties));
+        postProcessors.put(2, OfframpProcessor.with(properties));
 
         // find shortest-path(s) until the whole location is covered by a
         // concatenation of these shortest-path(s)
@@ -211,7 +214,9 @@ public abstract class AbstractEncoder {
         }
 
         checkedList.add(locRefPoints.get(locRefPoints.size() - 1));
-        checkedList = alternatePathProcessor.process(checkedList);
+        for(int index : postProcessors.keySet()){
+            checkedList = postProcessors.get(index).process(checkedList);
+        }
         int lrpCount = 1;
         for (int i = 0; i < checkedList.size() - 1; i++) {
             LocRefPoint lrp = checkedList.get(i);

@@ -98,7 +98,10 @@ public enum OpenLREncoderProperty implements OpenLRProperty {
     LRP_ALTERNATIVE_PATH("LrpAlternativePath", PropertyType.BOOLEAN, false),
 
     /** Relative threshold for alternate routes **/
-    ALTERNATIVE_PATH_RELATIVE_THRESHOLD("AlternatePathRelativeThreshold", PropertyType.FLOAT, 0.1f);
+    ALTERNATIVE_PATH_RELATIVE_THRESHOLD("AlternatePathRelativeThreshold", PropertyType.FLOAT, 0.1f),
+
+    /** Insert lrp at off ramp **/
+    INSERT_EXTRA_LRP_TO_AVOID_OFF_RAMP("OfframpExtraLrp", PropertyType.BOOLEAN, false);
 
 
     /** The key. */

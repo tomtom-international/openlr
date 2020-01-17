@@ -18,11 +18,12 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestMapStubTest {
     @Test
-    public void encoding() throws OpenLRProcessingException {
+    public void testAlternatePathAlgorithm() throws OpenLRProcessingException {
         InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/TestMapStub.xml");
         OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
         Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
@@ -47,4 +48,28 @@ public class TestMapStubTest {
         assertEquals(locationReferenceHolder.getLRPs().get(2).getLongitudeDeg(), 13.45505);
         assertEquals(locationReferenceHolder.getLRPs().get(2).getLatitudeDeg(), 52.502817);
     }
+
+    @Test
+    public void  testOffRampExtraLrp() throws OpenLRProcessingException {
+        InputStream mapFile = OpenLRMapDatabaseAdaptor.class.getClassLoader().getResourceAsStream("teststubs/OfframpTest.xml");
+        OpenLRMapDatabaseAdaptor map = OpenLRMapDatabaseAdaptor.from(mapFile);
+        Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
+        encoderConfig.setProperty("OfframpExtraLrp",true);
+        OpenLREncoderParameter params = new OpenLREncoderParameter.Builder().with(map).with(encoderConfig).buildParameter();
+        List<Line> route = Arrays.asList(map.getLine(3L), map.getLine(4L), map.getLine(5L),map.getLine(6L));
+        Location loc1 = LocationFactory.createLineLocation("off ramp", route);
+        OpenLREncoder encoder = new openlr.encoder.OpenLREncoder();
+        LocationReferenceHolder locationReferenceHolder = encoder.encodeLocation(params, loc1);
+        locationReferenceHolder.isValid();
+        assertEquals(locationReferenceHolder.getLRPs().size(), 3);
+        assertEquals(locationReferenceHolder.getLRPs().get(0).getDistanceToNext(), 90);
+        assertEquals(locationReferenceHolder.getLRPs().get(1).getDistanceToNext(), 69);
+        assertEquals(locationReferenceHolder.getLRPs().get(1).getLongitudeDeg(),13.46998);
+        assertEquals(locationReferenceHolder.getLRPs().get(1).getLatitudeDeg(),52.510951);
+    }
+
+
+
+
+
 }
