@@ -1,7 +1,6 @@
 package openlr.encoder.postprocessor;
 
 import openlr.OpenLRProcessingException;
-import openlr.encoder.data.LocRefPoint;
 import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.encoder.routesearch.SecondShortestRouteChecker;
 import openlr.map.Line;

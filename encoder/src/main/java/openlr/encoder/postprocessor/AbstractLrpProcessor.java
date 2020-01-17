@@ -3,7 +3,6 @@ package openlr.encoder.postprocessor;
 import openlr.OpenLRProcessingException;
 import openlr.encoder.data.LocRefPoint;
 import openlr.encoder.properties.OpenLREncoderProperties;
-import openlr.map.GeoCoordinates;
 import openlr.map.Line;
 
 import java.util.ArrayList;

@@ -13,21 +13,20 @@ import java.util.stream.StreamSupport;
 
 public class OfframpProcessor extends AbstractLrpProcessor {
 
+    private static double BEARING_RANGE_OF_SIBLING_LINES = 45;
+
     public static class RouteNodeInfo {
+        public Node node;
+        public double lengthViaNode;
         public RouteNodeInfo(Node node, double lengthViaSNode) {
             this.node = node;
             this.lengthViaNode = lengthViaSNode;
         }
-
-        public Node node;
-        public double lengthViaNode;
     }
 
     private OfframpProcessor(OpenLREncoderProperties properties) {
         this.properties = properties;
     }
-
-    private static double BEARING_OF_SIBLING_LINE = 45;
 
     public static OfframpProcessor with(OpenLREncoderProperties properties) {
         return new OfframpProcessor(properties);
@@ -46,7 +45,7 @@ public class OfframpProcessor extends AbstractLrpProcessor {
         for (Line line : siblingsOfLrpLine) {
             double bearingOfSiblingLine = GeometryUtils.calculateLineBearing(line, GeometryUtils.BearingDirection.IN_DIRECTION, this.properties.getBearingDistance(), 0);
             double difference = GeometryUtils.bearingDifference(bearingOfLrpLine, bearingOfSiblingLine);
-            if (difference <= BEARING_OF_SIBLING_LINE) {
+            if (difference <= BEARING_RANGE_OF_SIBLING_LINES) {
                 return true;
             }
         }
