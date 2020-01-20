@@ -40,18 +40,14 @@ public class LocationTypeDecoderRegistry {
             case POLYGON:
                 return polygonDecoder;
             case POI_WITH_ACCESS_POINT:
-                break;
             case CIRCLE:
-                break;
             case CLOSED_LINE:
-                break;
             case RECTANGLE:
-                break;
             case GRID:
-                break;
             case UNKNOWN:
                 return null;
+            default:
+                throw new IllegalStateException();
         }
-        return null;
     }
 }
