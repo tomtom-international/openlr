@@ -28,24 +28,28 @@ public abstract class AbstractLrpProcessor implements LrpProcessor {
      */
     private List<LocRefPoint> createNewLRPs(List<Line> route, List<Integer> lrpPositions) throws OpenLRProcessingException {
         List<LocRefPoint> revisedLrpList = new ArrayList<>();
+
         LocRefPoint firstPoint = new LocRefPoint(route.subList(0, lrpPositions.get(0)), properties);
         revisedLrpList.add(firstPoint);
+
         for (int index = 0; index < lrpPositions.size() - 1; ++index) {
             int from = lrpPositions.get(index);
             int to = lrpPositions.get(index + 1);
             LocRefPoint intermediatePoint = new LocRefPoint(route.subList(from, to), properties);
             revisedLrpList.add(intermediatePoint);
         }
+
         int from = lrpPositions.get(lrpPositions.size() - 1);
         LocRefPoint lastPoint = new LocRefPoint(route.subList(from, route.size()), properties);
         revisedLrpList.add(lastPoint);
+
         return revisedLrpList;
     }
 
     /**
      * @return true if postprocessor is not configured in properties file;
      */
-    protected abstract boolean isNotActive();
+    protected abstract boolean isActive();
 
 
 
@@ -57,10 +61,13 @@ public abstract class AbstractLrpProcessor implements LrpProcessor {
      * @throws OpenLRProcessingException
      */
     public List<LocRefPoint> process(List<LocRefPoint> lrps) throws OpenLRProcessingException {
-        if (isNotActive()) {
+
+        if (!isActive()) {
             return lrps;
         }
+
         List<LocRefPoint> revisedLrpList = new ArrayList<>();
+
         for (int index = 0; index < lrps.size() - 1; ++index) {
             LocRefPoint lrp = lrps.get(index);
             LocRefPoint nextLrp = lrps.get(index + 1);
@@ -79,6 +86,7 @@ public abstract class AbstractLrpProcessor implements LrpProcessor {
                 revisedLrpList.addAll(createNewLRPs(lrp.getRoute(), intermediateLrpPositions));
             }
         }
+
         revisedLrpList.add(lrps.get(lrps.size() - 1));
         return revisedLrpList;
     }

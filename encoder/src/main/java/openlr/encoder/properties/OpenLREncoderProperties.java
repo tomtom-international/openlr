@@ -90,6 +90,9 @@ public class OpenLREncoderProperties {
     /** flag to insert lrp to add lrp to avoid off ramp **/
     private boolean insertLrpToAvoidOffRamp;
 
+    /** max difference between sibling lines from a node **/
+    private float siblingBearingLimit;
+
     /**
      * Instantiates a new open lr encoder properties.
      *
@@ -128,6 +131,8 @@ public class OpenLREncoderProperties {
         alternatePathRelativeThreshold = OpenLRPropertyAccess.getFloatPropertyValue(config,OpenLREncoderProperty.ALTERNATIVE_PATH_RELATIVE_THRESHOLD);
 
         insertLrpToAvoidOffRamp = OpenLRPropertyAccess.getBooleanPropertyValue(config,OpenLREncoderProperty.INSERT_EXTRA_LRP_TO_AVOID_OFF_RAMP);
+
+        siblingBearingLimit = OpenLRPropertyAccess.getFloatPropertyValue(config,OpenLREncoderProperty.SIBLING_BEARING_LIMIT);
     }
 
 
@@ -138,6 +143,14 @@ public class OpenLREncoderProperties {
 
     public boolean insertLrpToAvoidOffRamp() {
         return insertLrpToAvoidOffRamp;
+    }
+
+
+    /**
+     * @return bearing difference of sibling lines
+     */
+    public final float getSiblingBearingLimit() {
+        return siblingBearingLimit;
     }
 
     /**
@@ -189,7 +202,6 @@ public class OpenLREncoderProperties {
         return compTime4Cache;
     }
 
-
     public final boolean insertLrpAtAlternatePath(){
         return insertLrpAtAlternatePath;
     }
@@ -197,5 +209,4 @@ public class OpenLREncoderProperties {
     public final float getAlternatePathRelativeThreshold(){
             return alternatePathRelativeThreshold;
     }
-
 }

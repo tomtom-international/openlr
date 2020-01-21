@@ -20,7 +20,7 @@ import java.util.List;
 
 public class OfframpProcessorTest {
     private OpenLRMapDatabaseAdaptor map;
-    private OfframpProcessor offrampProcessor;
+    private RoadForkProcessor offrampProcessor;
 
     @BeforeTest
     public void loadMapStub() throws OpenLRProcessingException {
@@ -28,7 +28,7 @@ public class OfframpProcessorTest {
         this.map = OpenLRMapDatabaseAdaptor.from(mapFile);
         Configuration encoderConfig = OpenLRPropertiesReader.loadPropertiesFromFile(new File(TestMapStubTest.class.getClassLoader().getResource("OpenLR-Encoder-Properties.xml").getFile()));
         OpenLREncoderProperties properties = new OpenLREncoderProperties(encoderConfig, new ArrayList<>());
-        this.offrampProcessor = OfframpProcessor.with(properties);
+        this.offrampProcessor = RoadForkProcessor.with(properties);
     }
 
 

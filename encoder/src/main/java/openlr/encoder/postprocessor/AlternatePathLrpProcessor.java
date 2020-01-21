@@ -27,8 +27,8 @@ public class AlternatePathLrpProcessor extends AbstractLrpProcessor {
     /**
      * @return true if postprocessor is not configured in properties file;
      */
-    protected final boolean isNotActive() {
-        return !properties.insertLrpAtAlternatePath();
+    protected final boolean isActive() {
+        return properties.insertLrpAtAlternatePath();
     }
 
     /**

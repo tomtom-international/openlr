@@ -60,7 +60,7 @@ import openlr.encoder.data.ExpansionHelper;
 import openlr.encoder.data.LocRefData;
 import openlr.encoder.data.LocRefPoint;
 import openlr.encoder.postprocessor.LrpProcessor;
-import openlr.encoder.postprocessor.OfframpProcessor;
+import openlr.encoder.postprocessor.RoadForkProcessor;
 import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.encoder.routesearch.RouteSearch;
 import openlr.encoder.routesearch.RouteSearchResult;
@@ -143,7 +143,7 @@ public abstract class AbstractEncoder {
 
         Map<Integer, LrpProcessor> postProcessors = new TreeMap<>();
         postProcessors.put(1,AlternatePathLrpProcessor.with(properties));
-        postProcessors.put(2, OfframpProcessor.with(properties));
+        postProcessors.put(2, RoadForkProcessor.with(properties));
 
         // find shortest-path(s) until the whole location is covered by a
         // concatenation of these shortest-path(s)
