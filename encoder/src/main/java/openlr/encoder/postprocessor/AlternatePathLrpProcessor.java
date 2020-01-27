@@ -34,13 +34,19 @@ public class AlternatePathLrpProcessor extends AbstractLrpProcessor {
     /**
      *
      * @param route linked list of road segment
+     * @param firstLineOfNextLrp
+     * @param lastLRP
      * @return list of indices in the linked list where the alternate path with length under threshold starts.
      * @throws OpenLRProcessingException
      */
-    protected List<Integer> determineNewIntermediatePoints(List<Line> route) throws OpenLRProcessingException {
+    protected List<Integer> determineNewIntermediatePoints(List<Line> route, Line firstLineOfNextLrp, boolean lastLRP) throws OpenLRProcessingException {
+        List<Line> connectedRoute = route;
+        if(!lastLRP){
+            connectedRoute.add(firstLineOfNextLrp);
+        }
         List<Integer> intermediates = new ArrayList<>();
-        SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(route, properties.getAlternatePathRelativeThreshold());
-        for (int index = 1; index < route.size(); ++index) {
+        SecondShortestRouteChecker checker = SecondShortestRouteChecker.on(connectedRoute, properties.getAlternatePathRelativeThreshold());
+        for (int index = 1; index < connectedRoute.size(); ++index) {
             if (checker.hasValidDeviationBefore(index)) {
                 intermediates.add(index);
             }

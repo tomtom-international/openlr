@@ -49,7 +49,7 @@ public class RoadForkProcessor extends AbstractLrpProcessor {
         return properties.insertLrpToAvoidOffRamp();
     }
 
-    public List<Integer> determineNewIntermediatePoints(List<Line> route) throws OpenLRProcessingException {
+    public List<Integer> determineNewIntermediatePoints(List<Line> route, Line firstLineOfNextLrp, boolean lastLRP) throws OpenLRProcessingException {
         List<Integer> intermediates = new ArrayList<>();
 
         if (route.isEmpty()) {
@@ -69,7 +69,8 @@ public class RoadForkProcessor extends AbstractLrpProcessor {
         }
 
         GeoCoordinates source = startNode.getGeoCoordinates();
-        GeoCoordinates destination = route.get(route.size() - 1).getEndNode().getGeoCoordinates();
+        GeoCoordinates destination = lastLRP ?
+                route.get(route.size() - 1).getEndNode().getGeoCoordinates() : firstLineOfNextLrp.getStartNode().getGeoCoordinates();
         Map<Integer, Double> distanceViaNodes = new HashMap<>();
 
         for (int index = 1; index < route.size(); ++index) {

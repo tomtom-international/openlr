@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class OfframpProcessorTest {
+public class RoadForkProcessorTest {
     private OpenLRMapDatabaseAdaptor map;
     private RoadForkProcessor offrampProcessor;
 
@@ -35,17 +35,35 @@ public class OfframpProcessorTest {
     @Test
     public void locationAlongMotorWay() throws OpenLRProcessingException, InvalidMapDataException {
         List<Line> route = Arrays.asList(map.getLine(1L), map.getLine(2L), map.getLine(6L));
-        List<Integer> corePointPositions = offrampProcessor.determineNewIntermediatePoints(route);
+        List<Integer> corePointPositions = offrampProcessor.determineNewIntermediatePoints(route, null, true);
         Assert.assertEquals(corePointPositions.size(), 1);
         Assert.assertEquals(corePointPositions.get(0).intValue(),2);
     }
 
     @Test
-    public void locationAlongOfframp() throws OpenLRProcessingException, InvalidMapDataException {
+    public void locationAlongMotorWayIntermediatePoint() throws OpenLRProcessingException, InvalidMapDataException {
+        List<Line> route = Arrays.asList(map.getLine(1L), map.getLine(2L));
+        List<Integer> corePointPositions = offrampProcessor.determineNewIntermediatePoints(route, map.getLine(6L), false);
+        Assert.assertEquals(corePointPositions.size(), 1);
+        Assert.assertEquals(corePointPositions.get(0).intValue(),1);
+    }
+
+
+    @Test
+    public void locationAlongOfftrack() throws OpenLRProcessingException, InvalidMapDataException {
         List<Line> route = Arrays.asList(map.getLine(3L), map.getLine(4L), map.getLine(5L),map.getLine(6L));
-        List<Integer> corePointPositions = offrampProcessor.determineNewIntermediatePoints(route);
+        List<Integer> corePointPositions = offrampProcessor.determineNewIntermediatePoints(route, null, true);
         Assert.assertEquals(corePointPositions.size(), 1);
         Assert.assertEquals(corePointPositions.get(0).intValue(),2);
-
     }
+
+
+    @Test
+    public void locationAlongOfftrackIntermediatePoint() throws OpenLRProcessingException, InvalidMapDataException {
+        List<Line> route = Arrays.asList(map.getLine(3L), map.getLine(4L), map.getLine(5L));
+        List<Integer> corePointPositions = offrampProcessor.determineNewIntermediatePoints(route, map.getLine(6L), false);
+        Assert.assertEquals(corePointPositions.size(), 1);
+        Assert.assertEquals(corePointPositions.get(0).intValue(),2);
+    }
+
 }

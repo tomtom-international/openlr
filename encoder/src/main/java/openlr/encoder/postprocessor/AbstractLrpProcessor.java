@@ -15,10 +15,12 @@ public abstract class AbstractLrpProcessor implements LrpProcessor {
     /**
      *
      * @param route linked list of road segment
+     * @param firstLineOfNextLrp
+     * @param lastLRP
      * @return list of indices in the linked list where the alternate path with length under threshold starts.
      * @throws OpenLRProcessingException
      */
-    protected abstract List<Integer> determineNewIntermediatePoints(List<Line> route) throws OpenLRProcessingException;
+    protected abstract List<Integer> determineNewIntermediatePoints(List<Line> route, Line firstLineOfNextLrp, boolean lastLRP) throws OpenLRProcessingException;
 
     /**
      * @param route route between the adjacent location reference points(including the road segment of the destination lrp)
@@ -70,14 +72,10 @@ public abstract class AbstractLrpProcessor implements LrpProcessor {
 
         for (int index = 0; index < lrps.size() - 1; ++index) {
             LocRefPoint lrp = lrps.get(index);
+            List<Line> lrpRoute = lrp.getRoute();
             LocRefPoint nextLrp = lrps.get(index + 1);
             Line firstLineOfNextLrp = nextLrp.getLine();
-            List<Line> oldRoute = lrp.getRoute();
-            List<Line> connectedRoute = new ArrayList<>(oldRoute);
-            if(!nextLrp.isLastLRP()){
-                connectedRoute.add(firstLineOfNextLrp);
-            }
-            List<Integer> intermediateLrpPositions = determineNewIntermediatePoints(connectedRoute);
+            List<Integer> intermediateLrpPositions = determineNewIntermediatePoints(lrpRoute,firstLineOfNextLrp,nextLrp.isLastLRP());
             if (intermediateLrpPositions.isEmpty()) {
                 revisedLrpList.add(lrp);
             } else {
