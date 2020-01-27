@@ -79,10 +79,15 @@ message PointAlongLineLocationReference {
     Orientation orientation = 5;
 }
 
+message PolygonLocationReference {
+    repeated Coordinates coordinates = 1;
+}
+
 message LocationReferenceData {
     oneof locationReference {
         LineLocationReference lineLocationReference = 1;
         GeoCoordinatesLocationReference geoCoordinatesLocationReference = 2;
         PointAlongLineLocationReference pointAlongLineLocationReference = 3;
+        PolygonLocationReference polygonLocationReference = 4;
     }
 }

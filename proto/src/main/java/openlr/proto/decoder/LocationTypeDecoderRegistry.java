@@ -3,26 +3,30 @@ package openlr.proto.decoder;
 import openlr.LocationType;
 
 public class LocationTypeDecoderRegistry {
+    private final LineDecoder lineDecoder;
+    private final GeoCoordinatesDecoder geoCoordinatesDecoder;
+    private final PointAlongLineDecoder pointAlongLineDecoder;
+    private final PolygonDecoder polygonDecoder;
+
     public static LocationTypeDecoderRegistry create() {
         LocationReferencePointDecoder locationReferencePointDecoder = new LocationReferencePointDecoder();
         LineDecoder lineDecoder = new LineDecoder(locationReferencePointDecoder);
         GeoCoordinatesDecoder geoCoordinatesDecoder = new GeoCoordinatesDecoder();
         PointAlongLineDecoder pointAlongLineDecoder = new PointAlongLineDecoder(locationReferencePointDecoder);
+        PolygonDecoder polygonDecoder = new PolygonDecoder();
 
         return new LocationTypeDecoderRegistry(
                 lineDecoder,
                 geoCoordinatesDecoder,
-                pointAlongLineDecoder);
+                pointAlongLineDecoder,
+                polygonDecoder);
     }
 
-    private final LineDecoder lineDecoder;
-    private final GeoCoordinatesDecoder geoCoordinatesDecoder;
-    private final PointAlongLineDecoder pointAlongLineDecoder;
-
-    LocationTypeDecoderRegistry(LineDecoder lineDecoder, GeoCoordinatesDecoder geoCoordinatesDecoder, PointAlongLineDecoder pointAlongLineDecoder) {
+    LocationTypeDecoderRegistry(LineDecoder lineDecoder, GeoCoordinatesDecoder geoCoordinatesDecoder, PointAlongLineDecoder pointAlongLineDecoder, PolygonDecoder polygonDecoder) {
         this.lineDecoder = lineDecoder;
         this.geoCoordinatesDecoder = geoCoordinatesDecoder;
         this.pointAlongLineDecoder = pointAlongLineDecoder;
+        this.polygonDecoder = polygonDecoder;
     }
 
     public LocationReferenceDecoder getDecoder(LocationType locationType) {
@@ -33,21 +37,17 @@ public class LocationTypeDecoderRegistry {
                 return geoCoordinatesDecoder;
             case POINT_ALONG_LINE:
                 return pointAlongLineDecoder;
-            case POI_WITH_ACCESS_POINT:
-                break;
-            case CIRCLE:
-                break;
             case POLYGON:
-                break;
+                return polygonDecoder;
+            case POI_WITH_ACCESS_POINT:
+            case CIRCLE:
             case CLOSED_LINE:
-                break;
             case RECTANGLE:
-                break;
             case GRID:
-                break;
             case UNKNOWN:
                 return null;
+            default:
+                throw new IllegalStateException();
         }
-        return null;
     }
 }
