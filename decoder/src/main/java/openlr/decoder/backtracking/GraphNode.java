@@ -7,7 +7,12 @@ public class GraphNode<T> {
 
     private List<GraphEdge<T>> outgoingEdge = new ArrayList<>();
     private List<GraphEdge<T>> incomingEdge = new ArrayList<>();
-    private final T element;
+
+    public T getNodeElement() {
+        return nodeElement;
+    }
+
+    private final T nodeElement;
 
     public List<GraphEdge<T>> getOutgoingEdge() {
         return outgoingEdge;
@@ -17,8 +22,8 @@ public class GraphNode<T> {
         return incomingEdge;
     }
 
-    public GraphNode(T element) {
-        this.element = element;
+    public GraphNode(T nodeElement) {
+        this.nodeElement = nodeElement;
     }
 
     public boolean isDeadEnd() {
