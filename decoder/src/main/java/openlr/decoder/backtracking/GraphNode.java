@@ -5,14 +5,13 @@ import java.util.List;
 
 public class GraphNode<T> {
 
+    private final T nodeElement;
     private List<GraphEdge<T>> outgoingEdge = new ArrayList<>();
     private List<GraphEdge<T>> incomingEdge = new ArrayList<>();
 
     public T getNodeElement() {
         return nodeElement;
     }
-
-    private final T nodeElement;
 
     public List<GraphEdge<T>> getOutgoingEdge() {
         return outgoingEdge;
