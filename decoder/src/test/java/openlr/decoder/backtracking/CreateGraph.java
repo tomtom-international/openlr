@@ -12,15 +12,15 @@ import static org.mockito.Mockito.mock;
 
 public class CreateGraph {
 
-    GraphNode graphNode1;
-    GraphNode graphNode2;
-    GraphNode graphNode3;
-    GraphNode graphNode4;
-    GraphNode graphNode5;
-    GraphNode graphNode6;
-    GraphNode graphNode7;
-    GraphNode graphNode8;
-    BackTrackingGraph backTrackingGraph;
+    private GraphNode graphNode1;
+    private GraphNode graphNode2;
+    private GraphNode graphNode3;
+    private GraphNode graphNode4;
+    private GraphNode graphNode5;
+    private GraphNode graphNode6;
+    private GraphNode graphNode7;
+    private GraphNode graphNode8;
+    private BackTrackingGraph backTrackingGraph;
 
     @BeforeMethod
     public void setUp() {
@@ -76,7 +76,7 @@ public class CreateGraph {
         Assert.assertEquals(graphNode2,graphNode);
     }
 
-    void verifyStartAndEndNodes(GraphEdge edge, GraphNode startNode, GraphNode endNode){
+    private void verifyStartAndEndNodes(GraphEdge edge, GraphNode startNode, GraphNode endNode){
         Assert.assertEquals(startNode, edge.getSourceNode());
         Assert.assertEquals(endNode, edge.getDestinationNode());
     }

@@ -5,11 +5,9 @@ public enum EntityColor {
     GREEN(1),
     WHITE(2);
 
+    private final int value;
+
     EntityColor(int value) {
         this.value = value;
     }
-
-    private final int value;
-
-
 }

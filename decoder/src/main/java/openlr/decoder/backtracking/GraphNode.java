@@ -1,11 +1,14 @@
 package openlr.decoder.backtracking;
 
-import openlr.map.Line;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class GraphNode<T> {
+
+    private List<GraphEdge<T>> outgoingEdge = new ArrayList<>();
+    private List<GraphEdge<T>> incomingEdge = new ArrayList<>();
+    private final T element;
+
     public List<GraphEdge<T>> getOutgoingEdge() {
         return outgoingEdge;
     }
@@ -13,10 +16,6 @@ public class GraphNode<T> {
     public List<GraphEdge<T>> getIncomingEdge() {
         return incomingEdge;
     }
-
-    private List<GraphEdge<T>> outgoingEdge = new ArrayList<>();
-    private List<GraphEdge<T>> incomingEdge = new ArrayList<>();
-    private final T element;
 
     public GraphNode(T element) {
         this.element = element;
