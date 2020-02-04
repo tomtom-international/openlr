@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public class BackTrackingGraph<T> {
-    private final List<Slice> slices;
+    private final List<Slice<T>> slices;
     private final Map<String, GraphEdge> edges;
     private int currentSourceSliceIndex = -1;
     private GraphEdge<T> graphEdge = null;
     private GraphEdge<T> lastSuccessfulEdge = null;
 
-    public BackTrackingGraph(List<Slice> slices) {
+    public BackTrackingGraph(List<Slice<T>> slices) {
         this.slices = slices;
         this.edges = new HashMap<>();
     }
