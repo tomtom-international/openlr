@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,20 +21,18 @@ public class CreateGraph {
     private GraphNode graphNode6;
     private GraphNode graphNode7;
     private GraphNode graphNode8;
+    private Line line1 =  mock(Line.class);
+    private Line line2 = mock(Line.class);
+    private Line line3 =  mock(Line.class);
+    private Line line4 = mock(Line.class);
+    private Line line5 =  mock(Line.class);
+    private Line line6 = mock(Line.class);
+    private Line line7 =  mock(Line.class);
+    private Line line8 = mock(Line.class);
     private BackTrackingGraph backTrackingGraph;
 
     @BeforeMethod
     public void setUp() {
-
-
-        Line line1 =  mock(Line.class);
-        Line line2 = mock(Line.class);
-        Line line3 =  mock(Line.class);
-        Line line4 = mock(Line.class);
-        Line line5 =  mock(Line.class);
-        Line line6 = mock(Line.class);
-        Line line7 =  mock(Line.class);
-        Line line8 = mock(Line.class);
 
         graphNode1 = new GraphNode(line1);
         graphNode2 = new GraphNode(line2);
@@ -89,21 +88,28 @@ public class CreateGraph {
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        List<Line> route1 = Arrays.asList(line1,line3);
+        edge.setValue(route1);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge,graphNode3,graphNode5);
+        List<Line> route2 = Arrays.asList(line3,line5);
+        edge.setValue(route2);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge,graphNode5,graphNode7);
+        List<Line> route3 = Arrays.asList(line5,line7);
+        edge.setValue(route3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
+        Assert.assertEquals(backTrackingGraph.traceBack(),Arrays.asList(route3,route2,route1));
     }
 
 
@@ -113,27 +119,36 @@ public class CreateGraph {
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
+        List<Line> route1 = Arrays.asList(line1,line3);
+        edge.setValue(route1);
         edge.setEdgeColor(EntityColor.RED);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge,graphNode1,graphNode4);
+        List<Line> route2 = Arrays.asList(line1,line4);
+        edge.setValue(route2);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge,graphNode4,graphNode5);
+        List<Line> route3 = Arrays.asList(line4,line5);
+        edge.setValue(route3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge,graphNode5,graphNode7);
+        List<Line> route4 = Arrays.asList(line5,line7);
+        edge.setValue(route4);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
+        Assert.assertEquals(backTrackingGraph.traceBack(),Arrays.asList(route4,route3,route2));
     }
 
     @Test
