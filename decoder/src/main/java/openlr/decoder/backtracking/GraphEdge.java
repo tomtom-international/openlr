@@ -8,6 +8,16 @@ public class GraphEdge<T> {
     private List<T> value;
     private GraphNode<T> sourceNode;
     private GraphNode<T> destinationNode;
+    private int sourceSliceIndex;
+    private int destinationSliceIndex;
+
+    public int getSourceSliceIndex() {
+        return sourceSliceIndex;
+    }
+
+    public int getDestinationSliceIndex() {
+        return destinationSliceIndex;
+    }
 
     public EntityColor getEdgeColor() {
         return edgeColor;
@@ -33,9 +43,11 @@ public class GraphEdge<T> {
         return destinationNode;
     }
 
-    public GraphEdge(GraphNode sourceNode, GraphNode destinationNode) {
+    public GraphEdge(GraphNode sourceNode, GraphNode destinationNode, int sourceSliceIndex, int destinationSliceIndex) {
         this.sourceNode = sourceNode;
         this.destinationNode = destinationNode;
+        this.sourceSliceIndex = sourceSliceIndex;
+        this.destinationSliceIndex = destinationSliceIndex;
         this.edgeColor = EntityColor.WHITE;
     }
 }

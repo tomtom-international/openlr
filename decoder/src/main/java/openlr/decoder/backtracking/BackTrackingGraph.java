@@ -96,7 +96,6 @@ public class BackTrackingGraph<T> {
 
         if (edge.getSourceNode().getIncomingEdge()
                 .stream().count() == 0) {
-            ++currentSourceSliceIndex;
             return null;
         }
 
@@ -130,7 +129,6 @@ public class BackTrackingGraph<T> {
 
         if (edge.getDestinationNode().getOutgoingEdge()
                 .stream().count() == 0) {
-            --currentSourceSliceIndex;
             return null;
         }
 
@@ -163,10 +161,10 @@ public class BackTrackingGraph<T> {
     }
 
     public boolean isComplete() {
-        return (currentSourceSliceIndex == slices.size() - 2)
+        return (currentSourceSliceIndex == slices.size() - 1)
                 && lastSuccessfulEdge != null
                 && lastSuccessfulEdge.getEdgeColor().equals(EntityColor.GREEN)
-                && !isBacktrackingRequired(currentSourceSliceIndex, lastSuccessfulEdge);
+                && !isBacktrackingRequired(currentSourceSliceIndex -1, lastSuccessfulEdge);
     }
 
 
@@ -213,7 +211,7 @@ public class BackTrackingGraph<T> {
                 String edgeId = getEdgeId(sourceSliceIndex, sourceNodeIndex, destinationSliceIndex, destinationNodeIndex);
                 GraphNode sourceNode = sourceSliceNodes.get(sourceNodeIndex);
                 GraphNode destinationNode = destinationSliceNodes.get(destinationNodeIndex);
-                GraphEdge graphEdge = new GraphEdge(sourceNode, destinationNode);
+                GraphEdge graphEdge = new GraphEdge(sourceNode, destinationNode, sourceSliceIndex, destinationSliceIndex);
                 sourceNode.addOutgoingEdge(graphEdge);
                 destinationNode.addIncomingEdge(graphEdge);
                 this.edges.put(edgeId, graphEdge);

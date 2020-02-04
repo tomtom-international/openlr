@@ -107,6 +107,9 @@ public class CreateGraph {
         edge.setValue(route3);
         edge.setEdgeColor(EntityColor.GREEN);
 
+        edge = backTrackingGraph.getNextBestEdge();
+        Assert.assertNull(edge);
+
         Assert.assertTrue(backTrackingGraph.isComplete());
         Assert.assertEquals(backTrackingGraph.traceBack(), Arrays.asList(route3, route2, route1));
     }
@@ -146,6 +149,9 @@ public class CreateGraph {
         edge.setValue(route4);
         edge.setEdgeColor(EntityColor.GREEN);
 
+        edge = backTrackingGraph.getNextBestEdge();
+        Assert.assertNull(edge);
+
         Assert.assertTrue(backTrackingGraph.isComplete());
         Assert.assertEquals(backTrackingGraph.traceBack(), Arrays.asList(route4, route3, route2));
     }
@@ -176,6 +182,9 @@ public class CreateGraph {
         edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge, graphNode5, graphNode8);
         edge.setEdgeColor(EntityColor.GREEN);
+
+        edge = backTrackingGraph.getNextBestEdge();
+        Assert.assertNull(edge);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
 
@@ -208,6 +217,9 @@ public class CreateGraph {
         edge = backTrackingGraph.getNextBestEdge();
         verifyStartAndEndNodes(edge, graphNode6, graphNode7);
         edge.setEdgeColor(EntityColor.GREEN);
+
+        edge = backTrackingGraph.getNextBestEdge();
+        Assert.assertNull(edge);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
 
@@ -377,9 +389,8 @@ public class CreateGraph {
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-
         Assert.assertNull(edge);
 
-        Assert.assertFalse(backTrackingGraph.isComplete());
+        Assert.assertTrue(backTrackingGraph.isComplete());
     }
 }
