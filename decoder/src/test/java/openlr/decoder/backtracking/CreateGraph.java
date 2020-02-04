@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,13 +20,13 @@ public class CreateGraph {
     private GraphNode graphNode6;
     private GraphNode graphNode7;
     private GraphNode graphNode8;
-    private Line line1 =  mock(Line.class);
+    private Line line1 = mock(Line.class);
     private Line line2 = mock(Line.class);
-    private Line line3 =  mock(Line.class);
+    private Line line3 = mock(Line.class);
     private Line line4 = mock(Line.class);
-    private Line line5 =  mock(Line.class);
+    private Line line5 = mock(Line.class);
     private Line line6 = mock(Line.class);
-    private Line line7 =  mock(Line.class);
+    private Line line7 = mock(Line.class);
     private Line line8 = mock(Line.class);
     private BackTrackingGraph backTrackingGraph;
 
@@ -44,16 +43,16 @@ public class CreateGraph {
         graphNode8 = new GraphNode(line8);
 
 
-        List<GraphNode> graphNodeList1 = Arrays.asList(graphNode1,graphNode2);
-        Slice slice1 = new Slice(graphNodeList1,false);
-        List<GraphNode> graphNodeList2 = Arrays.asList(graphNode3,graphNode4);
-        Slice slice2 = new Slice(graphNodeList2,false);
-        List<GraphNode> graphNodeList3 = Arrays.asList(graphNode5,graphNode6);
-        Slice slice3 = new Slice(graphNodeList3,false);
-        List<GraphNode> graphNodeList4 = Arrays.asList(graphNode7,graphNode8);
+        List<GraphNode> graphNodeList1 = Arrays.asList(graphNode1, graphNode2);
+        Slice slice1 = new Slice(graphNodeList1, false);
+        List<GraphNode> graphNodeList2 = Arrays.asList(graphNode3, graphNode4);
+        Slice slice2 = new Slice(graphNodeList2, false);
+        List<GraphNode> graphNodeList3 = Arrays.asList(graphNode5, graphNode6);
+        Slice slice3 = new Slice(graphNodeList3, false);
+        List<GraphNode> graphNodeList4 = Arrays.asList(graphNode7, graphNode8);
         Slice slice4 = new Slice(graphNodeList4, true);
 
-        List<Slice> slices = Arrays.asList(slice1,slice2,slice3,slice4);
+        List<Slice> slices = Arrays.asList(slice1, slice2, slice3, slice4);
 
         backTrackingGraph = new BackTrackingGraph(slices);
         backTrackingGraph.generateEdges();
@@ -61,21 +60,21 @@ public class CreateGraph {
 
     @Test
     public void createSlices() {
-        Line line1 =  mock(Line.class);
+        Line line1 = mock(Line.class);
         Line line2 = mock(Line.class);
         GraphNode graphNode1 = new GraphNode(line1);
         GraphNode graphNode2 = new GraphNode(line2);
-        List<GraphNode> graphNodeList = Arrays.asList(graphNode1,graphNode2);
-        Slice slice1 = new Slice(graphNodeList,true);
+        List<GraphNode> graphNodeList = Arrays.asList(graphNode1, graphNode2);
+        Slice slice1 = new Slice(graphNodeList, true);
 
         GraphNode graphNode = slice1.getNextBestNode();
-        Assert.assertEquals(graphNode1,graphNode);
+        Assert.assertEquals(graphNode1, graphNode);
 
         graphNode = slice1.getNextBestNode();
-        Assert.assertEquals(graphNode2,graphNode);
+        Assert.assertEquals(graphNode2, graphNode);
     }
 
-    private void verifyStartAndEndNodes(GraphEdge edge, GraphNode startNode, GraphNode endNode){
+    private void verifyStartAndEndNodes(GraphEdge edge, GraphNode startNode, GraphNode endNode) {
         Assert.assertEquals(startNode, edge.getSourceNode());
         Assert.assertEquals(endNode, edge.getDestinationNode());
     }
@@ -87,29 +86,29 @@ public class CreateGraph {
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
-        List<Line> route1 = Arrays.asList(line1,line3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
+        List<Line> route1 = Arrays.asList(line1, line3);
         edge.setValue(route1);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode5);
-        List<Line> route2 = Arrays.asList(line3,line5);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode5);
+        List<Line> route2 = Arrays.asList(line3, line5);
         edge.setValue(route2);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode7);
-        List<Line> route3 = Arrays.asList(line5,line7);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode7);
+        List<Line> route3 = Arrays.asList(line5, line7);
         edge.setValue(route3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
-        Assert.assertEquals(backTrackingGraph.traceBack(),Arrays.asList(route3,route2,route1));
+        Assert.assertEquals(backTrackingGraph.traceBack(), Arrays.asList(route3, route2, route1));
     }
 
 
@@ -119,36 +118,36 @@ public class CreateGraph {
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        List<Line> route1 = Arrays.asList(line1,line3);
+        List<Line> route1 = Arrays.asList(line1, line3);
         edge.setValue(route1);
         edge.setEdgeColor(EntityColor.RED);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode4);
-        List<Line> route2 = Arrays.asList(line1,line4);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode4);
+        List<Line> route2 = Arrays.asList(line1, line4);
         edge.setValue(route2);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode4,graphNode5);
-        List<Line> route3 = Arrays.asList(line4,line5);
+        verifyStartAndEndNodes(edge, graphNode4, graphNode5);
+        List<Line> route3 = Arrays.asList(line4, line5);
         edge.setValue(route3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode7);
-        List<Line> route4 = Arrays.asList(line5,line7);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode7);
+        List<Line> route4 = Arrays.asList(line5, line7);
         edge.setValue(route4);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
-        Assert.assertEquals(backTrackingGraph.traceBack(),Arrays.asList(route4,route3,route2));
+        Assert.assertEquals(backTrackingGraph.traceBack(), Arrays.asList(route4, route3, route2));
     }
 
     @Test
@@ -157,25 +156,25 @@ public class CreateGraph {
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode5);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode7);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode7);
         edge.setEdgeColor(EntityColor.RED);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode8);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode8);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
@@ -189,25 +188,25 @@ public class CreateGraph {
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode5);
         edge.setEdgeColor(EntityColor.RED);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode6);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode6);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertFalse(backTrackingGraph.isComplete());
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode6,graphNode7);
+        verifyStartAndEndNodes(edge, graphNode6, graphNode7);
         edge.setEdgeColor(EntityColor.GREEN);
 
         Assert.assertTrue(backTrackingGraph.isComplete());
@@ -218,31 +217,31 @@ public class CreateGraph {
     public void testBacktrackingFromTheLastSlice() {
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode5);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode7);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode7);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode8);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode8);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode6,graphNode7);
+        verifyStartAndEndNodes(edge, graphNode6, graphNode7);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode6,graphNode8);
+        verifyStartAndEndNodes(edge, graphNode6, graphNode8);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode6);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode6);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
@@ -255,23 +254,23 @@ public class CreateGraph {
     public void testGraphUnconnectedInTheMiddle() {
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode5);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode6);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode6);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode4,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode4, graphNode5);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode4,graphNode6);
+        verifyStartAndEndNodes(edge, graphNode4, graphNode6);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
@@ -287,19 +286,19 @@ public class CreateGraph {
     public void testGraphWhichUnconnectedInTheFirstTwoSlices() {
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode4);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode4);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode2,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode2, graphNode3);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode2,graphNode4);
+        verifyStartAndEndNodes(edge, graphNode2, graphNode4);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
@@ -315,27 +314,27 @@ public class CreateGraph {
     public void testGraphWhichUnconnectedInTheLastTwoSlices() {
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode5);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode7);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode7);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode8);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode8);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode6,graphNode7);
+        verifyStartAndEndNodes(edge, graphNode6, graphNode7);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode6,graphNode8);
+        verifyStartAndEndNodes(edge, graphNode6, graphNode8);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
@@ -350,31 +349,31 @@ public class CreateGraph {
     public void testBacktrackingInTheMiddleSlice() {
 
         GraphEdge edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode3);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode3);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode5);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode3,graphNode6);
+        verifyStartAndEndNodes(edge, graphNode3, graphNode6);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode4,graphNode5);
+        verifyStartAndEndNodes(edge, graphNode4, graphNode5);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode1,graphNode4);
+        verifyStartAndEndNodes(edge, graphNode1, graphNode4);
         edge.setEdgeColor(EntityColor.RED);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode2,graphNode4);
+        verifyStartAndEndNodes(edge, graphNode2, graphNode4);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
-        verifyStartAndEndNodes(edge,graphNode5,graphNode7);
+        verifyStartAndEndNodes(edge, graphNode5, graphNode7);
         edge.setEdgeColor(EntityColor.GREEN);
 
         edge = backTrackingGraph.getNextBestEdge();
