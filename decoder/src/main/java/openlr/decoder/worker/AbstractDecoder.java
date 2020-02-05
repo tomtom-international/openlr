@@ -37,6 +37,17 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -56,6 +67,7 @@ import openlr.LocationReferencePoint;
 import openlr.LocationType;
 import openlr.OpenLRProcessingException;
 import openlr.decoder.DecoderReturnCode;
+import openlr.decoder.backtracking.*;
 import openlr.decoder.data.*;
 import openlr.decoder.properties.OpenLRDecoderProperties;
 import openlr.decoder.rating.OpenLRRating;
@@ -70,9 +82,8 @@ import openlr.map.utils.GeometryUtils;
 import openlr.rawLocRef.RawLocationReference;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * The class OpenLRDecoderWorker provides the worker method for an OpenLR
@@ -445,6 +456,31 @@ public abstract class AbstractDecoder {
         return cLine;
     }
 
+
+    BackTrackingGraph buildBackTrackingGraph(List<? extends LocationReferencePoint> locationReferencePoints, final CandidateLinesResultSet candidateLines) {
+
+        List<Slice<CorePointCandidate, Line>> slices = new ArrayList<>();
+        for (int index = 0; index < locationReferencePoints.size(); ++index) {
+
+            LocationReferencePoint lrp = locationReferencePoints.get(index);
+            List<GraphNode<CorePointCandidate, Line>> sliceNodes = candidateLines.getCandidateLines(lrp).stream()
+                    .map(candidateLine -> new GraphNode<CorePointCandidate, Line>(new CorePointCandidate(lrp, candidateLine)))
+                    .collect(Collectors.toList());
+
+            if (index == locationReferencePoints.size() - 1) {
+                Slice<CorePointCandidate, Line> slice = new Slice<>(sliceNodes, true);
+                slices.add(slice);
+            } else {
+                Slice<CorePointCandidate, Line> slice = new Slice<>(sliceNodes, false);
+                slices.add(slice);
+            }
+        }
+        BackTrackingGraph<CorePointCandidate, Line> backTrackingGraph = new BackTrackingGraph<>(slices);
+        backTrackingGraph.generateEdges();
+        return backTrackingGraph;
+    }
+
+
     /**
      * Resolves the shortest-paths between each subsequent pair of location
      * reference points. The method orders the candidate line pairs for two
@@ -494,54 +530,54 @@ public abstract class AbstractDecoder {
                         candidateLines.getBestCandidateLine(lrpNext));
             }
         } else {
-            // iterate over all LRP pairs
-            for (int i = 0; i < nrLRP - 1; ++i) {
-                LocationReferencePoint lrpPrev = null;
-                if (i > 0) {
-                    lrpPrev = points.get(i - 1);
-                }
-                LocationReferencePoint lrp = points.get(i);
-                LocationReferencePoint lrpNext = points.get(i + 1);
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("investigate point " + lrp.getSequenceNumber()
-                            + " with expected distance: "
-                            + lrp.getDistanceToNext() + "m");
-                }
-                // determine the minimum frc for the path to be calculated
+
+            BackTrackingGraph backTrackingGraph = buildBackTrackingGraph(points, candidateLines);
+
+            for (GraphEdge<CorePointCandidate, Line> edge = backTrackingGraph.getNextBestEdge(); edge != null; edge = backTrackingGraph.getNextBestEdge()) {
+
+                LocationReferencePoint lrp = edge.getSourceNode().getNodeElement().getLrp();
+                LocationReferencePoint lrpNext = edge.getDestinationNode().getNodeElement().getLrp();
+
+                CandidateLine startCandidate = edge.getSourceNode().getNodeElement().getCandidateLine();
+                CandidateLine destCandidate = edge.getDestinationNode().getNodeElement().getCandidateLine();
+
                 int lfrc = lrp.getLfrc().getID() + properties.getFrcVariance(lrp.getLfrc());
-                CandidateLine previousEndCandidate = null;
-                if (lrpPrev != null) {
-                    previousEndCandidate = resolvedRoutes
-                            .getCandidateEnd(lrpPrev);
-                }
-                List<CandidateLinePair> lrpPairs = DecoderUtils
-                        .resolveCandidatesOrder(lrp, lrpNext, candidateLines,
-                                previousEndCandidate, properties, locType);
-                boolean routeSearchFinished = false;
-                for (CandidateLinePair currentPair : lrpPairs) {
-                    CandidateLine startCandidate = candidateLines
-                            .getCandidateLineAtIndex(lrp,
-                                    currentPair.getStartIndex());
-                    CandidateLine destCandidate = candidateLines
-                            .getCandidateLineAtIndex(lrpNext,
-                                    currentPair.getDestIndex());
-                    routeSearchFinished = checkCandidatePair(startCandidate,
-                            destCandidate, properties, resolvedRoutes, lfrc,
-                            lrpPrev, lrp, lrpNext, previousEndCandidate);
-                    if (routeSearchFinished) {
-                        break;
+
+                List<Line> route = findValidRoute(startCandidate, destCandidate, properties, lfrc, lrp, lrpNext);
+                if (route.isEmpty() && !startCandidate.getLine().equals(destCandidate.getLine())) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("Cannot estimate valid route from lrp:" +
+                                lrp.getSequenceNumber()
+                                + " Candidate Line:" + startCandidate.getLine().getID()
+                                + " to lrp:" + lrp.getSequenceNumber()
+                                + " Candidate Line:" + destCandidate.getLine().getID());
                     }
+                    edge.setEdgeColor(EntityColor.RED);
+                } else {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("Estimated valid route from lrp:" +
+                                lrp.getSequenceNumber()
+                                + " Candidate Line:" + startCandidate.getLine().getID()
+                                + " to lrp:" + lrp.getSequenceNumber()
+                                + " Candidate Line:" + destCandidate.getLine().getID());
+                    }
+                    edge.setValue(route);
+                    edge.setEdgeColor(EntityColor.GREEN);
                 }
-                if (!routeSearchFinished) {
-                    LOG.error("cannot determine a route between lrp "
-                            + lrp.getSequenceNumber() + " and "
-                            + lrpNext.getSequenceNumber());
-                    resolvedRoutes.setError(DecoderReturnCode.NO_ROUTE_FOUND);
-                    return resolvedRoutes;
+            }
+
+            if (backTrackingGraph.isComplete()) {
+                List<GraphEdge<CorePointCandidate, Line>> edges = backTrackingGraph.traceBackEdges();
+                Collections.reverse(edges);
+                for (GraphEdge<CorePointCandidate, Line> edge : edges) {
+                    resolvedRoutes.putRoute(edge.getSourceNode().getNodeElement().getLrp(),
+                            edge.getValue(), edge.getSourceNode().getNodeElement().getCandidateLine(),
+                            edge.getDestinationNode().getNodeElement().getCandidateLine());
                 }
-                if (resolvedRoutes.hasErrorCode()) {
-                    return resolvedRoutes;
-                }
+            } else {
+                LOG.error("cannot determine routes between all lrps");
+                resolvedRoutes.setError(DecoderReturnCode.NO_ROUTE_FOUND);
+                return resolvedRoutes;
             }
         }
         resolvedRoutes.setAllResolved();
@@ -573,99 +609,58 @@ public abstract class AbstractDecoder {
         return singleLine;
     }
 
-    /**
-     * Check candidate pair.
-     *
-     * @param startCandidate
-     *            the start candidate
-     * @param destCandidate
-     *            the dest candidate
-     * @param properties
-     *            the properties
-     * @param resolvedRoutes
-     *            the resolved routes
-     * @param lfrc
-     *            the lfrc
-     * @param lrpPrev
-     *            the lrp prev
-     * @param lrp
-     *            the lrp
-     * @param lrpNext
-     *            the lrp next
-     * @param previousEndCandidate
-     *            the previous end candidate
-     * @return true, if successful
-     * @throws OpenLRProcessingException
-     *             the open lr processing exception
-     */
-    private boolean checkCandidatePair(final CandidateLine startCandidate,
-                                       final CandidateLine destCandidate,
-                                       final OpenLRDecoderProperties properties,
-                                       final ResolvedRoutes resolvedRoutes, final int lfrc,
-                                       final LocationReferencePoint lrpPrev,
-                                       final LocationReferencePoint lrp,
-                                       final LocationReferencePoint lrpNext,
-                                       final CandidateLine previousEndCandidate)
-            throws OpenLRProcessingException {
+    List<Line> findValidRoute(final CandidateLine startCandidate,
+                              final CandidateLine destCandidate,
+                              final OpenLRDecoderProperties properties,
+                              final int lfrc,
+                              final LocationReferencePoint lrp,
+                              final LocationReferencePoint lrpNext) throws OpenLRProcessingException {
+
         RouteSearch rsearch = new RouteSearch();
         Line startLine = startCandidate.getLine();
         Line destLine = destCandidate.getLine();
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("test candidate pair: start-" + startLine.getID()
                     + " - dest-" + destLine.getID());
         }
+
         if (startLine.getID() == destLine.getID()) {
-            handleSameStartEnd(resolvedRoutes, lrp, lrpNext, startCandidate,
-                    destCandidate);
-            return true;
+            return findRouteSameStartEnd(lrpNext, startCandidate);
         }
+
         int maxDistance = DecoderUtils.calculateMaxLength(lrp, startCandidate,
                 destCandidate, properties);
+
         // calculate route between start and end and a maximum distance
         RouteSearch.RouteSearchResult result = rsearch.calculateRoute(
                 startLine, destLine, maxDistance, lfrc, lrpNext.isLastLRP());
-        return handleRouteSearchResult(properties, resolvedRoutes, rsearch,
-                lrpPrev, lrp, previousEndCandidate, startCandidate,
-                destCandidate, result);
+
+        boolean isValid = isRouteSearchResultValid(properties, lrp, destCandidate, rsearch, result);
+
+        if (isValid) {
+            return rsearch.getCalculatedRoute();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
-    /**
-     * Handle route search result.
-     *
-     * @param properties
-     *            the properties
-     * @param resolvedRoutes
-     *            the resolved routes
-     * @param rsearch
-     *            the rsearch
-     * @param lrpPrev
-     *            the lrp prev
-     * @param lrp
-     *            the lrp
-     * @param previousEndCandidate
-     *            the previous end candidate
-     * @param startCandidate
-     *            the start candidate
-     * @param destCandidate
-     *            the dest candidate
-     * @param result
-     *            the result
-     * @return true, if successful
-     * @throws OpenLRProcessingException
-     *             the open lr processing exception
-     */
-    private boolean handleRouteSearchResult(
-            final OpenLRDecoderProperties properties,
-            final ResolvedRoutes resolvedRoutes, final RouteSearch rsearch,
-            final LocationReferencePoint lrpPrev,
-            final LocationReferencePoint lrp,
-            final CandidateLine previousEndCandidate,
-            final CandidateLine startCandidate,
-            final CandidateLine destCandidate,
-            final RouteSearch.RouteSearchResult result)
+
+    private List<Line> findRouteSameStartEnd(LocationReferencePoint lrpNext,
+                                             CandidateLine startCandidate) {
+        if (lrpNext.isLastLRP()) {
+            return Arrays.asList(startCandidate.getLine());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    private boolean isRouteSearchResultValid(OpenLRDecoderProperties properties,
+                                             LocationReferencePoint lrp,
+                                             CandidateLine destCandidate,
+                                             RouteSearch rsearch,
+                                             RouteSearch.RouteSearchResult result)
             throws OpenLRProcessingException {
-        boolean finished = false;
-        // check the route search result
         if (result == RouteSearch.RouteSearchResult.NO_ROUTE_FOUND) {
             // no route was found, so fail or have a second try
             if (LOG.isDebugEnabled()) {
@@ -685,159 +680,8 @@ public abstract class AbstractDecoder {
                 LOG.debug("  route found with length: " + rLength + "m");
             }
             // check the minimum distance criteria
-            if (DecoderUtils.getMinDistanceNP(lrp, properties) <= rLength) {
-                boolean retCode = handleValidRoute(properties, resolvedRoutes,
-                        rsearch, lrpPrev, lrp, previousEndCandidate,
-                        startCandidate, destCandidate);
-                if (!retCode) {
-                    resolvedRoutes
-                            .setError(DecoderReturnCode.NO_ALTERNATIVE_FOUND);
-                }
-                finished = true;
-            } else {
-                // minimum length criteria failed, so have a second try
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("minimum route length error");
-                    LOG.debug("  route length should be at least "
-                            + DecoderUtils.getMinDistanceNP(lrp, properties));
-                }
-                // store current start/dest pair (which failed!!)
-                resolvedRoutes.putRoute(lrp, rsearch.getCalculatedRoute(),
-                        startCandidate, destCandidate);
-            }
+            return (DecoderUtils.getMinDistanceNP(lrp, properties) <= rLength);
         }
-        return finished;
+        return false;
     }
-
-    /**
-     * Handle same start end.
-     *
-     * @param resolvedRoutes
-     *            the resolved routes
-     * @param lrp
-     *            the lrp
-     * @param lrpNext
-     *            the lrp next
-     * @param startCandidate
-     *            the start candidate
-     * @param destCandidate
-     *            the dest candidate
-     */
-    private void handleSameStartEnd(final ResolvedRoutes resolvedRoutes,
-                                    final LocationReferencePoint lrp,
-                                    final LocationReferencePoint lrpNext,
-                                    final CandidateLine startCandidate,
-                                    final CandidateLine destCandidate) {
-        if (lrpNext.isLastLRP()) {
-            ArrayList<Line> path = new ArrayList<Line>(1);
-            path.add(startCandidate.getLine());
-            resolvedRoutes.putRoute(lrp, path, startCandidate, destCandidate);
-        } else {
-            resolvedRoutes.putRoute(lrp, new ArrayList<Line>(), startCandidate,
-                    destCandidate);
-        }
-    }
-
-    /**
-     * Handle valid route.
-     *
-     * @param properties
-     *            the properties
-     * @param resolvedRoutes
-     *            the resolved routes
-     * @param rsearch
-     *            the rsearch
-     * @param lrpPrev
-     *            the lrp prev
-     * @param lrp
-     *            the lrp
-     * @param previousEndCandidate
-     *            the previous end candidate
-     * @param startCandidate
-     *            the start candidate
-     * @param destCandidate
-     *            the dest candidate
-     * @return the decoder return code
-     * @throws OpenLRProcessingException
-     *             the open lr processing exception
-     */
-    private boolean handleValidRoute(final OpenLRDecoderProperties properties,
-                                     final ResolvedRoutes resolvedRoutes, final RouteSearch rsearch,
-                                     final LocationReferencePoint lrpPrev,
-                                     final LocationReferencePoint lrp,
-                                     final CandidateLine previousEndCandidate,
-                                     final CandidateLine startCandidate,
-                                     final CandidateLine destCandidate) throws OpenLRProcessingException {
-        if (previousEndCandidate != null
-                && !startCandidate.hasSameLine(previousEndCandidate)) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("start index has changed, need to redo previous route!!");
-            }
-            boolean retCode = handleStartLineChange(startCandidate, lrpPrev,
-                    lrp, resolvedRoutes, properties);
-            if (!retCode) {
-                return false;
-            }
-        }
-        // passed, set route found and store the line index
-        // being used
-        resolvedRoutes.putRoute(lrp, rsearch.getCalculatedRoute(),
-                startCandidate, destCandidate);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("route found");
-        }
-        return true;
-    }
-
-    /**
-     * Handle start line change.
-     *
-     * @param newCandidate
-     *            the new candidate
-     * @param lrpPrev
-     *            the lrp prev
-     * @param lrp
-     *            the lrp
-     * @param resolvedRoutes
-     *            the resolved routes
-     * @param properties
-     *            the properties
-     * @return the decoder return code
-     * @throws OpenLRProcessingException
-     *             the open lr processing exception
-     */
-    private boolean handleStartLineChange(final CandidateLine newCandidate,
-                                          final LocationReferencePoint lrpPrev,
-                                          final LocationReferencePoint lrp,
-                                          final ResolvedRoutes resolvedRoutes,
-                                          final OpenLRDecoderProperties properties)
-            throws OpenLRProcessingException {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("start index has changed, need to redo previous route!!");
-        }
-        CandidateLine ppreviousCandidate = resolvedRoutes
-                .getCandidateStart(lrpPrev);
-        Line newStart = ppreviousCandidate.getLine();
-        RouteSearch rsearchInner = new RouteSearch();
-        int maxdistanceInner = DecoderUtils.calculateMaxLength(lrpPrev,
-                ppreviousCandidate, newCandidate, properties);
-        RouteSearch.RouteSearchResult resultRedo = rsearchInner.calculateRoute(
-                newStart, newCandidate.getLine(), maxdistanceInner, lrpPrev
-                        .getLfrc().getID() + properties.getFrcVariance(lrpPrev.getLfrc()),
-                lrp.isLastLRP());
-        if (resultRedo == RouteSearch.RouteSearchResult.ROUTE_FOUND
-                && DecoderUtils.getMinDistanceNP(lrpPrev, properties) <= rsearchInner
-                .getRouteLength()) {
-            resolvedRoutes.putRoute(lrpPrev, rsearchInner.getCalculatedRoute(),
-                    ppreviousCandidate, newCandidate);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("new route found for previous lrp");
-            }
-            return true;
-        } else {
-            LOG.error("cannot find a proper route after start index change!");
-            return false;
-        }
-    }
-
 }

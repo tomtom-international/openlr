@@ -1,5 +1,8 @@
 package openlr.decoder.backtracking;
 
+import openlr.decoder.worker.CorePointCandidate;
+import openlr.map.Line;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -263,7 +266,7 @@ public class BackTrackingGraph<T, L> {
     public List<List<L>> traceBack() {
         List<GraphEdge<T, L>> edges = traceBackEdges();
         List<List<L>> traceSummary = new ArrayList<>();
-        for (GraphEdge<T, L> edge : edges) {
+        for(GraphEdge<T, L> edge : edges){
             traceSummary.add(edge.getValue());
         }
         return traceSummary;
@@ -291,8 +294,8 @@ public class BackTrackingGraph<T, L> {
     }
 
     public List<GraphEdge<T, L>> traceBackEdges() {
-        GraphEdge<T, L> edge = lastSuccessfulEdge;
-        List<GraphEdge<T, L>> traceSummary = new ArrayList<>();
+        GraphEdge<T,L> edge = lastSuccessfulEdge;
+        List<GraphEdge<T,L>> traceSummary = new ArrayList<>();
 
         while (edge != null && edge.getEdgeColor().equals(EntityColor.GREEN)) {
             traceSummary.add(edge);
