@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BackTrackingGraph<T> {
-    private final List<Slice<T>> slices;
+public class BackTrackingGraph<T,L> {
+    private final List<Slice<T,L>> slices;
     private final Map<String, GraphEdge> edges;
     private int currentSourceSliceIndex = -1;
-    private GraphEdge<T> graphEdge = null;
-    private GraphEdge<T> lastSuccessfulEdge = null;
+    private GraphEdge<T,L> graphEdge = null;
+    private GraphEdge<T,L> lastSuccessfulEdge = null;
 
-    public BackTrackingGraph(List<Slice<T>> slices) {
+    public BackTrackingGraph(List<Slice<T,L>> slices) {
         this.slices = slices;
         this.edges = new HashMap<>();
     }
@@ -59,9 +59,9 @@ public class BackTrackingGraph<T> {
      * @param graphEdge         edge of which the predecessors need to verified
      * @return
      */
-    public boolean isBacktrackingRequired(int currentSliceIndex, GraphEdge<T> graphEdge) {
+    public boolean isBacktrackingRequired(int currentSliceIndex, GraphEdge<T,L> graphEdge) {
         int sliceIndex = currentSliceIndex;
-        for (GraphEdge<T> edge = graphEdge; edge != null; --sliceIndex) {
+        for (GraphEdge<T,L> edge = graphEdge; edge != null; --sliceIndex) {
             edge = edge.getSourceNode().getIncomingEdge()
                     .stream()
                     .filter(incomingEdge -> incomingEdge.getEdgeColor().equals(EntityColor.GREEN)).findFirst().orElse(null);
@@ -116,8 +116,8 @@ public class BackTrackingGraph<T> {
      */
     private GraphEdge getEdgeByBackwardTracking() {
 
-        GraphEdge<T> edge = graphEdge;
-        GraphEdge<T> parent = null;
+        GraphEdge<T,L> edge = graphEdge;
+        GraphEdge<T,L> parent = null;
         do {
             parent = edge.getSourceNode().getIncomingEdge()
                     .stream()
@@ -151,9 +151,9 @@ public class BackTrackingGraph<T> {
      * then return an unmarked edge starting from the end node of the final green edge, if there are no such unmarked edges then it will try
      * to find the best candidate from slice which contains the start node of the last edge in the chain
      */
-    private GraphEdge<T> getEdgeByForwardTracking() {
-        GraphEdge<T> edge = graphEdge;
-        GraphEdge<T> successor = null;
+    private GraphEdge<T,L> getEdgeByForwardTracking() {
+        GraphEdge<T,L> edge = graphEdge;
+        GraphEdge<T,L> successor = null;
         do {
             successor = (edge.getDestinationNode().getOutgoingEdge()
                     .stream()
@@ -185,7 +185,7 @@ public class BackTrackingGraph<T> {
     /**
      * retrieve the next best edge based on the users opinion of the last best edge
      */
-    private GraphEdge<T> edgeFormGraph() {
+    private GraphEdge<T,L> edgeFormGraph() {
         if (graphEdge == null) {
             ++currentSourceSliceIndex;
             return getNextEdgeFromNormalFlow();
@@ -242,9 +242,9 @@ public class BackTrackingGraph<T> {
     /**
      * Get the successors of the last Successful edge
      */
-    public List<List<T>> traceBack() {
-        GraphEdge<T> edge = lastSuccessfulEdge;
-        List<List<T>> traceSummary = new ArrayList<>();
+    public List<List<L>> traceBack() {
+        GraphEdge<T,L> edge = lastSuccessfulEdge;
+        List<List<L>> traceSummary = new ArrayList<>();
 
         while (edge != null && edge.getEdgeColor().equals(EntityColor.GREEN)) {
             traceSummary.add(edge.getValue());

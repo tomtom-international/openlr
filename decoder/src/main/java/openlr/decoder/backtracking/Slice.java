@@ -3,13 +3,13 @@ package openlr.decoder.backtracking;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Slice<T> {
-    private final List<GraphNode<T>> graphNodeList;
+public class Slice<T,L> {
+    private final List<GraphNode<T,L>> graphNodeList;
     private final boolean isLast;
 
     private int index = -1;
 
-    public Slice(List<GraphNode<T>> graphNodeList, boolean isLast) {
+    public Slice(List<GraphNode<T,L>> graphNodeList, boolean isLast) {
         this.graphNodeList = graphNodeList;
         this.isLast = isLast;
     }
@@ -18,8 +18,8 @@ public class Slice<T> {
         return graphNodeList.stream().filter(node -> node.isDeadEnd()).count() == graphNodeList.size() && !isLast;
     }
 
-    public final GraphNode<T> getNextBestNode() {
-        List<GraphNode<T>> graphNodeListWithOutDeadEndNodes = graphNodeList.stream()
+    public final GraphNode<T,L> getNextBestNode() {
+        List<GraphNode<T,L>> graphNodeListWithOutDeadEndNodes = graphNodeList.stream()
                 .filter(graphNode -> !graphNode.isDeadEnd() || isLast).collect(Collectors.toList());
 
         if (index > graphNodeListWithOutDeadEndNodes.size() - 1) {
@@ -38,12 +38,12 @@ public class Slice<T> {
         return null;
     }
 
-    public List<GraphNode<T>> getNodes() {
+    public List<GraphNode<T,L>> getNodes() {
         return graphNodeList;
 
     }
 
-    public int getNodePosition(GraphNode<T> node) {
+    public int getNodePosition(GraphNode<T,L> node) {
         return graphNodeList.indexOf(node);
     }
 }

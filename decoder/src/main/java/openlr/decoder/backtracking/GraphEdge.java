@@ -2,12 +2,12 @@ package openlr.decoder.backtracking;
 
 import java.util.List;
 
-public class GraphEdge<T> {
+public class GraphEdge<T,L> {
 
     private EntityColor edgeColor;
-    private List<T> value;
-    private GraphNode<T> sourceNode;
-    private GraphNode<T> destinationNode;
+    private List<L> value;
+    private GraphNode<T,L> sourceNode;
+    private GraphNode<T,L> destinationNode;
     private int sourceSliceIndex;
     private int destinationSliceIndex;
 
@@ -27,19 +27,19 @@ public class GraphEdge<T> {
         this.edgeColor = edgeColor;
     }
 
-    public List<T> getValue() {
+    public List<L> getValue() {
         return value;
     }
 
-    public void setValue(List<T> value) {
+    public void setValue(List<L> value) {
         this.value = value;
     }
 
-    public GraphNode<T> getSourceNode() {
+    public GraphNode<T,L> getSourceNode() {
         return sourceNode;
     }
 
-    public GraphNode<T> getDestinationNode() {
+    public GraphNode<T,L> getDestinationNode() {
         return destinationNode;
     }
 
