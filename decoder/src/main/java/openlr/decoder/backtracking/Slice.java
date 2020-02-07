@@ -19,23 +19,29 @@ public class Slice<T,L> {
     }
 
     public final GraphNode<T,L> getNextBestNode() {
-        List<GraphNode<T,L>> graphNodeListWithOutDeadEndNodes = graphNodeList.stream()
-                .filter(graphNode -> !graphNode.isDeadEnd() || isLast).collect(Collectors.toList());
-
-        if (index > graphNodeListWithOutDeadEndNodes.size() - 1) {
-            index = graphNodeListWithOutDeadEndNodes.size() - 1;
-        }
-
-        while (!graphNodeListWithOutDeadEndNodes.isEmpty()) {
-            ++index;
-            if (index < graphNodeListWithOutDeadEndNodes.size()) {
-                return graphNodeListWithOutDeadEndNodes.get(index);
+        List<GraphNode<T, L>> graphNodeListWithOutDeadEndNodes = graphNodeList.stream().filter((graphNode) -> {
+            return !graphNode.isDeadEnd() || isLast;
+        }).filter((graphNode) -> {
+            return !graphNode.isUnreachable() || graphNode.getIncomingEdge().size() == 0;
+        }).collect(Collectors.toList());
+        if (graphNodeListWithOutDeadEndNodes.isEmpty()) {
+            return null;
+        } else {
+            if (index >= graphNodeList.size() - 1) {
+                index = 0;
             } else {
-                index = -1;
+                ++index;
             }
-        }
 
-        return null;
+            GraphNode nextNode;
+            for (nextNode = graphNodeList.get(index); !graphNodeListWithOutDeadEndNodes.contains(nextNode); nextNode = graphNodeList.get(index)) {
+                ++index;
+                if (index > graphNodeList.size() - 1) {
+                    index = 0;
+                }
+            }
+            return nextNode;
+        }
     }
 
     public List<GraphNode<T,L>> getNodes() {
