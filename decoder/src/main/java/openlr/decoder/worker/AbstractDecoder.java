@@ -463,7 +463,7 @@ public abstract class AbstractDecoder {
         for (int index = 0; index < locationReferencePoints.size(); ++index) {
 
             LocationReferencePoint lrp = locationReferencePoints.get(index);
-            List<GraphNode<CorePointCandidate, Line>> sliceNodes = candidateLines.getCandidateLines(lrp).stream()
+            List<GraphNode<CorePointCandidate, Line>> sliceNodes = candidateLines.getCandidateLines(lrp).stream().limit(5)
                     .map(candidateLine -> new GraphNode<CorePointCandidate, Line>(new CorePointCandidate(lrp, candidateLine)))
                     .collect(Collectors.toList());
 
