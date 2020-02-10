@@ -48,6 +48,50 @@
  * <p>
  * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
  * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
+ * <p>
+ * Copyright (C) 2009-2019 TomTom International B.V.
+ * <p>
+ * TomTom (Legal Department)
+ * Email: legal@tomtom.com
+ * <p>
+ * TomTom (Technical contact)
+ * Email: openlr@tomtom.com
+ * <p>
+ * Address: TomTom International B.V., Oosterdoksstraat 114, 1011DK Amsterdam,
+ * the Netherlands
  */
 /**
  *  Copyright (C) 2009-2019 TomTom International B.V.
@@ -67,7 +111,11 @@ import openlr.LocationReferencePoint;
 import openlr.LocationType;
 import openlr.OpenLRProcessingException;
 import openlr.decoder.DecoderReturnCode;
-import openlr.decoder.backtracking.*;
+import openlr.decoder.backtracking.BackTrackingGraph;
+import openlr.decoder.backtracking.Slice;
+import openlr.decoder.backtracking.GraphNode;
+import openlr.decoder.backtracking.GraphEdge;
+import openlr.decoder.backtracking.EntityColor;
 import openlr.decoder.data.*;
 import openlr.decoder.properties.OpenLRDecoderProperties;
 import openlr.decoder.rating.OpenLRRating;
@@ -457,7 +505,7 @@ public abstract class AbstractDecoder {
     }
 
 
-    BackTrackingGraph buildBackTrackingGraph(List<? extends LocationReferencePoint> locationReferencePoints, final CandidateLinesResultSet candidateLines) {
+    private BackTrackingGraph buildBackTrackingGraph(List<? extends LocationReferencePoint> locationReferencePoints, final CandidateLinesResultSet candidateLines) {
 
         List<Slice<CorePointCandidate, Line>> slices = new ArrayList<>();
         for (int index = 0; index < locationReferencePoints.size(); ++index) {
@@ -609,12 +657,12 @@ public abstract class AbstractDecoder {
         return singleLine;
     }
 
-    List<Line> findValidRoute(final CandidateLine startCandidate,
-                              final CandidateLine destCandidate,
-                              final OpenLRDecoderProperties properties,
-                              final int lfrc,
-                              final LocationReferencePoint lrp,
-                              final LocationReferencePoint lrpNext) throws OpenLRProcessingException {
+    private List<Line> findValidRoute(final CandidateLine startCandidate,
+                                      final CandidateLine destCandidate,
+                                      final OpenLRDecoderProperties properties,
+                                      final int lfrc,
+                                      final LocationReferencePoint lrp,
+                                      final LocationReferencePoint lrpNext) throws OpenLRProcessingException {
 
         RouteSearch rsearch = new RouteSearch();
         Line startLine = startCandidate.getLine();

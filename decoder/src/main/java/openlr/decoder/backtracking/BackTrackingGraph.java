@@ -1,8 +1,5 @@
 package openlr.decoder.backtracking;
 
-import openlr.decoder.worker.CorePointCandidate;
-import openlr.map.Line;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
