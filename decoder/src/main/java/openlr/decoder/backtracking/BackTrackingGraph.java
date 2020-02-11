@@ -75,7 +75,7 @@ public class BackTrackingGraph<T, L> {
      * @param graphEdge         edge of which the predecessors need to be verified
      * @return
      */
-    public boolean isBacktrackingRequired(int currentSliceIndex, GraphEdge<T, L> graphEdge) {
+    private boolean isBacktrackingRequired(int currentSliceIndex, GraphEdge<T, L> graphEdge) {
         int sliceIndex = currentSliceIndex;
         for (GraphEdge<T, L> edge = graphEdge; edge != null; --sliceIndex) {
             edge = edge.getSourceNode().getIncomingEdge()
