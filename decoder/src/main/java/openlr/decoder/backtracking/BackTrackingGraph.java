@@ -18,9 +18,9 @@ public class BackTrackingGraph<T, L> {
     }
 
     /**
-     * if the user has marked last edge returned by the graph as red;
+     * if the user has marked last edge returned by the graph as red
      * then the next edge should be an unmarked edge with the same start node
-     * But If all the edges starts from this start node is already marked
+     * But if all the edges starting from this start node are already marked
      * then the next edge can start from any node in the slice
      *
      * @param sourceSlice Slice from which next edge will start if all edges from the start node of previous edge is already marked
@@ -63,9 +63,7 @@ public class BackTrackingGraph<T, L> {
     private void handleIncomingEdges(GraphNode<T, L> sourceNode, Slice sourceSlice) {
         if (sourceNode.isDeadEnd() && slices.indexOf(sourceSlice) != slices.size() - 1) {
             sourceNode.getIncomingEdge().forEach(
-                    edge -> {
-                        edge.setEdgeColor(EntityColor.RED);
-                    }
+                    edge -> edge.setEdgeColor(EntityColor.RED)
             );
         }
     }
@@ -74,7 +72,7 @@ public class BackTrackingGraph<T, L> {
      * Backtracking is required if the green edges in the previous slices are not connected directly or indirectly to the given edge
      *
      * @param currentSliceIndex index of the slice from which the edge starts
-     * @param graphEdge         edge of which the predecessors need to verified
+     * @param graphEdge         edge of which the predecessors need to be verified
      * @return
      */
     public boolean isBacktrackingRequired(int currentSliceIndex, GraphEdge<T, L> graphEdge) {
@@ -85,7 +83,6 @@ public class BackTrackingGraph<T, L> {
                     .filter(incomingEdge -> incomingEdge.getEdgeColor().equals(EntityColor.GREEN)).findFirst().orElse(null);
         }
         return (sliceIndex != -1);
-
     }
 
     /**
@@ -201,9 +198,9 @@ public class BackTrackingGraph<T, L> {
     }
 
     /**
-     * retrieve the next best edge based on the users opinion of the last best edge
+     * Retrieve the next best edge based on the users opinion of the last best edge
      */
-    private GraphEdge<T, L> edgeFormGraph() {
+    private GraphEdge<T, L> edgeFromGraph() {
         if (graphEdge == null) {
             ++currentSourceSliceIndex;
             return getNextEdgeFromNormalFlow();
@@ -232,10 +229,10 @@ public class BackTrackingGraph<T, L> {
 
 
     /**
-     * returns the next best edge in the graph, and the edge if such an edge actually exist it can be of any color
+     * Returns the next best edge in the graph, and the edge if such an edge actually exist it can be of any color
      */
     public GraphEdge getNextBestEdge() {
-        graphEdge = edgeFormGraph();
+        graphEdge = edgeFromGraph();
         if (graphEdge != null) {
             lastSuccessfulEdge = graphEdge;
         }
@@ -258,7 +255,7 @@ public class BackTrackingGraph<T, L> {
     }
 
     /**
-     * Get the successors of the last Successful edge
+     * Get the successors of the last successful edge
      */
     public List<List<L>> traceBack() {
         List<GraphEdge<T, L>> edges = traceBackEdges();
@@ -271,7 +268,7 @@ public class BackTrackingGraph<T, L> {
 
 
     /**
-     * generate edges between the given slices
+     * Generate edges between the given slices
      */
     private void generateEdges(Slice sourceSlice, int sourceSliceIndex, Slice destinationSlice, int destinationSliceIndex) {
 
