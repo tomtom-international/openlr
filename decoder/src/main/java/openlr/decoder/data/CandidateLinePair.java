@@ -78,7 +78,7 @@ public class CandidateLinePair {
     private int destIndex;
 
     /** The score. */
-    private int score;
+    private long score;
 
     /**
      * Instantiates a new candidate pair. The candidate lines are referenced by their index in the
@@ -89,7 +89,7 @@ public class CandidateLinePair {
      * @param i2 the index of the destination line
      * @param s the score for this pair of candidate lines
      */
-    public CandidateLinePair(final int i1, final int i2, final int s) {
+    public CandidateLinePair(final int i1, final int i2, final long s) {
         startIndex = i1;
         destIndex = i2;
         score = s;
@@ -118,7 +118,7 @@ public class CandidateLinePair {
      *
      * @return the score
      */
-    public final int getScore() {
+    public final long getScore() {
         return score;
     }
 
