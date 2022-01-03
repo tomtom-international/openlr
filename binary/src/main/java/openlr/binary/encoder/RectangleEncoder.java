@@ -66,7 +66,8 @@ import openlr.binary.data.RelativeCoordinates;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.map.GeoCoordinates;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The encoder for the rectangle coordinate location type.
@@ -81,7 +82,7 @@ import org.apache.log4j.Logger;
 public class RectangleEncoder extends AbstractEncoder {
 
     /** Logging */
-    private static final Logger LOG = Logger.getLogger(RectangleEncoder.class);
+    private static final Logger LOG = LogManager.getLogger(RectangleEncoder.class);
 
     /**
      * {@inheritDoc}

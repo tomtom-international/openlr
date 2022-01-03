@@ -44,7 +44,8 @@ package openlr.map.sqlite.impl;
 import openlr.map.*;
 import openlr.map.sqlite.helpers.SpatialUtils;
 import openlr.map.utils.GeometryUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.geom.Rectangle2D;
 import java.io.*;
@@ -82,7 +83,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * The default logger for this class.
      */
-    private static final Logger LOG = Logger.getLogger(MapDatabaseImpl.class);
+    private static final Logger LOG = LogManager.getLogger(MapDatabaseImpl.class);
 
     /**
      * Map containing cached instances of class {@link openlr.map.Line}.

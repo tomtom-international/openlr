@@ -65,7 +65,8 @@ import openlr.binary.data.IntermediateLRP;
 import openlr.binary.data.LastClosedLineLRP;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -82,7 +83,7 @@ import java.util.List;
 public class ClosedLineEncoder extends AbstractEncoder {
 
     /** Logging */
-    private static final Logger LOG = Logger.getLogger(ClosedLineEncoder.class);
+    private static final Logger LOG = LogManager.getLogger(ClosedLineEncoder.class);
 
     /**
      * {@inheritDoc}

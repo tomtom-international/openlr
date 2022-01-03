@@ -59,7 +59,8 @@ import openlr.encoder.locationCheck.LocationCheck;
 import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.map.MapDatabase;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -74,7 +75,7 @@ import org.apache.log4j.Logger;
 public class GeoCoordinateLocationCheck extends LocationCheck {
 
     /** The Constant LOG. */
-    private static final Logger LOG = Logger.getLogger(GeoCoordinateLocationCheck.class);
+    private static final Logger LOG = LogManager.getLogger(GeoCoordinateLocationCheck.class);
 
     /**
      * {@inheritDoc}

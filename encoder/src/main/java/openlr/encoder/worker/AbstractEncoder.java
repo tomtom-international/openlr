@@ -70,7 +70,8 @@ import openlr.map.Line;
 import openlr.map.MapDatabase;
 import openlr.map.utils.NodeCheck;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -95,7 +96,7 @@ import java.util.List;
 public abstract class AbstractEncoder {
 
     /** The Constant logger. */
-    private static final Logger LOG = Logger.getLogger(AbstractEncoder.class);
+    private static final Logger LOG = LogManager.getLogger(AbstractEncoder.class);
 
     /** The Constant FRC_COMPARATOR. */
     private static final FrcComparator FRC_COMPARATOR = new FunctionalRoadClass.FrcComparator();

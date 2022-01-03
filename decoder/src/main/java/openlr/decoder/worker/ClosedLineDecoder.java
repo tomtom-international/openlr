@@ -74,7 +74,8 @@ import openlr.map.MapDatabase;
 import openlr.map.utils.IteratorHelper;
 import openlr.map.utils.PathUtils;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -93,7 +94,7 @@ import java.util.List;
 public class ClosedLineDecoder extends AbstractDecoder {
 
     /** logger. */
-    private static final Logger LOG = Logger.getLogger(ClosedLineDecoder.class);
+    private static final Logger LOG = LogManager.getLogger(ClosedLineDecoder.class);
 
     /**
      * {@inheritDoc}

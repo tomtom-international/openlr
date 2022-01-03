@@ -64,7 +64,8 @@ import openlr.location.data.Orientation;
 import openlr.location.data.SideOfRoad;
 import openlr.map.GeoCoordinates;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ import java.util.List;
 public class PoiAccessEncoder extends AbstractEncoder {
 
     /** Logging */
-    private static final Logger LOG = Logger.getLogger(PoiAccessEncoder.class);
+    private static final Logger LOG = LogManager.getLogger(PoiAccessEncoder.class);
 
     /**
      * {@inheritDoc}

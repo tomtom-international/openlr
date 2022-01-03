@@ -59,7 +59,8 @@ import openlr.encoder.locationCheck.LocationCheck;
 import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.map.MapDatabase;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -73,7 +74,7 @@ import org.apache.log4j.Logger;
  */
 public class ClosedLineLocationCheck extends LocationCheck {
     /** The Constant LOG. */
-    private static final Logger LOG = Logger.getLogger(LineLocationCheck.class);
+    private static final Logger LOG = LogManager.getLogger(LineLocationCheck.class);
 
     /**
      * Check.

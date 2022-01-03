@@ -58,7 +58,8 @@ import openlr.binary.OpenLRBinaryException.PhysicalFormatError;
 import openlr.binary.bitstream.BitstreamException;
 import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * See OpenLR white paper for additional information.
@@ -73,7 +74,7 @@ import org.apache.log4j.Logger;
 public class GridDimension extends OpenLRBinaryInformation {
 
     /** logger */
-    private static final Logger LOG = Logger.getLogger(GridDimension.class);
+    private static final Logger LOG = LogManager.getLogger(GridDimension.class);
 
     /** number of bits used for grid dimension */
     private static final int DIMENSION_BITS = OpenLRBinaryConstants.DIMENSION_SIZE * 8;

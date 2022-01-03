@@ -70,7 +70,8 @@ import openlr.map.Line;
 import openlr.map.utils.NodeCheck;
 import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 /**
@@ -85,8 +86,7 @@ import java.util.List;
 public class IntermediateHandler {
 
     /** The logger */
-    private static final Logger LOG = Logger
-            .getLogger(IntermediateHandler.class);
+    private static final Logger LOG = LogManager.getLogger(IntermediateHandler.class);
     /** The location. */
     private final List<? extends Line> location;
     /**

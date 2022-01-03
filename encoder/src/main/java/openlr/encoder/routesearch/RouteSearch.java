@@ -63,7 +63,8 @@ import openlr.map.Node;
 import openlr.map.utils.GeometryUtils;
 import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
@@ -90,7 +91,7 @@ public class RouteSearch {
     private static final FrcComparator FRC_COMPARATOR = new FunctionalRoadClass.FrcComparator();
 
     /** The logger */
-    private static final Logger LOG = Logger.getLogger(RouteSearch.class);
+    private static final Logger LOG = LogManager.getLogger(RouteSearch.class);
     /** The location. */
     private final List<? extends Line> location;
     /** The start line. */
