@@ -59,7 +59,8 @@ import openlr.location.Location;
 import openlr.map.Line;
 import openlr.map.MapDatabase;
 import openlr.map.utils.NodeCheck;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -78,7 +79,7 @@ import java.util.List;
 public final class ExpansionHelper {
 
     /** Logging. */
-    private static final Logger LOG = Logger.getLogger(ExpansionHelper.class);
+    private static final Logger LOG = LogManager.getLogger(ExpansionHelper.class);
 
     /**
      * Utility class shall not be instantiated.

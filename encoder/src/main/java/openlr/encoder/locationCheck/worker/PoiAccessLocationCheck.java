@@ -60,7 +60,8 @@ import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.map.Line;
 import openlr.map.MapDatabase;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -75,7 +76,7 @@ import org.apache.log4j.Logger;
 public class PoiAccessLocationCheck extends LocationCheck {
 
     /** The Constant LOG. */
-    private static final Logger LOG = Logger.getLogger(PoiAccessLocationCheck.class);
+    private static final Logger LOG = LogManager.getLogger(PoiAccessLocationCheck.class);
 
     /**
      * {@inheritDoc}

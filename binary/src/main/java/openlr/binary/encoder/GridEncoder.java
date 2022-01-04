@@ -63,7 +63,8 @@ import openlr.binary.data.*;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.map.GeoCoordinates;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The encoder for the rectangle coordinate location type.
@@ -78,7 +79,7 @@ import org.apache.log4j.Logger;
 public class GridEncoder extends AbstractEncoder {
 
     /** Logging */
-    private static final Logger LOG = Logger.getLogger(GridEncoder.class);
+    private static final Logger LOG = LogManager.getLogger(GridEncoder.class);
 
     /**
      * Encode data.

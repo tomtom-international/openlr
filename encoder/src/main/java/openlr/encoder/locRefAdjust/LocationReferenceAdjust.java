@@ -66,7 +66,8 @@ import openlr.map.Line;
 import openlr.map.Node;
 import openlr.map.utils.NodeCheck;
 import openlr.map.utils.PathUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,8 +87,7 @@ import java.util.List;
 public abstract class LocationReferenceAdjust {
 
     /** Logging */
-    private static final Logger LOG = Logger
-            .getLogger(LocationReferenceAdjust.class);
+    private static final Logger LOG = LogManager.getLogger(LocationReferenceAdjust.class);
 
     /**
      * The generated OpenLR(tm) location references need to be checked whether

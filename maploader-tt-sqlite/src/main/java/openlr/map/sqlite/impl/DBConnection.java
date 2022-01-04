@@ -41,7 +41,8 @@
  */
 package openlr.map.sqlite.impl;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteJDBCLoader;
 
@@ -58,7 +59,7 @@ public class DBConnection {
     /**
      * The default logger for this class.
      */
-    private static final Logger LOG = Logger.getLogger(DBConnection.class);
+    private static final Logger LOG = LogManager.getLogger(DBConnection.class);
 
     /**
      * Database connection.

@@ -58,7 +58,8 @@ import openlr.location.Location;
 import openlr.map.Line;
 import openlr.map.MapDatabase;
 import openlr.map.utils.IteratorHelper;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -85,7 +86,7 @@ import java.util.List;
 public abstract class LocationCheck {
 
     /** Logging. */
-    private static final Logger LOG = Logger.getLogger(LocationCheck.class);
+    private static final Logger LOG = LogManager.getLogger(LocationCheck.class);
 
     /** The Constant MAX_LAT. */
     private static final float MAX_LAT = 90;

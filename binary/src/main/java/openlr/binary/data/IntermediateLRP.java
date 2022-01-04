@@ -57,7 +57,8 @@ import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The Class IntermediateLRP holds data for intermediate location reference
@@ -78,7 +79,7 @@ import org.apache.log4j.Logger;
 public class IntermediateLRP extends AbstractLRP {
 
     /** logger */
-    private static final Logger LOG = Logger.getLogger(IntermediateLRP.class);
+    private static final Logger LOG = LogManager.getLogger(IntermediateLRP.class);
 
     /** number of bits used for coordinates (relative) */
     private static final int COORD_BITS = 16;

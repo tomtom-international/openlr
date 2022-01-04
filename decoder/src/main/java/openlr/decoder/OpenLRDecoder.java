@@ -59,7 +59,8 @@ import openlr.decoder.worker.*;
 import openlr.location.InvalidLocation;
 import openlr.location.Location;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +84,7 @@ import java.util.ServiceLoader;
 public final class OpenLRDecoder implements openlr.OpenLRDecoder {
 
     /** logger */
-    private static final Logger LOG = Logger.getLogger(OpenLRDecoder.class);
+    private static final Logger LOG = LogManager.getLogger(OpenLRDecoder.class);
 
     /** the version of the decoder */
     private final Version VERSION = VersionHelper.getVersion("decoder");

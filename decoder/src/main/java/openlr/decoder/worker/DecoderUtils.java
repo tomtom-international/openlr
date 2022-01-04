@@ -60,7 +60,8 @@ import openlr.decoder.data.CandidateLinePair;
 import openlr.decoder.data.CandidateLinesResultSet;
 import openlr.decoder.properties.OpenLRDecoderProperties;
 import openlr.decoder.routesearch.RouteSearch;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,7 +76,7 @@ import java.util.List;
 public final class DecoderUtils {
 
     /** logger. */
-    private static final Logger LOG = Logger.getLogger(DecoderUtils.class);
+    private static final Logger LOG = LogManager.getLogger(DecoderUtils.class);
 
     /**
      * Utility class shall not be instantiated.
