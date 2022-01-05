@@ -7,6 +7,7 @@
 [![Release](https://img.shields.io/github/release/tomtom-international/openlr.svg?maxAge=3600)](https://github.com/tomtom-international/openlr/releases)
 
 ## Installation
+The project can be built with Maven and Java 8.
 
 To build all the modules go to the project folder:
 
