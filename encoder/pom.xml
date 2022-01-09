@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.openlr</groupId>
         <artifactId>openlr</artifactId>
-        <version>1.4.4-SNAPSHOT</version>
+        <version>1.4.5-SNAPSHOT</version>
     </parent>
 
     <artifactId>encoder</artifactId>
@@ -86,6 +86,12 @@
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-epsg-hsql</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
