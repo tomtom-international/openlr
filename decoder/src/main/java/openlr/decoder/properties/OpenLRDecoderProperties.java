@@ -74,9 +74,6 @@ public class OpenLRDecoderProperties {
     /** The max bearing diff. */
     private final int maxBearingDiff;
 
-    /** The maximum score bearing rating can contribute to the overall rating. */
-    private final int maxBearingScore;
-
     /** The frc rating. */
     private final EnumMap<RatingCategory, Integer> frcRating;
 
@@ -85,6 +82,12 @@ public class OpenLRDecoderProperties {
 
     /** The fow rating. */
     private final EnumMap<RatingCategory, Integer> fowRating;
+
+    /** The bearing intervals. */
+    private final EnumMap<RatingCategory, Integer> bearingIntervals;
+
+    /** The bearing intervals. */
+    private final EnumMap<RatingCategory, Integer> bearingRating;
 
     /** The calc affected lines. */
     private final boolean calcAffectedLines;
@@ -129,44 +132,35 @@ public class OpenLRDecoderProperties {
             frcVariance.put(frc, variance);
         }
 
-        minimumAcceptedRating = OpenLRPropertyAccess.getIntegerPropertyValue(
-                config, OpenLRDecoderProperty.MIN_ACC_RATING);
-        maxNumberRetries = OpenLRPropertyAccess.getIntegerPropertyValue(config,
-                OpenLRDecoderProperty.MAX_NR_RETRIES);
-        connectedRouteIncrease = OpenLRPropertyAccess.getFloatPropertyValue(
-                config, OpenLRDecoderProperty.CONNECT_ROUTE_INC);
-        dnpVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
-                OpenLRDecoderProperty.DNP_VARIANCE);
-        maxBearingDiff = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config, OpenLRDecoderProperty.BEAR_RATING, "MaxBearingDiff");
-        maxBearingScore = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config, OpenLRDecoderProperty.BEAR_RATING, "MaxScore");
+        minimumAcceptedRating = OpenLRPropertyAccess.getIntegerPropertyValue(config, OpenLRDecoderProperty.MIN_ACC_RATING);
+        maxNumberRetries = OpenLRPropertyAccess.getIntegerPropertyValue(config, OpenLRDecoderProperty.MAX_NR_RETRIES);
+        connectedRouteIncrease = OpenLRPropertyAccess.getFloatPropertyValue(config, OpenLRDecoderProperty.CONNECT_ROUTE_INC);
+        dnpVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config, OpenLRDecoderProperty.DNP_VARIANCE);
+        maxBearingDiff = OpenLRPropertyAccess.getIntegerPropertyValue(config, OpenLRDecoderProperty.MAX_BEAR_DIFF);
 
-        frcRating = new EnumMap<RatingCategory, Integer>(RatingCategory.class);
-        fowRating = new EnumMap<RatingCategory, Integer>(RatingCategory.class);
-        frcIntervals = new EnumMap<RatingCategory, Integer>(
-                RatingCategory.class);
+        frcRating = new EnumMap<>(RatingCategory.class);
+        fowRating = new EnumMap<>(RatingCategory.class);
+        bearingRating = new EnumMap<>(RatingCategory.class);
+        frcIntervals = new EnumMap<>(RatingCategory.class);
+        bearingIntervals = new EnumMap<>(RatingCategory.class);
         for (RatingCategory cat : RatingCategory.values()) {
-            fowRating.put(cat, OpenLRPropertyAccess
-                    .getIntegerPropertyValueFromMap(config,
-                            OpenLRDecoderProperty.FOW_RATING,
-                            cat.getIdentifier()));
-            frcRating.put(cat, OpenLRPropertyAccess
-                    .getIntegerPropertyValueFromMap(config,
-                            OpenLRDecoderProperty.FRC_RATING,
-                            cat.getIdentifier()));
+            fowRating.put(cat, OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config,
+                    OpenLRDecoderProperty.FOW_RATING, cat.getIdentifier()));
+            frcRating.put(cat, OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config,
+                    OpenLRDecoderProperty.FRC_RATING, cat.getIdentifier()));
+            bearingRating.put(cat, OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config,
+                            OpenLRDecoderProperty.BEAR_RATING, cat.getIdentifier()));
             if (cat != RatingCategory.POOR) {
-                frcIntervals.put(cat, OpenLRPropertyAccess
-                        .getIntegerPropertyValueFromMap(config,
-                                OpenLRDecoderProperty.FRC_INTERVALS,
-                                cat.getIdentifier()));
+                frcIntervals.put(cat, OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config,
+                        OpenLRDecoderProperty.FRC_INTERVALS, cat.getIdentifier()));
+                bearingIntervals.put(cat, OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config,
+                        OpenLRDecoderProperty.BEAR_INTERVALS, cat.getIdentifier()));
             }
         }
 
-        calcAffectedLines = OpenLRPropertyAccess.getBooleanPropertyValue(
-                config, OpenLRDecoderProperty.CALC_AFFECTED_LINES);
-        linesDirectlyFactor = OpenLRPropertyAccess.getFloatPropertyValue(
-                config, OpenLRDecoderProperty.LINES_DIRECTLY_FACTOR);
-        compTime4Cache = OpenLRPropertyAccess.getIntegerPropertyValue(config,
-                OpenLRDecoderProperty.COMP_TIME_4_CACHE);
+        calcAffectedLines = OpenLRPropertyAccess.getBooleanPropertyValue(config, OpenLRDecoderProperty.CALC_AFFECTED_LINES);
+        linesDirectlyFactor = OpenLRPropertyAccess.getFloatPropertyValue(config, OpenLRDecoderProperty.LINES_DIRECTLY_FACTOR);
+        compTime4Cache = OpenLRPropertyAccess.getIntegerPropertyValue(config, OpenLRDecoderProperty.COMP_TIME_4_CACHE);
     }
 
     /**
@@ -273,15 +267,6 @@ public class OpenLRDecoderProperties {
     }
 
     /**
-     * Gets the max bearing score.
-     *
-     * @return the maxBearingDiff
-     */
-    public final int getMaxBearingScore() {
-        return maxBearingScore;
-    }
-
-    /**
      * Gets the frc rating.
      *
      * @param cat
@@ -314,6 +299,27 @@ public class OpenLRDecoderProperties {
         return fowRating.get(cat);
     }
 
+    /**
+     * Gets the bearing rating.
+     *
+     * @param cat
+     *            the cat
+     * @return the bearingRating
+     */
+    public final int getBearingRating(final RatingCategory cat) {
+        return bearingRating.get(cat);
+    }
+
+    /**
+     * Gets the bearing intervals.
+     *
+     * @param interval
+     *            the interval
+     * @return the bearingIntervals
+     */
+    public final int getBearingIntervals(final RatingCategory interval) {
+        return bearingIntervals.get(interval);
+    }
 
     /**
      * Checks if is calc affected lines.

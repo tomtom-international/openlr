@@ -63,21 +63,20 @@ public final class GeometryUtils {
     public static final float MIN_LON = -180;
 
     /** The Constant ZERO_CIRCLE. */
-    public static final double ZERO_CIRCLE = 0;
+    public static final int ZERO_CIRCLE = 0;
+
+    /** The Constant QUARTER_CIRCLE. */
+    public static final int QUARTER_CIRCLE = 90;
 
     /** The Constant HALF_CIRCLE. */
-    public static final double HALF_CIRCLE = 180;
+    public static final int HALF_CIRCLE = 180;
 
     /** The Constant QUARTER_CIRCLE. */
-    public static final double QUARTER_CIRCLE = 90;
+    public static final int THREE_QUARTER_CIRCLE = 270;
 
     /** The Constant FULL_CIRCLE. */
-    public static final double FULL_CIRCLE = 360;
+    public static final int FULL_CIRCLE = 360;
 
-    /** The Constant QUARTER_CIRCLE. */
-    public static final double THREE_QUARTER_CIRCLE = 270;
-    /** degree in a full circle */
-    public static final int FULL_CIRCLE_DEGREE = 360;
     /** The default precision for rounding coordinate values. */
     private static final int DEFAULT_PRECISION = 5;
     /** Integer of value 10. */
@@ -87,7 +86,7 @@ public final class GeometryUtils {
     /** The Constant METER_PER_KILOMETER. */
     private static final float METER_PER_KILOMETER = 1000.0f;
     /** The Constant divisionsPerDegree. */
-    private static final int DIVISIONS_PER_DEGREE = 100000; // 1000 * 100;
+    private static final int DIVISIONS_PER_DEGREE = 100_000;
     /** = DIVISIONS_PER_DEGREE / DIVISIONS_PER_RADIAN */
     private static final double RAD_FACTOR = 0.017453292519943294;
     /** The equatorial radius in meters */
@@ -247,7 +246,7 @@ public final class GeometryUtils {
         double deltaY = transformDecaMicroDeg(p2Latitude - p1Latitude);
         double angle = Math.toDegrees(Math.atan2(deltaX, deltaY));
         if (angle < 0) {
-            angle += FULL_CIRCLE_DEGREE;
+            angle += FULL_CIRCLE;
         }
         return angle;
     }
@@ -662,12 +661,12 @@ public final class GeometryUtils {
                 .sqrt(sina * sina + g * g)))) * HALF_CIRCLE / Math.PI;
         double lon2 = lon
                 + Math.atan(ss * az12sin / (cosu1 * cs - sinu1 * ss * az12cos))
-                * HALF_CIRCLE / Math.PI + (2 * FULL_CIRCLE_DEGREE);
+                * HALF_CIRCLE / Math.PI + (2 * FULL_CIRCLE);
         while (lat2 > QUARTER_CIRCLE) {
-            lat2 = lat2 - FULL_CIRCLE_DEGREE;
+            lat2 = lat2 - FULL_CIRCLE;
         }
         while (lon2 > HALF_CIRCLE) {
-            lon2 = lon2 - FULL_CIRCLE_DEGREE;
+            lon2 = lon2 - FULL_CIRCLE;
         }
         return new GeoCoordinatesImpl(lon2, lat2);
     }
@@ -678,8 +677,8 @@ public final class GeometryUtils {
      * @param secondBearing the angle of a line relative to due north
      * @return the absolute difference between the 2 angles
      */
-    public static double bearingDifference(double firstBearing, double secondBearing) {
-        double diff = Math.round(Math.abs(firstBearing - secondBearing));
+    public static int bearingDifference(double firstBearing, double secondBearing) {
+        int diff = (int) Math.round(Math.abs(firstBearing - secondBearing));
         if (diff > HALF_CIRCLE) {
             diff = FULL_CIRCLE - diff;
         }

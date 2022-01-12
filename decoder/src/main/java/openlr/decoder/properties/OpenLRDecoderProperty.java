@@ -34,6 +34,7 @@ import openlr.properties.OpenLRProperty;
 import openlr.properties.PropertyType;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Enum OpenLRDecoderProperty.
@@ -92,57 +93,56 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
     /** The DN p_ variance. */
     DNP_VARIANCE("DNPVariance", PropertyType.INTEGER, 118),
 
+    /** The MA x_ bea r_ diff. */
+    MAX_BEAR_DIFF("maxBearingDiff", PropertyType.INTEGER, 90),
+
     /** The FR c_ rating. */
     @SuppressWarnings("serial")
     FRC_RATING("FRC_Rating", PropertyType.INTEGER_BY_MAP,
-            new HashMap<String, Integer>() {
-                {
-                    put("Excellent", 100);
-                    put("Good", 75);
-                    put("Average", 50);
-                    put("Poor", 0);
-                }
-            }),
+            new HashMap<String, Integer>() {{
+                put("Excellent", 100);
+                put("Good", 75);
+                put("Average", 50);
+                put("Poor", 0);
+            }}),
 
     /** The FR c_ intervals. */
     @SuppressWarnings("serial")
     FRC_INTERVALS("FRC_Intervals", PropertyType.INTEGER_BY_MAP,
-            new HashMap<String, Integer>() {
-                {
-                    put("Excellent", 0);
-                    put("Good", 1);
-                    put("Average", 2);
-                }
-            }),
+            new HashMap<String, Integer>() {{
+                put("Excellent", 0);
+                put("Good", 1);
+                put("Average", 2);
+            }}),
 
     /** The FO w_ rating. */
     @SuppressWarnings("serial")
     FOW_RATING("FOW_Rating", PropertyType.INTEGER_BY_MAP,
-            new HashMap<String, Integer>() {
-                {
-                    put("Excellent", 100);
-                    put("Good", 50);
-                    put("Average", 50);
-                    put("Poor", 25);
-                }
-            }),
+            new HashMap<String, Integer>() {{
+                put("Excellent", 100);
+                put("Good", 50);
+                put("Average", 50);
+                put("Poor", 25);
+            }}),
 
     /** The BEA r_ rating. */
     @SuppressWarnings("serial")
     BEAR_RATING("Bearing_Rating", PropertyType.INTEGER_BY_MAP,
-            new HashMap<String, Integer>() {
-                {
-                    /**
-                     * Maximum score bearing rating can contribute to the overall candidate line rating
-                     */
-                    put("MaxScore", 100);
+            new HashMap<String, Integer>() {{
+                put("Excellent", 100);
+                put("Good", 50);
+                put("Average", 25);
+                put("Poor", 0);
+            }}),
 
-                    /**
-                     * Maximum difference between the bearing encoded in the lrp and the line bearing
-                     */
-                    put("MaxBearingDiff", 45);
-                }
-            }),
+    /** The BEA r_ intervals. */
+    @SuppressWarnings("serial")
+    BEAR_INTERVALS("Bearing_Intervals", PropertyType.INTEGER_BY_MAP,
+            new HashMap<String, Integer>() {{
+                put("Excellent", 6);
+                put("Good", 12);
+                put("Average", 18);
+            }}),
 
     /** The CAL c_ affecte d_ lines. */
     CALC_AFFECTED_LINES("Calc_Affected_Lines", PropertyType.BOOLEAN, false),
