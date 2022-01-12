@@ -54,6 +54,7 @@ package openlr.decoder.data;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Objects;
 
 
 /**
@@ -127,33 +128,19 @@ public class CandidateLinePair {
      */
     @Override
     public final String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("startIdx: ").append(startIndex);
-        sb.append(" destIdx: ").append(destIndex);
-        sb.append(" score: ").append(score);
-        return sb.toString();
+        return String.format("startIdx: [%d], destIdx: [%d], score: [%d]", startIndex, destIndex, score);
     }
 
-    /**
-     * The Class CandidatePairComparator provides a comparator for candidate pairs. The comparator
-     * sorts according to better (greater) score values.
-     */
-    public static class CandidateLinePairComparator implements Comparator<CandidateLinePair>, Serializable {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CandidateLinePair that = (CandidateLinePair) o;
+        return startIndex == that.startIndex && destIndex == that.destIndex && score == that.score;
+    }
 
-        /**
-         * Serialization ID
-         */
-        private static final long serialVersionUID = -5038985615293780820L;
-
-        /** {@inheritDoc} */
-        @Override
-        public final int compare(final CandidateLinePair o1, final CandidateLinePair o2) {
-            if (o1.score < o2.score) {
-                return 1;
-            } else if (o1.score > o2.score) {
-                return -1;
-            }
-            return 0;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(startIndex, destIndex, score);
     }
 }

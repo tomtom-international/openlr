@@ -63,9 +63,8 @@ import openlr.decoder.routesearch.RouteSearch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * DecoderUtils provides utility methods for the decoding process.
@@ -99,64 +98,129 @@ public final class DecoderUtils {
      * The sequence of candidate pairs will be trimmed down to a maximum size
      * according to the encoder properties.
      *
-     * @param p1
-     *            the first LRP
-     * @param p2
-     *            the successor LRP
-     * @param candidateLines
-     *            the candidate lines
-     * @param lastUsed
-     *            the last used
-     * @param properties
-     *            the OpenLR encoder properties
-     * @param locType
-     *            the loc type
-     * @return an ordered list of candidate pairs, best comes first
-     * @throws OpenLRProcessingException
-     *             the open lr processing exception
+     * @param p1 the first LRP
+     * @param p2 the successor LRP
+     * @param candidateLines the candidate lines
+     * @param lastUsed the last used
+     * @param properties the OpenLR encoder properties
+     * @param locType the loc type
+     * @return an ordered list of candidate pairs, best (with the smallest scores) comes first
      */
     public static List<CandidateLinePair> resolveCandidatesOrder(
             final LocationReferencePoint p1, final LocationReferencePoint p2,
             final CandidateLinesResultSet candidateLines,
             final CandidateLine lastUsed,
-            final OpenLRDecoderProperties properties, final LocationType locType)
-            throws OpenLRProcessingException {
+            final OpenLRDecoderProperties properties, final LocationType locType) {
+        return resolveCandidatesOrder(p1, p2, candidateLines, lastUsed, properties);
+    }
+
+    /**
+     * Each LRP might have several candidate lines. In order to find the best
+     * pair to start with each pair needs to be investigated and rated. The
+     * rating process includes:
+     * <ul>
+     * <li>score of the first candidate line</li>
+     * <li>score of the second candidate line</li>
+     * <li>connection to the previously calculated path</li>
+     * <li>candidate lines shall not be equal</li>
+     * </ul>
+     *
+     * The sequence of candidate pairs will be trimmed down to a maximum size
+     * according to the encoder properties.
+     *
+     * @param p1 the first LRP
+     * @param p2 the successor LRP
+     * @param candidateLines the candidate lines
+     * @param lastUsed the last used
+     * @param properties the OpenLR encoder properties
+     * @return an ordered list of candidate pairs, best (with bigger scores) comes first
+     */
+    public static List<CandidateLinePair> resolveCandidatesOrder(
+            final LocationReferencePoint p1, final LocationReferencePoint p2,
+            final CandidateLinesResultSet candidateLines,
+            final CandidateLine lastUsed,
+            final OpenLRDecoderProperties properties) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("resolve candidates order with ConnectedRouteIncrease: "
-                    + properties.getConnectedRouteIncrease()
-                    + " and MaxNrRetries: " + properties.getMaxNumberRetries());
+            LOG.debug(String.format("resolve candidates order with ConnectedRouteIncrease: %f and MaxNrRetries: %d",
+                    properties.getConnectedRouteIncrease(), properties.getMaxNumberRetries()));
         }
-        List<CandidateLinePair> pairs = new ArrayList<CandidateLinePair>();
         List<CandidateLine> p1List = candidateLines.getCandidateLines(p1);
         List<CandidateLine> p2List = candidateLines.getCandidateLines(p2);
+        int returnSize = Math.min(properties.getMaxNumberRetries() + 1, p1List.size() * p2List.size());
+
+        /*
+         * Below is an implementation for typical Top K algorythm problem.
+         * We need k=[returnSize] line candidate pairs with the smallest
+         * score out of [n*m] total items, where n=[p1List.size()] and m=[p2List.size()].
+         *
+         * Time complexity is O( n*m * log(k) ), space complexity is O(k).
+         * We know that m >> k (m is much greater than k).
+         */
+
+        // As long as an object instantiation is expensive, we'll check first the scores
+        // and will see whether an instance of CandidateLinePair should be created at all.
+        // We'll not keep more than returnSize items in the queue, every (returnSize+1) item will be removed.
+        Queue<Long> scores = new PriorityQueue<>(returnSize + 1);
+
+        // Here we'll keep max k=[returnSize] CandidateLinePair instances with so far smallest scores.
+        Map<Long, List<CandidateLinePair>> scoreToCandidatePairs = new HashMap<>();
+
         for (int i = 0; i < p1List.size(); ++i) {
-            int p1Score = p1List.get(i).getRating();
-            CandidateLine cl = p1List.get(i);
+            final CandidateLine candidateLine = p1List.get(i);
+            int p1Score = candidateLine.getRating();
             // check connection with previously calculated path
-            if (lastUsed != null && cl.hasSameLine(lastUsed)) {
+            if (lastUsed != null && candidateLine.hasSameLine(lastUsed)) {
                 p1Score += (properties.getConnectedRouteIncrease() * p1Score);
             }
             for (int j = 0; j < p2List.size(); ++j) {
-                int p2Score = p2List.get(j).getRating();
-                CandidateLinePair candidate = new CandidateLinePair(i, j,
-                        (long)p1Score * p2Score);
-                pairs.add(candidate);
+                long candidateLinePairScore = (long) p1Score * p2List.get(j).getRating();
+
+                scores.offer(candidateLinePairScore); // log(k) because we have max k=[returnSize] items in the queue
+
+                if (scores.size() <= returnSize) {
+                    List<CandidateLinePair> sameScorePairs =
+                            scoreToCandidatePairs.computeIfAbsent(candidateLinePairScore, k -> new ArrayList<>());
+                    sameScorePairs.add(new CandidateLinePair(i, j, candidateLinePairScore));
+                    scoreToCandidatePairs.put(candidateLinePairScore, sameScorePairs);
+                    continue;
+                }
+
+                Long soFarMinScore = scores.poll(); // get rid of the so far min score
+
+                if (candidateLinePairScore <= soFarMinScore) {
+                    // the new candidate is guaranteed to be out of the returnSize list, so
+                    // don't event create the new CandidateLinePair instance, just continue
+                    continue;
+                }
+
+                // add new candidate to the sameScorePairs map
+                List<CandidateLinePair> sameScorePairs =
+                        scoreToCandidatePairs.computeIfAbsent(candidateLinePairScore, k -> new ArrayList<>());
+                sameScorePairs.add(new CandidateLinePair(i, j, candidateLinePairScore));
+                scoreToCandidatePairs.put(candidateLinePairScore, sameScorePairs);
+
+                // remove candidate with soFarMinScore from the sameScorePairs map
+                List<CandidateLinePair> candidateToRemovePairs = scoreToCandidatePairs.get(soFarMinScore);
+                if (candidateToRemovePairs.size() > 1) {
+                    candidateToRemovePairs.remove(candidateToRemovePairs.size()-1);
+                } else {
+                    scoreToCandidatePairs.remove(soFarMinScore);
+                }
             }
         }
-        Collections.sort(pairs,
-                new CandidateLinePair.CandidateLinePairComparator());
-        int returnSize = Math.min(properties.getMaxNumberRetries() + 1,
-                pairs.size());
-        List<CandidateLinePair> subList = pairs.subList(0, returnSize);
+
+        List<CandidateLinePair> topCandidates = new ArrayList<>();
+        while (!scores.isEmpty()) {
+            topCandidates.addAll(0, scoreToCandidatePairs.get(scores.poll()));
+        }
+
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Candidate pair list for " + p1.getSequenceNumber()
-                    + " and " + p2.getSequenceNumber());
-            for (CandidateLinePair clp : subList) {
-                LOG.debug("startIdx[" + clp.getStartIndex() + "] - destIdx["
-                        + clp.getDestIndex() + "], score: " + clp.getScore());
-            }
+            LOG.debug(String.format("Candidate pair list for %d and %d", p1.getSequenceNumber(), p2.getSequenceNumber()));
+            topCandidates.forEach(clp ->
+                    LOG.debug(String.format("startIdx[%d] - destIdx[%d], score: ", clp.getStartIndex(), clp.getDestIndex(), clp.getScore())));
         }
-        return subList;
+
+        return topCandidates;
     }
 
     /**
