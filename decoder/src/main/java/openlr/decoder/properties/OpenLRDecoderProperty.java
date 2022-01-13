@@ -68,24 +68,25 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
 
     /** The FRC variance */
     FRC_VARIANCE("FRC_Variance", PropertyType.INTEGER_BY_MAP,
-            new HashMap<String, Integer>() {
-                {
-                    put("FRC_0", 2);
-                    put("FRC_1", 2);
-                    put("FRC_2", 2);
-                    put("FRC_3", 2);
-                    put("FRC_4", 2);
-                    put("FRC_5", 2);
-                    put("FRC_6", 2);
-                    put("FRC_7", 2);
-                }
-            }),
+            new HashMap<String, Integer>() {{
+                put("FRC_0", 2);
+                put("FRC_1", 2);
+                put("FRC_2", 2);
+                put("FRC_3", 2);
+                put("FRC_4", 2);
+                put("FRC_5", 2);
+                put("FRC_6", 2);
+                put("FRC_7", 2);
+            }}),
 
     /** The MI n_ ac c_ rating. */
     MIN_ACC_RATING("MinimumAcceptedRating", PropertyType.INTEGER, 800),
 
     /** The MA x_ n r_ retries. */
     MAX_NR_RETRIES("MaxNumberRetries", PropertyType.INTEGER, 3),
+
+    /** The SAM e_ lin e_ degrad. */
+    SAME_LINE_DEGRAD("SameLineDegradation", PropertyType.FLOAT, 0.10f),
 
     /** The CONNEC t_ rout e_ inc. */
     CONNECT_ROUTE_INC("ConnectedRouteIncrease", PropertyType.FLOAT, 0.10f),
