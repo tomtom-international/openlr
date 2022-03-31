@@ -52,7 +52,6 @@ package openlr.decoder.data;
 
 import openlr.decoder.TestData;
 import openlr.decoder.data.CandidateLine.CandidateLineComparator;
-import openlr.decoder.data.CandidateLinePair.CandidateLinePairComparator;
 import openlr.map.Line;
 import org.testng.annotations.Test;
 
@@ -130,52 +129,8 @@ public class CandidateLineTest {
     @Test
     public final void testToString() {
         TestData td = TestData.getInstance();
-        CandidateLine line = new CandidateLine(td.getMapDatabase().getLine(1),
-                RATIO_1000, -1);
+        CandidateLine line = new CandidateLine(td.getMapDatabase().getLine(1), RATIO_1000, -1);
         assertNotNull(line.toString());
-    }
-
-
-    /**
-     * Test the comparison of line objects.
-     */
-    @Test
-    public final void testComparisonPair() {
-
-        CandidateLinePair scoreOneA = new CandidateLinePair(0, 1, 1);
-        CandidateLinePair scoreOneB = new CandidateLinePair(0, 1, 1);
-        CandidateLinePair scoreMax = new CandidateLinePair(0, 2,
-                Integer.MAX_VALUE);
-        CandidateLinePair scoreMin = new CandidateLinePair(1, 2,
-                Integer.MIN_VALUE);
-        CandidateLinePair scoreZero = new CandidateLinePair(2, 1, 0);
-
-        assertEquals(scoreOneA.getStartIndex(), scoreMax.getStartIndex());
-        assertEquals(scoreMin.getDestIndex(), scoreMax.getDestIndex());
-        assertEquals(scoreOneA.getScore(), scoreOneB.getScore());
-
-        CandidateLinePairComparator comp = new CandidateLinePairComparator();
-        assertTrue(comp.compare(scoreOneA, scoreOneA) == 0);
-        assertTrue(comp.compare(scoreOneA, scoreOneB) == 0);
-        assertTrue(comp.compare(scoreMax, scoreOneA) < 0);
-        assertTrue(comp.compare(scoreOneA, scoreMax) > 0);
-        assertTrue(comp.compare(scoreMin, scoreMax) > 0);
-        assertTrue(comp.compare(scoreMax, scoreMin) < 0);
-        assertTrue(comp.compare(scoreMax, scoreMax) == 0);
-        assertTrue(comp.compare(scoreMax, scoreZero) < 0);
-        assertTrue(comp.compare(scoreZero, scoreMax) > 0);
-
-        CandidateLinePair[] expectedSorting = new CandidateLinePair[]{
-                scoreMax, scoreOneA, scoreZero, scoreMin};
-
-        List<CandidateLinePair> pairs = Arrays.asList(scoreMax, scoreOneA,
-                scoreMin, scoreZero);
-        Collections.sort(pairs, new CandidateLinePairComparator());
-
-        for (int i = 0; i < expectedSorting.length; i++) {
-            assertSame(pairs.get(i), expectedSorting[i],
-                    "Unexpected entry at index " + i);
-        }
     }
 
     /**

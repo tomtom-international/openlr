@@ -154,13 +154,27 @@ public class DecoderPropertiesTest {
                     OpenLRDecoderProperty.NODE_FACTOR), NODE_FACTOR);
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValue(prop,
                     OpenLRDecoderProperty.LINE_FACTOR), LINE_FACTOR);
+            assertEquals(OpenLRPropertyAccess.getFloatPropertyValue(prop,
+                            OpenLRDecoderProperty.SAME_LINE_DEGRAD), SAME_LINE_DEGRADIATION);
 
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
-                    prop, OpenLRDecoderProperty.BEAR_RATING,
-                    "MaxScore"), 100);
+                            prop, OpenLRDecoderProperty.BEAR_INTERVALS,
+                            RatingCategory.EXCELLENT.getIdentifier()),
+                    BEARING_INTERVAL_6);
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
-                    prop, OpenLRDecoderProperty.BEAR_RATING,
-                    "MaxBearingDiff"), 45);
+                    prop, OpenLRDecoderProperty.BEAR_INTERVALS,
+                    RatingCategory.GOOD.getIdentifier()), BEARING_INTERVAL_12);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                            prop, OpenLRDecoderProperty.BEAR_INTERVALS,
+                            RatingCategory.AVERAGE.getIdentifier()),
+                    BEARING_INTERVAL_18);
+
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    prop, OpenLRDecoderProperty.FRC_INTERVALS,
+                    RatingCategory.EXCELLENT.getIdentifier()), 0);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    prop, OpenLRDecoderProperty.FRC_INTERVALS,
+                    RatingCategory.GOOD.getIdentifier()), 1);
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
                     prop, OpenLRDecoderProperty.FRC_INTERVALS,
                     RatingCategory.AVERAGE.getIdentifier()), 2);
@@ -190,6 +204,19 @@ public class DecoderPropertiesTest {
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
                     prop, OpenLRDecoderProperty.FOW_RATING,
                     RatingCategory.POOR.getIdentifier()), RATING_25);
+
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    prop, OpenLRDecoderProperty.BEAR_RATING,
+                    RatingCategory.EXCELLENT.getIdentifier()), RATING_100);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    prop, OpenLRDecoderProperty.BEAR_RATING,
+                    RatingCategory.GOOD.getIdentifier()), RATING_50);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    prop, OpenLRDecoderProperty.BEAR_RATING,
+                    RatingCategory.AVERAGE.getIdentifier()), RATING_25);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    prop, OpenLRDecoderProperty.BEAR_RATING,
+                    RatingCategory.POOR.getIdentifier()), RATING_0);
 
         } catch (OpenLRProcessingException e) {
             fail("reading properties failed", e);

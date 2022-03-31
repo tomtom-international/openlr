@@ -52,9 +52,16 @@
         <Poor>25</Poor>
     </FOW_Rating>
     <Bearing_Rating>
-        <MaxScore>100</MaxScore>
-        <MaxBearingDiff>45</MaxBearingDiff>
+        <Excellent>100</Excellent>
+        <Good>50</Good>
+        <Average>50</Average>
+        <Poor>25</Poor>
     </Bearing_Rating>
+    <Bearing_Intervals>
+        <Excellent>6</Excellent>
+        <Good>12</Good>
+        <Average>10</Average>
+    </Bearing_Intervals>
     <FRC_Variance></FRC_Variance>
     <MinimumAcceptedRating>700</MinimumAcceptedRating>
     <MaxNumberRetries>3</MaxNumberRetries>

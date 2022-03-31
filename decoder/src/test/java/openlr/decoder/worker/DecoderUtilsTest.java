@@ -14,7 +14,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 
 public class DecoderUtilsTest {
 
@@ -98,11 +101,17 @@ public class DecoderUtilsTest {
         clrs.putCandidateLines(lrp3, candidates3);
 
         try {
-            List<CandidateLinePair> order = DecoderUtils
-                    .resolveCandidatesOrder(lrp1, lrp2, clrs, null,
-                            new OpenLRDecoderProperties(null),
-                            LocationType.LINE_LOCATION);
-            //System.out.println(order);
+            List<CandidateLinePair> candidateLinePairsSample = Arrays.asList(
+                    new CandidateLinePair(0, 1, 1375353L),
+                    new CandidateLinePair(1, 0, 1292040L),
+                    new CandidateLinePair(0, 0, 1253259L),
+                    new CandidateLinePair(1, 1, 1147740L)
+            );
+
+            List<CandidateLinePair> candidateLinePairs = DecoderUtils.resolveCandidatesOrder(lrp1, lrp2, clrs,
+                    null, new OpenLRDecoderProperties(null), LocationType.LINE_LOCATION);
+
+            assertEquals(candidateLinePairs, candidateLinePairsSample);
         } catch (OpenLRProcessingException e) {
             e.printStackTrace();
             Assert.fail("Unexpected exception");

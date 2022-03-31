@@ -89,15 +89,14 @@ public interface OpenLRRating {
      * @throws OpenLRProcessingException the open lr processing exception
      */
     int getRating(OpenLRDecoderProperties properties, int distance,
-                  LocationReferencePoint p, Line line, int projectionAlongLine)
-            throws OpenLRProcessingException;
+                  LocationReferencePoint p, Line line, int projectionAlongLine) throws OpenLRProcessingException;
 
     /**
      * The Enum RatingCategory defines 4 different categories in which the
      * compared attributes might fall into. The ranking of the categories from
      * best to worst is: EXCELLENT -> GOOD -> AVERAGE -> POOR.
      */
-    public enum RatingCategory {
+    enum RatingCategory {
 
         /**
          * indicates an excellent match of the attributes of the line with the

@@ -96,7 +96,7 @@ public class EqualsHashCodeToStringTest {
     private static final String GEOLOCATION_XML = "geolocation.xml";
 
     /**
-     * An instance of {@link LocationReferencePointBinaryImpl}.
+     * An instance of {@link LocationReferencePointImpl}.
      */
     private static final LocationReferencePointImpl LRP_IMPL = new LocationReferencePointImpl(
             1, FunctionalRoadClass.FRC_2, FormOfWay.MOTORWAY, Double.MAX_VALUE,
@@ -104,7 +104,7 @@ public class EqualsHashCodeToStringTest {
             false);
 
     /**
-     * A {@link LocationReferencePointBinaryImpl} instance that should not be
+     * A {@link LocationReferencePointImpl} instance that should not be
      * equal to {@link #LRP_IMPL}.
      */
     private static final LocationReferencePointImpl LRP_IMPL_UNEQUAL = new LocationReferencePointImpl(

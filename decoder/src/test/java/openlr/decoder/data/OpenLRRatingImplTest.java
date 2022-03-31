@@ -65,23 +65,23 @@ public class OpenLRRatingImplTest {
     private static final double BEARING_LRP_2 = 256.67;
 
     /** The expected result of rating test #1. */
-    private static final int EXPECTED_RESULT_RATING_1 = 916;
+    private static final int EXPECTED_RESULT_RATING_1 = 847;
     /** The expected result of rating test #2. */
     private static final int EXPECTED_RESULT_RATING_2 = 494;
     /** The expected result of rating test #3. */
-    private static final int EXPECTED_RESULT_RATING_3 = 755;
+    private static final int EXPECTED_RESULT_RATING_3 = 644;
 
     /** The non-junction node factor to apply for tests */
     private static final float NON_JUNCTION_NODE_FACTOR = 0.8f;
 
     /** The expected result of rating test with junction node with no non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 1002;
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 933;
     /** The expected result of rating test with junction node with a non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 1002;
+    private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 933;
     /** The expected result of rating test with non-junction node with no non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 852;
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 783;
     /** The expected result of rating test with non-junction node with a non-junction node factor. */
-    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 798;
+    private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 729;
 
     /** The distance value of rating test #1. */
     private static final int DISTANCE_RATING_1 = 14;
@@ -102,9 +102,9 @@ public class OpenLRRatingImplTest {
     /** A reference to the test OpenLR properties. */
     private OpenLRDecoderProperties properties;
 
-    /** The mocked {@link LocRefPoint} #1. */
+    /** The mocked {@link LocationReferencePoint} #1. */
     private LocationReferencePoint point1;
-    /** The mocked {@link LocRefPoint} #2. */
+    /** The mocked {@link LocationReferencePoint} #2. */
     private LocationReferencePoint point2;
     /** The line object 4 of the test map. */
     private Line line4;
