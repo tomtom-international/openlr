@@ -94,11 +94,12 @@ public class OpenLRRatingImpl implements OpenLRRating {
                                final Line line, final int projectionAlongLine)
             throws OpenLRProcessingException {
         BearingDirection dir = null;
-        if (p.isLastLRP()) {
-            dir = BearingDirection.AGAINST_DIRECTION;
-        } else {
+        // I believe we don't need to do this check
+        //if (p.isLastLRP()) {
+        //    dir = BearingDirection.AGAINST_DIRECTION;
+        //} else {
             dir = BearingDirection.IN_DIRECTION;
-        }
+        //}
 
         int nodeRating = calculateDistanceRating(properties, distance);
 
