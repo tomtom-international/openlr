@@ -157,14 +157,14 @@ public class LineDecoderTest {
             13.538750, 52.615403, 2750, FunctionalRoadClass.FRC_0,
             FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 95.6, false, 0);
     /**
-     * The first LRP of the location, but with a bearing that produces a bearing rating of 66, which is
-     * just acceptable given a Bear_Rating.MinScore = 65 in DecoderpropertiesBearingMinScore.xml
+     * The first LRP of the LONG location, but with an altered bearing that produces a bearing rating of 66, 
+     * which is just acceptable given a Bear_Rating.MinScore = 65 in DecoderpropertiesBearingMinScore.xml
      */
     private static final LocationReferencePoint LRP_START_LONG_BAD_BEARING_ACCEPTABLE = new TestLocationReferencePointImpl(
             13.538750, 52.615403, 2750, FunctionalRoadClass.FRC_0,
             FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 81.0, false, 0);
     /**
-     * The first LRP of the location, but with a bearing that produces a bearing rating less than the 
+     * The first LRP of the LONG location, but with a bearing that produces a bearing rating less than the 
      * Bear_Rating.MinScore = 65 in DecoderpropertiesBearingMinScore.xml and therefore finds no candidates.
      */
     private static final LocationReferencePoint LRP_START_LONG_BAD_BEARING_REJECT = new TestLocationReferencePointImpl(
@@ -331,7 +331,8 @@ public class LineDecoderTest {
 
 
     /**
-     * Tests a long location wit offsets that goes over multiple lines
+     * Tests that candidates are discarded from consideration if the bearing score is
+     * less than or equal to the <Bearing_Rating>.<MinScore> attribute.
      */
     @Test
     public final void testFindCandidates() {

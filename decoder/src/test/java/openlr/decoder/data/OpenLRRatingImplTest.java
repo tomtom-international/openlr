@@ -295,6 +295,7 @@ public class OpenLRRatingImplTest {
         // Should succeed.  Expected bearing score: 73, MinScore = 65
         int rating1 = RATING_FUNCTION.getRating(properties,
                 DISTANCE_RATING_1, point1, line10, 0);
+
         assertEquals(rating1, EXPECTED_RESULT_RATING_1);
     }
 
@@ -310,6 +311,7 @@ public class OpenLRRatingImplTest {
         // Should be rejected.  Expected bearing score: 62, MinScore = 65
         int rating = RATING_FUNCTION.getRating(properties,
                 DISTANCE_RATING_2, point2, line26, PROJECTION_LINE_26);
+
         assertEquals(EXPECTED_RESULT_MIN_SCORE_REJECT, rating);
     }
     /**
@@ -335,7 +337,8 @@ public class OpenLRRatingImplTest {
     }
 
     /**
-     * Instantiates the properties.
+     * Instantiates properties from the xml file that specified a non-default
+     * MinScore bearing parameter.
      *
      * @return the properties
      */

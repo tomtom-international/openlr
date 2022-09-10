@@ -108,10 +108,17 @@ public class OpenLRRatingImpl implements OpenLRRating {
 
         int bearingRating = calculateBearingRating(properties, p.getBearing(),
                 dir, line, projectionAlongLine);
+        
+        // verify bearing rating is >= minimum threshold
         if (bearingRating < properties.getMinBearingScore()) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("bearing of a candidate line is out of range ["
-                        + line.getID() + "]");
+                LOG.debug("candidate ["
+                        + line.getID()  + "] ignored: bearing rating (" 
+                        + bearingRating
+                        + ") < Bearing_Rating.MinScore ("
+                        + properties.getMinBearingScore()
+                        + ")"
+                        );
             }
             return -1;
         }
