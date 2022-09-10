@@ -108,7 +108,7 @@ public class OpenLRRatingImpl implements OpenLRRating {
 
         int bearingRating = calculateBearingRating(properties, p.getBearing(),
                 dir, line, projectionAlongLine);
-        if (bearingRating < 0) {
+        if (bearingRating < properties.getMinBearingScore()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("bearing of a candidate line is out of range ["
                         + line.getID() + "]");

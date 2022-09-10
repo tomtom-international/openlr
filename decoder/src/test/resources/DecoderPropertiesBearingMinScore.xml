@@ -50,6 +50,7 @@
         <Poor>25</Poor>
     </FOW_Rating>
     <Bearing_Rating>
+        <MinScore>65</MinScore>
         <MaxScore>100</MaxScore>
         <MaxBearingDiff>45</MaxBearingDiff>
     </Bearing_Rating>

@@ -53,6 +53,11 @@ package openlr.decoder.worker;
 import openlr.LocationReferencePoint;
 import openlr.OpenLRProcessingException;
 import openlr.decoder.OpenLRDecoder;
+import openlr.decoder.worker.LineDecoder;
+import openlr.decoder.properties.OpenLRDecoderProperties;
+import openlr.properties.OpenLRPropertiesReader;
+import openlr.decoder.data.CandidateNodesResultSet;
+import openlr.decoder.data.CandidateLinesResultSet;
 import openlr.decoder.OpenLRDecoderParameter;
 import openlr.decoder.TestLocationReferencePointImpl;
 import openlr.location.Location;
@@ -65,10 +70,15 @@ import openlr.rawLocRef.RawLineLocRef;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 /**
  * Tests the decoding and specially the offset calculation of
@@ -146,6 +156,20 @@ public class LineDecoderTest {
     private static final LocationReferencePoint LRP_START_LONG = new TestLocationReferencePointImpl(
             13.538750, 52.615403, 2750, FunctionalRoadClass.FRC_0,
             FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 95.6, false, 0);
+    /**
+     * The first LRP of the location, but with a bearing that produces a bearing rating of 66, which is
+     * just acceptable given a Bear_Rating.MinScore = 65 in DecoderpropertiesBearingMinScore.xml
+     */
+    private static final LocationReferencePoint LRP_START_LONG_BAD_BEARING_ACCEPTABLE = new TestLocationReferencePointImpl(
+            13.538750, 52.615403, 2750, FunctionalRoadClass.FRC_0,
+            FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 81.0, false, 0);
+    /**
+     * The first LRP of the location, but with a bearing that produces a bearing rating less than the 
+     * Bear_Rating.MinScore = 65 in DecoderpropertiesBearingMinScore.xml and therefore finds no candidates.
+     */
+    private static final LocationReferencePoint LRP_START_LONG_BAD_BEARING_REJECT = new TestLocationReferencePointImpl(
+            13.538750, 52.615403, 2750, FunctionalRoadClass.FRC_0,
+            FormOfWay.MOTORWAY, FunctionalRoadClass.FRC_0, 75.0, false, 0);
     /**
      * The last LRP of the location
      */
@@ -305,6 +329,44 @@ public class LineDecoderTest {
         runDecoding(locRef, new long[]{3}, 374, 433);
     }
 
+
+    /**
+     * Tests a long location wit offsets that goes over multiple lines
+     */
+    @Test
+    public final void testFindCandidates() {
+
+        List<LocationReferencePoint> lrpListAcceptable = Arrays.asList(LRP_START_LONG_BAD_BEARING_ACCEPTABLE,
+                LRP_END_LONG);
+
+        List<LocationReferencePoint> lrpListReject = Arrays.asList(LRP_START_LONG_BAD_BEARING_REJECT,
+                LRP_END_LONG);
+
+        RawLineLocRef locRefAcceptableFirstBearing = new RawLineLocRef("longLocRefAcceptableFirstBearing", lrpListAcceptable,
+                LARGE_POS_OFFSET);
+
+        RawLineLocRef locRefRejectedFirstBearing = new RawLineLocRef("longLocRefRejectedFirstBearing", lrpListReject,
+                LARGE_POS_OFFSET);
+
+        LineDecoder lineDecoder = new LineDecoder();
+        OpenLRDecoderProperties properties = getPropertiesWithBearingMinScore();
+        
+        try {
+                CandidateLinesResultSet candidateLines;
+                CandidateNodesResultSet candidateNodes;
+                candidateNodes = lineDecoder.findCandidateNodes(properties, locRefAcceptableFirstBearing, mdb);
+                candidateLines = lineDecoder.findCandidateLines(properties, locRefAcceptableFirstBearing, candidateNodes, mdb);
+                assertEquals(candidateLines.getNumberOfCandidateLines(LRP_START_LONG_BAD_BEARING_ACCEPTABLE), 1);
+                assertEquals(candidateLines.getNumberOfCandidateLines(LRP_END_LONG), 1);
+                candidateNodes = lineDecoder.findCandidateNodes(properties, locRefRejectedFirstBearing, mdb);
+                candidateLines = lineDecoder.findCandidateLines(properties, locRefRejectedFirstBearing, candidateNodes, mdb);
+                assertEquals(candidateLines.getNumberOfCandidateLines(LRP_START_LONG_BAD_BEARING_REJECT), 0);
+        } catch (OpenLRProcessingException e) {
+            fail("failure during candidate search", e);
+        }
+
+    }
+
     /**
      * Tests a long location with large offsets and multiple LRPs that goes over
      * multiple lines. The pruning should remove the first line in this case.
@@ -371,6 +433,30 @@ public class LineDecoderTest {
         } catch (OpenLRProcessingException e) {
             Assert.fail("Unexpected exception", e);
         }
+    }
+
+    /**
+     * Instantiates the properties.
+     *
+     * @return the properties
+     */
+    private OpenLRDecoderProperties getPropertiesWithBearingMinScore() {
+        OpenLRDecoderProperties local_properties = null;
+
+        File validProperties = new File(
+                "src/test/resources/DecoderPropertiesBearingMinScore.xml");
+                // "src/test/resources/OpenLR-Decoder-Properties.xml");
+        try {
+            local_properties = new OpenLRDecoderProperties(OpenLRPropertiesReader
+                    .loadPropertiesFromStream(new FileInputStream(validProperties), true));
+        } catch (OpenLRProcessingException e) {
+            fail("failed to load valid properties file", e);
+        } catch (FileNotFoundException e) {
+            fail("cannot find properties file", e);
+        }
+
+        return local_properties;
+
     }
 
 }
