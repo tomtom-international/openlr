@@ -52,6 +52,7 @@
         <Poor>25</Poor>
     </FOW_Rating>
     <Bearing_Rating>
+        <MinScore>0</MinScore>
         <MaxScore>100</MaxScore>
         <MaxBearingDiff>45</MaxBearingDiff>
     </Bearing_Rating>
@@ -61,6 +62,5 @@
     <SameLineDegradation>0.10</SameLineDegradation>
     <ConnectedRouteIncrease>0.10</ConnectedRouteIncrease>
     <DNPVariance>118</DNPVariance>
-    <maxBearingDiff>90</maxBearingDiff>
     <Calc_Affected_Lines>false</Calc_Affected_Lines>
 </ml:OpenLRDecoderProperties>

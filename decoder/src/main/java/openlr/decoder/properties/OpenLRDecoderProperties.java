@@ -74,6 +74,9 @@ public class OpenLRDecoderProperties {
     /** The max bearing diff. */
     private final int maxBearingDiff;
 
+    /** The minimum bearing score.  Candidates with bearing scores less than this value will be disregarded. */
+    private final int minBearingScore;
+
     /** The maximum score bearing rating can contribute to the overall rating. */
     private final int maxBearingScore;
 
@@ -138,6 +141,7 @@ public class OpenLRDecoderProperties {
         dnpVariance = OpenLRPropertyAccess.getIntegerPropertyValue(config,
                 OpenLRDecoderProperty.DNP_VARIANCE);
         maxBearingDiff = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config, OpenLRDecoderProperty.BEAR_RATING, "MaxBearingDiff");
+        minBearingScore = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config, OpenLRDecoderProperty.BEAR_RATING, "MinScore");
         maxBearingScore = OpenLRPropertyAccess.getIntegerPropertyValueFromMap(config, OpenLRDecoderProperty.BEAR_RATING, "MaxScore");
 
         frcRating = new EnumMap<RatingCategory, Integer>(RatingCategory.class);
@@ -270,6 +274,15 @@ public class OpenLRDecoderProperties {
      */
     public final int getMaxBearingDiff() {
         return maxBearingDiff;
+    }
+
+    /**
+     * Gets the min bearing score.
+     *
+     * @return the maxBearingDiff
+     */
+    public final int getMinBearingScore() {
+        return minBearingScore;
     }
 
     /**
