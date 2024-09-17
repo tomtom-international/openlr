@@ -157,6 +157,9 @@ public class DecoderPropertiesTest {
 
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
                     prop, OpenLRDecoderProperty.BEAR_RATING,
+                    "MinScore"), 0);
+            assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
+                    prop, OpenLRDecoderProperty.BEAR_RATING,
                     "MaxScore"), 100);
             assertEquals(OpenLRPropertyAccess.getIntegerPropertyValueFromMap(
                     prop, OpenLRDecoderProperty.BEAR_RATING,

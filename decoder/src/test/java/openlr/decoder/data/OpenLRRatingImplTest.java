@@ -27,6 +27,7 @@
  */
 package openlr.decoder.data;
 
+import java.util.HashMap;
 import openlr.LocationReferencePoint;
 import openlr.OpenLRProcessingException;
 import openlr.decoder.TestData;
@@ -51,17 +52,18 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 /**
- * The Class TestTTLRRating.
+ * The Class OpenLRRatingImplTest.
+ * 
+ * Tests the effect on candidate rating of the Bearing_Rating.MinScore attribute
  */
 public class OpenLRRatingImplTest {
-
 
     /** The value used for parameter projectionAlongLine of the test on line 26 */
     public static final int PROJECTION_LINE_26 = 22;
 
     /** The bearing value of the test LRP #1 */
     private static final double BEARING_LRP_1 = 162.9;
-    /** The bearing value of the test LRP #1 */
+    /** The bearing value of the test LRP #2 */
     private static final double BEARING_LRP_2 = 256.67;
 
     /** The expected result of rating test #1. */
@@ -70,24 +72,37 @@ public class OpenLRRatingImplTest {
     private static final int EXPECTED_RESULT_RATING_2 = 494;
     /** The expected result of rating test #3. */
     private static final int EXPECTED_RESULT_RATING_3 = 755;
+    /** The expected result of rating test #3. */
+    private static final int EXPECTED_RESULT_MIN_SCORE_REJECT = -1;
 
     /** The non-junction node factor to apply for tests */
     private static final float NON_JUNCTION_NODE_FACTOR = 0.8f;
 
-    /** The expected result of rating test with junction node with no non-junction node factor. */
+    /**
+     * The expected result of rating test with junction node with no non-junction
+     * node factor.
+     */
     private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 1002;
-    /** The expected result of rating test with junction node with a non-junction node factor. */
+    /**
+     * The expected result of rating test with junction node with a non-junction
+     * node factor.
+     */
     private static final int EXPECTED_RESULT_RATING_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 1002;
-    /** The expected result of rating test with non-junction node with no non-junction node factor. */
+    /**
+     * The expected result of rating test with non-junction node with no
+     * non-junction node factor.
+     */
     private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NO_NON_JUNCTION_NODE_FACTOR = 852;
-    /** The expected result of rating test with non-junction node with a non-junction node factor. */
+    /**
+     * The expected result of rating test with non-junction node with a non-junction
+     * node factor.
+     */
     private static final int EXPECTED_RESULT_RATING_NON_JUNCTION_NODE_NON_JUNCTION_NODE_FACTOR = 798;
 
     /** The distance value of rating test #1. */
     private static final int DISTANCE_RATING_1 = 14;
     /** The distance value of rating test #2. */
     private static final int DISTANCE_RATING_2 = 3;
-
 
     /** The ID of line 4 of the test map. */
     private static final int TEST_LINE_4 = 4;
@@ -270,6 +285,36 @@ public class OpenLRRatingImplTest {
     }
 
     /**
+     * Test effect of default Bearing_Rating.MinScore on rating score when bearing score
+     * is >= Bearing_Rating.MinScore.  The candidate rating should be unchanged
+     */
+    @Test
+    public final void testRatingBearingMinScoreAccept() throws OpenLRProcessingException {
+        OpenLRDecoderProperties properties = getPropertiesWithBearingMinScore();
+
+        // Should succeed.  Expected bearing score: 73, MinScore = 65
+        int rating1 = RATING_FUNCTION.getRating(properties,
+                DISTANCE_RATING_1, point1, line10, 0);
+
+        assertEquals(rating1, EXPECTED_RESULT_RATING_1);
+    }
+
+    /**
+     * Test effect of default Bearing_Rating.MinScore on rating score when bearing score
+     * is less than Bearing_Rating.MinScore.  The rating should be -1, causing the 
+     * candidate to be rejected.
+     */
+    @Test
+    public final void testRatingBearingMinScoreReject() throws OpenLRProcessingException {
+        OpenLRDecoderProperties properties = getPropertiesWithBearingMinScore();
+
+        // Should be rejected.  Expected bearing score: 62, MinScore = 65
+        int rating = RATING_FUNCTION.getRating(properties,
+                DISTANCE_RATING_2, point2, line26, PROJECTION_LINE_26);
+
+        assertEquals(EXPECTED_RESULT_MIN_SCORE_REJECT, rating);
+    }
+    /**
      * Instantiates the properties.
      *
      * @return the properties
@@ -291,4 +336,27 @@ public class OpenLRRatingImplTest {
         return properties;
     }
 
+    /**
+     * Instantiates properties from the xml file that specified a non-default
+     * MinScore bearing parameter.
+     *
+     * @return the properties
+     */
+    private OpenLRDecoderProperties getPropertiesWithBearingMinScore() {
+        OpenLRDecoderProperties local_properties = null;
+
+        File validProperties = new File(
+                "src/test/resources/DecoderPropertiesBearingMinScore.xml");
+        try {
+            local_properties = new OpenLRDecoderProperties(OpenLRPropertiesReader
+                    .loadPropertiesFromStream(new FileInputStream(validProperties), true));
+        } catch (OpenLRProcessingException e) {
+            fail("failed to load valid properties file", e);
+        } catch (FileNotFoundException e) {
+            fail("cannot find properties file", e);
+        }
+
+        return local_properties;
+
+    }
 }

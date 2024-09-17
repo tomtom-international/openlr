@@ -135,6 +135,11 @@ public enum OpenLRDecoderProperty implements OpenLRProperty {
                     /**
                      * Maximum score bearing rating can contribute to the overall candidate line rating
                      */
+                    put("MinScore", 0);
+
+                    /**
+                     * Maximum score bearing rating can contribute to the overall candidate line rating
+                     */
                     put("MaxScore", 100);
 
                     /**
