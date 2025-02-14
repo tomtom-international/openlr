@@ -202,7 +202,7 @@ public abstract class AbstractEncoder {
     protected final LineAttributes createLineAttr(final LocationReferencePoint lrp) {
         LineAttributes lineAttr = OBJECT_FACTORY.createLineAttributes();
         int bearing = (int) Math.round(lrp.getBearing());
-        if (bearing == GeometryUtils.FULL_CIRCLE_DEGREE) {
+        if (bearing == GeometryUtils.FULL_CIRCLE) {
             bearing = 0;
         }
         lineAttr.setBEAR(bearing);

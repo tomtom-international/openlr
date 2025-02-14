@@ -6,7 +6,7 @@
     <artifactId>openlr</artifactId>
 
     <packaging>pom</packaging>
-    <version>1.4.4-SNAPSHOT</version>
+    <version>1.4.4-RC1</version>
 
     <name>OpenLR</name>
 
