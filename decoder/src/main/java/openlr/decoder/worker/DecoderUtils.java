@@ -117,7 +117,8 @@ public final class DecoderUtils {
         }
         List<CandidateLine> p1List = candidateLines.getCandidateLines(p1);
         List<CandidateLine> p2List = candidateLines.getCandidateLines(p2);
-        int returnSize = Math.min(properties.getMaxNumberRetries() + 1, p1List.size() * p2List.size());
+        int maxResultSize = (int) Math.min((long) p1List.size() * p2List.size(), Integer.MAX_VALUE);
+        int returnSize = Math.min(properties.getMaxNumberRetries() + 1, maxResultSize);
 
         /*
          * Below is an implementation for typical Top K algorythm problem.
