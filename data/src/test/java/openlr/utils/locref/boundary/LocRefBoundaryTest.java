@@ -211,9 +211,53 @@ public class LocRefBoundaryTest {
         corners.add(new GeoCoordinatesImpl(5.1019, 52.10933));
         corners.add(new GeoCoordinatesImpl(5.0988, 52.107374));
 
-        RawPolygonLocRef lineLocRef = new RawPolygonLocRef("id", corners);
+        RawPolygonLocRef polygonLocRef = new RawPolygonLocRef("id", corners);
 
-        calculateBox(lineLocRef, 52.10306, 5.0988, 52.10933, 5.10516);
+        calculateBox(polygonLocRef, 52.10306, 5.0988, 52.10933, 5.10516);
+    }
+
+    /**
+     * Tests calculation of a bounding box for a polygon location reference
+     *
+     * @throws InvalidMapDataException never
+     */
+    @Test
+    public final void testRealPolygonLocationReference()
+            throws InvalidMapDataException {
+
+        List<GeoCoordinates> corners = new ArrayList<GeoCoordinates>();
+        corners.add(new GeoCoordinatesImpl(-124.42835, 42.91889));
+        corners.add(new GeoCoordinatesImpl(-124.43720, 42.93490));
+        corners.add(new GeoCoordinatesImpl(-124.45523, 42.92735));
+        corners.add(new GeoCoordinatesImpl(-124.43211, 42.91521));
+
+        RawPolygonLocRef polygonLocRef = new RawPolygonLocRef("id", corners);
+
+//        check if there are valid coordinates - eg no 4.9E-324
+
+        calculateBox(polygonLocRef, 42.91521, -124.45523, 42.93490, -124.42835);
+
+    }
+
+    /**
+     * Tests calculation of a bounding box for a polygon location reference around point (0,0)
+     * with mixed positive and negative coordinates
+     *
+     * @throws InvalidMapDataException never
+     */
+    @Test
+    public final void testPolygonAroundZeroPointLocationReference()
+            throws InvalidMapDataException {
+
+        List<GeoCoordinates> corners = new ArrayList<GeoCoordinates>();
+        corners.add(new GeoCoordinatesImpl(-1.5, -2.0));
+        corners.add(new GeoCoordinatesImpl(2.0, -1.0));
+        corners.add(new GeoCoordinatesImpl(1.5, 2.5));
+        corners.add(new GeoCoordinatesImpl(-2.0, 1.0));
+
+        RawPolygonLocRef polygonLocRef = new RawPolygonLocRef("id", corners);
+
+        calculateBox(polygonLocRef, -2.0, -2.0, 2.5, 2.0);
     }
 
     /**
