@@ -56,9 +56,9 @@ import eu.datex2.schema._2_0rc2._2_0.D2LogicalModel;
 import openlr.datex2.OpenLRDatex2Exception.XMLErrorType;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 import java.io.OutputStream;
 import java.io.Writer;
 

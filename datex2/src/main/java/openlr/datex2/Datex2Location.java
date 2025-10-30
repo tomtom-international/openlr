@@ -58,7 +58,7 @@ import openlr.datex2.OpenLRDatex2Exception.XMLErrorType;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 /**
  * The class Datex2Location is the data class for Datex II location
