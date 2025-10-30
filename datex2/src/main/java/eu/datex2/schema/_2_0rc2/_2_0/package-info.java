@@ -55,5 +55,5 @@
 /**
  * Provides an implementation of the OpenLR location container within the Datex2 standard. 
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://datex2.eu/schema/2_0RC2/2_0", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://datex2.eu/schema/2_0RC2/2_0", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package eu.datex2.schema._2_0rc2._2_0;

@@ -66,8 +66,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
-import java.io.*;
+import jakarta.xml.bind.JAXBException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringWriter;
 
 import static org.testng.Assert.fail;
 

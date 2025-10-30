@@ -53,7 +53,7 @@ package openlr.xml;
 import openlr.xml.generated.OpenLR;
 import org.testng.annotations.Test;
 
-import javax.xml.bind.UnmarshalException;
+import jakarta.xml.bind.UnmarshalException;
 import java.io.InputStream;
 
 import static org.testng.Assert.fail;

@@ -58,5 +58,5 @@
 /**
  * Contains classes implementing the OpenLR XML data format.
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.openlr.org/openlr", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://www.openlr.org/openlr", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package openlr.xml.generated;

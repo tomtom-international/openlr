@@ -8,13 +8,13 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
-import  openlr.map.teststubs.schema.TestMapStub;
+import openlr.map.teststubs.schema.TestMapStub;
 
 public class XmlToTestMapStubTest {
     @Test
