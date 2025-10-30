@@ -87,12 +87,12 @@
                             <goal>generate</goal>
                         </goals>
                     </execution>
-                </executions>                
+                </executions>
                 <configuration>
                     <schemaDirectory>src/test/resources/openlr/map/stub</schemaDirectory>
                     <schemaIncludes>
                         <include>*.xsd</include>
-                    </schemaIncludes>                    
+                    </schemaIncludes>
 
                     <generatePackage>openlr.map.teststubs.schema</generatePackage>
                     <cleanPackageDirectories>false</cleanPackageDirectories>
