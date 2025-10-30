@@ -138,7 +138,7 @@ public class GeometryUtilsTest {
                 BEARING_L1_IN_DIRECTION);
         assertEquals(df.format(GeometryUtils.calculateLineBearing(lines.get(Lines.L2),
                         BearingDirection.AGAINST_DIRECTION, BEARING_DISTANCE, Lines.L2.lenght)),
-                String.valueOf(BEARING_L2_AGAINST_DIRECTION));
+                df.format(BEARING_L2_AGAINST_DIRECTION));
         assertEquals(GeometryUtils.calculateLineBearing(lines.get(Lines.L3),
                 BearingDirection.IN_DIRECTION, BEARING_DISTANCE, 0),
                 BEARING_L3_IN_DIRECTION);
@@ -150,7 +150,7 @@ public class GeometryUtilsTest {
 
         assertEquals(df.format(GeometryUtils.calculateLineBearing(lines.get(Lines.L1),
                 BearingDirection.IN_DIRECTION, BEARING_DISTANCE,
-                PAL_DISTANCE_LONG)), String.valueOf(BEARING_L1_PAL_IN_DIRECTION));
+                PAL_DISTANCE_LONG)), df.format(BEARING_L1_PAL_IN_DIRECTION));
         assertEquals(GeometryUtils.calculateLineBearing(lines.get(Lines.L2),
                 BearingDirection.AGAINST_DIRECTION, BEARING_DISTANCE,
                 PAL_DISTANCE_LONG), BEARING_L2_PAL_AGAINST_DIRECTION);
