@@ -1,8 +1,5 @@
 package openlr.map.teststubs;
 
-import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.LineString;
 import openlr.map.MapDatabase;
 import openlr.map.Line;
 import openlr.map.Node;
@@ -11,15 +8,20 @@ import openlr.map.FormOfWay;
 import openlr.map.FunctionalRoadClass;
 import openlr.map.GeoCoordinates;
 import openlr.map.InvalidMapDataException;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.LineString;
 
 import openlr.map.teststubs.schema.TestMapStub;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+
 import java.awt.geom.Rectangle2D;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OpenLRMapDatabaseAdaptor implements MapDatabase {
