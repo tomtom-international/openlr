@@ -504,7 +504,9 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
         try {
             connection.getPsGetNode().setLong(1, id);
             rs = connection.getPsGetNode().executeQuery();
-            node = createNode(rs, id);
+            if (rs.next()) {
+                node = createNode(rs, id);
+            }
         } catch (SQLException e) {
             LOG.error(e);
             node = null;
