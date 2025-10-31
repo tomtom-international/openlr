@@ -57,8 +57,8 @@ import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class Offset holds offset information as defined in the physical data
@@ -74,7 +74,7 @@ import org.apache.logging.log4j.Logger;
 public class Offset extends OpenLRBinaryInformation {
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(Offset.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Offset.class);
 
     /** number of bits used for offset */
     private static final int OFFSET_BITS = 8;

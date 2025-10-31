@@ -60,8 +60,8 @@ import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.map.GeoCoordinates;
 import openlr.map.MapDatabase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -77,7 +77,7 @@ public class GridLocationCheck extends LocationCheck {
 
 
     /** The Constant LOG. */
-    private static final Logger LOG = LogManager.getLogger(GridLocationCheck.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GridLocationCheck.class);
 
     /**
      * {@inheritDoc}

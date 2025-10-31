@@ -57,8 +57,8 @@ import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class Attr3 holds the data for the third attribute defined in the physical data format of OpenLR.
@@ -76,7 +76,7 @@ import org.apache.logging.log4j.Logger;
 public class Attr3 extends OpenLRBinaryInformation {
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(Attr3.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Attr3.class);
 
     /** number of bits used for dnp */
     private static final int DNP_BITS = 8;

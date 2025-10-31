@@ -65,8 +65,8 @@ import openlr.binary.data.Header;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.map.GeoCoordinates;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The encoder for the geo coordinate location type.
@@ -81,7 +81,7 @@ import org.apache.logging.log4j.Logger;
 public class GeoCoordEncoder extends AbstractEncoder {
 
     /** Logging */
-    private static final Logger LOG = LogManager.getLogger(GeoCoordEncoder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GeoCoordEncoder.class);
 
     /**
      * {@inheritDoc}

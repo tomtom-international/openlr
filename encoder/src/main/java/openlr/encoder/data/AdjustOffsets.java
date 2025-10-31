@@ -58,8 +58,8 @@ import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.location.LocationFactory;
 import openlr.map.Line;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ import java.util.List;
 public final class AdjustOffsets {
 
     /** Logging. */
-    private static final Logger LOG = LogManager.getLogger(AdjustOffsets.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AdjustOffsets.class);
 
     /**
      * Helper class cannot be instantiated.

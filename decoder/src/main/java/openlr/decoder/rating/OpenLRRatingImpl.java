@@ -39,8 +39,8 @@ import openlr.map.Line;
 import openlr.map.Node;
 import openlr.map.utils.GeometryUtils;
 import openlr.map.utils.GeometryUtils.BearingDirection;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -82,7 +82,7 @@ public class OpenLRRatingImpl implements OpenLRRating {
     private static final int FULL_CIRCLE = 2 * HALF_CIRCLE;
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(OpenLRRatingImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OpenLRRatingImpl.class);
 
     /** The Constant fowRatingTable. */
     private static final FormOfWayRatingTable FOW_RATING_TABLE = new FormOfWayRatingTable();

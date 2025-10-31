@@ -57,8 +57,8 @@ import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class LastLRP holds data for the last location reference point as defined
@@ -77,7 +77,7 @@ import org.apache.logging.log4j.Logger;
 public class LastLRP extends AbstractLRP {
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(LastLRP.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LastLRP.class);
 
     /** number of bits used for coordinates (relative) */
     private static final int COORD_BITS = 16;

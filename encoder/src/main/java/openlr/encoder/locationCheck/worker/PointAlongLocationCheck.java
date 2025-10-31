@@ -60,8 +60,8 @@ import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.map.Line;
 import openlr.map.MapDatabase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -76,7 +76,7 @@ import org.apache.logging.log4j.Logger;
 public class PointAlongLocationCheck extends LocationCheck {
 
     /** The Constant LOG. */
-    private static final Logger LOG = LogManager.getLogger(PointAlongLocationCheck.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PointAlongLocationCheck.class);
 
     /**
      * {@inheritDoc}

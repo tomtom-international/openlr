@@ -52,8 +52,8 @@ package openlr.map.mockdb;
 
 import openlr.map.*;
 import org.apache.commons.configuration.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 
@@ -78,7 +78,7 @@ import java.util.*;
 class DatabaseMockery {
 
     /** logger. */
-    private static final Logger LOG = LogManager.getLogger(MockedMapDatabase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MockedMapDatabase.class);
     /** The mocking context. */
     private final Mockery context;
     /**
