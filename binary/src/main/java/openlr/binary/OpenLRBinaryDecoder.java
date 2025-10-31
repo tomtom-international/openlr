@@ -63,8 +63,8 @@ import openlr.binary.data.RawBinaryData;
 import openlr.binary.decoder.*;
 import openlr.rawLocRef.RawInvalidLocRef;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class OpenLRBinaryDecoder implements the {@link PhysicalDecoder}
@@ -83,7 +83,7 @@ public final class OpenLRBinaryDecoder implements PhysicalDecoder {
     private static final int[] VERSIONS = {2, 3};
 
     /** logger. */
-    private static final Logger LOG = LogManager.getLogger(OpenLRBinaryDecoder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OpenLRBinaryDecoder.class);
 
     /**
      * Gets the versions.

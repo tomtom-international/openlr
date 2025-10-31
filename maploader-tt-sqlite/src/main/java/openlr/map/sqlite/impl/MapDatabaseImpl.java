@@ -44,8 +44,8 @@ package openlr.map.sqlite.impl;
 import openlr.map.*;
 import openlr.map.sqlite.helpers.SpatialUtils;
 import openlr.map.utils.GeometryUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.geom.Rectangle2D;
 import java.io.*;
@@ -83,7 +83,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     /**
      * The default logger for this class.
      */
-    private static final Logger LOG = LogManager.getLogger(MapDatabaseImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MapDatabaseImpl.class);
 
     /**
      * Map containing cached instances of class {@link openlr.map.Line}.
@@ -265,7 +265,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
             try {
                 rs.close();
             } catch (SQLException e) {
-                LOG.error(e);
+                LOG.error("Error on closing", e);
             }
         }
     }
@@ -403,7 +403,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
                 line = createLine(id, rs);
             }
         } catch (Exception e) {
-            LOG.error(e);
+            LOG.error("Error on reading", e);
         } finally {
             closeQuietly(rs);
         }
@@ -508,8 +508,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
                 node = createNode(rs, id);
             }
         } catch (SQLException e) {
-            LOG.error(e);
-            node = null;
+            LOG.error("Error on reading a node", e);;
         } finally {
             closeQuietly(rs);
         }
@@ -607,7 +606,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
                             mapCopyrightOwner);
                 }
             } catch (SQLException e) {
-                LOG.error(e);
+                LOG.error("Error on reading meta data", e);
                 name = "(unknown)";
             } finally {
                 closeQuietly(rs);
@@ -627,7 +626,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
         try {
             ps = connection.createStatement();
         } catch (SQLException e1) {
-            LOG.error(e1);
+            LOG.error("Error on initialization", e1);
         }
         try {
             rs = ps.executeQuery("Select * from Line");
@@ -636,7 +635,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
             }
             ps.close();
         } catch (SQLException e) {
-            LOG.error(e);
+            LOG.error("Error on reading", e);
         } finally {
             closeQuietly(rs);
         }
@@ -650,9 +649,8 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
     public Iterator<Node> getAllNodes() {
         final Set<Node> nodes = new HashSet<Node>();
         ResultSet rs = null;
-        Statement ps = null;
         try {
-            ps = connection.createStatement();
+            Statement ps = connection.createStatement();
             rs = ps.executeQuery("Select * from Node");
             while (rs.next()) {
                 nodes.add(createNode(rs));
@@ -660,7 +658,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
             rs.close();
             ps.close();
         } catch (SQLException e) {
-            LOG.error(e);
+            LOG.error("Error on reading", e);
         } finally {
             closeQuietly(rs);
         }
@@ -684,7 +682,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
                 rect.setRect(minLon, minLat, maxLon - minLon, maxLat - minLat);
             }
         } catch (SQLException e) {
-            LOG.error(e);
+            LOG.error("Error on reading meta data", e);
         } finally {
             closeQuietly(rs);
         }
@@ -706,7 +704,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
                 LOG.warn("Cannot resolve number of lines.");
             }
         } catch (SQLException e) {
-            LOG.error(e);
+            LOG.error("Error on reading", e);
         } finally {
             closeQuietly(rs);
         }
@@ -729,7 +727,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
                 LOG.warn("Cannot resolve number of nodes.");
             }
         } catch (SQLException e) {
-            LOG.error(e);
+            LOG.error("Error on reading", e);
         } finally {
             closeQuietly(rs);
         }

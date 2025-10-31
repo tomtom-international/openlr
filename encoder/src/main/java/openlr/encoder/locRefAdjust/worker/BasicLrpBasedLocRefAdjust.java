@@ -58,8 +58,8 @@ import openlr.encoder.OpenLREncoderProcessingException.EncoderProcessingError;
 import openlr.encoder.data.LocRefData;
 import openlr.encoder.locRefAdjust.LocationReferenceAdjust;
 import openlr.encoder.properties.OpenLREncoderProperties;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Performs adjustments relevant for fall LRP based location references.
@@ -74,7 +74,7 @@ import org.apache.logging.log4j.Logger;
 public class BasicLrpBasedLocRefAdjust extends LocationReferenceAdjust {
 
     /** The Constant LOG. */
-    private static final Logger LOG = LogManager.getLogger(BasicLrpBasedLocRefAdjust.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BasicLrpBasedLocRefAdjust.class);
 
     /**
      * {@inheritDoc}

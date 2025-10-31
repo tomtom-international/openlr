@@ -57,8 +57,8 @@ import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The last closed line lrp finishes a closed line location reference.
@@ -75,7 +75,7 @@ import org.apache.logging.log4j.Logger;
 public class LastClosedLineLRP extends OpenLRBinaryInformation {
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(LastClosedLineLRP.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LastClosedLineLRP.class);
 
     /** The attrib5 information. */
     private final Attr5 attrib5;

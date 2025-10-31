@@ -65,8 +65,8 @@ import openlr.binary.data.Radius;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.map.GeoCoordinates;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The encoder for the circle coordinate location type.
@@ -81,7 +81,7 @@ import org.apache.logging.log4j.Logger;
 public class CircleEncoder extends AbstractEncoder {
 
     /** Logging */
-    private static final Logger LOG = LogManager.getLogger(CircleEncoder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CircleEncoder.class);
 
     /**
      * {@inheritDoc}

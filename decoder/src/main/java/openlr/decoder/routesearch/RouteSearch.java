@@ -46,8 +46,8 @@ import openlr.map.Node;
 import openlr.map.utils.GeometryUtils;
 import openlr.map.utils.PQElem;
 import openlr.map.utils.PathUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -78,7 +78,7 @@ import java.util.List;
 public class RouteSearch {
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(RouteSearch.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RouteSearch.class);
 
     /**
      * The route search will stop in one of these status.

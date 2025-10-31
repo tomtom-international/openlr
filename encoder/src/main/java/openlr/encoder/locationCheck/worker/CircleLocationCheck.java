@@ -59,8 +59,8 @@ import openlr.encoder.locationCheck.LocationCheck;
 import openlr.encoder.properties.OpenLREncoderProperties;
 import openlr.location.Location;
 import openlr.map.MapDatabase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -78,7 +78,7 @@ public class CircleLocationCheck extends LocationCheck {
     private static final long MAX_RADIUS = (long) Math.pow(2, 32);
 
     /** The Constant LOG. */
-    private static final Logger LOG = LogManager.getLogger(CircleLocationCheck.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CircleLocationCheck.class);
 
     /**
      * {@inheritDoc}

@@ -57,8 +57,8 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.FileConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
@@ -78,7 +78,7 @@ import java.io.InputStream;
 public final class OpenLRPropertiesReader {
 
     /** logger. */
-    private static final Logger LOG = LogManager.getLogger(OpenLRPropertiesReader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OpenLRPropertiesReader.class);
 
     /**
      * Utility class shall not be instantiated.

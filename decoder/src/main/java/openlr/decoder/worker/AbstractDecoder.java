@@ -68,8 +68,8 @@ import openlr.map.MapDatabase;
 import openlr.map.Node;
 import openlr.map.utils.GeometryUtils;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -93,7 +93,7 @@ import java.util.List;
 public abstract class AbstractDecoder {
 
     /** logger. */
-    private static final Logger LOG = LogManager.getLogger(AbstractDecoder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractDecoder.class);
 
     /** The rating function being used. */
     private static final OpenLRRating RATING_FUNCTION = new OpenLRRatingImpl();

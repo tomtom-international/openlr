@@ -61,8 +61,8 @@ import openlr.location.Location;
 import openlr.map.GeoCoordinates;
 import openlr.map.MapDatabase;
 import openlr.map.utils.GeometryUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.geom.Line2D;
 import java.util.List;
@@ -80,7 +80,7 @@ import java.util.List;
 public class PolygonLocationCheck extends LocationCheck {
 
     /** The Constant LOG. */
-    private static final Logger LOG = LogManager.getLogger(PolygonLocationCheck.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PolygonLocationCheck.class);
 
     /** The Constant MIN_NR_COORDINATES. */
     private static final int MIN_NR_COORDINATES = 3;

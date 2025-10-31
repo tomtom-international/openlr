@@ -57,8 +57,8 @@ import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class Header holds administrative data for a binary location reference in
@@ -77,7 +77,7 @@ import org.apache.logging.log4j.Logger;
 public class Header extends OpenLRBinaryInformation {
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(Header.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Header.class);
 
     /** number of bits unused */
     // DLR e.V. (RE) changed into:

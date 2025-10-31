@@ -57,8 +57,8 @@ import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class Attr2 holds the data for the second attribute defined in the
@@ -78,7 +78,7 @@ import org.apache.logging.log4j.Logger;
 public class Attr2 extends OpenLRBinaryInformation {
 
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(Attr2.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Attr2.class);
 
     /** number of bits used for lfrcnp */
     private static final int LFRCNP_BITS = 3;

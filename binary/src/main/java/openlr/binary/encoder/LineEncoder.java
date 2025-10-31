@@ -60,8 +60,8 @@ import openlr.binary.bitstream.impl.ByteArrayBitstreamOutput;
 import openlr.binary.data.*;
 import openlr.binary.impl.LocationReferenceBinaryImpl;
 import openlr.rawLocRef.RawLocationReference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -78,7 +78,7 @@ import java.util.List;
 public class LineEncoder extends AbstractEncoder {
 
     /** Logging */
-    private static final Logger LOG = LogManager.getLogger(LineEncoder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LineEncoder.class);
 
     /**
      * {@inheritDoc}

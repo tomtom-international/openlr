@@ -53,8 +53,8 @@
 package openlr.xml;
 
 import openlr.xml.generated.OpenLR;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import jakarta.xml.bind.JAXBContext;
@@ -81,7 +81,7 @@ import java.net.URL;
 public class OpenLRXmlWriter {
 
     /** The Constant LOG. */
-    private static final Logger LOG = LogManager.getLogger(OpenLRXmlWriter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OpenLRXmlWriter.class);
 
     /** The Constant XML_SCHEMA_OPENLR. */
     private static final String XML_SCHEMA_OPENLR = "openlr.xsd";

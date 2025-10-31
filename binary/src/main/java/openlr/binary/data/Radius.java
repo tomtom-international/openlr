@@ -56,8 +56,8 @@ import openlr.binary.OpenLRBinaryConstants;
 import openlr.binary.bitstream.BitstreamException;
 import openlr.binary.bitstream.BitstreamInput;
 import openlr.binary.bitstream.BitstreamOutput;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class EncodedRadius holds the encoded radius information as defined in
@@ -89,7 +89,7 @@ public class Radius extends OpenLRBinaryInformation {
     private static final long MAX_RADIUS_EXTRA_LARGE = (long) Math.pow(2,
             OpenLRBinaryConstants.EXTRA_LARGE_RADIUS_BITS);
     /** logger */
-    private static final Logger LOG = LogManager.getLogger(Radius.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Radius.class);
     /** The radius (up to 4 bytes) according to OpenLR white paper */
     private long radius;
 
