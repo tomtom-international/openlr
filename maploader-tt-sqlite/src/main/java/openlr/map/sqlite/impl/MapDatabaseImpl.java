@@ -265,7 +265,7 @@ public final class MapDatabaseImpl implements openlr.map.MapDatabase {
             try {
                 rs.close();
             } catch (SQLException e) {
-                LOG.error("Error on cloding", e);
+                LOG.error("Error on closing", e);
             }
         }
     }
