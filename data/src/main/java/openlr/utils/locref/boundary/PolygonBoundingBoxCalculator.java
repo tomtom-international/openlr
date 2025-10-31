@@ -78,18 +78,20 @@ final class PolygonBoundingBoxCalculator implements BoundingBoxCalculator {
 
         double minLong = Double.MAX_VALUE;
         double minLat = Double.MAX_VALUE;
-        double maxLong = Double.MIN_VALUE;
-        double maxLat = Double.MIN_VALUE;
+        double maxLong = -Double.MAX_VALUE;
+        double maxLat = -Double.MAX_VALUE;
 
         for (GeoCoordinates coord : locRef.getCornerPoints()) {
             if (coord.getLongitudeDeg() < minLong) {
                 minLong = coord.getLongitudeDeg();
-            } else if (coord.getLongitudeDeg() > maxLong) {
+            }
+            if (coord.getLongitudeDeg() > maxLong) {
                 maxLong = coord.getLongitudeDeg();
             }
             if (coord.getLatitudeDeg() < minLat) {
                 minLat = coord.getLatitudeDeg();
-            } else if (coord.getLatitudeDeg() > maxLat) {
+            }
+            if (coord.getLatitudeDeg() > maxLat) {
                 maxLat = coord.getLatitudeDeg();
             }
         }
